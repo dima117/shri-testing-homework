@@ -1,1 +1,20 @@
-hello!
+<table>
+    <thead>
+        <tr>
+            <th>hash</th>
+            <th>author</th>
+            <th>timestamp</th>
+            <th>commit message</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each history}}
+            <tr>
+                <td>{{hash}}</td>
+                <td>{{author}}</td>
+                <td>{{timestamp}}</td>
+                <td>{{msg}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

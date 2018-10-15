@@ -1,3 +1,9 @@
+const { gitHistory } = require('../utils/git');
+
 module.exports = function(req, res) {
-    res.render('index', { title: 'welcome!' });
+
+    gitHistory(1, 20)
+        .then(history => {
+            res.render('index', { title: 'history', history });
+        });
 };
