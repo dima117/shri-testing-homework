@@ -14,9 +14,9 @@ function buildObjectUrl(parentHash, {path, type}) {
 
 module.exports = function(req, res, next) {
     const { hash } = req.params;
-    const path = req.params[0].split('/').filter(Boolean);
+    const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
-    gitFileTree(hash, `${path.join('/')}/`)
+    const path = pathParam.length ? pathParam.join('/') + '/' : '';
         .then(list => {
             const files = list.map(item => ({ 
                 ...item, 
