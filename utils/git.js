@@ -49,15 +49,18 @@ function parseFileTreeItem(line) {
 }
 
 function gitFileTree(hash, path) {
-    const pathParam = `${path.join('/')}/`;
-
-    return executeGit('git', ['ls-tree', hash, pathParam])
+    return executeGit('git', ['ls-tree', hash, path])
         .then(data => {
             return data.split('\n').filter(Boolean).map(parseFileTreeItem);
         });
 }
 
+function gitFileContent(hash) {
+  return executeGit('git', ['show', hash]);
+}
+
 module.exports = {
     gitHistory,
-    gitFileTree
+    gitFileTree,
+    gitFileContent
 }
