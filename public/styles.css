@@ -3,6 +3,10 @@ body {
     color: #333;
 }
 
+.commit {
+    margin-bottom: 32px; 
+}
+
 .content {
     white-space: pre-wrap;
     font-family: monospace;
