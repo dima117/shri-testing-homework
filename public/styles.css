@@ -2,3 +2,8 @@ body {
     font-family: sans-serif;
     color: #333;
 }
+
+.content {
+    white-space: pre-wrap;
+    font-family: monospace;
+}

@@ -1,10 +1,12 @@
 const { gitFileTree } = require('../utils/git');
-const { buildFolderUrl } = require('../utils/navigation');
+const { buildFolderUrl, buildFileUrl } = require('../utils/navigation');
 
 function buildObjectUrl(parentHash, {path, type}) {
     switch (type) {
         case 'tree':
-            return buildFolderUrl({hash: parentHash, path});
+            return buildFolderUrl(parentHash, path);
+        case 'blob':
+            return buildFileUrl(parentHash, path);
         default:
             return '#';
     }
