@@ -1,5 +1,5 @@
 const { gitFileTree } = require('../utils/git');
-const { buildFolderUrl, buildFileUrl } = require('../utils/navigation');
+const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../utils/navigation');
 
 function buildObjectUrl(parentHash, {path, type}) {
     switch (type) {
@@ -26,6 +26,10 @@ module.exports = function(req, res, next) {
                 name: item.path.split('/').pop()
             }));
 
-            res.render('files', { title: 'files', files });
+            res.render('files', { 
+                title: 'files', 
+                breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+                files 
+            });
         }, err => next(err));
 };

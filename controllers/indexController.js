@@ -1,5 +1,5 @@
 const { gitHistory } = require('../utils/git');
-const {buildFolderUrl} = require('../utils/navigation');
+const {buildFolderUrl, buildBreadcrumbs} = require('../utils/navigation');
 
 module.exports = function(req, res) {
 
@@ -10,6 +10,10 @@ module.exports = function(req, res) {
                 href: buildFolderUrl(item.hash, '')
             }));
 
-            res.render('index', { title: 'history', list });
+            res.render('index', { 
+                title: 'history', 
+                breadcrumbs: buildBreadcrumbs(),
+                list 
+            });
         }, err => next(err));
 };

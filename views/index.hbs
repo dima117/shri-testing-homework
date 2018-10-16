@@ -1,3 +1,11 @@
+{{#each breadcrumbs}}
+    {{#if href}}
+        <a href="{{href}}">{{text}}</a> / 
+    {{else}}
+        {{text}}
+    {{/if}}
+{{/each}}
+
 {{#each list}}
     <div class="commit">
         <div class="commit__info">

@@ -1,3 +1,11 @@
+{{#each breadcrumbs}}
+    {{#if href}}
+        <a href="{{href}}">{{text}}</a> / 
+    {{else}}
+        {{text}}
+    {{/if}}
+{{/each}}
+
 <a href="{{parentHref}}">{{parentPath}}</a>
 
 <div class="content">{{content}}</div>
