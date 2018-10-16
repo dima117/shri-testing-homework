@@ -1,13 +1,37 @@
 body {
+    padding: 20px 0;
     font-family: sans-serif;
     color: #333;
 }
 
-.commit {
-    margin-bottom: 32px; 
+a, a:visited {
+    color: #007ACC;
+}
+
+a:hover {
+    color: #DC2519;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.breadcrumbs {
+    padding: 20px;
+    background-color: #e2e2e2;
+    border: 1px solid #ccc;
 }
 
 .content {
+    padding: 20px;
+}
+
+.commit {
+    margin-bottom: 20px;
+}
+
+.file-content {
     white-space: pre-wrap;
     font-family: monospace;
 }
