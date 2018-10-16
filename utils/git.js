@@ -1,4 +1,5 @@
-const REPO = '/Users/dima117a/shri-2/homework/multimedia-task';
+const { resolve } = require('path');
+const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 

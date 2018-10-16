@@ -1,6 +1,9 @@
 const path = require('path');
 const express = require('express');
 
+const PORT = 3000;
+const HOST = '::';
+
 // controllers
 const indexController = require('./controllers/indexController');
 const filesController = require('./controllers/filesController');
@@ -37,6 +40,8 @@ app.use(function(err, req, res, next) {
   res.render('error', { title: 'error', status, message });
 });
 
-app.listen(3000);
+app.listen(PORT, HOST, () => {
+  console.log(`App listening at http://localhost:${PORT}`);
+});
 
 module.exports = app;
