@@ -37,10 +37,27 @@ function gitHistory(page = 1, size = 10) {
     '-n',
     size
   ]).then(data => {
-    return data.split('\n').map(parseHistoryItem);
+    return data.split('\n').filter(Boolean).map(parseHistoryItem);
   });
 }
 
+function parseFileTreeItem(line) {
+    const [info, path] = line.split('\t');
+    const [, type, hash] = info.split(' ');
+
+    return { type, hash, path };
+}
+
+function gitFileTree(hash, path) {
+    const pathParam = `${path.join('/')}/`;
+
+    return executeGit('git', ['ls-tree', hash, pathParam])
+        .then(data => {
+            return data.split('\n').filter(Boolean).map(parseFileTreeItem);
+        });
+}
+
 module.exports = {
-    gitHistory
+    gitHistory,
+    gitFileTree
 }

@@ -3,6 +3,7 @@ const express = require('express');
 
 // controllers
 const indexController = require('./controllers/indexController');
+const filesController = require('./controllers/filesController');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
 app.get('/', indexController);
+app.get('/files/:hash/*?', filesController);
 
 // error handlers
 app.use(function(req, res, next) {
