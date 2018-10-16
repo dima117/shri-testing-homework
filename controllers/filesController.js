@@ -17,6 +17,8 @@ module.exports = function(req, res, next) {
     const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
     const path = pathParam.length ? pathParam.join('/') + '/' : '';
+
+    return gitFileTree(hash, path)
         .then(list => {
             const files = list.map(item => ({ 
                 ...item, 
