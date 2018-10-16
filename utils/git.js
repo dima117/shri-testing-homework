@@ -3,6 +3,7 @@ const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
+//возвращает результат команды
 function executeGit(cmd, args) {
   return new Promise((resolve, reject) => {
     execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
@@ -15,6 +16,7 @@ function executeGit(cmd, args) {
   });
 }
 
+//строка -> объект
 function parseHistoryItem(line) {
   const [hash, author, timestamp, msg] = line.split('\t');
 
@@ -26,6 +28,7 @@ function parseHistoryItem(line) {
   };
 }
 
+// получает историю гита и преобразовывает ее в массив объектов
 function gitHistory(page = 1, size = 10) {
   const offset = (page - 1) * size;
 
@@ -40,11 +43,12 @@ function gitHistory(page = 1, size = 10) {
   ]).then(data => {
     return data
       .split('\n')
-      .filter(Boolean)
+      .filter(Boolean)//удаляет все ложные значения
       .map(parseHistoryItem);
   });
 }
 
+//парсер строка -> {type: 'blob', hash: 'b12e...', path: 'package.json'}
 function parseFileTreeItem(line) {
   const [info, path] = line.split('\t');
   const [, type, hash] = info.split(' ');
@@ -52,6 +56,7 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
+//по хэшу и пути возвращает все файлы по этому пути если файл это папка то путь равен пустой строке
 function gitFileTree(hash, path) {
   const params = ['ls-tree', hash];
   path && params.push(path);
@@ -64,6 +69,7 @@ function gitFileTree(hash, path) {
   });
 }
 
+//строка которую возвращает гит по команде git show hash, предполагается что это содержимое файла
 function gitFileContent(hash) {
   return executeGit('git', ['show', hash]);
 }

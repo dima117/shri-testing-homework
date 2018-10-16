@@ -6,6 +6,7 @@ function buildFileUrl(parentHash, path) {
   return `/content/${parentHash}/${path}`;
 }
 
+//строит массив путей из корня в path
 function buildBreadcrumbs(hash, path) {
   const bc = [
     {
@@ -41,7 +42,6 @@ function buildBreadcrumbs(hash, path) {
         text: currentName
       });
   }
-
   return bc;
 }
 
