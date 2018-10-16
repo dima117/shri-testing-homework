@@ -16,6 +16,7 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "hermione": "^0.90.1",
     "ndb": "^1.0.26"
   }
 }
