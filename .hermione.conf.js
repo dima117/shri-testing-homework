@@ -1,10 +1,10 @@
 module.exports = {
-  baseUrl: 'https://0.0.0.0:3000',
+  baseUrl: 'http://0.0.0.0:3000',
   gridUrl: 'http://0.0.0.0:4444/wd/hub',
 
   sets: {
       desktop: {
-          files: 'tests/desktop'
+          files: 'tests/integration'
       }
   },
 
