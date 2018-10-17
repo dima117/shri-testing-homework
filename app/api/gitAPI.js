@@ -1,4 +1,4 @@
-const {executeGit} = require( "../model/gitModel");
+const {executeGit} = require( '../model/gitModel');
 const { parseFileTreeItem, parseHistoryItem } = require('../utils/gitParser');
 
 function gitHistory(page = 1, size = 10) {

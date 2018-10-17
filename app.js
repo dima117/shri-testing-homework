@@ -1,13 +1,13 @@
 const path = require('path');
 const express = require('express');
 
-const PORT = 2000;
+const PORT = 3000;
 const HOST = '::';
 
 // controllers
-const indexController = require('./controllers/indexController');
-const filesController = require('./controllers/filesController');
-const contentController = require('./controllers/contentController');
+const indexController = require('./app/controllers/indexController');
+const filesController = require('./app/controllers/filesController');
+const contentController = require('./app/controllers/contentController');
 
 const app = express();
 
@@ -26,22 +26,22 @@ app.get('/content/:hash/*?', contentController);
 
 // error handlers
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  const { status = 500, message } = err;
+    const { status = 500, message } = err;
 
-  // render the error page
-  res.status(status);
-  res.render('error', { title: 'error', status, message });
+    // render the error page
+    res.status(status);
+    res.render('error', { title: 'error', status, message });
 });
 
 app.listen(PORT, HOST, () => {
-  console.log(`App listening at http://localhost:${PORT}`);
+    console.log(`App listening at http://localhost:${PORT}`);
 });
 
 module.exports = app;
