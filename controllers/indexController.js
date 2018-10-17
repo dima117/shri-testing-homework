@@ -1,5 +1,7 @@
+const {buildBreadcrumbs} = require("../view/buildBreadcrumbs");
+
 const { gitHistory } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { buildFolderUrl} = require('../utils/navigation');
 
 module.exports = function(req, res) {
   gitHistory(1, 20).then(

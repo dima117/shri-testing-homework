@@ -1,8 +1,9 @@
+const {buildBreadcrumbs} = require("../view/buildBreadcrumbs");
+
 const { gitFileTree } = require('../utils/git');
 const {
   buildFolderUrl,
-  buildFileUrl,
-  buildBreadcrumbs
+  buildFileUrl
 } = require('../utils/navigation');
 
 function buildObjectUrl(parentHash, { path, type }) {

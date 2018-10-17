@@ -1,5 +1,7 @@
+const {buildBreadcrumbs} = require("../view/buildBreadcrumbs");
+
 const { gitFileContent, gitFileTree } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { buildFolderUrl } = require('../utils/navigation');
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
