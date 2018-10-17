@@ -1,4 +1,4 @@
-const { gitFileContent, gitFileTree, gitHistory } = require('./../../utils/git');
+const { gitFileContent, gitFileTree, gitHistory } = require('../../../utils/git');
 const { resolve } = require('path');
 const { execFile } = require('child_process');
 const expect = require('chai').expect;
