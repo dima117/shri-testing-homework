@@ -1,9 +1,5 @@
-function buildFolderUrl(parentHash, path = '') {
-  return `/files/${parentHash}/${path}`;
-}
-
-function buildFileUrl(parentHash, path) {
-  return `/content/${parentHash}/${path}`;
+function buildFileUrl(folder,parentHash, path = '') {
+  return `/${folder}/${parentHash}/${path}`;
 }
 
 function buildBreadcrumbs(hash, path) {
@@ -21,7 +17,7 @@ function buildBreadcrumbs(hash, path) {
     // root folder
     bc.push({
       text: 'ROOT',
-      href: normalizedPath.length ? `/files/${hash}/` : undefined
+      href: normalizedPath.length ? buildFileUrl('files', hash) : undefined
     });
 
     // path
@@ -31,7 +27,7 @@ function buildBreadcrumbs(hash, path) {
       fullPath += `${part}/`;
       bc.push({
         text: part,
-        href: `/files/${hash}/${fullPath}`
+        href: buildFileUrl('files', hash, fullPath)
       });
     }
 
@@ -46,7 +42,6 @@ function buildBreadcrumbs(hash, path) {
 }
 
 module.exports = {
-  buildFolderUrl,
   buildFileUrl,
   buildBreadcrumbs
 };

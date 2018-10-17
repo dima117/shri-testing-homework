@@ -1,16 +1,16 @@
-const { gitFileTree } = require('../utils/git');
+const { gitModule } = require('../utils/git');
 const {
-  buildFolderUrl,
   buildFileUrl,
   buildBreadcrumbs
 } = require('../utils/navigation');
+const git = new gitModule();
 
 function buildObjectUrl(parentHash, { path, type }) {
   switch (type) {
     case 'tree':
-      return buildFolderUrl(parentHash, path);
+      return buildFileUrl('files', parentHash, path);
     case 'blob':
-      return buildFileUrl(parentHash, path);
+      return buildFileUrl('content', parentHash, path);
     default:
       return '#';
   }
@@ -22,7 +22,7 @@ module.exports = function(req, res, next) {
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-  return gitFileTree(hash, path).then(
+  return git.gitFileTree(hash, path).then(
     list => {
       const files = list.map(item => ({
         ...item,
