@@ -9,18 +9,20 @@
 </div>
 
 <div class="content">
-    {{#each list}}
-        <div class="commit">
-            <div class="commit__info">
-                <span class="commit__author">{{author}}</span>
-                <span class="commit__date">{{timestamp}}</span>
+    <div class="history">
+        {{#each list}}
+            <div class="commit">
+                <div class="commit__info">
+                    <span class="commit__author">{{author}}</span>
+                    <span class="commit__date">{{timestamp}}</span>
+                </div>
+                <div class="commit__msg">
+                    {{msg}}
+                </div>
+                <div class="commit__link">
+                    <a href="{{href}}">{{hash}}</a>
+                </div>
             </div>
-            <div class="commit__msg">
-                {{msg}}
-            </div>
-            <div class="commit__link">
-                <a href="{{href}}">{{hash}}</a>
-            </div>
-        </div>
-    {{/each}}
+        {{/each}}
+    </div>
 </div>
