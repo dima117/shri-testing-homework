@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./utils/gitParser.test.js",
+    "test": "mocha ./app/tests/utils",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
     "lint": "eslint ./ --fix"
