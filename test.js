@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const { Git } = require('./utils/git');
-const { buildBreadcrumbs } = require('./utils/navigation');
+const { buildBreadcrumbs, buildFolderUrl, buildFileUrl } = require('./utils/navigation');
 
 describe('история коммитов', function () {
   it('можно получить историю коммитов', async function () {
@@ -150,7 +150,7 @@ describe('просмотр содержимого файла', function () {
 });
 
 describe('хлебные крошки', function () {
-  it('из переданных параметров hash и path формируется массив "хлебных крошек"', async function () {
+  it('из переданных параметров hash и path формируется массив "хлебных крошек"', function () {
     // подготовка
     const hash = '90180910fc27a11272a3e5caeeb119a51e5c0545';
     const path = 'controllers/indexController.js';
@@ -178,6 +178,34 @@ describe('хлебные крошки', function () {
     const bc = buildBreadcrumbs();
 
     // проверка
-    expect(bc).to.eql([ { text: 'HISTORY', href: undefined } ]);
+    expect(bc).to.eql([{ text: 'HISTORY', href: undefined }]);
+  });
+});
+
+describe('формирование пути', function () {
+  it('функция buildFolderUrl возвращает путь к файловой структуре коммита', function () {
+    // подготовка
+    const parentHash = 'a5b8b36531c819d685b4d220edb9784edae8b0f2';
+    const path = '';
+    const url = '/files/a5b8b36531c819d685b4d220edb9784edae8b0f2/';
+
+    // действие
+    const bc = buildFolderUrl(parentHash, path);
+
+    // проверка
+    expect(bc).to.eql(url);
+  });
+
+  it('функция buildFileUrl возвращает путь к содержимому выбранного файла', function () {
+    // подготовка
+    const parentHash = 'a5b8b36531c819d685b4d220edb9784edae8b0f2';
+    const path = 'README.md';
+    const url = '/content/a5b8b36531c819d685b4d220edb9784edae8b0f2/README.md';
+
+    // действие
+    const bc = buildFileUrl(parentHash, path);
+
+    // проверка
+    expect(bc).to.eql(url);
   });
 });

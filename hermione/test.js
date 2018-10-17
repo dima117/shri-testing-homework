@@ -7,7 +7,6 @@ describe('содержимое отображается правильно на 
         .url('/')
         .isExisting('.history')
         .then(exists => assert.ok(exists, 'История коммитов не отображается'))
-        .assertView('plain', '.history');
     });
   });
 
