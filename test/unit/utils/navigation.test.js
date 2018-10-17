@@ -2,108 +2,104 @@ const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../../../uti
 var expect  = require('chai').expect;
 
 describe('navigation.js', function() {
-    describe('Генерация url', () => {
+    describe('buildFolderUrl()', () => {
         it('Получить путь к коммиту', () => {
-            // Подготовка 
             const parentHash = '3781b1db26f2dd293a45a975cd3be7c023f65f12';
-            // Дейcтвие
+
             const result = buildFolderUrl(parentHash);
-            // Проверка
+
             expect(result).to.equal(`/files/${parentHash}/`);
         });
+    });
     
+    describe('buildFileUrl()', () => {
         it('Получить путь к директории в коммите', () => {
-            // Подготовка 
-            const parentHash = '3781b1db26f2dd293a45a975cd3be7c023f65f12';
+            const parentHash = 'testCommitHash';
             const path = 'additional/path/';
-            // Дейcтвие
+
             const result = buildFolderUrl(parentHash, path);
-            // Проверка
+
             expect(result).to.equal(`/files/${parentHash}/${path}`);
         }); 
 
         it('Получить путь к файлу в коммите', () => {
-            // Подготовка
-            const parentHash = '3781b1db26f2dd293a45a975cd3be7c023f65f12';
+            const parentHash = 'testCommitHash';
             const path = 'path/toFile.js';
-            // Действие
+
             const result = buildFileUrl(parentHash, path);
-            // Проверка
+
             expect(result).to.equal(`/content/${parentHash}/${path}`);
         });
     });
 
-    describe('"Хлебные крошки"', () => {
-        it('По умолчанию возвращается элемент HISTORY', () => {
-            // Подготовка
-            // Действие
+    describe('buildBreadcrumbs()', () => {
+        describe('Без параметров', () => {
             const breadcrumbs = buildBreadcrumbs();
-            // Проверка
-            expect(breadcrumbs).to.eql([{'href': undefined, 'text': 'HISTORY'}]);
+
+            it('Только один элемент', () => {
+                expect(breadcrumbs).to.have.lengthOf(1);
+            });
+
+            it('Элемент имеет имя HISTORY', () => {
+                expect(breadcrumbs[0]).to.have.property('text', 'HISTORY');
+            });
+
+            it('Элемент не имеет ссылки', () => {
+                expect(breadcrumbs[0]).to.have.property('href', undefined);
+            });
         });
 
-        it('Элемент HISTORY имеет корректную ссылку', () => {
-            // Подготовка
-            const commitHash = '3781b1db26f2dd293a45a975cd3be7c023f65f12';
-            // Действие
+        describe('Параметр: hash', () => {
+            const commitHash = 'testCommitHash';
+
             const breadcrumbs = buildBreadcrumbs(commitHash);
-            const firstElement = breadcrumbs[0];
-            // Проверка
-            expect(firstElement).to.have.property('href', '/');
+
+            it('В цепочке 2 элемента', () => {
+                expect(breadcrumbs).to.have.lengthOf(2);
+            });
+
+            it('Элемент HISTORY имеет ссылку на корень', () => {
+                expect(breadcrumbs[0]).to.have.property('href', '/');
+            });
+
+            it('Добавлен элемент с названием ROOT', () => {
+                expect(breadcrumbs[1]).to.have.property('text', 'ROOT');
+            });
+
+            it('Элемент ROOT не имеет ссылки', () => {
+                expect(breadcrumbs[1]).to.have.property('href', undefined);
+            });
         });
 
-        it('При указании hash, вторым элементом добавляется ROOT', () => {
-            // Подготовка
-            const commitHash = '3781b1db26f2dd293a45a975cd3be7c023f65f12';
-            // Действие
-            const breadcrumbs = buildBreadcrumbs(commitHash);
-            const secondElement = breadcrumbs[1];
-            // Проверка
-            expect(secondElement).to.eql({'href': undefined, 'text': 'ROOT'});
-        });
-
-        it('Элемент ROOT имеет корректную ссылку', () => {
-            // Подготовка
-            const commitHash = "3781b1db26f2dd293a45a975cd3be7c023f65f12";
-            const path = 'folder'
-            // Действие
-            const breadcrumbs = buildBreadcrumbs(commitHash, path);
-            const secondElement = breadcrumbs[1];
-            // Проверка
-            expect(secondElement).to.have.property('href', '/files/3781b1db26f2dd293a45a975cd3be7c023f65f12/');
-        });
-
-        it('Добавляемые элементы содержат корректную ссылку', () => {
-            // Подготовка
-            const commitHash = '3781b1db26f2dd293a45a975cd3be7c023f65f12';
+        describe('Параметры: hash + path(folder + file)', () => {
+            const commitHash = 'testCommitHash';
             const path = 'folder/file.js';
-            // Действие
-            const breadcrumbs = buildBreadcrumbs(commitHash, path);
-            const thirdElement = breadcrumbs[2];
-            // Проверка
-            expect(thirdElement).to.have.property('href', '/files/3781b1db26f2dd293a45a975cd3be7c023f65f12/folder/');
-            
-        });
 
-        it('Последний элемент цепочки имеет корректные данные', () => {
-            // Подготовка
-            const commitHash = '3781b1db26f2dd293a45a975cd3be7c023f65f12';
-            const path = 'folder/anotherFolder/file.js';
-            // Действие
             const breadcrumbs = buildBreadcrumbs(commitHash, path);
-            const lastElement = breadcrumbs.pop();
-            // Проверка
-            expect(lastElement).to.eql({'text': 'file.js'});
-        });
 
-        it('В цепочку добавляется корректное количество элементов', () => {
-            // Подготовка
-            const commitHash = '3781b1db26f2dd293a45a975cd3be7c023f65f12';
-            const path = 'folder/anotherFolder/file.js';
-            // Действие
-            const breadcrumbs = buildBreadcrumbs(commitHash, path);
-            // Проверка
-            expect(breadcrumbs).to.have.lengthOf(5);;
+            it('В цепочке 4 элемента', () => {
+                expect(breadcrumbs).to.have.lengthOf(4);
+            });
+
+            it('Элемент ROOT имеет ссылку на коммит', () => {
+                expect(breadcrumbs[1]).to.have.property('href', `/files/${commitHash}/`);
+            });
+
+            it('Элемент Папка имеет корректное название', () => {
+                expect(breadcrumbs[2]).to.have.property('text', `folder`);
+            });
+
+            it('Элемент Папка имеет корректную ссылку', () => {
+                expect(breadcrumbs[2]).to.have.property('href', `/files/${commitHash}/folder/`);
+            });
+
+            it('Элемент Файл имеет корректное название', () => {
+                expect(breadcrumbs[3]).to.have.property('text', `file.js`);
+            });
+
+            it('Элемент Файл не имеет ссылки', () => {
+                expect(breadcrumbs[3]).to.not.have.property('href');
+            });
         });
     });
 });
