@@ -1,5 +1,5 @@
 module.exports = {
-    baseUrl: 'https://yandex.ru',
+    baseUrl: 'http://localhost:3000',
     gridUrl: 'http://0.0.0.0:4444/wd/hub',
 
     browsers: {
@@ -7,6 +7,13 @@ module.exports = {
             desiredCapabilities: {
                 browserName: 'chrome'
             }
+        }
+    },
+    sets: {
+        common: {
+            files: [
+                "test/integrational/*.hermione.js"
+            ]
         }
     },
     plugins: {
