@@ -1,0 +1,14 @@
+
+
+  git.js
+    ✓ should parse git history
+    ✓ 
+
+  navigation.js
+    ✓ should returns folder path by hash
+    ✓ should returns file path by hash
+    ✓ should returns array with info about path
+
+
+  5 passing (15ms)
+
