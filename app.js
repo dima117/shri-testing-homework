@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 
-const PORT = 7000;
+const PORT = 2000;
 const HOST = '::';
 
 // controllers
@@ -12,7 +12,7 @@ const contentController = require('./controllers/contentController');
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'hbs');
 app.set('view options', { layout: 'layout', extname: '.hbs' });
 
