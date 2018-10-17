@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "eslint": "eslint controllers/*.js utils/*.js *.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,8 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-google": "^0.11.0",
     "ndb": "^1.0.26"
   }
 }

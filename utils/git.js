@@ -39,9 +39,9 @@ function gitHistory(page = 1, size = 10) {
     size
   ]).then(data => {
     return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseHistoryItem);
+        .split('\n')
+        .filter(Boolean)
+        .map(parseHistoryItem);
   });
 }
 
@@ -58,9 +58,9 @@ function gitFileTree(hash, path) {
 
   return executeGit('git', params).then(data => {
     return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseFileTreeItem);
+        .split('\n')
+        .filter(Boolean)
+        .map(parseFileTreeItem);
   });
 }
 

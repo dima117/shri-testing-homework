@@ -23,19 +23,19 @@ module.exports = function(req, res, next) {
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
   return gitFileTree(hash, path).then(
-    list => {
-      const files = list.map(item => ({
-        ...item,
-        href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
-      }));
+      list => {
+        const files = list.map(item => ({
+          ...item,
+          href: buildObjectUrl(hash, item),
+          name: item.path.split('/').pop()
+        }));
 
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
-    },
-    err => next(err)
+        res.render('files', {
+          title: 'files',
+          breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+          files
+        });
+      },
+      err => next(err)
   );
 };
