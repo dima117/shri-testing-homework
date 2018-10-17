@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 
-const PORT = 4000;
+const PORT = 7000;
 const HOST = '::';
 
 // controllers

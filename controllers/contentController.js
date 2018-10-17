@@ -1,6 +1,6 @@
 const {buildBreadcrumbs} = require("../view/buildBreadcrumbs");
 
-const { gitFileContent, gitFileTree } = require('../utils/git');
+const { gitFileContent, gitFileTree } = require('../api/gitAPI');
 
 
 module.exports = function(req, res, next) {

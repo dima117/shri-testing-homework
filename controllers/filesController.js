@@ -1,6 +1,6 @@
 const {buildBreadcrumbs} = require("../view/buildBreadcrumbs");
 
-const { gitFileTree } = require('../utils/git');
+const { gitFileTree } = require('../api/gitAPI');
 const { buildObjectUrl} = require('../utils/navigation');
 
 
