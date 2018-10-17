@@ -7,6 +7,11 @@ const {parseFileTreeItem, parseHistoryItem} = require('../../utils/gitParser');
 describe('parseFileTreeItem', () => {
     const testLine = '100644 blob 27e5864fa4f9a15d22ef81a804ca339fa4befbcd\tREADME.md';
 
+    it('should return 3 objects', () => {
+        const result = parseFileTreeItem(testLine);
+        expect(Object.keys(result).length).to.be.equal(3);
+    });
+
     it('should return type, hash and path of commit', () => {
         const {type, hash, path} = parseFileTreeItem(testLine);
         expect([type, hash, path]).to.include.ordered.members(
@@ -18,6 +23,11 @@ describe('parseFileTreeItem', () => {
 
 describe('parseHistoryItem', () => {
     const testLine = 'cc2284293758e32c50fa952da2f487c8c5e8d023\tDmitry Andriyanov\t2018-10-16 12:36:32 +0300\treadme';
+
+    it('should return 4 objects', () => {
+        const result = parseHistoryItem(testLine);
+        expect(Object.keys(result).length).to.be.equal(4);
+    });
 
     it('should return hash, author, timestamp and msg of commit', () => {
         const {hash, author, timestamp, msg} = parseHistoryItem(testLine);
