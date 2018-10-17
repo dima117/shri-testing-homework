@@ -69,6 +69,7 @@ function gitFileContent(hash) {
 }
 
 module.exports = {
+  parseHistoryItem,
   gitHistory,
   gitFileTree,
   gitFileContent
