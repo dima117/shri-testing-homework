@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive test/*/*.js",
+    "test": "nyc mocha --recursive test/*/*.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -18,6 +18,7 @@
     "mocha": "^5.2.0"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "ndb": "^1.0.26",
+    "nyc": "^13.1.0"
   }
 }

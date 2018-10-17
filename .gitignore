@@ -2,3 +2,6 @@ node_modules
 
 # IntelliJ project files
 .idea/
+
+# Test coverage output
+.nyc_output/
