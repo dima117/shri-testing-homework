@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests/*.test.js",
-    "test-watch": "mocha ./tests/*.test.js --watch",
+    "test": "mocha ./tests/**/*.test.js",
+    "test-watch": "mocha ./tests/**/*.test.js --watch",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },

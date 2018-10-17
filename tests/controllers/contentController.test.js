@@ -1,14 +1,14 @@
-const contentController = require('../controllers/contentController');
+const contentController = require('./../../controllers/contentController');
 const express = require('express');
 const request = require('supertest');
 const path = require('path');
 const expect = require('chai').expect;
 
-describe('contentController', () => {
+describe('controllers/contentController', () => {
   it('возвращает корректные данные в шаблоне', (done) => {
     const app = express();
 
-    app.set('views', path.join(__dirname, '../views'));
+    app.set('views', path.join(__dirname, '../../views'));
     app.set('view engine', 'hbs');
     app.set('view options', { layout: 'layout', extname: '.hbs' });
     app.get('/content/:hash/*?', contentController);
