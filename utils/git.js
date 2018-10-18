@@ -42,7 +42,6 @@ class myGit {
             '-n',
             size
         ]).then(data => {
-            console.log(data)
             return data
                 .split('\n')
                 .filter(Boolean)
@@ -71,14 +70,6 @@ class myGit {
 
     gitFileContent(hash) {
         return this.executeGit('git', ['show', hash])
-    }
-
-    addOneToEach(arr) {
-        return arr.map(item => 1 + item)
-    }
-
-    sumNumbers(arr) {
-        return arr.reduce((acc, item) => acc + item)
     }
 }
 module.exports = { myGit }
