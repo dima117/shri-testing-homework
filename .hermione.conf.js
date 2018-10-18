@@ -1,11 +1,10 @@
-module.export = {
-  baseUrl: 'http://localhost:3000/',
-  // baseUrl: 'https://yandex.ru/',
+module.exports = {
+  baseUrl: 'http://localhost:3000',
   gridUrl: 'http://0.0.0.0:4444/wd/hub',
 
   sets: {
     desktop: {
-      files: './hermione'
+      files: 'hermione'
     }
   },
 
