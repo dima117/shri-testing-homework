@@ -1,19 +1,11 @@
-const {executeGit} = require( '../model/gitModel');
-const { parseFileTreeItem, parseHistoryItem } = require('../utils/gitParser');
+const {executeGit} = require('../model/gitModel');
+const {parseFileTreeItem, parseHistoryItem} = require('../utils/gitParser');
 
-function gitHistory(page = 1, size = 10) {
-    const offset = (page - 1) * size;
-
-
-    return executeGit('git', [
-        'log',
-        '--pretty=format:%H%x09%an%x09%ad%x09%s',
-        '--date=iso',
-        '--skip',
-        offset,
-        '-n',
-        size
-    ]).then(data => {
+function gitHistory(page = 1, size = 10, execGit = executeGit) { //last argument is for test stub
+    const offset = (page - 1) * size,
+        params = ['log', '--pretty=format:%H%x09%an%x09%ad%x09%s',
+            '--date=iso', '--skip', offset, '-n', size];
+    return execGit('git', params).then(data => {
         return data
             .split('\n')
             .filter(Boolean)
@@ -22,11 +14,11 @@ function gitHistory(page = 1, size = 10) {
 }
 
 
-function gitFileTree(hash, path) {
+function gitFileTree(hash, path, execGit = executeGit) {
     const params = ['ls-tree', hash];
     path && params.push(path);
 
-    return executeGit('git', params).then(data => {
+    return execGit('git', params).then(data => {
         return data
             .split('\n')
             .filter(Boolean)
@@ -34,9 +26,8 @@ function gitFileTree(hash, path) {
     });
 }
 
-function gitFileContent(hash) {
-
-    return executeGit('git', ['show', hash]);
+function gitFileContent(hash, execGit = executeGit) {
+    return execGit('git', ['show', hash]);
 }
 
 module.exports = {
