@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
+    "test": "jest --watch *.js utils/",
+    "start": "nodemon ./bin/www",
     "devstart": "ndb ./bin/www"
   },
   "keywords": [],
@@ -16,6 +16,8 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "jest": "^23.6.0",
+    "ndb": "^1.0.26",
+    "nodemon": "^1.18.4"
   }
 }
