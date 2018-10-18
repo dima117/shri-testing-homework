@@ -4,8 +4,13 @@ const REPO = resolve('.');
 const { execFile } = require('child_process');
 
 function executeGit(cmd, args) {
+  // точка расширения
+  const executeFile = executeGit._executeFileFake ?
+    executeGit._executeFileFake:
+    execFile;
+
   return new Promise((resolve, reject) => {
-    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
+    executeFile(cmd, args, { cwd: REPO }, (err, stdout) => {
       if (err) {
         reject(err);
       }
@@ -27,6 +32,13 @@ function parseHistoryItem(line) {
 }
 
 function gitHistory(page = 1, size = 10) {
+
+  if (typeof gitHistory._executeFileFake === 'function') {
+    executeGit._executeFileFake = gitHistory._executeFileFake;
+  } else {
+    delete executeGit._executeFileFake
+  }
+
   const offset = (page - 1) * size;
 
   return executeGit('git', [
@@ -65,6 +77,14 @@ function gitFileTree(hash, path) {
 }
 
 function gitFileContent(hash) {
+
+  // точка расширения
+  if (typeof gitFileContent._executeFileFake === 'function') {
+    executeGit._executeFileFake = gitFileContent._executeFileFake;
+  } else {
+    delete executeGit._executeFileFake
+  }
+
   return executeGit('git', ['show', hash]);
 }
 
