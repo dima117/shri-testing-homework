@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "selenium": "selenium-standalone start",
-    "test:i": "hermione hermione/test.js --config ./hermione/.hermione.conf.js",
     "test:u": "nyc mocha test.js",
+    "test:i": "hermione hermione/test.js --config ./hermione/.hermione.conf.js",
+    "hermione:gui" : "hermione gui hermione/test.js --config hermione/.hermione.conf.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
