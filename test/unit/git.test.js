@@ -1,9 +1,9 @@
-const GitCommands = require('../../../utils/git');
+const GitCommands = require('../../utils/git');
 var expect  = require('chai').expect;
 
 describe('git.js', function() {
     describe('gitFileContent()', () => {
-        it('Git вызывает правильную команду', () => {
+        it('Выполняется правильная git-команда', () => {
             const hash = 'testHash';
             let result;
 

@@ -1,4 +1,4 @@
-const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../../../utils/navigation');
+const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../../utils/navigation');
 var expect  = require('chai').expect;
 
 describe('navigation.js', function() {
