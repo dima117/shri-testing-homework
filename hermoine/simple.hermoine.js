@@ -14,7 +14,7 @@ describe('На всех страницах правильно отображае
     it('просмотр файловой системы', function () {
         return this.browser
             .url('/files/1dca9032cbf1c6b10af7b08adc1fe18c5e4d3312/')
-            .isExisting('.content') // Fix
+            .isExisting('.commit') // Fix
             .then((exists) => {
                 assert.ok(exists, 'Содержимое директории не отображается!');
             });
