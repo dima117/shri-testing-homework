@@ -26,7 +26,7 @@ module.exports.router = function(req, res, next) {
             }
         })
         .then(
-            content => interProcessor(content, res, hash, path,),
+            content => interProcessor(content, res, hash, path, next),
             err => next(err)
         );
 };

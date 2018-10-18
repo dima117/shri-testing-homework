@@ -2,7 +2,7 @@ const { interProcessor } = require('./filesController');
 const { expect } = require('chai');
 
 describe('filesController.js', () => {
-    it('should return correct format of data', () => {
+    it('should returns correct format of data', () => {
         // Mock must be
         const res = {
             breadcrumbs: [
