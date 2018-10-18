@@ -69,6 +69,23 @@ describe('Git File Tree performance', () => {
     })
 })
 
+describe('Git File Content performance', () => {
+    it('Git File Content is returning the correct content of files', async () => {
+        const mygit = new myGit()
+        const hash = 'd7b47df17ba8ea90f706bf9c92f9a7fc14579744'
+        const resultStub =
+            "#!/usr/bin/env node\n\n/**\n* Module dependencies.\n*/\n\nvar app = require('../app');\n"
+
+        mygit.executeGit = () => {
+            return Promise.resolve(resultStub)
+        }
+
+        const checkGitFileContent = await mygit.gitFileContent(hash)
+
+        expect(checkGitFileContent).toEqual(resultStub)
+    })
+})
+
 describe('Git History performance', () => {
     it('Git History is returning the correct history of commits', async () => {
         const mygit = new myGit()

@@ -70,6 +70,7 @@ class myGit {
     }
 
     gitFileContent(hash) {
+      // console.log(hash)
         return this.executeGit('git', ['show', hash])
     }
 }
