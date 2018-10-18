@@ -20,5 +20,7 @@ module.exports = {
     'html-reporter/hermione': {
       path: 'hermione-html-report'
     }
-  }
+  },
+
+  compositeImage: true
 }
