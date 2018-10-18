@@ -1,32 +1,16 @@
 const { execFile } = require("child_process");
 const { resolve } = require("path");
 
-function parseHistoryItem(line) {
-	const [hash, author, timestamp, msg] = line.split("\t");
-
-	return {
-		hash,
-		author,
-		timestamp,
-		msg
-	};
-}
-
-function parseFileTreeItem(line) {
-	const [info, path] = line.split("\t");
-	const [, type, hash] = info.split(" ");
-
-	return { type, hash, path };
-}
+const { getOffset, parseHistoryItem, parseFileTreeItem } = require("./helpers");
 
 class Git {
 	constructor() {
 		this.REPO = resolve(".");
 	}
 
-	executeGit(cmd, args) {
+	executeGit(args) {
 		return new Promise((resolve, reject) => {
-			execFile(cmd, args, { cwd: this.REPO }, (err, stdout) => {
+			execFile("git", args, { cwd: this.REPO }, (err, stdout) => {
 				if (err) {
 					reject(err);
 				}
@@ -37,9 +21,9 @@ class Git {
 	}
 
 	getHistory(page = 1, size = 10) {
-		const offset = (page - 1) * size;
+		const offset = getOffset(page, size);
 
-		return this.executeGit("git", [
+		return this.executeGit([
 			"log",
 			"--pretty=format:%H%x09%an%x09%ad%x09%s",
 			"--date=iso",
@@ -60,7 +44,7 @@ class Git {
 
 		path && params.push(path);
 
-		return this.executeGit("git", params).then((data) => {
+		return this.executeGit(params).then((data) => {
 			return data
 				.split("\n")
 				.filter(Boolean)
@@ -69,7 +53,7 @@ class Git {
 	}
 
 	getFileContent(hash) {
-		return this.executeGit("git", ["show", hash]);
+		return this.executeGit(["show", hash]);
 	}
 }
 
