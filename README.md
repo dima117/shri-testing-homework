@@ -40,10 +40,10 @@ npm start
 
   - Git
 
-    - gitHistory
+    - getHistory
       - правильно формируется offset
       - возвращает результат в правильном формате
-    - gitFileTree
+    - getFileTree
       - shell команда формируется правильно, когда передан path
       - shell команда формируется правильно, когда path не был передан
 
