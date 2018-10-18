@@ -1,1 +1,5 @@
 node_modules
+coverage
+hermione-html-port
+.nyc_output
+tmp

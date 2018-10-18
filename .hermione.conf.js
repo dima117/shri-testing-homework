@@ -1,7 +1,7 @@
 module.exports = {
     sets: {
         desktop: {
-            files: 'tests/integrationTest'
+            files: 'tests/integrationTests'
         }
     },
 
