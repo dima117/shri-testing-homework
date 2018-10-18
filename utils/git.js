@@ -9,6 +9,7 @@ function executeGit(cmd, args) {
             if (err) {
                 reject(err)
             }
+            // console.log(stdout.toString())
             resolve(stdout.toString())
         })
     })
