@@ -1,5 +1,5 @@
 module.exports = {
-    baseUrl: 'https://yandex.ru',
+    baseUrl: 'http://localhost:3000/',
     gridUrl: 'http://0.0.0.0:4444/wd/hub',
 
     browsers: {
