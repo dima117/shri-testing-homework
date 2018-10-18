@@ -44,14 +44,12 @@ describe('gitFileTree', () => {
 
     it('should return an array', async () => {
         let result = await gitFileTree(1, 10, stubExecuteGit);
-        console.log(result, result.length);
         expect(result).to.be.an('array');
     });
 
 
     it('should have 3 commits', async () => {
         let result = await gitFileTree(1, 10, stubExecuteGit);
-        console.log(result, result.length);
         expect(result.length).to.be.equal(3);
     });
 });
@@ -73,7 +71,6 @@ describe('gitFileContent', () => {
 
     it('should have content "node_modules"',  async () => {
         let result = await gitFileContent(1, stubExecuteGit);
-        console.log(result, result.length);
         expect(result).to.be.equal('node_modules');
     });
 });
