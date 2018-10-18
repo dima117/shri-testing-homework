@@ -37,9 +37,9 @@ function buildBreadcrumbs(hash, path) {
 
         // last part
         currentName &&
-      bc.push({
-          text: currentName
-      });
+        bc.push({
+            text: currentName
+        });
     }
 
     return bc;

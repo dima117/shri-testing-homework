@@ -6,8 +6,8 @@ const HOST = '::';
 
 // controllers
 const indexController = require('./controllers/indexController');
-const filesController = require('./controllers/filesController');
-const contentController = require('./controllers/contentController');
+const filesController = require('./controllers/filesController').router;
+const contentController = require('./controllers/contentController').router;
 
 const app = express();
 
