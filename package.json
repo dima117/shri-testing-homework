@@ -6,6 +6,8 @@
   "scripts": {
     "test": "mocha ./tests/**/*.test.js",
     "test-watch": "mocha ./tests/**/*.test.js --watch",
+    "hermione": "hermione",
+    "hermione-gui": "hermione gui",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },

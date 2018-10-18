@@ -25,6 +25,11 @@ module.exports = {
   plugins: {
     'html-reporter/hermione': {
       path: 'hermione-html-report'
-    }
+    },
+    'custom-commands': true,
+  },
+  windowSize: {
+    width: 800,
+    height: 1000
   }
 };
