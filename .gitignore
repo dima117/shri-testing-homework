@@ -5,3 +5,4 @@ node_modules
 
 # Test coverage output
 .nyc_output/
+/hermione-html-report/
