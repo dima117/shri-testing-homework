@@ -46,7 +46,7 @@ class myGit {
             return data
                 .split('\n')
                 .filter(Boolean)
-                .map(parseHistoryItem)
+                .map(this.parseHistoryItem)
         })
     }
 
@@ -65,7 +65,7 @@ class myGit {
             return data
                 .split('\n')
                 .filter(Boolean)
-                .map(parseFileTreeItem)
+                .map(this.parseFileTreeItem)
         })
     }
 
@@ -82,6 +82,3 @@ class myGit {
     }
 }
 module.exports = { myGit }
-//
-
-// module.exports = {addOneToEach, sumNumbers}
