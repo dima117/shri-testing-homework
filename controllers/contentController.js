@@ -21,7 +21,7 @@ module.exports.router = function(req, res, next) {
 
     return Utils.gitFileTree(hash, path.join('/'))
         .then(function([file]) {
-            if (file.type === 'blob') {
+            if (file && file.type === 'blob') {
                 return Utils.gitFileContent(file.hash);
             }
         })

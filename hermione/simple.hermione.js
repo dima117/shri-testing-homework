@@ -1,10 +1,10 @@
-const assert = require('chai').assert;
+const { assert } = require('chai');
 
 describe('github', function() {
-    it('should find hermione', function() {
+    it('should find ".content"', function() {
         return this.browser
             .url('/')
             .isExisting('.content')
-            .then(exist => assert.ok(exist, 'Ahtung'));
+            .then(exist => assert.ok(exist, 'the ".content" not exists!'));
     });
 });
