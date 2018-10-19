@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./tests/unit/contentCheckContent.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -12,12 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "express": "^4.16.4",
     "hbs": "^4.0.1"
   },
   "devDependencies": {
     "hermione": "^0.90.1",
     "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
     "ndb": "^1.0.26"
   }
 }
