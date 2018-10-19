@@ -16,7 +16,7 @@ function executeGit(cmd, args) {
 
 class myGit {
     constructor(executeGit) {
-        this.executeGit = executeGit 
+        this.executeGit = executeGit
     }
 
     parseHistoryItem(line) {
