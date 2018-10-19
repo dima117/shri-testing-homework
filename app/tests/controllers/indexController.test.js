@@ -1,12 +1,19 @@
-const chai = require('chai'),
-    expect = chai.expect;
-const {indexController} = require('../../controllers/indexController');
+// const chai = require('chai'),
+//     expect = chai.expect;
+// const indexController = require('../../controller/indexController');
 //
 // describe('indexController', () => {
 //
-//     it('should return an array', async () => {
-//         indexController.then(data => console.log(data));
-//         // console.log(result);
+//     let mockResponse = {
+//         render: function (view, options, callback) {
+//             return true;
+//         }
+//     };
+//
+//     it('should return an array', () => {
+//
+//         // let result = await indexController('', mockResponse);
+//         console.log(indexController('', mockResponse));
 //         expect([]).to.be.an('array');
 //     });
 //

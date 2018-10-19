@@ -1,6 +1,6 @@
 // const chai = require('chai'),
 //     expect = chai.expect;
-// const {contentController} = require('../../controllers/contentController');
+// const {contentController} = require('../../controller/contentController');
 //
 // describe('contentController', () => {
 //

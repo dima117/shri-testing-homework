@@ -4,40 +4,38 @@ const express = require('express');
 const PORT = 3000;
 const HOST = '::';
 
-// controllers
-const indexController = require('./app/controllers/indexController');
-const filesController = require('./app/controllers/filesController');
-const contentController = require('./app/controllers/contentController');
+// controller
+const {indexController, filesController, contentController} = require('./app/controller/controller');
 
 const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'hbs');
-app.set('view options', { layout: 'layout', extname: '.hbs' });
+app.set('view options', {layout: 'layout', extname: '.hbs'});
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
-app.get('/', indexController);
+app.get('/',indexController);
 app.get('/files/:hash/*?', filesController);
 app.get('/content/:hash/*?', contentController);
 
 // error handlers
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-    const { status = 500, message } = err;
+app.use(function (err, req, res, next) {
+    const {status = 500, message} = err;
 
     // render the error page
     res.status(status);
-    res.render('error', { title: 'error', status, message });
+    res.render('error', {title: 'error', status, message});
 });
 
 app.listen(PORT, HOST, () => {
