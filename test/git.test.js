@@ -2,24 +2,23 @@ const chai = require('chai');
 const expect = chai.expect;
 const { Git } = require('../utils/git');
 const { resolve } = require('path');
+const sinon = require('sinon');
 
-class TestGit extends Git {
-  constructor(testString) {
-    super();
-    this.testString = testString;
-  }
-  executeGit(cmd, args) {
+function createGitWithFakeExecute(returnsString) {
+  const git = new Git();
+  sinon.stub(git, 'executeGit').callsFake(function() {
     return new Promise((resolve, reject) => {
-      resolve(this.testString);
+      resolve(returnsString);
     });
-  }
+  });
+  return git;
 }
 
 describe('Проверка работы с git', () => {
   it('Отображается история', () => {
     //подготовка
     const testString = `123\u0009Olga\u00092018-10-16 12:49:56 +0300\u0009заглушка stub`;
-    const testGit = new TestGit(testString);
+    const testGit = createGitWithFakeExecute(testString); //new TestGit(testString);
     const expectedResult = [
       {
         hash: '123',
@@ -42,7 +41,7 @@ describe('Проверка работы с git', () => {
       123456\u0009Olga\u00092018-10-16 12:52:56 +0300\u0009заглушка stub-4\n
       1234567\u0009Olga\u00092018-10-16 12:53:56 +0300\u0009заглушка stub-5\n
       12345678\u0009Olga\u00092018-10-16 12:54:56 +0300\u0009заглушка stub-6`;
-    const testGit = new TestGit(testString);
+    const testGit = createGitWithFakeExecute(testString);
     const expectedResult = [
       {
         hash: '      123456',
@@ -76,7 +75,7 @@ describe('Проверка работы с git', () => {
   it('Отображается файловая структура коммита', () => {
     //подготовка
     const testString = `10000 blob 123\u0009app.js\n100001 tree 1234\u0009test\n`;
-    const testGit = new TestGit(testString);
+    const testGit = createGitWithFakeExecute(testString);
     const expectedResult = [
       {
         type: 'blob',
@@ -102,7 +101,7 @@ describe('Проверка работы с git', () => {
   it('Отображается файловая структура коммита по указанному пути', () => {
     //подготовка
     const testString = `100002 blob 12345\u0009test.app.js\n`;
-    const testGit = new TestGit(testString);
+    const testGit = createGitWithFakeExecute(testString);
     const expectedResult = [
       {
         type: 'blob',
@@ -127,7 +126,7 @@ describe('Проверка работы с git', () => {
       const express = require('express');
       app.listen(3000);
       module.exports = app;`;
-    const testGit = new TestGit(testString);
+    const testGit = createGitWithFakeExecute(testString);
     const hash = '123';
     const expectedResult = `const path = require('path');
       const express = require('express');
