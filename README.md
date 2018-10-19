@@ -2,12 +2,15 @@
 ## Как запустить
 
 `git clone`
+
 `npm i`
+
 `npm start`
 
 ### Установить Selenium:
 
 `npm install selenium-standalone --global`  
+
 `selenium-standalone install` 
 
 ### Запуск Selenium:
@@ -17,8 +20,9 @@
 
 * Модульные:
 `npm run test-unit`
+
 * Интеграционные:
-`mpn run test-integration`
+`npm run test-integration`
 
 
 ## Интеграционные тесты
