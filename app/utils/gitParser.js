@@ -12,7 +12,6 @@ function parseHistoryItem(line) {
 function parseFileTreeItem(line) {
     const [info, path] = line.split('\t');
     const [, type, hash] = info.split(' ');
-    // console.log(line,{type, hash, path});
     return {type, hash, path};
 }
 
