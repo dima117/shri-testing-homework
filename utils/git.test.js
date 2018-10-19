@@ -81,11 +81,16 @@ describe('Работа git-функционала', () => {
         expect(actualResult).toEqual(expectedResult)
     })
 
-    it('Git History возвращает последние три коммита (size) в репозитории на первой странице (page)', async () => {
+    it('Git History с заданным size = 5 возвращает массив из пяти последний коммитов, содержащий предпоследний коммит, на первой странице (page)', async () => {
         const mygit = new myGit()
         const page = 1
-        const size = 3
-        const expectedResult = 3
+        const size = 5
+        const expectedCommit = {
+            author: 'Hope R',
+            hash: '7f13b8bf3911557fe1d7e1657a1df0540c746f94',
+            msg: 'Use dependency injection',
+            timestamp: '2018-10-19 18:17:48 +0300'
+        }
 
         mygit.executeGit = () => {
             return Promise.resolve(gitCommandInputStub)
@@ -93,7 +98,11 @@ describe('Работа git-функционала', () => {
 
         const actualResult = await mygit.gitHistory(page, size)
 
-        expect(actualResult.length).toEqual(expectedResult)
+        // cодержит нужный коммит
+        expect(actualResult).toContainEqual(expectedCommit)
+
+        // включает пять коммитов
+        expect(actualResult.length).toEqual(size)
     })
 })
 

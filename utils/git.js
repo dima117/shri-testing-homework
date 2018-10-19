@@ -42,7 +42,6 @@ class myGit {
             '-n',
             size
         ]).then(data => {
-            console.log(data)
             return data
                 .split('\n')
                 .filter(Boolean)
