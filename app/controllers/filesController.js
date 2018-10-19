@@ -4,7 +4,6 @@ const { gitFileTree } = require('../api/gitAPI');
 const { buildObjectUrl} = require('../utils/navigation');
 
 
-
 module.exports = function(req, res, next) {
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
