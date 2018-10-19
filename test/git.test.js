@@ -3,9 +3,9 @@ const expect = chai.expect;
 const { Git } = require('../utils/git');
 const { resolve } = require('path');
 const sinon = require('sinon');
+const git = new Git();
 
 function createGitWithFakeExecute(returnsString) {
-  const git = new Git();
   sinon.stub(git, 'executeGit').callsFake(function() {
     return new Promise((resolve, reject) => {
       resolve(returnsString);
@@ -15,10 +15,21 @@ function createGitWithFakeExecute(returnsString) {
 }
 
 describe('Проверка работы с git', () => {
-  it('Отображается история', () => {
+  let testGit;
+  before(function() {
+    testGit = sinon.stub(git, 'executeGit').callsFake(returnsString => {
+      return new Promise((resolve, reject) => {
+        resolve(returnsString);
+      });
+    });
+  });
+  after(function() {
+    git.executeGit.restore(); // Unwraps the spy
+  });
+  it('Отображается история', function(done) {
     //подготовка
     const testString = `123\u0009Olga\u00092018-10-16 12:49:56 +0300\u0009заглушка stub`;
-    const testGit = createGitWithFakeExecute(testString); //new TestGit(testString);
+    //const testGit = createGitWithFakeExecute(testString); //new TestGit(testString);
     const expectedResult = [
       {
         hash: '123',
@@ -27,8 +38,12 @@ describe('Проверка работы с git', () => {
         msg: 'заглушка stub'
       }
     ];
+
+    git.executeGit(testString);
+
     //действие
-    const resultGitHistory = testGit.gitHistory();
+    const resultGitHistory = git.gitHistory();
+
     //проверка
     return resultGitHistory.then(res => {
       expect(res).to.deep.equal(expectedResult);

@@ -1,7 +1,7 @@
 const { Git } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 const git = new Git();
-const gitFileTree = git.gitFileTree;
+//const gitFileTree = git.gitFileTree;
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
@@ -9,12 +9,14 @@ module.exports = function(req, res, next) {
   git
     .gitFileTree(hash, path.join('/'))
     .then(function([file]) {
+      console.log(file);
       if (file && file.type === 'blob') {
         return git.gitFileContent(file.hash);
       }
     })
     .then(
       content => {
+        console.log('content: ', content);
         if (content) {
           res.render('content', {
             title: 'content',
@@ -25,6 +27,8 @@ module.exports = function(req, res, next) {
           next();
         }
       },
-      err => next(err)
+      err => {
+        next(err);
+      }
     );
 };
