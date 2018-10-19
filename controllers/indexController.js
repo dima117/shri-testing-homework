@@ -6,7 +6,7 @@ module.exports = function(req, res, next) {
 		(history) => {
 			const list = history.map((item) => ({
 				...item,
-				href: buildFolderUrl(item.hash, "")
+				href: buildFolderUrl(item.hash)
 			}));
 
 			res.render("index", {
