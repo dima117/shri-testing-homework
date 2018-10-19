@@ -6,17 +6,15 @@ const git = new Git();
 module.exports = function(req, res, next) {
   const { hash } = req.params;
   const path = req.params[0].split('/').filter(Boolean);
-  git
+  return git
     .gitFileTree(hash, path.join('/'))
     .then(function([file]) {
-      console.log(file);
       if (file && file.type === 'blob') {
         return git.gitFileContent(file.hash);
       }
     })
     .then(
       content => {
-        console.log('content: ', content);
         if (content) {
           res.render('content', {
             title: 'content',
