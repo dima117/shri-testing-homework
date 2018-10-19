@@ -16,26 +16,31 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
-module.exports = function(req, res, next) {
+// переписал на async/await что бы можно было дождаться промежуточного результата
+// и добавил необязательный аргумент для передачи стабов
+module.exports = async function(req, res, next, ...stubs) {
+  const getFileTree = stubs[0] ? stubs[0] : gitFileTree
+  const buildObjUrl = stubs[1] ? stubs[1] : buildObjectUrl
+
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-  return gitFileTree(hash, path).then(
+  const files = await getFileTree(hash, path).then(
     list => {
-      const files = list.map(item => ({
+      return list.map(item => ({
         ...item,
-        href: buildObjectUrl(hash, item),
+        href: buildObjUrl(hash, item),
         name: item.path.split('/').pop()
       }));
-
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
     },
     err => next(err)
   );
+
+  res.render('files', {
+    title: 'files',
+    breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+    files
+  });
 };

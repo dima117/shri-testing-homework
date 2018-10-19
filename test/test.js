@@ -1,2 +1,5 @@
 require('./git-test')
 require('./navigation-test')
+require('./indexController-test')
+require('./contentController-test')
+require('./filesController-test')

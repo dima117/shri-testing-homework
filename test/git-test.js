@@ -4,7 +4,7 @@ const { expect } = chai
 
 const { gitHistory, gitFileTree, gitFileContent } = require('../utils/git')
 
-const stabFileTree = () => Promise.resolve(`040000 tree 6a033b657f10911ad9b65c27c3f9b6fb6130b058	public \n\n`)
+const stabFileTree = () => Promise.resolve(`040000 tree 6a033b657f10911ad9b65c27c3f9b6fb6130b058	public \n`)
 const stabHistory = () => Promise.resolve(`38429bed94bd7c107c65fed6bffbf443ff0f4183	Dmitry Andriyanov	2018-10-15 13:22:09 +0300	заготовка приложения\n`)
 
 describe('functions from utils/git.js', () => {
@@ -47,7 +47,5 @@ describe('functions from utils/git.js', () => {
       const result = await gitFileTree(null, null, stabFileTree)
       expect(result[0]).to.have.all.keys('type', 'hash', 'path')
     })
-
   })
-
 })
