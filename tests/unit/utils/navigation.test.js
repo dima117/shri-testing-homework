@@ -1,8 +1,8 @@
 const { buildFolderUrl, buildBreadcrumbs, buildFileUrl } = require('../../../utils/navigation');
-const expect = require('chai').expect;
+const { expect } = require('chai');
 
-describe('utils/navigation', () => {
-  describe('buildFolderUrl', () => {
+describe('Построение навигационных ссылок', () => {
+  describe('buildFileUrl: получение ссылки на контент файла', () => {
     it('возвращает корректный URL', () => {
       const hash = '0a88cdf2265c0b19663ddbe2733a27e9599724e1';
       const path = 'controllers/indexController.js';
@@ -10,17 +10,17 @@ describe('utils/navigation', () => {
       const resultURL = buildFileUrl(hash, path);
 
       expect(resultURL).to.equal('/content/0a88cdf2265c0b19663ddbe2733a27e9599724e1/controllers/indexController.js');
-    })
-  })
+    });
+  });
 
-  describe('buildFileUrl', () => {
+  describe('buildFolderUrl: получение ссылки на определенную папку', () => {
     it('возвращает корректный URL при передаче одного параметра', () => {
       const hash = '0a88cdf2265c0b19663ddbe2733a27e9599724e1';
 
       const resultURL = buildFolderUrl(hash);
 
       expect(resultURL).to.equal('/files/0a88cdf2265c0b19663ddbe2733a27e9599724e1/');
-    })
+    });
 
     it('возвращает корректный URL при передаче двух параметров', () => {
       const hash = '0a88cdf2265c0b19663ddbe2733a27e9599724e1';
@@ -29,10 +29,10 @@ describe('utils/navigation', () => {
       const resultURL = buildFolderUrl(hash, path);
 
       expect(resultURL).to.equal('/files/0a88cdf2265c0b19663ddbe2733a27e9599724e1/controllers/');
-    })
-  })
+    });
+  });
 
-  describe('buildBreadcrumbs', () => {
+  describe('buildBreadcrumbs: построение "хлебных крошек"', () => {
     it('возвращает корректное значение для главной страницы', () => {
       const resultBreadcrumbs = buildBreadcrumbs();
 
@@ -50,8 +50,8 @@ describe('utils/navigation', () => {
 
       expect(resultBreadcrumbs).to.have.deep.members([
         { text: 'HISTORY', href: '/' },
-        { text: 'ROOT', href: "/files/0a88cdf2265c0b19663ddbe2733a27e9599724e1/"},
-        { text: 'controllers', href: "/files/0a88cdf2265c0b19663ddbe2733a27e9599724e1/controllers/"},
+        { text: 'ROOT', href: '/files/0a88cdf2265c0b19663ddbe2733a27e9599724e1/' },
+        { text: 'controllers', href: '/files/0a88cdf2265c0b19663ddbe2733a27e9599724e1/controllers/' },
         { text: 'filesController.js' },
       ]);
     });

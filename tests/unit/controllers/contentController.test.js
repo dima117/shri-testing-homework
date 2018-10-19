@@ -2,7 +2,7 @@ const contentController = require('./../../../controllers/contentController');
 const express = require('express');
 const request = require('supertest');
 const path = require('path');
-const expect = require('chai').expect;
+const { expect } = require('chai');
 
 describe('controllers/contentController', () => {
   it('возвращает корректные данные в шаблоне', (done) => {
@@ -17,9 +17,9 @@ describe('controllers/contentController', () => {
       .get('/content/0a88cdf2265c0b19663ddbe2733a27e9599724e1/.gitignore')
       .expect(200)
       .expect((res) => {
-        expect(res.text).to.include('<div class="file-content">node_modules</div>')
-        done()
+        expect(res.text).to.include('<div class="file-content">node_modules</div>');
+        done();
       })
-      .catch(done)
-  })
-})
+      .catch(done);
+  });
+});

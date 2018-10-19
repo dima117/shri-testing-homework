@@ -3,14 +3,23 @@ const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
+function _setExecuteFileFake(fakeFunction) {
+  if (typeof fakeFunction === 'function') {
+    executeGit._executeFileFake = fakeFunction;
+  } else {
+    delete executeGit._executeFileFake;
+  }
+}
+
 function executeGit(cmd, args) {
   // точка расширения
-  const executeFile = executeGit._executeFileFake ?
-    executeGit._executeFileFake:
-    execFile;
+
+  if (typeof executeGit._executeFileFake === 'function') {
+    return executeGit._executeFileFake(cmd, args);
+  }
 
   return new Promise((resolve, reject) => {
-    executeFile(cmd, args, { cwd: REPO }, (err, stdout) => {
+    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
       if (err) {
         reject(err);
       }
@@ -27,17 +36,12 @@ function parseHistoryItem(line) {
     hash,
     author,
     timestamp,
-    msg
+    msg,
   };
 }
 
 function gitHistory(page = 1, size = 10) {
-
-  if (typeof gitHistory._executeFileFake === 'function') {
-    executeGit._executeFileFake = gitHistory._executeFileFake;
-  } else {
-    delete executeGit._executeFileFake
-  }
+  _setExecuteFileFake(gitHistory._executeFileFake);
 
   const offset = (page - 1) * size;
 
@@ -48,13 +52,11 @@ function gitHistory(page = 1, size = 10) {
     '--skip',
     offset,
     '-n',
-    size
-  ]).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseHistoryItem);
-  });
+    size,
+  ]).then(data => data
+    .split('\n')
+    .filter(Boolean)
+    .map(parseHistoryItem));
 }
 
 function parseFileTreeItem(line) {
@@ -65,25 +67,20 @@ function parseFileTreeItem(line) {
 }
 
 function gitFileTree(hash, path) {
+  _setExecuteFileFake(gitFileTree._executeFileFake);
+
   const params = ['ls-tree', hash];
   path && params.push(path);
 
-  return executeGit('git', params).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseFileTreeItem);
-  });
+  return executeGit('git', params).then(data => data
+    .split('\n')
+    .filter(Boolean)
+    .map(parseFileTreeItem));
 }
 
 function gitFileContent(hash) {
-
   // точка расширения
-  if (typeof gitFileContent._executeFileFake === 'function') {
-    executeGit._executeFileFake = gitFileContent._executeFileFake;
-  } else {
-    delete executeGit._executeFileFake
-  }
+  _setExecuteFileFake(gitFileContent._executeFileFake);
 
   return executeGit('git', ['show', hash]);
 }
@@ -91,5 +88,5 @@ function gitFileContent(hash) {
 module.exports = {
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
 };
