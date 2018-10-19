@@ -10,7 +10,7 @@
     "hermione": "hermione",
     "unit-test": "mocha **/*.test.js",
     "integration-test": "run-p selenium test-server hermione",
-    "test-server": "cd test-environment && node ./www",
+    "test-server": "cd env-for-test && node ./www",
     "unit-testlog": "rm unit-test.log && touch unit-test.log && npm run unit-test >> unit-test.log",
     "integration-testlog": "rm integration-test.log && touch integration-test.log && npm run integration-test >> integration-test.log",
     "testlog": "run-p unit-testlog integration-testlog",
