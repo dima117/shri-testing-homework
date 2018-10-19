@@ -3,15 +3,81 @@ var expect  = require('chai').expect;
 
 describe('git.js', function() {
     describe('gitHistory()', () => {
-        // Тесты для gitHistory()
+        it('Полученные данные корректно обрабатываются', async () => {
+            GitCommands.executeCommand = () => {
+                return Promise.resolve(
+                    'hash1\tauthor1\ttimestamp1\tTest commit message 1\n' +
+                    'hash2\tauthor2\ttimestamp2\tTest commit message 2'
+                );
+            };
+
+            const result = await GitCommands.gitHistory();
+
+            expect(result).to.be.eql([ { 
+                hash: 'hash1',
+                author: 'author1',
+                timestamp: 'timestamp1',
+                msg: 'Test commit message 1' 
+            },
+            { 
+                hash: 'hash2',
+                author: 'author2',
+                timestamp: 'timestamp2',
+                msg: 'Test commit message 2' 
+            }]);
+        });
+
+        describe('Корректные аргументы git-команды', () => {
+            it('Без аргументов', () => {
+                let result;
+                GitCommands.executeCommand = (...args) => {
+                    result = args;
+                    return Promise.resolve('');
+                };
+
+                GitCommands.gitHistory();
+
+                expect(result).to.eql(['git', [
+                    'log',
+                    '--pretty=format:%H%x09%an%x09%ad%x09%s',
+                    '--date=iso',
+                    '--skip',
+                    0,
+                    '-n',
+                    10]
+                ]);
+            });
+
+            it('Аргументы page и size', () => {
+                const page = 2;
+                const size = 3;
+                let result;
+                GitCommands.executeCommand = (...args) => {
+                    result = args;
+                    return Promise.resolve('');
+                };
+
+                GitCommands.gitHistory(page, size);
+
+                expect(result).to.eql(['git', [
+                    'log',
+                    '--pretty=format:%H%x09%an%x09%ad%x09%s',
+                    '--date=iso',
+                    '--skip',
+                    3,
+                    '-n',
+                    3]
+                ]);
+            });
+        });
     });
     
     describe('gitFileTree()', () => {
         const hash = 'testHash';
         const path = 'test/path';
 
-        describe('В git-команду передаются корректные аргументы', () => {
-            it('Без path', () => {
+        describe('Корректные аргументы git-команды', () => {
+            it('Без аргументов', () => {
                 let result;
                 GitCommands.executeCommand = (...args) => {
                     result = args;
@@ -23,7 +89,7 @@ describe('git.js', function() {
                 expect(result).to.eql(['git', ['ls-tree', hash]]);
             });
 
-            it('С path', () => {
+            it('Аргумент path', () => {
                 let result;
                 GitCommands.executeCommand = (...args) => {
                     result = args;
@@ -60,7 +126,7 @@ describe('git.js', function() {
     });
 
     describe('gitFileContent()', () => {
-        it('Выполняется правильная git-команда', () => {
+        it('Корректные аргументы git-команды', () => {
             const hash = 'testHash';
             let result;
 
