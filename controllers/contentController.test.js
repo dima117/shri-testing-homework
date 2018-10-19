@@ -10,11 +10,7 @@ describe('contentController.js', () => {
                 { text: 'path' }
             ],
             content: 'content',
-            title: 'content',
-            hash: 'hash',
-            path: [
-                'path'
-            ]
+            title: 'content'
         };
 
         let mock = {};

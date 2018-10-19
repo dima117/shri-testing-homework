@@ -1,7 +1,7 @@
 const Utils = require('../utils/git');
 const { buildBreadcrumbs } = require('../utils/navigation');
 
-function interProcessor(content, res, hash, path, next) {
+function interProcessor(content, res, hash, path) {
     if (content) {
         res.render('content', {
             title: 'content',
@@ -9,9 +9,10 @@ function interProcessor(content, res, hash, path, next) {
             content
         });
     } else {
-        next();
+        const err = new Error('Not correct content');
+        err.status = 400;
+        throw err;
     }
-    return { path, hash };
 }
 
 module.exports.interProcessor = interProcessor;
@@ -25,8 +26,6 @@ module.exports.router = function(req, res, next) {
                 return Utils.gitFileContent(file.hash);
             }
         })
-        .then(
-            content => interProcessor(content, res, hash, path, next),
-            err => next(err)
-        );
+        .then(content => interProcessor(content, res, hash, path))
+        .catch(next);
 };

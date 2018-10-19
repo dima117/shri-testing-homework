@@ -1,2 +1,27 @@
-✓ github should find hermione [chrome:01b0982f01900318314b049d1726b718] - 1418ms
-Total: 1 Passed: 1 Failed: 0 Skipped: 0 Retries: 0
+
+> git-viewer@1.0.0 integration-test /Users/shri/Documents/Projects/shri-testing-homework
+> run-p selenium test-server hermione
+
+
+> git-viewer@1.0.0 hermione /Users/shri/Documents/Projects/shri-testing-homework
+> hermione
+
+
+> git-viewer@1.0.0 selenium /Users/shri/Documents/Projects/shri-testing-homework
+> selenium-standalone start
+
+
+> git-viewer@1.0.0 test-server /Users/shri/Documents/Projects/shri-testing-homework
+> cd test-environment && node ./www
+
+App listening at http://localhost:3000
+Selenium started
+✓ Breadcrumbs breadcrumbs should be without links [chrome:0d5b5b8da6cfd28361a80fb57e3c6405] - 2496ms
+✓ Server responses should returns 404 status [chrome:0d5b5b8da6cfd28361a80fb57e3c6405] - 253ms
+✓ Server responses should returns 400 status [chrome:0d5b5b8da6cfd28361a80fb57e3c6405] - 394ms
+✓ Breadcrumbs breadcrumbs should be without links [firefox:bb237f35-fe03-f64d-adbb-9906baa8d4f9] - 1303ms
+✓ Server responses should returns page [chrome:0d5b5b8da6cfd28361a80fb57e3c6405] - 287ms
+✓ Server responses should returns 404 status [firefox:bb237f35-fe03-f64d-adbb-9906baa8d4f9] - 507ms
+✓ Server responses should returns 400 status [firefox:bb237f35-fe03-f64d-adbb-9906baa8d4f9] - 447ms
+✓ Server responses should returns page [firefox:bb237f35-fe03-f64d-adbb-9906baa8d4f9] - 537ms
+Total: 8 Passed: 8 Failed: 0 Skipped: 0 Retries: 0

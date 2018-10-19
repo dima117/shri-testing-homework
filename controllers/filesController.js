@@ -24,6 +24,12 @@ function interProcessor(list, res, hash, pathParam) {
         name: item.path.split('/').pop()
     }));
 
+    if (files.length < 1) {
+        const err = new Error('Not correct file');
+        err.status = 400;
+        throw err;
+    }
+
     res.render('files', {
         title: 'files',
         breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
@@ -38,10 +44,7 @@ module.exports.router = function(req, res, next) {
 
     const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-    return Utils.gitFileTree(hash, path).then(
-        list => { 
-            interProcessor(list, res, hash, pathParam); 
-        },
-        err => next(err)
-    );
+    return Utils.gitFileTree(hash, path)
+        .then(list => { interProcessor(list, res, hash, pathParam); })
+        .catch(next);
 };

@@ -1,10 +1,17 @@
 
+> git-viewer@1.0.0 unit-test /Users/shri/Documents/Projects/shri-testing-homework
+> mocha **/*.test.js
+
+
 
   contentController.js
     ✓ should return correct format of data
 
   filesController.js
-    ✓ should return correct format of data
+    ✓ should returns correct format of data
+
+  indexController.test.js
+    ✓ should returns correct format of data
 
   git.js
     ✓ should return correct format data of git history
@@ -18,5 +25,5 @@
     ✓ should returns correct format data, for breadcrumbs, without args
 
 
-  9 passing (23ms)
+  10 passing (21ms)
 

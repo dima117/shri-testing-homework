@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const HOST = '::';
 
 // controllers
@@ -34,7 +34,6 @@ app
         // render the error page
         res.status(status);
         res.render('error', { title: 'error', status, message });
-        // next();
     });
 
 app.listen(PORT, HOST, () => {
