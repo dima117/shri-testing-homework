@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha --recursive test/*/*.js",
+    "int-test": "./node_modules/hermione/bin/hermione hermione/simple.hermione.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },

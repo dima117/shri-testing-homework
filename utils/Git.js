@@ -19,7 +19,7 @@ class Git {
         });
     }
 
-    static parseHistoryItem(line) {
+    parseHistoryItem(line) {
         const [hash, author, timestamp, msg] = line.split('\t');
 
         return {
@@ -45,11 +45,11 @@ class Git {
             return data
                 .split('\n')
                 .filter(Boolean)
-                .map(Git.parseHistoryItem);
+                .map(this.parseHistoryItem);
         });
     }
 
-    static parseFileTreeItem(line) {
+    parseFileTreeItem(line) {
         const [info, path] = line.split('\t');
         const [, type, hash] = info.split(' ');
 
@@ -64,7 +64,7 @@ class Git {
             return data
                 .split('\n')
                 .filter(Boolean)
-                .map(Git.parseFileTreeItem);
+                .map(this.parseFileTreeItem);
         });
     }
 
