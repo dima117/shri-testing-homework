@@ -64,4 +64,3 @@ describe('Содержимое страниц', () => {
     });
   });
 });
-// //  selenium-standalone start  npm run hermione-gui npm start
