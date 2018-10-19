@@ -40,7 +40,7 @@ describe('page-preparation.js', () => {
                 expect(result.list[0]).to.have.property('href', '/files/Hash 1/');
             });
 
-            it('Список содержит 2 элемента', () => {
+            it('Список содержит корректное количество элементов', () => {
                 expect(result.list).to.have.lengthOf(2);
             });
         });
@@ -80,7 +80,7 @@ describe('page-preparation.js', () => {
             'hash': 'hash3',
             'path': 'path31/path32'
         }];
-        
+
         const hash = 'userHash';
         const pathParam = ['path1', 'path2'];
 
@@ -106,7 +106,7 @@ describe('page-preparation.js', () => {
             expect(result.files[0]).to.have.property('name', 'path12');
         });
 
-        it('Список содержит 3 элемента', () => {
+        it('Список содержит корректное количество элементов', () => {
             expect(result.files).to.have.lengthOf(3);
         });
     });

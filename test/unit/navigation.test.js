@@ -36,7 +36,7 @@ describe('navigation.js', function() {
         describe('Без параметров', () => {
             const breadcrumbs = buildBreadcrumbs();
 
-            it('Только один элемент', () => {
+            it('В цепочке корректное количество элементов', () => {
                 expect(breadcrumbs).to.have.lengthOf(1);
             });
 
@@ -54,7 +54,7 @@ describe('navigation.js', function() {
 
             const breadcrumbs = buildBreadcrumbs(commitHash);
 
-            it('В цепочке 2 элемента', () => {
+            it('В цепочке корректное количество элементов', () => {
                 expect(breadcrumbs).to.have.lengthOf(2);
             });
 
@@ -77,7 +77,7 @@ describe('navigation.js', function() {
 
             const breadcrumbs = buildBreadcrumbs(commitHash, path);
 
-            it('В цепочке 4 элемента', () => {
+            it('В цепочке корректное количество элементов', () => {
                 expect(breadcrumbs).to.have.lengthOf(4);
             });
 
