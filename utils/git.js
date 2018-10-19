@@ -58,11 +58,7 @@ class Git {
   gitFileTree(hash, path) {
     const params = ['ls-tree', hash];
     path && params.push(path);
-    console.log(params);
-
     return this.executeGit('git', params).then(data => {
-      console.log(`data`);
-      console.log(data);
       return data
         .split('\n')
         .filter(Boolean)

@@ -2,42 +2,38 @@ const chai = require('chai');
 const expect = chai.expect;
 const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-describe('работа с navigation', () => {
-  describe('buildFolderUrl', () => {
-    it('можно ли получить путь до папки по двум параметрам ', () => {
-      //подготовка
-      const path = 'b';
-      const parentHash = 'a';
-      //действие
-      const resultBuildFolderUrl = buildFolderUrl(parentHash, path);
-      //проверка
-      expect(resultBuildFolderUrl).to.eql('/files/a/b');
-    });
-
-    it('можно ли получить путь до папки с опущенным парметром path ', () => {
-      //подготовка
-      const parentHash = 'a';
-      //действие
-      const resultBuildFolderUrl = buildFolderUrl(parentHash);
-      //проверка
-      expect(resultBuildFolderUrl).to.eql('/files/a/');
-    });
+describe('Проверка навигации по ссылкам', () => {
+  it('Формируется url к папке до элемента и от заданного элемента по заданной вложенности', () => {
+    //подготовка
+    const path = 'b';
+    const parentHash = 'a';
+    //действие
+    const resultBuildFolderUrl = buildFolderUrl(parentHash, path);
+    //проверка
+    expect(resultBuildFolderUrl).to.eql('/files/a/b');
   });
 
-  describe('buildFileUrl', () => {
-    it('можно ли получить путь до файла по двум параметрам ', () => {
-      //подготовка
-      const path = 'b';
-      const parentHash = 'a';
-      //действие
-      const resultBuildFileUrl = buildFileUrl(parentHash, path);
-      //проверка
-      expect(resultBuildFileUrl).to.eql('/content/a/b');
-    });
+  it('Формируется url к папке до указанного элемента', () => {
+    //подготовка
+    const parentHash = 'a';
+    //действие
+    const resultBuildFolderUrl = buildFolderUrl(parentHash);
+    //проверка
+    expect(resultBuildFolderUrl).to.eql('/files/a/');
   });
 
-  describe('buildBreadcrumbs', () => {
-    it('можно ли получить хлебные крошки - без параметров', () => {
+  it('Формируется url до файла от при указании элемента и относительного пути до файла', () => {
+    //подготовка
+    const path = 'b';
+    const parentHash = 'a';
+    //действие
+    const resultBuildFileUrl = buildFileUrl(parentHash, path);
+    //проверка
+    expect(resultBuildFileUrl).to.eql('/content/a/b');
+  });
+
+  describe('Хлебные крошки:', () => {
+    it('Первый элемент - история', () => {
       //подготовка
       const bc = [
         {
@@ -50,7 +46,8 @@ describe('работа с navigation', () => {
       //проверка
       expect(resultBuildBreadCrumbs).to.deep.equal(bc);
     });
-    it('можно ли получить хлебные крошки - с одним параметром hash', () => {
+
+    it('Содержимое коммита - HISTORY/ROOT', () => {
       //подготовка
       const bc = [
         {
@@ -68,7 +65,8 @@ describe('работа с navigation', () => {
       //проверка
       expect(resultBuildBreadCrumbs).to.deep.equal(bc);
     });
-    it('можно ли получить хлебные крошки - с двумя параметрами hash, path - пустая строка', () => {
+
+    it('Содержимое коммита и пустой путь вложенности - HISTORY/ROOT', () => {
       //подготовка
       const hash = 'a';
       const path = '';
@@ -88,54 +86,68 @@ describe('работа с navigation', () => {
       //проверка
       expect(resultBuildBreadCrumbs).to.deep.equal(bc);
     });
-    it('можно ли получить хлебные крошки - с двумя параметрами hash, path', () => {
-      //подготовка
-      const hash = 'a';
-      const path = 'b';
-      const bc = [
-        {
-          text: 'HISTORY',
-          href: '/'
-        },
-        {
-          text: 'ROOT',
-          href: '/files/a/'
-        },
-        {
-          text: 'b'
-        }
-      ];
 
-      //действие
-      const resultBuildBreadCrumbs = buildBreadcrumbs(hash, path);
-      //проверка
-      expect(resultBuildBreadCrumbs).to.deep.equal(bc);
-    });
-    it('можно ли получить хлебные крошки - с двумя параметрами hash, path - вложенность пути', () => {
+    it('У последнего элемента должен быть пустой адрес', () => {
       //подготовка
       const hash = 'a';
-      const path = 'b/с';
-      const bc = [
-        {
-          text: 'HISTORY',
-          href: '/'
-        },
-        {
-          text: 'ROOT',
-          href: '/files/a/'
-        },
-        {
-          text: 'b',
-          href: '/files/a/b/'
-        },
-        {
-          text: 'с'
-        }
-      ];
+      const path = '';
       //действие
       const resultBuildBreadCrumbs = buildBreadcrumbs(hash, path);
       //проверка
-      expect(resultBuildBreadCrumbs).to.deep.equal(bc);
+      expect(resultBuildBreadCrumbs[resultBuildBreadCrumbs.length - 1].href).to.deep.equal(undefined);
+    });
+
+    describe('Отображаются хлебные крошки вложенных папок', () => {
+      it('отображаются хлебные крошки первого уровня вложенности', () => {
+        //подготовка
+        const hash = 'a';
+        const path = 'b';
+        const bc = [
+          {
+            text: 'HISTORY',
+            href: '/'
+          },
+          {
+            text: 'ROOT',
+            href: '/files/a/'
+          },
+          {
+            text: 'b'
+          }
+        ];
+
+        //действие
+        const resultBuildBreadCrumbs = buildBreadcrumbs(hash, path);
+        //проверка
+        expect(resultBuildBreadCrumbs).to.deep.equal(bc);
+      });
+
+      it('отображаются хлебные крошки второго уровня вложенности', () => {
+        //подготовка
+        const hash = 'a';
+        const path = 'b/с';
+        const bc = [
+          {
+            text: 'HISTORY',
+            href: '/'
+          },
+          {
+            text: 'ROOT',
+            href: '/files/a/'
+          },
+          {
+            text: 'b',
+            href: '/files/a/b/'
+          },
+          {
+            text: 'с'
+          }
+        ];
+        //действие
+        const resultBuildBreadCrumbs = buildBreadcrumbs(hash, path);
+        //проверка
+        expect(resultBuildBreadCrumbs).to.deep.equal(bc);
+      });
     });
   });
 });
