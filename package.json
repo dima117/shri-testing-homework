@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./app/tests/utils ./app/tests/api ./app/tests/view",
+    "test": "mocha ./app/tests/utils ./app/tests/api ./app/tests/view ./app/tests/controllers",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
-    "lint": "eslint ./ --fix"
+    "lint": "eslint ./ --fix",
+    "hermione": "hermione ./hermione/simple.hermione.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,10 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.7.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
     "mocha": "^5.2.0",
-    "ndb": "^1.0.26"
+    "ndb": "^1.0.26",
+    "selenium-standalone": "^6.15.3"
   }
 }
