@@ -22,6 +22,7 @@ function gitFileTree(hash, path) {
     path && params.push(path);
 
     return gitFileTree.prototype.executeGit('git', params).then(data => {
+
         return data
             .split('\n')
             .filter(Boolean)

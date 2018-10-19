@@ -1,6 +1,6 @@
 const {buildBreadcrumbs} = require("../view/buildBreadcrumbs");
 
-const {gitHistory, gitFileContent, gitFileTree} = require('../api/gitAPI');
+const {gitHistory, gitFileContent, gitFileTree} = require('../api/gitApi');
 const {buildFolderUrl, buildObjectUrl} = require('../utils/navigation');
 
 [indexController, contentController, filesController].forEach(obj => {
@@ -11,8 +11,7 @@ const {buildFolderUrl, buildObjectUrl} = require('../utils/navigation');
 
 
 function indexController(req, res) {
-    indexController.prototype.gitHistory(1, 20).then(
-        history => {
+    return indexController.prototype.gitHistory(1, 20).then(history => {
             const list = history.map(item => ({
                 ...item,
                 href: buildFolderUrl(item.hash, '')
@@ -25,8 +24,7 @@ function indexController(req, res) {
             };
             res.render('index', renderOptions);
 
-            // console.log('ic', {history,renderOptions});
-            return {history, renderOptions};
+            return renderOptions;
         },
         err => next(err)
     );
@@ -35,22 +33,25 @@ function indexController(req, res) {
 function contentController(req, res, next) {
     const {hash} = req.params;
     const path = req.params[0].split('/').filter(Boolean);
+
     return contentController.prototype.gitFileTree(hash, path.join('/'))
         .then(function ([file]) {
             if (file && file.type === 'blob') {
-                return gitFileContent(file.hash);
+                return contentController.prototype.gitFileContent(file.hash);
             }
         })
         .then(
             content => {
                 if (content) {
-                    res.render('content', {
+                    const renderOptions = {
                         title: 'content',
                         breadcrumbs: buildBreadcrumbs(hash, path.join('/')),
                         content
-                    });
+                    };
+                    res.render('content', renderOptions);
+                    return renderOptions;
                 } else {
-                    next();
+                    return next();
                 }
             },
             err => next(err)
@@ -71,11 +72,14 @@ function filesController(req, res, next) {
                 name: item.path.split('/').pop()
             }));
 
-            res.render('files', {
+            const renderOptions = {
                 title: 'files',
                 breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
                 files
-            });
+            };
+
+            res.render('files', renderOptions);
+            return renderOptions;
         },
         err => next(err)
     );
