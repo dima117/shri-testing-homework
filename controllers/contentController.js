@@ -1,5 +1,5 @@
 const { Git } = require('../utils/Git');
-const { buildBreadcrumbs } = require('../utils/navigation');
+const buildFileContent = require('../middleware/buildFileContent');
 let git = new Git();
 
 module.exports = function(req, res, next) {
@@ -15,11 +15,7 @@ module.exports = function(req, res, next) {
     .then(
       content => {
         if (content) {
-          res.render('content', {
-            title: 'content',
-            breadcrumbs: buildBreadcrumbs(hash, path.join('/')),
-            content
-          });
+          res.render('content', buildFileContent(content, hash, path));
         } else {
           next();
         }
