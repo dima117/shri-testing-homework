@@ -9,15 +9,14 @@ function executeGit(cmd, args) {
             if (err) {
                 reject(err)
             }
-            // console.log(stdout.toString())
             resolve(stdout.toString())
         })
     })
 }
 
 class myGit {
-    constructor() {
-        this.executeGit = executeGit
+    constructor(executeGit) {
+        this.executeGit = executeGit 
     }
 
     parseHistoryItem(line) {
@@ -34,7 +33,7 @@ class myGit {
     gitHistory(page = 1, size = 10) {
         const offset = (page - 1) * size
 
-        return this.executeGit('git', [
+        return executeGit('git', [
             'log',
             '--pretty=format:%H%x09%an%x09%ad%x09%s',
             '--date=iso',
@@ -43,6 +42,7 @@ class myGit {
             '-n',
             size
         ]).then(data => {
+            console.log(data)
             return data
                 .split('\n')
                 .filter(Boolean)
@@ -61,7 +61,7 @@ class myGit {
         const params = ['ls-tree', hash]
         path && params.push(path)
 
-        return this.executeGit('git', params).then(data => {
+        return executeGit('git', params).then(data => {
             return data
                 .split('\n')
                 .filter(Boolean)
@@ -70,8 +70,7 @@ class myGit {
     }
 
     gitFileContent(hash) {
-      // console.log(hash)
-        return this.executeGit('git', ['show', hash])
+        return executeGit('git', ['show', hash])
     }
 }
-module.exports = { myGit }
+module.exports = { myGit, executeGit }
