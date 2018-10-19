@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch *.js utils/",
+    "test-unit": "jest --watch *.js utils/",
+    "test-integration": "hermione integration-test.js --config .hermione.conf.js",
     "start": "nodemon ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "selenium": "selenium-standalone start"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,7 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "hermione": "^0.90.1",
     "jest": "^23.6.0",
     "ndb": "^1.0.26",
     "nodemon": "^1.18.4"
