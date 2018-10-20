@@ -15,7 +15,6 @@ function buildBreadcrumbs(hash, path) {
   ];
 
   if (hash) {
-		console.log(path);
     const normalizedPath = (path || '').split('/').filter(Boolean);
     const [currentName] = normalizedPath.slice(-1);
 

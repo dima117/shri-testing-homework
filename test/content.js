@@ -1,4 +1,4 @@
-const assert = require("assert");
+const assert = require("chai").assert;
 const { getFileContent } = require("../controllers/contentController");
 const { buildBreadcrumbs } = require("../utils/navigation");
 
@@ -11,7 +11,7 @@ describe("Обработка страницы с содержимым объек
     assert.deepEqual(breadcrumbs, [
       {
         text: "HISTORY",
-        href: hash ? "/" : undefined
+        href: "/"
       },
       {
         text: "ROOT",
