@@ -23,6 +23,42 @@ describe('Содержимое страницы отображается кор�
             .isExisting('.file-content')
             .then(exists => assert.ok(exists, 'Содержимое файла не отображено'))
     })
+
+    it('В последнем элементе списка коммитов отображается АВТОР первого коммита', function() {
+        return this.browser
+            .url('/')
+            .getText('.commit:last-of-type .commit__info .commit__author')
+            .then(function(title) {
+                assert.equal(title, 'Dmitry Andriyanov')
+            })
+    })
+
+    it('В последнем элементе списка коммитов отображается ДАТА и ВРЕМЯ первого коммита', function() {
+        return this.browser
+            .url('/')
+            .getText('.commit:last-of-type .commit__info .commit__date')
+            .then(function(title) {
+                assert.equal(title, '2018-10-16 12:02:11 +0300')
+            })
+    })
+
+    it('В последнем элементе списка коммитов отображается COMMIT MESSAGE первого коммита', function() {
+        return this.browser
+            .url('/')
+            .getText('.commit:last-of-type .commit__msg')
+            .then(function(title) {
+                assert.equal(title, 'стили')
+            })
+    })
+
+    it('В последнем элементе списка коммитов отображается ХЭШ первого коммита', function() {
+        return this.browser
+            .url('/')
+            .getText('.commit:last-of-type .commit__link a')
+            .then(function(title) {
+                assert.equal(title, 'f2df8ac23e817f6da01624a77ec050a0147f642a')
+            })
+    })
 })
 
 describe('Работа переходов между страницами: ', () => {
@@ -50,6 +86,16 @@ describe('Работа переходов между страницами: ', ()
                     'Содержимое файла по клику на файл не отобразилось'
                 )
             )
+    })
+
+    it('После клика на файл на странице должен появиться элемент file-content с текстом "node_modules" внутри', function() {
+        return this.browser
+            .url('/files/0f3702f6d74cc990f3acfeb5d6bb32ebdaaf2ffe/')
+            .click('.git-file-tree > li > a[href$=".gitignore"]')
+            .getText('.file-content')
+            .then(function(title) {
+                assert.equal(title, 'node_modules')
+            })
     })
 
     it('После клика на любой файл на странице должен появиться элемент file-content с содержимым файла', function() {
