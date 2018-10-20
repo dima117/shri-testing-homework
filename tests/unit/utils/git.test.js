@@ -1,6 +1,6 @@
-const { gitFileContent, gitFileTree, gitHistory } = require('../../../utils/git');
 const { expect, assert } = require('chai');
 const sinon = require('sinon');
+const { gitFileContent, gitFileTree, gitHistory } = require('../../../utils/git');
 
 describe('работа с Git', () => {
   describe('gitFileContent: получение контента коммита', () => {
@@ -38,7 +38,10 @@ describe('работа с Git', () => {
     });
 
     it('данные получаем нужном формате', async () => {
-      const stub = 'cd8de07994ac47fddad63ca0d3e38d71a99da9ef\tAlexander Ivankov\t2018-10-19 03:54:15 +0300\tTesting [homework]: написал hermione тесты на страницу с файловой структурой\n1ac31291b9ca4903fb970c8c73057118ff4e79c9\tAlexander Ivankov\t2018-10-19 02:35:12 +0300\tTesting [homework]: написал hermione тесты на главную страницу';
+      const stub = 'cd8de07994ac47fddad63ca0d3e38d71a99da9ef\tAlexander Ivankov\t'
+      + '2018-10-19 03:54:15 +0300\tTesting [homework]: написал hermione тесты на страницу с файловой структурой\n'
+      + '1ac31291b9ca4903fb970c8c73057118ff4e79c9\tAlexander Ivankov\t'
+      + '2018-10-19 02:35:12 +0300\tTesting [homework]: написал hermione тесты на главную страницу';
 
       gitHistory._executeFileFake = () => new Promise((res, rej) => {
         res(stub);
@@ -65,7 +68,7 @@ describe('работа с Git', () => {
 
 
   describe('gitFileTree: получение файлового дерева', () => {
-    it('функция вызывается с коректными параметрами без передачи пути', () => {
+    it('функция вызывается с корректными параметрами без передачи пути', () => {
       const mock = sinon.fake.resolves('');
       gitFileTree._executeFileFake = mock;
 
@@ -77,7 +80,7 @@ describe('работа с Git', () => {
       ]), 'git вызван с некорректными параметрами');
     });
 
-    it('функция вызывается с коректными параметрами c передачи пути', () => {
+    it('функция вызывается с корректными параметрами c передачи пути', () => {
       const mock = sinon.fake.resolves('');
       gitFileTree._executeFileFake = mock;
 
@@ -91,10 +94,9 @@ describe('работа с Git', () => {
     });
 
     it('данные получаем нужном формате', async () => {
-      const stub =
-      '100644 blob b512c09d476623ff4bf8d0d63c29b784925dbdf8\t.gitignore\n040000 tree 6a033b657f10911ad9b65c27c3f9b6fb6130b058\tpublic\n040000 file 0c174efd10167e419bca53f98fde0611072258ba\tutils.js';
-      gitFileTree._executeFileFake = () => new Promise((res, rej) => {
-        res(stub);
+      const stub = '100644 blob b512c09d476623ff4bf8d0d63c29b784925dbdf8\t.gitignore\n040000 tree 6a033b657f10911ad9b65c27c3f9b6fb6130b058\tpublic\n040000 file 0c174efd10167e419bca53f98fde0611072258ba\tutils.js';
+      gitFileTree._executeFileFake = () => new Promise((resolve, reject) => {
+        resolve(stub);
       });
 
       const result = await gitFileTree('0a88cdf2265c0b19663ddbe2733a27e9599724e1');

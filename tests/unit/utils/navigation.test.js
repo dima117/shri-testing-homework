@@ -1,5 +1,5 @@
-const { buildFolderUrl, buildBreadcrumbs, buildFileUrl } = require('../../../utils/navigation');
 const { expect } = require('chai');
+const { buildFolderUrl, buildBreadcrumbs, buildFileUrl } = require('../../../utils/navigation');
 
 describe('Построение навигационных ссылок', () => {
   describe('buildFileUrl: получение ссылки на контент файла', () => {

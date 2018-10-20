@@ -1,15 +1,9 @@
 const { resolve } = require('path');
+
 const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
-function _setExecuteFileFake(fakeFunction) {
-  if (typeof fakeFunction === 'function') {
-    executeGit._executeFileFake = fakeFunction;
-  } else {
-    delete executeGit._executeFileFake;
-  }
-}
 
 function executeGit(cmd, args) {
   // точка расширения
@@ -27,6 +21,15 @@ function executeGit(cmd, args) {
       resolve(stdout.toString());
     });
   });
+}
+
+// Функция помощник устанавливающая точки расширения
+function _setExecuteFileFake(fakeFunction) {
+  if (typeof fakeFunction === 'function') {
+    executeGit._executeFileFake = fakeFunction;
+  } else {
+    delete executeGit._executeFileFake;
+  }
 }
 
 function parseHistoryItem(line) {

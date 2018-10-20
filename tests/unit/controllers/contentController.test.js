@@ -1,8 +1,8 @@
-const contentController = require('./../../../controllers/contentController');
 const express = require('express');
 const request = require('supertest');
 const path = require('path');
 const { expect } = require('chai');
+const contentController = require('./../../../controllers/contentController');
 
 describe('controllers/contentController', () => {
   it('возвращает корректные данные в шаблоне', (done) => {
