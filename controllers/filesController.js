@@ -24,8 +24,8 @@ module.exports = function(req, res, next) {
 	const path = pathParam.length ? pathParam.join("/") + "/" : "";
 
 	return Git.getFileTree(hash, path).then(
-		(list) => {
-			const files = list.map((item) => ({
+		list => {
+			const files = list.map(item => ({
 				...item,
 				href: buildObjectUrl(hash, item),
 				name: item.path.split("/").pop()
@@ -37,6 +37,6 @@ module.exports = function(req, res, next) {
 				files
 			});
 		},
-		(err) => next(err)
+		err => next(err)
 	);
 };
