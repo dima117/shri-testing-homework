@@ -4,7 +4,7 @@ module.exports = {
 
   sets: {
     desktop: {
-      files: 'hermione'
+      files: 'hermione/*.hermione.js'
     }
   },
 
@@ -23,7 +23,10 @@ module.exports = {
 
   plugins: {
     'html-reporter/hermione': {
-      path: 'hermione-html-report'
+      path: 'hermione/hermione-html-report'
+    },
+    'hermione-custom-methods': {
+      path: 'hermione/hermione-custom-methods'
     }
   },
 
