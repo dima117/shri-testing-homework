@@ -27,12 +27,14 @@ function parseHistoryItem(line) {
 }
 
 // добавил необязательный аргумент, что бы передать стаб в тестах
+// добавил аргумент что бы на страницу рендерился мастер - для тестов скриншотами
 function gitHistory(page = 1, size = 10, stabExecuteGit) {
   const execute = stabExecuteGit ? stabExecuteGit : executeGit;
   const offset = (page - 1) * size;
 
   return execute('git', [
     'log',
+    'master',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
     '--skip',
