@@ -27,7 +27,7 @@ describe('Переходы по ссылкам внутри контента', (
     });
 
     it('Переход из списка файлов на страницу отдельного файла', function() {
-        const fileLink = '//div[@class="content"]/ul/li[2]/a';
+        const fileLink = '//div[@class="content"]/ul/li[3]/a';
 
         return this.browser
             .url('/')
