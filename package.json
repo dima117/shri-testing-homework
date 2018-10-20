@@ -20,6 +20,7 @@
     "webdriverio": "^4.13.2"
   },
   "devDependencies": {
+    "eslint": "^5.7.0",
     "graceful-fs": "^4.1.11",
     "growl": "^1.10.5",
     "hermione": "^0.90.1",

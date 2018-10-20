@@ -1,19 +1,19 @@
 const assert = require('assert');
-var webdriverio = require('webdriverio');
-var options = {
-    browsers: {
-        chrome: {
-            desiredCapabilities: {
-                browserName: 'chrome'
-            }
-        }, 
-        firefox: {
-            desiredCapabilities: {
-                browserName: 'firefox'
-            }
-        }
-    }
-};
+// const webdriverio = require('webdriverio');
+// const options = {
+//     browsers: {
+//         chrome: {
+//             desiredCapabilities: {
+//                 browserName: 'chrome'
+//             }
+//         },
+//         firefox: {
+//             desiredCapabilities: {
+//                 browserName: 'firefox'
+//             }
+//         }
+//     }
+// };
 
 describe('Наличие и расположение траниц приложения', () => {
     it('Главная страница присутствует, заголовок соответствует', function () {
@@ -34,5 +34,3 @@ describe('Наличие и расположение траниц приложе
             });
     });
 });
-
-
