@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "nyc --reporter=html mocha ./utils/**/*.js ",
-		"test-watch": "nyc --reporter=html mocha ./utils/**/*.js --watch",
+		"test": "nyc --reporter=html mocha ./**/__tests__/**/*.test.js",
+		"test-watch": "nyc --reporter=html mocha ./**/__tests__/**/*.test.js --watch",
 		"start": "node ./bin/www",
 		"devstart": "ndb ./bin/www"
 	},

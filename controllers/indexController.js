@@ -1,9 +1,12 @@
 const { Git } = require("../utils/git");
 const { buildFolderUrl, buildBreadcrumbs } = require("../utils/navigation");
 
+const ELEMENTS_ON_PAGE = 20;
+const CURRENT_PAGE = 1;
+
 module.exports = function(req, res, next) {
-	Git.getHistory(1, 20).then(
-		(history) => {
+	return Git.getHistory(CURRENT_PAGE, ELEMENTS_ON_PAGE)
+		.then((history) => {
 			const list = history.map((item) => ({
 				...item,
 				href: buildFolderUrl(item.hash)
@@ -14,7 +17,6 @@ module.exports = function(req, res, next) {
 				breadcrumbs: buildBreadcrumbs(),
 				list
 			});
-		},
-		(err) => next(err)
-	);
+		})
+		.catch((err) => next(err));
 };
