@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "test-watch": "NODE_ENV=test npx mocha test --watch --recursive"
   },
   "keywords": [],
   "author": "",
@@ -16,11 +17,14 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.7.0",
     "eslint-config-google": "^0.11.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "^3.0.0",
+    "mocha": "^5.2.0",
     "ndb": "^1.0.26",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "supertest": "^3.3.0"
   }
 }
