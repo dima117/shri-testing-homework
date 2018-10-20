@@ -3,63 +3,56 @@ var expect  = require('chai').expect;
 describe('Содержимое страниц', () => {
     const lastCommitLink = '//div[@class="commit"][last()]/div[@class="commit__link"]/a';
 
-    it('Содержимое истории коммитов', function() {
-        return this.browser
+    it('Содержимое истории коммитов', async function() {
+        const exists = await this.browser
             .url('/')
-            .isExisting('.commit')
-            .then((exists) => {
-                expect(exists).to.be.true;
-            })
+            .isExisting('.commit');
+
+        expect(exists).to.be.true;
     });
 
-    it('Коммит содержит автора', function() {
-        return this.browser
+    it('Коммит содержит автора', async function() {
+        const exists = await this.browser
             .url('/')
-            .isExisting('.commit__author')
-            .then((exists) => {
-                expect(exists).to.be.true;
-            })
+            .isExisting('.commit__author');
+        
+        expect(exists).to.be.true;
     });
 
-    it('Коммит содержит дату', function() {
-        return this.browser
+    it('Коммит содержит дату', async function() {
+        const exists = await this.browser
             .url('/')
-            .isExisting('.commit__date')
-            .then((exists) => {
-                expect(exists).to.be.true;
-            })
+            .isExisting('.commit__date');
+            
+        expect(exists).to.be.true;
     });
 
-    it('Коммит содержит сообщение', function() {
-        return this.browser
+    it('Коммит содержит сообщение', async function() {
+        const exists = await this.browser
             .url('/')
-            .isExisting('.commit__msg')
-            .then((exists) => {
-                expect(exists).to.be.true;
-            })
+            .isExisting('.commit__msg');
+            
+        expect(exists).to.be.true;
     });
 
-    it('Содержимое файловой системы', function() {
-
-        return this.browser
+    it('Содержимое файловой системы', async function() {
+        const exists = await this.browser
             .url('/')
             .click(lastCommitLink)
-            .isExisting('.content')
-            .then((exists) => {
-                expect(exists).to.be.true;
-            })
+            .isExisting('.content');
+        
+        expect(exists).to.be.true;
     });
 
-    it('Содержимое файла', function() {
+    it('Содержимое файла', async function() {
         const fileLink = '//div[@class="content"]/ul/li[2]/a';
 
-        return this.browser
+        const exists = await this.browser
             .url('/')
             .click(lastCommitLink) 
             .click(fileLink) 
-            .isExisting('.file-content')
-            .then((exists) => {
-                expect(exists).to.be.true;
-            })
+            .isExisting('.file-content');
+
+        expect(exists).to.be.true;
     });
 });
