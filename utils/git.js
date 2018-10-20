@@ -4,13 +4,13 @@ const { execFile } = require('child_process');
 
 class gitModule {
 
-    constructor(exec = execFile){
+    constructor(exec = this.executeGit){
         this.exec = exec;
     }
 
     executeGit(cmd, args) {
         return new Promise((resolve, reject) => {
-            this.exec(cmd, args, { cwd: REPO }, (err, stdout) => {
+            execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
                 if (err) {
                     reject(err);
                 }
@@ -32,7 +32,7 @@ class gitModule {
     }
 
     gitHistory(offset = 0, size = 10){
-        return this.executeGit('git', [
+        return this.exec('git', [
             'log',
             '--pretty=format:%H%x09%an%x09%ad%x09%s',
             '--date=iso',
@@ -59,7 +59,7 @@ class gitModule {
         const params = ['ls-tree', hash];
         path && params.push(path);
 
-        return this.executeGit('git', params).then(data => {
+        return this.exec('git', params).then(data => {
             return data
                 .split('\n')
                 .filter(Boolean)
@@ -69,7 +69,7 @@ class gitModule {
 
     gitFileContent([file]) {
         if (file && file.type === 'blob') {
-            return this.executeGit('git', ['show', file.hash]);
+            return this.exec('git', ['show', file.hash]);
         }
     }
 
