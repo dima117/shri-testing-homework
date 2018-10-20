@@ -3,7 +3,7 @@ var expect  = require('chai').expect;
 describe('Содержимое страниц', () => {
     const lastCommitLink = '//div[@class="commit"][last()]/div[@class="commit__link"]/a';
 
-    it('Содержимое истории коммитов', async function() {
+    it('История коммитов содержит коммиты', async function() {
         const exists = await this.browser
             .url('/')
             .isExisting('.commit');
@@ -35,7 +35,7 @@ describe('Содержимое страниц', () => {
         expect(exists).to.be.true;
     });
 
-    it('Содержимое файловой системы', async function() {
+    it('Файловая система имеет содержимое', async function() {
         const exists = await this.browser
             .url('/')
             .click(lastCommitLink)
@@ -44,7 +44,7 @@ describe('Содержимое страниц', () => {
         expect(exists).to.be.true;
     });
 
-    it('Содержимое файла', async function() {
+    it('Файл имеет содержимое', async function() {
         const fileLink = '//div[@class="content"]/ul/li[2]/a';
 
         const exists = await this.browser
