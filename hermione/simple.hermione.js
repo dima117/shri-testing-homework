@@ -1,43 +1,63 @@
 const { assert } = require('chai');
+const hash = 'ab90444b89769498eb6c455534f059926e470450';
+
+describe('Routes', () => {
+    it('should return file "some_file_2.txt"', function() {
+        return this.browser
+            .url(`http://localhost:3000/content/${hash}/folder/folder_2/some_file_2.txt`)
+            .getText('.content')
+            .then(text => 
+                assert.ok(text === 'Test 1', 'url not work')    
+            );
+    });
+});
 
 describe('Breadcrumbs', () => {
-    it('breadcrumbs should be without links', function() {
+    it('breadcrumb should corrects parsed', function() {
         return this.browser
             .url('/')
             .getText('.breadcrumbs')
             .then(text => 
-                assert.ok(text === 'HISTORY', 'the breadcrumbs, works not correct')    
+                assert.ok(text === 'HISTORY', 'the .breadcrumbs returns not correct text')
+            )
+            .url(`http://localhost:3000/content/${hash}/folder/folder_2/some_file_2.txt`)
+            .getText('.breadcrumbs')
+            .then(text =>
+                assert.ok(
+                    text === 'HISTORY / ROOT / folder / folder_2 / some_file_2.txt',
+                    'the .breadcrumbs retunrns not correct text'
+                )   
+            )
+            .url(`/files/${hash}/`)
+            .getText('.breadcrumbs')
+            .then(text =>
+                assert.ok(text === 'HISTORY / ROOT', 'the the .breadcrumbs returns not correct text')
             );
     });
-
-    // it('');
 });
 
 describe('Server responses', () => {
-    it('should returns 404 status', function() {
+    it('should returns correct statuses', function() {
         return this.browser
             .url('/not-existing-url-i-think-so')
             .getValue('.error')
             .then(status =>
-                assert.ok(status === '404', 'the status is not correct')
-            );
-    });
-
-    it('should returns 400 status', function() {
-        return this.browser
-            .url('/content/8e9667c303b2781e0b1fafe762e2357c0a0c6053/not-existing-url-i-think-so')
+                assert.ok(status === '404', 'response not returned 404 status')
+            )
+            .url(`/content/${hash}/not-existing-url-i-think-so`)
             .getValue('.error')
             .then(status => 
-                assert.ok(status === '400', 'the status is not correct')
-            );
-    });
-
-    it('should returns page', function() {
-        return this.browser
+                assert.ok(status === '400', 'response not returned 400 status')
+            )
             .url('/')
             .isExisting('.content')
             .then(isExists => 
-                assert.ok(isExists, 'the page is not returns')
+                assert.ok(isExists, 'response not returned main page')
+            )
+            .url('content/not-existing-hash-i-think-so/any-file')
+            .getValue('.error')
+            .then(status =>
+                assert.ok(status === '500', 'response not returned 500 status')
             );
     });
 });

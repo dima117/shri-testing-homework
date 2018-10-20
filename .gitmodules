@@ -1,0 +1,3 @@
+[submodule "env-for-test"]
+    path = env-for-test
+    url = git://github.com/ilya777grin23/env-for-test.git

@@ -9,7 +9,7 @@
     "selenium": "selenium-standalone start",
     "hermione": "hermione",
     "unit-test": "mocha **/*.test.js",
-    "integration-test": "run-p selenium test-server hermione",
+    "integration-test": "run-p test-server hermione",
     "test-server": "cd env-for-test && node ./www",
     "unit-testlog": "rm unit-test.log && touch unit-test.log && npm run unit-test >> unit-test.log",
     "integration-testlog": "rm integration-test.log && touch integration-test.log && npm run integration-test >> integration-test.log",
