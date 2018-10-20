@@ -10,7 +10,7 @@
 
 ```sh
 git clone git@github.com:dima117/shri-testing-homework.git
-cd shri-testing-homework.git
+cd shri-testing-homework
 npm i
 npm start
 ```
