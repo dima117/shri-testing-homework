@@ -20,9 +20,9 @@ app.set('view options', { layout: 'layout', extname: '.hbs' });
 app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
-app.get('/', indexController);
-app.get('/files/:hash/*?', filesController);
-app.get('/content/:hash/*?', contentController);
+app.get('/', new indexController().run);
+app.get('/files/:hash/*?', new filesController().run);
+app.get('/content/:hash/*?', new contentController().run);
 
 // error handlers
 app.use(function(req, res, next) {

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./utils ./controllers",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -13,9 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "sinon": "^7.0.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
     "ndb": "^1.0.26"
   }
 }

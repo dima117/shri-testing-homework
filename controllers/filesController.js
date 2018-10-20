@@ -15,27 +15,32 @@ function buildObjectUrl(parentHash, { path, type }) {
       return '#';
   }
 }
-
-module.exports = function(req, res, next) {
-  const { hash } = req.params;
-  const pathParam = (req.params[0] || '').split('/').filter(Boolean);
-
-  const path = pathParam.length ? pathParam.join('/') + '/' : '';
-
-  return gitFileTree(hash, path).then(
-    list => {
-      const files = list.map(item => ({
-        ...item,
-        href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
-      }));
-
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
-    },
-    err => next(err)
-  );
-};
+class FilesController{
+  constructor(){
+    this.gitFileTree = new gitFileTree().run;
+    this.run = this.run.bind(this);
+  }
+  run(req, res, next) {
+    const { hash } = req.params;
+    const pathParam = (req.params[0] || '').split('/').filter(Boolean);
+    const path = pathParam.length ? pathParam.join('/') + '/' : '';
+    return  this.gitFileTree(hash, path).then(
+      list => {
+        const files = list.map(item => ({
+          ...item,
+          href: buildObjectUrl(hash, item),
+          name: item.path.split('/').pop()
+        }));
+  
+        res.render('files', {
+          title: 'files',
+          breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+          files
+        });
+      },
+      err => next(err)
+    );
+  };
+  
+}
+module.exports = FilesController
