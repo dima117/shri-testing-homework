@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./**/__test__/*.test.js",
+    "test": "nyc mocha ./**/__test__/*.test.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -19,6 +19,10 @@
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "ndb": "^1.0.26",
+    "nyc": "^13.1.0",
     "sinon": "^7.0.0"
+  },
+  "nyc": {
+    "temp-dir": "./node_modules/coverage/.nyc_output"
   }
 }
