@@ -9,7 +9,7 @@ describe('Переходы по ссылкам внутри контента', (
             .click(lastCommitLink)
             .getText('.breadcrumbs');
         
-        expect(breadcrumbsText).to.eql('HISTORY / ROOT');
+        expect(breadcrumbsText).to.equal('HISTORY / ROOT');
     });
 
     it('Переход из списка файлов во вложенную папку', async function() {
@@ -21,7 +21,7 @@ describe('Переходы по ссылкам внутри контента', (
             .click(lastFolderLink) 
             .getText('.breadcrumbs');
         
-        expect(breadcrumbsText).to.eql('HISTORY / ROOT / views');
+        expect(breadcrumbsText).to.equal('HISTORY / ROOT / views');
     });
 
     it('Переход из списка файлов на страницу отдельного файла', async function() {
@@ -33,6 +33,6 @@ describe('Переходы по ссылкам внутри контента', (
             .click(fileLink) 
             .getText('.breadcrumbs');
 
-        expect(breadcrumbsText).to.eql('HISTORY / ROOT / app.js');
+        expect(breadcrumbsText).to.equal('HISTORY / ROOT / app.js');
     });
 });

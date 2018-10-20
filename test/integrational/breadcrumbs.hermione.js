@@ -12,7 +12,7 @@ describe('Переходы по "Хлебным крошкам"', () => {
             .click(historyBreadcrumbsLink)
             .getText('.breadcrumbs');
 
-        expect(breadcrumbsText).to.eql('HISTORY');
+        expect(breadcrumbsText).to.equal('HISTORY');
     });
 
     it('ROOT -> folder -> ROOT', async function() {
@@ -26,7 +26,7 @@ describe('Переходы по "Хлебным крошкам"', () => {
             .click(rootBreadcrumbsLink)
             .getText('.breadcrumbs');
 
-        expect(breadcrumbsText).to.eql('HISTORY / ROOT');
+        expect(breadcrumbsText).to.equal('HISTORY / ROOT');
     });
 
     it('folder -> file -> folder', async function() {
@@ -42,6 +42,6 @@ describe('Переходы по "Хлебным крошкам"', () => {
             .click(folderBreadcrumbsLink)
             .getText('.breadcrumbs');
             
-        expect(breadcrumbsText).to.eql('HISTORY / ROOT / views');
+        expect(breadcrumbsText).to.equal('HISTORY / ROOT / views');
     });
 });

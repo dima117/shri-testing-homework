@@ -13,7 +13,7 @@ describe('git.js', function() {
 
             const result = await GitCommands.gitHistory();
 
-            expect(result).to.be.eql([ { 
+            expect(result).to.eql([ { 
                 hash: 'hash1',
                 author: 'author1',
                 timestamp: 'timestamp1',
@@ -112,7 +112,7 @@ describe('git.js', function() {
 
             const result = await GitCommands.gitFileTree(hash);
 
-            expect(result).to.be.eql([ { 
+            expect(result).to.eql([ { 
                 type: 'blob',
                 hash: '70461d5f9009344d9933e889b0448aa3f18d83d9',
                 path: 'app.js' 

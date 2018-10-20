@@ -62,7 +62,7 @@ describe('page-preparation.js', () => {
         });
 
         it('Контент содержит переданную строку', () => {
-            expect(result.content).to.be.eql(content);
+            expect(result.content).to.equal(content);
         });
     });
 
