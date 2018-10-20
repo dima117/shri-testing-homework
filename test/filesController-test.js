@@ -18,8 +18,8 @@ describe('controllers/filesController.js', () => {
     { t: 't', path: 'root/' }
   ]))
 
-  describe('добавление href и name в объекты файлов', () => {
-    it('href и name', async () => {
+  describe('маппинг массива', () => {
+    it('добавление href и name в объекты файлов', async () => {
       await controller(req, spy, null, stubGetTree, stubBuildObj)
 
       const mappedArr = spy.render.args[0][1].files
@@ -30,7 +30,6 @@ describe('controllers/filesController.js', () => {
   })
 
   describe('построение пути из url', () => {
-
     it('путь для корневой директории должен быть пустой строкой', async () => {
       await controller(req, spy, null, stubGetTree, stubBuildObj)
       const path = stubGetTree.args[1][1]
@@ -46,7 +45,5 @@ describe('controllers/filesController.js', () => {
       const path = stubGetTree.args[2][1]
       expect(path.slice(-1)).to.equal('/')
     })
-
-
   })
 })

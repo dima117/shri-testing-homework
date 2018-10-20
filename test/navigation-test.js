@@ -26,7 +26,7 @@ describe('functions from utils/navigation.js', () => {
 
   describe('buildBreadcrumbs', () => {
 
-    it('длина возвращаемого массива должны быть больше 0', () => {
+    it('длина возвращаемого массива должна быть больше 0', () => {
       expect(buildBreadcrumbs()).to.have.lengthOf.above(0)
     })
 

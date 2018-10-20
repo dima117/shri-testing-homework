@@ -8,6 +8,12 @@ describe('правильно отображается содержимое', () 
       .assertView('first-commit', '.commit:last-of-type')
   })
 
+  it('списка коммитов', function() {
+    return this.browser
+      .url('/')
+      .assertView('first-commit', '.content-commits')
+  })
+
   it('файловой системы', function() {
     return this.browser
       .url('/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/')
