@@ -42,7 +42,7 @@ describe('Страница "История коммитов"', () => {
     });
 });
 
-describe('Страница коммита', () => {
+describe('Страница файловой системы', () => {
 
     describe('Проверка внешнего отображения компонентов', () => {
 
@@ -72,7 +72,7 @@ describe('Страница коммита', () => {
 
     describe('Проверка ссылок', () => {
 
-        it('Проверка перехода по крошкам', function () {
+        it('Проверка перехода по крошкам из файловой системы на главную страницу', function () {
             return this.browser
                 .url('/')
                 .click(PO.commitLink)
@@ -104,6 +104,36 @@ describe('Страница коммита', () => {
                 .url('/')
                 .click(PO.commitLink)
                 .click(linkFolder)
+                .getTitle()
+                .then((text) => {
+                    assert.equal(text, 'files');
+                });
+        });
+
+        it('Проверка перехода по крошкам из внутренней папки на главную страницу', function () {
+            const linkFolder = 'a[href^="/files"]';
+
+            return this.browser
+                .url('/')
+                .click(PO.commitLink)
+                .click(linkFolder)
+                .element(PO.breadcrumbs)
+                .click('a=HISTORY')
+                .getTitle()
+                .then((text) => {
+                    assert.equal(text, 'history');
+                });
+        });
+
+        it('Проверка перехода по крошкам из внутренней папки на страницу файловой системы', function () {
+            const linkFolder = 'a[href^="/files"]';
+
+            return this.browser
+                .url('/')
+                .click(PO.commitLink)
+                .click(linkFolder)
+                .element(PO.breadcrumbs)
+                .click('a=ROOT')
                 .getTitle()
                 .then((text) => {
                     assert.equal(text, 'files');
@@ -162,7 +192,7 @@ describe('Страница файла', () => {
                 });
         });
 
-        it('Проверка перехода по крошкам на уровень выше', function () {
+        it('Проверка перехода по крошкам из файла на страницу файловой системы', function () {
             const linkContent = 'a[href^="/content"]';
 
             return this.browser
