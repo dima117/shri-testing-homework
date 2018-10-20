@@ -3,24 +3,24 @@ const { expect } = require("chai");
 const indexController = require("./indexController");
 describe("indexController", function() {
   it("В res.render приходят правильные аргументы", async function() {
-    function stambGitHistory(){
-        return new Promise((resolve, reject) => {
-          resolve([
-            {
-              hash: "hash1",
-              author: "name1",
-              timestamp: "date1",
-              msg: "description1"
-            },
-            {
-              hash: "hash2",
-              author: "name2",
-              timestamp: "date2",
-              msg: "description2"
-            }
-          ]);
-        });
-      }
+    function stambGitHistory() {
+      return new Promise((resolve, reject) => {
+        resolve([
+          {
+            hash: "hash1",
+            author: "name1",
+            timestamp: "date1",
+            msg: "description1"
+          },
+          {
+            hash: "hash2",
+            author: "name2",
+            timestamp: "date2",
+            msg: "description2"
+          }
+        ]);
+      });
+    }
     const res = {
       render: sinon.spy()
     };

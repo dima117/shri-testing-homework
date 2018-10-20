@@ -20,7 +20,6 @@ class ContentController {
       .then(
         content => {
           if (content) {
-            console.log(content)
             res.render("content", {
               title: "content",
               breadcrumbs: buildBreadcrumbs(hash, path.join("/")),

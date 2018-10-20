@@ -1,32 +1,32 @@
-const path = require('path');
-const express = require('express');
+const path = require("path");
+const express = require("express");
 
 const PORT = 3000;
-const HOST = '::';
+const HOST = "::";
 
 // controllers
-const indexController = require('./controllers/indexController');
-const filesController = require('./controllers/filesController');
-const contentController = require('./controllers/contentController');
+const indexController = require("./controllers/indexController");
+const filesController = require("./controllers/filesController");
+const contentController = require("./controllers/contentController");
 
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-app.set('view options', { layout: 'layout', extname: '.hbs' });
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "hbs");
+app.set("view options", { layout: "layout", extname: ".hbs" });
 
 // static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // pages
-app.get('/', new indexController().run);
-app.get('/files/:hash/*?', new filesController().run);
-app.get('/content/:hash/*?', new contentController().run);
+app.get("/", new indexController().run);
+app.get("/files/:hash/*?", new filesController().run);
+app.get("/content/:hash/*?", new contentController().run);
 
 // error handlers
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
@@ -37,7 +37,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(status);
-  res.render('error', { title: 'error', status, message });
+  res.render("error", { title: "error", status, message });
 });
 
 app.listen(PORT, HOST, () => {

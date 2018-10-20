@@ -40,7 +40,7 @@ describe("contentController", function() {
         hash: "hash1"
       }
     };
-    await myContentController.run(req1, res, ()=>{});
+    await myContentController.run(req1, res, () => {});
     expect(myContentController.gitFileTree.getCall(0).args).to.deep.equal(["hash1", "path1"]);
 
     const req2 = {
@@ -50,7 +50,7 @@ describe("contentController", function() {
       }
     };
 
-    await myContentController.run(req2, res, ()=>{});
+    await myContentController.run(req2, res, () => {});
     expect(myContentController.gitFileTree.getCall(1).args).to.deep.equal(["hash2", "path2/path3"]);
   });
 
@@ -80,7 +80,7 @@ describe("contentController", function() {
     myContentController.gitFileTree = stumbGitFileTree;
     myContentController.gitFileContent = stumbGitFileContent;
 
-    await myContentController.run(req, res, ()=>{});
+    await myContentController.run(req, res, () => {});
     expect(myContentController.gitFileContent.getCall(0).args).to.deep.equal(["hash1"]);
   });
 
@@ -133,7 +133,7 @@ describe("contentController", function() {
     const myContentController = new contentController();
     myContentController.gitFileTree = stumbGitFileTree;
     myContentController.gitFileContent = stumbGitFileContent;
-    await myContentController.run(req, res, ()=>{});
+    await myContentController.run(req, res, () => {});
     expect(res.render.getCall(0).args).to.deep.equal(args);
   });
 });

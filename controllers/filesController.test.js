@@ -3,22 +3,22 @@ const { expect } = require("chai");
 const filesController = require("./filesController");
 describe("filesController", function() {
   it("В gitFileTree приходят правильные аргументы", async function() {
-    function stumbGitFileTree(){
-        return new Promise((resolve, reject) => {
-          resolve([
-            {
-              hash: "hash1",
-              path: "pathfile1",
-              type: "type1"
-            },
-            {
-              hash: "hash2",
-              path: "pathfile2",
-              type: "type2"
-            }
-          ]);
-        });
-      }
+    function stumbGitFileTree() {
+      return new Promise((resolve, reject) => {
+        resolve([
+          {
+            hash: "hash1",
+            path: "pathfile1",
+            type: "type1"
+          },
+          {
+            hash: "hash2",
+            path: "pathfile2",
+            type: "type2"
+          }
+        ]);
+      });
+    }
 
     const res = {
       render: () => {}
@@ -56,22 +56,22 @@ describe("filesController", function() {
   });
 
   it("В res.render приходят правильные аргументы", async function() {
-    function stumbGitFileTree (){
-        return new Promise((resolve, reject) => {
-          resolve([
-            {
-              hash: "hash1",
-              path: "pathfile1",
-              type: "type1"
-            },
-            {
-              hash: "hash2",
-              path: "pathfile2",
-              type: "type2"
-            }
-          ]);
-        });
-      }
+    function stumbGitFileTree() {
+      return new Promise((resolve, reject) => {
+        resolve([
+          {
+            hash: "hash1",
+            path: "pathfile1",
+            type: "type1"
+          },
+          {
+            hash: "hash2",
+            path: "pathfile2",
+            type: "type2"
+          }
+        ]);
+      });
+    }
     const res = {
       render: sinon.spy()
     };

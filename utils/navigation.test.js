@@ -49,7 +49,7 @@ describe("navigation", function() {
         path += `/path${i}`;
       }
       arrayOfResults.forEach((result, index) => {
-        expect(result).to.have.lengthOf( 3 + index );
+        expect(result).to.have.lengthOf(3 + index);
       });
     });
   });
