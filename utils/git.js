@@ -52,9 +52,5 @@ module.exports = {
 
         return this.executeGit(params)
             .then(data => this.parseLog(data, this.parseFileTreeItem));
-    },
-
-    gitFileContent(hash) {
-        return this.executeGit(['show', hash]);
     }
 };

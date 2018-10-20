@@ -23,7 +23,8 @@ module.exports.router = function(req, res, next) {
     return Utils.gitFileTree(hash, path.join('/'))
         .then(function([file]) {
             if (file && file.type === 'blob') {
-                return Utils.gitFileContent(file.hash);
+                // Show file content
+                return Utils.executeGit(['show', file.hash]);
             }
         })
         .then(content => interProcessor(content, res, hash, path))

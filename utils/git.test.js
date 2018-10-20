@@ -54,4 +54,11 @@ describe('git.js', () => {
             }, 'the key or value not correct!');
         });
     });
+
+    it('should parse string, and returns correct data format', () => {
+        expect(['a', 'b', 'c']).to.deep.eq(
+            // 2arg - be-se without function, [].map - will be throw error
+            Utils.parseLog('\na\n\nb\nc\n\n\n', val => val)
+        );
+    });
 });
