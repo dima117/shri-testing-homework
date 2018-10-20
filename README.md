@@ -63,6 +63,10 @@ npm run unit-test
 
 ## Для запуска всех тестов
 В отдельных вкладках
+### Submodule
+```sh
+git submodule update --init --recursive
+```
 ### Selenium
 ```sh
 npm run selenium
