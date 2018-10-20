@@ -1,5 +1,5 @@
-const { buildFileUrl, buildBreadcrumbs} = require('../utils/navigation');
-const {expect} = require('chai');
+const { buildFileUrl, buildBreadcrumbs, buildObjectUrl} = require('../utils/navigation');
+const { expect } = require('chai');
 
 it('правильно формируется ссылка buildFileUrl', function() {
     const folder = 'item1';
@@ -21,19 +21,19 @@ it('правильно формируется ссылка buildFileUrl без p
 });
 
 it('правильно создается массив файлов buildBreadcrumbs', function(){
-   const hash = 'item1';
-   const path = 'item2/item3.js';
+    const hash = 'item1';
+    const path = 'item2/item3.js';
 
-   const result = buildBreadcrumbs(hash, path);
+    const result = buildBreadcrumbs(hash, path);
 
-   const eqlResult = [
-       {text: 'HISTORY', href: '/'},
-       {text: 'ROOT', href: '/files/item1/'},
-       {text: 'item2', href: '/files/item1/item2/'},
-       {text: 'item3.js'}
-   ];
+    const eqlResult = [
+        {text: 'HISTORY', href: '/'},
+        {text: 'ROOT', href: '/files/item1/'},
+        {text: 'item2', href: '/files/item1/item2/'},
+        {text: 'item3.js'}
+    ];
 
-   expect(result).to.eql(eqlResult);
+    expect(result).to.eql(eqlResult);
 });
 
 it('правильно создается массив файлов buildBreadcrumbs, когда path пустой', function(){
@@ -71,4 +71,33 @@ it('правильно создается массив файлов buildBreadcr
     expect(result).to.eql(eqlResult);
 });
 
+it('правильно создается url для tree в buildObjectUrl', function () {
+    const item1 = 'item1';
+    const item2 = { path: 'item2', type: 'tree'};
 
+    const result = buildObjectUrl(item1, item2);
+
+    const eqlResult = '/files/item1/item2';
+
+    expect(result).to.eql(eqlResult);
+});
+
+it('правильно создается url для blob в buildObjectUrl', function () {
+    const item1 = 'item1';
+    const item2 = { path: 'item2', type: 'blob'};
+
+    const result = buildObjectUrl(item1, item2);
+
+    const eqlResult = '/content/item1/item2';
+
+    expect(result).to.eql(eqlResult);
+});
+
+it('правильно создается url для неизвестного type в buildObjectUrl', function () {
+    const item1 = 'item1';
+    const item2 = { path: 'item2'};
+
+    const result = buildObjectUrl(item1, item2);
+
+    expect(result).to.eql('#');
+});

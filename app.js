@@ -1,13 +1,11 @@
 const path = require('path');
 const express = require('express');
+const { contentController } = require('./controllers/contentController');
+const { filesController } = require('./controllers/filesController');
+const { indexController } = require('./controllers/indexController');
 
 const PORT = 3000;
 const HOST = '::';
-
-// controllers
-const indexController = require('./controllers/indexController');
-const filesController = require('./controllers/filesController');
-const contentController = require('./controllers/contentController');
 
 const app = express();
 
@@ -20,9 +18,15 @@ app.set('view options', { layout: 'layout', extname: '.hbs' });
 app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
-app.get('/', indexController);
-app.get('/files/:hash/*?', filesController);
-app.get('/content/:hash/*?', contentController);
+app.get('/', (req, res, next) => {
+    new indexController(req, res, next, 1, 20);
+});
+app.get('/files/:hash/*?', (req, res, next) => {
+  new filesController(req, res, next);
+});
+app.get('/content/:hash/*?', (req, res, next) => {
+  new contentController(req, res, next);
+});
 
 // error handlers
 app.use(function(req, res, next) {

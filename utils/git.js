@@ -5,7 +5,7 @@ const { execFile } = require('child_process');
 class gitModule {
 
     constructor(exec = execFile){
-      this.exec = execFile;
+        this.exec = exec;
     }
 
     executeGit(cmd, args) {

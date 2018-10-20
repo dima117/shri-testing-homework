@@ -1,41 +1,42 @@
 const { gitModule } = require('../utils/git');
 const {
-  buildFileUrl,
-  buildBreadcrumbs
+    buildObjectUrl,
+    buildBreadcrumbs
 } = require('../utils/navigation');
-const git = new gitModule();
 
-function buildObjectUrl(parentHash, { path, type }) {
-  switch (type) {
-    case 'tree':
-      return buildFileUrl('files', parentHash, path);
-    case 'blob':
-      return buildFileUrl('content', parentHash, path);
-    default:
-      return '#';
-  }
+class filesController{
+
+    constructor(req, res, next){
+        this.next = next;
+        this.res = res;
+        this.hash = req.params.hash;
+        const pathParam = (req.params[0] || '').split('/').filter(Boolean);
+        this.path = pathParam.length ? pathParam.join('/') + '/' : '';
+        this.git = new gitModule();
+
+        this.render();
+    }
+
+    render(){
+        return this.git.gitFileTree(this.hash, this.path).then(
+            list => {
+                const files = list.map(item => ({
+                    ...item,
+                    href: buildObjectUrl(this.hash, item),
+                    name: item.path.split('/').pop()
+                }));
+
+                this.res.render('files', {
+                    title: 'files',
+                    breadcrumbs: buildBreadcrumbs(this.hash, this.path),
+                    files
+                });
+            },
+            err => this.next(err)
+        );
+    }
 }
 
-module.exports = function(req, res, next) {
-  const { hash } = req.params;
-  const pathParam = (req.params[0] || '').split('/').filter(Boolean);
-
-  const path = pathParam.length ? pathParam.join('/') + '/' : '';
-
-  return git.gitFileTree(hash, path).then(
-    list => {
-      const files = list.map(item => ({
-        ...item,
-        href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
-      }));
-
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
-    },
-    err => next(err)
-  );
+module.exports = {
+    filesController
 };
