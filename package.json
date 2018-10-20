@@ -11,6 +11,11 @@
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -25,6 +30,17 @@
     "mocha": "^5.2.0",
     "ndb": "^1.0.26",
     "sinon": "^7.0.0",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.1.0",
+    "lint-staged": "^7.3.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
