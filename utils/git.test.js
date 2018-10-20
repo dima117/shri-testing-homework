@@ -57,43 +57,31 @@ describe('Работа git-функционала', () => {
             }
         ]
 
-        mygit.executeGit = () => {
-            return Promise.resolve()
-        }
-
         const actualResult = await mygit.gitFileTree(hash)
 
         expect(actualResult).toEqual(expectedResult)
     })
 
-    it('Git File Content возвращает корректное содержимое файла в текстовом формате по хэшу', async () => {
+    it('Git File Content возвращает корректное содержимое файла в текстовом формате по хэшу коммита', async () => {
         const mygit = new myGit()
         const hash = 'd7b47df17ba8ea90f706bf9c92f9a7fc14579744'
         const expectedResult =
             "#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar app = require('../app');\n"
-
-        mygit.executeGit = () => {
-            return Promise.resolve()
-        }
 
         const actualResult = await mygit.gitFileContent(hash)
 
         expect(actualResult).toEqual(expectedResult)
     })
 
-    it('Git History с заданным size = 5 возвращает массив из пяти последний коммитов, содержащий предпоследний коммит, на первой странице (page)', async () => {
+    it('Git History с size = 5 возвращает массив из пяти последних коммитов, содержащий предпоследний коммит, на первой странице (page)', async () => {
         const mygit = new myGit()
         const page = 1
         const size = 5
         const expectedCommit = {
             author: 'Hope R',
-            hash: '7f13b8bf3911557fe1d7e1657a1df0540c746f94',
-            msg: 'Use dependency injection',
-            timestamp: '2018-10-19 18:17:48 +0300'
-        }
-
-        mygit.executeGit = () => {
-            return Promise.resolve(gitCommandInputStub)
+            hash: '68d14a5c95d67e815d5aa9e2560b16b902b402d9',
+            msg: 'Update README',
+            timestamp: '2018-10-20 14:21:04 +0300'
         }
 
         const actualResult = await mygit.gitHistory(page, size)
