@@ -1,20 +1,5 @@
 const { Git } = require('../utils/git');
-const {
-  buildFolderUrl,
-  buildFileUrl,
-  buildBreadcrumbs
-} = require('../utils/navigation');
-
-function buildObjectUrl(parentHash, { path, type }) {
-  switch (type) {
-    case 'tree':
-      return buildFolderUrl(parentHash, path);
-    case 'blob':
-      return buildFileUrl(parentHash, path);
-    default:
-      return '#';
-  }
-}
+const { buildObjectUrl, buildBreadcrumbs } = require('../utils/navigation');
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
