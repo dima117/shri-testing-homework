@@ -23,7 +23,6 @@ describe('navigation.js', () => {
         expect(buildFileUrl(hash, path)).to.eq(res);
     });
 
-    // For that, must be harder test
     it('should returns breadcrumbs for 1 level', () => {
         const [hash, path] = ['hash', 'path'];
         // Must be
