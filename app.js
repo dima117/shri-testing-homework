@@ -19,13 +19,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
 app.get('/', (req, res, next) => {
-    new indexController(req, res, next, 0, 20);
+    const controller = new indexController(req, res, next);
+    controller.render(0, 20);
 });
 app.get('/files/:hash/*?', (req, res, next) => {
-    new filesController(req, res, next);
+    const controller = new filesController(req, res, next);
+    controller.render();
 });
 app.get('/content/:hash/*?', (req, res, next) => {
-    new contentController(req, res, next);
+    const controller = new contentController(req, res, next);
+    controller.render();
 });
 
 // error handlers

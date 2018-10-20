@@ -8,11 +8,9 @@ class filesController extends controller{
 
     constructor(req, res, next){
         super(req, res, next);
-
-        this.render();
     }
 
-    render(){
+    async render(){
         return this.git.gitFileTree(this.hash, this.path).then(
             list => {
                 const files = list.map(item => ({
@@ -20,7 +18,7 @@ class filesController extends controller{
                     href: buildObjectUrl(this.hash, item),
                     name: item.path.split('/').pop()
                 }));
-                this.res.render('files', {
+                return this.res.render('files', {
                     title: 'files',
                     breadcrumbs: buildBreadcrumbs(this.hash, this.path),
                     files
