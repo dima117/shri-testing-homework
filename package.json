@@ -6,6 +6,8 @@
 	"scripts": {
 		"test": "nyc --reporter=html mocha ./**/__tests__/**/*.test.js",
 		"test-watch": "nyc --reporter=html mocha ./**/__tests__/**/*.test.js --watch",
+		"test-int": "hermione gui --reporter flat",
+		"selenium-start": "selenium-standalone start",
 		"start": "node ./bin/www",
 		"devstart": "ndb ./bin/www"
 	},
@@ -23,6 +25,7 @@
 	"devDependencies": {
 		"eslint": "^5.7.0",
 		"eslint-config-prettier": "^3.1.0",
+		"html-reporter": "^2.22.0",
 		"husky": "^1.1.2",
 		"ndb": "^1.0.26"
 	},
