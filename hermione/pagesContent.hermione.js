@@ -3,64 +3,30 @@ const assert = require('assert');
 describe('Содержимое страниц', () => {
 
   describe('история коммитов', () => {
-    it('содержит хлебные крошки', function () {
+    it('содержит breadcrumbs и коммит', function () {
       return this.browser
         .url('/')
-        .isExisting('.breadcrumbs')
-        .then((exists) => {
-          assert.ok(exists, 'Хлебные крошки не появились');
-        });
-    });
-
-    it('содержит коммит', function () {
-      return this.browser
-        .url('/')
-        .isExisting('.content .commit .commit__link')
-        .then((exists) => {
-          assert.ok(exists, 'Ни одного коммита не найдено');
-        })
+        .assertExists('.breadcrumbs', 'Breadcrumbs не появились')
+        .assertExists('.content .commit .commit__link', 'Ни одного коммита не найдено')
     });
   });
 
   describe('файловая система коммита', () => {
-    it('содержит хлебные крошки', function () {
+    it('содержит breadcrumbs и список файлов', function () {
       return this.browser
         .url('/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/')
-        .isExisting('.breadcrumbs')
-        .then((exists) => {
-          assert.ok(exists, 'Хлебные крошки не появились');
-        })
-    });
-    it('содержит список файлов', function () {
-      return this.browser
-        .url('/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/')
-        .isExisting('.content ul li')
-        .then((exists) => {
-          assert.ok(exists, 'Ни одного элемента списка не найдено');
-        })
+        .assertExists('.breadcrumbs', 'Breadcrumbs не появились')
+        .assertExists('.content ul li', 'Ни одного элемента списка не найдено')
     });
   });
 
   describe('файл .gitignore', () => {
-    it('содержит хлебные крошки', function () {
-      return this.browser
-        .url('/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/')
-        .isExisting('.breadcrumbs')
-        .then((exists) => {
-          assert.ok(exists, 'Хлебные крошки не появились');
-        })
-    });
-    it('содержит файл', function () {
+    it('содержит breadcrumbs и внутриности файла', function () {
       return this.browser
         .url('/content/38429bed94bd7c107c65fed6bffbf443ff0f4183/.gitignore')
-        .isExisting('.content .file-content')
-        .then((exists) => {
-          assert.ok(exists, 'элемент с контентом файла не найден');
-        })
-        .getText('.content .file-content')
-        .then((text) => {
-          assert.equal(text, 'node_modules');
-        });
+        .assertExists('.breadcrumbs', 'Breadcrumbs не появились')
+        .assertExists('.content .file-content', 'Элемент с контентом файла не найден')
+        .textEqual('.content .file-content', 'node_modules');
     });
   });
 });

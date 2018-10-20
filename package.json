@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:integration": "run-p start-selenium hermione-gui start",
-    "start-selenium": "selenium-standalone start",
+    "test:integration": "run-p hermione-gui start",
     "hermione": "./node_modules/.bin/hermione hermione/*.js",
     "hermione-gui": "./node_modules/.bin/hermione gui hermione/*.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,6 +25,7 @@
     "mocha": "^5.2.0",
     "ndb": "^1.0.26",
     "npm-run-all": "^4.1.3",
-    "selenium-standalone": "^6.15.3"
+    "selenium-standalone": "^6.15.3",
+    "hermione-custom-commands": "file:./hermione-custom-commands"
   }
 }

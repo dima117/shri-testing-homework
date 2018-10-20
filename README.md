@@ -37,6 +37,7 @@ npm start
 
 `npm i`
 
-`npm run test:integration`
+В первой вкладке терминала `selenium-standalone start`
+Во второй `npm run test:integration`
 
 P.S. На машине должна стоять [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
