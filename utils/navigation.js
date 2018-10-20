@@ -1,12 +1,12 @@
-function buildFolderUrl(parentHash, path = '') {
+function buildFolderUrl (parentHash, path = '') {
   return `/files/${parentHash}/${path}`;
 }
 
-function buildFileUrl(parentHash, path) {
+function buildFileUrl (parentHash, path) {
   return `/content/${parentHash}/${path}`;
 }
 
-function buildBreadcrumbs(hash, path) {
+function buildBreadcrumbs (hash, path) {
   const bc = [
     {
       text: 'HISTORY',

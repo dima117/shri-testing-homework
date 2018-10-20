@@ -25,14 +25,14 @@ app.get('/files/:hash/*?', filesController);
 app.get('/content/:hash/*?', contentController);
 
 // error handlers
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use(function (req, res, next) {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   const { status = 500, message } = err;
 
   // render the error page

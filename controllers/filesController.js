@@ -5,7 +5,7 @@ const {
   buildBreadcrumbs
 } = require('../utils/navigation');
 
-function buildObjectUrl(parentHash, { path, type }) {
+function buildObjectUrl (parentHash, { path, type }) {
   switch (type) {
     case 'tree':
       return buildFolderUrl(parentHash, path);
@@ -16,7 +16,7 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 

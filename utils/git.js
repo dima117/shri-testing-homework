@@ -3,7 +3,7 @@ const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
-function executeGit(cmd, args) {
+function executeGit (cmd, args) {
   return new Promise((resolve, reject) => {
     execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
       if (err) {
@@ -15,7 +15,7 @@ function executeGit(cmd, args) {
   });
 }
 
-function parseHistoryItem(line) {
+function parseHistoryItem (line) {
   const [hash, author, timestamp, msg] = line.split('\t');
 
   return {
@@ -26,7 +26,7 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
+function gitHistory (page = 1, size = 10) {
   const offset = (page - 1) * size;
 
   return executeGit('git', [
@@ -45,14 +45,14 @@ function gitHistory(page = 1, size = 10) {
   });
 }
 
-function parseFileTreeItem(line) {
+function parseFileTreeItem (line) {
   const [info, path] = line.split('\t');
   const [, type, hash] = info.split(' ');
 
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
+function gitFileTree (hash, path) {
   const params = ['ls-tree', hash];
   path && params.push(path);
 
@@ -64,7 +64,7 @@ function gitFileTree(hash, path) {
   });
 }
 
-function gitFileContent(hash) {
+function gitFileContent (hash) {
   return executeGit('git', ['show', hash]);
 }
 
