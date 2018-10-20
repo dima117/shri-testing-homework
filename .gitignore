@@ -1,3 +1,7 @@
 node_modules
 .DS_Store
+html-reporter/index.html
+html-reporter/report.min.css
+html-reporter/report.min.js
+html-reporter/data.js
 .eslintrc.json

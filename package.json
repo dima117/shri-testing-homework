@@ -7,7 +7,7 @@
     "start": "node ./bin/www",
     "test": "run-s unit-test intergraion-test",
     "selenium": "selenium-standalone start",
-    "hermione": "hermione",
+    "hermione": "hermione gui",
     "unit-test": "mocha **/*.test.js",
     "integration-test": "run-p test-server hermione",
     "test-server": "cd env-for-test && node ./www",
@@ -28,7 +28,9 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
     "mocha": "^5.2.0",
-    "ndb": "^1.0.26"
+    "ndb": "^1.0.26",
+    "selenium-standalone": "^6.15.3"
   }
 }
