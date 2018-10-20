@@ -19,33 +19,33 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
 app.get('/', (req, res, next) => {
-    new indexController(req, res, next, 1, 20);
+    new indexController(req, res, next, 0, 20);
 });
 app.get('/files/:hash/*?', (req, res, next) => {
-  new filesController(req, res, next);
+    new filesController(req, res, next);
 });
 app.get('/content/:hash/*?', (req, res, next) => {
-  new contentController(req, res, next);
+    new contentController(req, res, next);
 });
 
 // error handlers
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  const { status = 500, message } = err;
+    const { status = 500, message } = err;
 
-  // render the error page
-  res.status(status);
-  res.render('error', { title: 'error', status, message });
+    // render the error page
+    res.status(status);
+    res.render('error', { title: 'error', status, message });
 });
 
 app.listen(PORT, HOST, () => {
-  console.log(`App listening at http://localhost:${PORT}`);
+    console.log(`App listening at http://localhost:${PORT}`);
 });
 
 module.exports = app;

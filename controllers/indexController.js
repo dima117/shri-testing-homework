@@ -1,18 +1,16 @@
-const { gitModule } = require('../utils/git');
+const { controller } = require('./controller');
 const { buildFileUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-class indexController{
+class indexController extends controller{
 
-    constructor(req, res, next, page, size){
-        this.res = res;
-        this.next = next;
-        this.git = new gitModule();
+    constructor(req, res, next, offset, size){
+        super(req, res, next);
 
-        this.render(page, size);
+        this.render(offset, size);
     }
 
-    render(page, size){
-        this.git.gitHistory(page, size).then(
+    render(offset, size){
+        this.git.gitHistory(offset, size).then(
             history => {
                 const list = history.map(item => ({
                     ...item,

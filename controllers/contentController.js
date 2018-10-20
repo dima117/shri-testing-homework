@@ -1,25 +1,18 @@
-const { gitModule } = require('../utils/git');
+const { controller } = require('./controller');
 const { buildBreadcrumbs } = require('../utils/navigation');
 
-class contentController {
+class contentController extends controller{
 
     constructor(req, res, next){
-        this.next = next;
-        this.res = res;
-        this.hash = req.params ? req.params.hash : undefined;
-        this.path = req.params ? req.params[0].split('/').filter(Boolean).join('/') : undefined;
-        this.git = new gitModule();
+        super(req, res, next);
 
         this.render();
     }
 
     render(){
-        const git = this.git;
         this.git.gitFileTree(this.hash, this.path)
-            .then(([file]) => {
-                if (file && file.type === 'blob') {
-                    return this.git.gitFileContent(file.hash);
-                }
+            .then(files => {
+                return this.git.gitFileContent(files);
             })
             .then(
                 content => {

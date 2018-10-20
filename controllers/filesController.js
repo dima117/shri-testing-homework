@@ -1,18 +1,13 @@
-const { gitModule } = require('../utils/git');
+const { controller } = require('./controller');
 const {
     buildObjectUrl,
     buildBreadcrumbs
 } = require('../utils/navigation');
 
-class filesController{
+class filesController extends controller{
 
     constructor(req, res, next){
-        this.next = next;
-        this.res = res;
-        this.hash = req.params.hash;
-        const pathParam = (req.params[0] || '').split('/').filter(Boolean);
-        this.path = pathParam.length ? pathParam.join('/') + '/' : '';
-        this.git = new gitModule();
+        super(req, res, next);
 
         this.render();
     }
@@ -25,7 +20,6 @@ class filesController{
                     href: buildObjectUrl(this.hash, item),
                     name: item.path.split('/').pop()
                 }));
-
                 this.res.render('files', {
                     title: 'files',
                     breadcrumbs: buildBreadcrumbs(this.hash, this.path),
