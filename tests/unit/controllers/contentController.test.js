@@ -1,14 +1,11 @@
 const express = require('express');
 const request = require('supertest');
-const path = require('path');
 
-const fakeREPO = path.resolve('./tests/hermioneStub/');
 const sinon = require('sinon');
 const { expect, assert } = require('chai');
-const { executeGit } = require('./../../../utils/git');
 const contentController = require('./../../../controllers/contentController');
 
-describe('controllers/contentController', () => {
+describe('передача данных в шаблонизатор: contentController', () => {
   it('передает корректные параметры для шаблонизатора', (done) => {
     const breadcrumbsMock = sinon.fake();
     const expectedTemplateData = ['content',
@@ -28,7 +25,6 @@ describe('controllers/contentController', () => {
 
 
     // подменяем данные стабами и моками
-    executeGit._fakeREPO = fakeREPO;
     contentController._buildBreadcrumbsFake = (...args) => {
       breadcrumbsMock(...args);
       return 'BreadCrumbsStub';

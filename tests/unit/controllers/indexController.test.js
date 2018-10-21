@@ -1,14 +1,11 @@
 const express = require('express');
 const request = require('supertest');
-const path = require('path');
 
-const fakeREPO = path.resolve('./tests/hermioneStub/');
 const sinon = require('sinon');
 const { expect } = require('chai');
-const { executeGit } = require('./../../../utils/git');
 const indexController = require('./../../../controllers/indexController');
 
-describe('controllers/indexController', () => {
+describe('передача данных в шаблонизатор: indexController', () => {
   it('передает корректные параметры для шаблонизатора', (done) => {
     const expectedTemplateData = ['index',
       {
@@ -75,7 +72,6 @@ describe('controllers/indexController', () => {
 
 
     // подменяем данные стабами и моками
-    executeGit._fakeREPO = fakeREPO;
     indexController._buildBreadcrumbsFake = () => 'BreadCrumbStub';
     indexController._gitHistoryFake = sinon.fake.resolves(gitHistoryStub);
     indexController._renderFake = res => (...args) => { res.send({ data: args }); };
