@@ -5,7 +5,7 @@ const {
   buildBreadcrumbs
 } = require('../../utils/navigation');
 
-describe('Блок навигации', () => {
+describe('Файл navigation.js', () => {
   const path = 'testing-folder/testing-file.asm';
   const hash = 'testing-hash';
 
