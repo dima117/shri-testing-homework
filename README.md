@@ -9,11 +9,31 @@
 ## Как запустить
 
 ```sh
-git clone git@github.com:dima117/shri-testing-homework.git
-cd shri-testing-homework.git
+git clone https://github.com/teleginzhenya/shri-testing-homework.git
+git clone https://github.com/teleginzhenya/teleginzhenya.github.io
+cd shri-testing-homework
 npm i
 npm start
 ```
+
+### Запуск модульных тестов
+
+```sh
+npm i
+npm run test
+```
+
+### Запуск интеграционных тестов
+
+```sh
+npm i
+npm run selenium-start
+npm run start-hermione
+npm run test-hermione
+# or npm run test-hermione-concurrently
+```
+
+Отчеты лежат в `hermione-reports/index.html`
 
 ## Интеграционные тесты
 
