@@ -1,7 +1,7 @@
-<div class="breadcrumbs">
+<div class="breadcrumbs" data-smid="breadcrumbs-title">
     {{#each breadcrumbs}}
         {{#if href}}
-            <a href="{{href}}">{{text}}</a> /
+            <a href="{{href}}" data-smid="breadcrumbs-link">{{text}}</a> /
         {{else}}
             {{text}}
         {{/if}}
@@ -12,7 +12,7 @@
     <ul>
         {{#each files}}
             <li>
-                <a href="{{href}}">{{name}}</a>
+                <a href="{{href}}" data-smid="file-link">{{name}}</a>
             </li>
         {{/each}}
     </ul>

@@ -1,14 +1,14 @@
-<div class="breadcrumbs">
+<div class="breadcrumbs" data-smid="breadcrumbs-title">
     {{#each breadcrumbs}}
         {{#if href}}
-            <a href="{{href}}">{{text}}</a> /
+            <a href="{{href}}" data-smid="breadcrumbs-link">{{text}}</a> /
         {{else}}
             {{text}}
         {{/if}}
     {{/each}}
 </div>
 
-<div class="content">
+<div class="content" data-smid="commit-content">
     <a href="{{parentHref}}">{{parentPath}}</a>
 
     <div class="file-content">{{content}}</div>
