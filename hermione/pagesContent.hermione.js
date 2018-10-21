@@ -7,7 +7,7 @@ describe('Содержимое страниц', () => {
       return this.browser
         .url('/')
         .assertExists('.breadcrumbs', 'Breadcrumbs не появились')
-        .assertExists('.content .commit .commit__link', 'Ни одного коммита не найдено')
+        .assertView('plain', '.content .commit');
     });
   });
 
@@ -16,7 +16,7 @@ describe('Содержимое страниц', () => {
       return this.browser
         .url('/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/')
         .assertExists('.breadcrumbs', 'Breadcrumbs не появились')
-        .assertExists('.content ul li', 'Ни одного элемента списка не найдено')
+        .assertView('plain', '.content');
     });
   });
 
@@ -25,8 +25,7 @@ describe('Содержимое страниц', () => {
       return this.browser
         .url('/content/38429bed94bd7c107c65fed6bffbf443ff0f4183/.gitignore')
         .assertExists('.breadcrumbs', 'Breadcrumbs не появились')
-        .assertExists('.content .file-content', 'Элемент с контентом файла не найден')
-        .textEqual('.content .file-content', 'node_modules');
+        .assertView('plain', '.content');
     });
   });
 });
