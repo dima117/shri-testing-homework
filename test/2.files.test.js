@@ -24,6 +24,42 @@ describe("Обработка страницы с содержимым объек
       }
     ]);
   });
+
+  it("Получен правильный href для ссылки на объект-дерево", async function() {
+    const filesController = new FilesController();
+    const stubBuildUrl = (hash, path = "") => `/files/${hash}/${path}`;
+    filesController.getFolderUrl = stubBuildUrl;
+
+    const href = filesController.buildObjectUrl("mock_hash", {
+      path: "mock_path",
+      type: "tree"
+    });
+
+    assert.equal(href, "/files/mock_hash/mock_path");
+  });
+  it("Получен правильный href для ссылки на объект-файл", async function() {
+    const filesController = new FilesController();
+    const stubBuildUrl = (hash, path = "") => `/content/${hash}/${path}`;
+    filesController.getFolderUrl = stubBuildUrl;
+
+    const href = filesController.buildObjectUrl("mock_hash", {
+      path: "mock_file_name",
+      type: "blob"
+    });
+
+    assert.equal(href, "/content/mock_hash/mock_file_name");
+  });
+  it("Получен правильный href по умолчанию, если объект не tree и не blob", async function() {
+    const filesController = new FilesController();
+
+    const href = filesController.buildObjectUrl("mock_hash", {
+      path: "mock_something",
+      type: "something"
+    });
+
+    assert.equal(href, "#");
+  });
+
   it("Получить список содержимого объекта-дерева", async function() {
     const filesController = new FilesController();
     const stubGetHistory = sinon

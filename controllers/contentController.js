@@ -1,10 +1,11 @@
-const { gitFileContent, gitFileTree } = require("../utils/git");
+const { Git } = require("../utils/Git");
 const { buildBreadcrumbs } = require("../utils/navigation");
 
 class ContentController {
   constructor() {
-    this.fetchFileTree = gitFileTree;
-    this.fetchFileContent = gitFileContent;
+    this.git = new Git();
+    this.fetchFileTree = (...args) => this.git.gitFileTree(...args);
+    this.fetchFileContent = (...args) => this.git.gitFileContent(...args);
     this.getBreadcrumbs = buildBreadcrumbs;
   }
   async getFileContent(hash, path) {

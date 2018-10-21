@@ -1,4 +1,5 @@
-const { gitFileTree } = require("../utils/git");
+const { Git } = require("../utils/Git");
+
 const {
   buildFolderUrl,
   buildFileUrl,
@@ -7,7 +8,8 @@ const {
 
 class FilesController {
   constructor() {
-    this.fetchFileTree = gitFileTree;
+    this.git = new Git();
+    this.fetchFileTree = (...args) => this.git.gitFileTree(...args);
     this.getFolderUrl = buildFolderUrl;
     this.getFileUrl = buildFileUrl;
     this.getBreadcrumbs = buildBreadcrumbs;

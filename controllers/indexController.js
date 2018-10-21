@@ -1,11 +1,12 @@
-const { gitHistory } = require("../utils/git");
+const { Git } = require("../utils/Git");
 const { buildFolderUrl, buildBreadcrumbs } = require("../utils/navigation");
 class IndexController {
   constructor() {
-    this.fetchHistory = gitHistory;
+    this.git = new Git();
+    this.fetchHistory = (...args) => this.git.gitHistory(...args);
     this.getFolderUrl = buildFolderUrl;
     this.getBreadcrumbs = buildBreadcrumbs;
-	}
+  }
 
   async getIndexList(page, size) {
     const history = await this.fetchHistory(page, size);
@@ -16,7 +17,7 @@ class IndexController {
     return list;
   }
 
-  render(req, res) {
+  render(req, res, next) {
     this.getIndexList(1, 20).then(
       list => {
         res.render("index", {

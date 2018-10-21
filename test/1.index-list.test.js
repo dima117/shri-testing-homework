@@ -30,7 +30,7 @@ describe("Обработка страницы со списком из N объ�
         msg: "ссылки на корневую папку 2"
       }
     ]);
-    const stubBuildFolderUrl = () => `/files/test_hash/`;
+    const stubBuildFolderUrl = (hash, path = "") => `/files/${hash}/${path}`;
 
     indexController.fetchHistory = stubGetHistory;
     indexController.getFolderUrl = stubBuildFolderUrl;
@@ -43,14 +43,14 @@ describe("Обработка страницы со списком из N объ�
         author: "author_1",
         timestamp: "timestamp_1",
         msg: "ссылки на корневую папку 1",
-        href: "/files/test_hash/"
+        href: "/files/hash_1/"
       },
       {
         hash: "hash_2",
         author: "author_2",
         timestamp: "timestamp_2",
         msg: "ссылки на корневую папку 2",
-        href: "/files/test_hash/"
+        href: "/files/hash_2/"
       }
     ]);
   });
