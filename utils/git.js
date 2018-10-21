@@ -26,10 +26,11 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
+function gitHistory(page = 1, size = 10, gitFake) {
   const offset = (page - 1) * size;
+  const gitFunction = gitFake || executeGit;
 
-  return executeGit('git', [
+  return gitFunction('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
