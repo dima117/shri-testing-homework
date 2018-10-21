@@ -12,7 +12,13 @@ const contentController = require('./controllers/contentController');
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set(
+  'views',
+  path.join(
+    __dirname,
+    process.env.NODE_ENV === 'test_hermione' ? 'hermione/views' : 'views'
+  )
+);
 app.set('view engine', 'hbs');
 app.set('view options', { layout: 'layout', extname: '.hbs' });
 
