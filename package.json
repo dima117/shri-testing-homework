@@ -10,7 +10,8 @@
     "selenium-start": "selenium-standalone start",
     "test": "NODE_ENV=test npx mocha test --watch",
     "test-watch": "NODE_ENV=test npx mocha test --watch --recursive",
-    "test-hermione": "NODE_ENV=test_hermione ./node_modules/.bin/hermione hermione/test/"
+    "test-hermione": "NODE_ENV=test_hermione ./node_modules/.bin/hermione hermione/test/",
+    "test-hermione-concurrently": "concurrently \"npm run selenium-start\" \"npm run start-hermione\" \"npm run test-hermione\""
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "concurrently": "^4.0.1",
     "eslint": "^5.7.0",
     "eslint-config-google": "^0.11.0",
     "eslint-config-prettier": "^3.1.0",
