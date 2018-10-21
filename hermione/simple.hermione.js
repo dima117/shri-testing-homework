@@ -1,153 +1,149 @@
 const chai = require('chai'),
     expect = chai.expect;
 
-describe('start page', () => {
+const FILE_NAME = 'www';
+const FILE_FOLDER = 'bin';
+const COMMIT_HASH = '4379c958d31dd5e92fa753383d5a8238a6facbf7';
 
-    it('should have HISTORY breadcrumb', function () {
+
+describe('navigation', () => {
+
+    it('should have correct navigation by folder and files', async function () {
+        let commitLink = await this.browser
+            .url(`/`)
+            .getAttribute('.commit .commit__link a', 'href')
+            .then((links) => {
+                return links[0];
+            });
+
+        let {folderLink, fileLink} = await this.browser
+            .url(commitLink)
+            .getAttribute('.content ul li a', 'href')
+            .then((links) => {
+                let folderLinks = links.find(link => link.search(/files/) !== -1);
+                let fileLinks = links.find(link => link.search(/content/) !== -1);
+                return {
+                    folderLink: folderLinks ? folderLinks[0] : null,
+                    fileLink: fileLinks ? fileLinks[0] : null
+                };
+
+            });
+
         return this.browser
-            .url('/')
+            .url(fileLink ? fileLink : `/content/${COMMIT_HASH}/${FILE_FOLDER}/${FILE_NAME}`)
+            .getHTML('.content .files-content')
+            .then((text) => {
+                expect(text).to.not.be.equal('');
+            })
+            .url(folderLink ? folderLink : `/content/${COMMIT_HASH}/${FILE_FOLDER}`)
+            .getHTML('.content')
+            .then((text) => {
+                expect(text).to.not.be.equal('');
+            });
+    });
+
+    it('should have correct breadcrumbs navigation', function () {
+        return this.browser
+            .url(`/content/${COMMIT_HASH}/${FILE_FOLDER}/${FILE_NAME}`)
             .getText('.breadcrumbs')
-            .then((value) => {
-                expect(value).to.be.equal('HISTORY');
+            .then((text) => {
+                expect(text).to.be.equal('HISTORY / ROOT / bin / www');
+            })
+            .click(`a[href="/files/${COMMIT_HASH}/${FILE_FOLDER}/"]`)
+            .getText('.breadcrumbs')
+            .then((text) => {
+                expect(text).to.be.equal('HISTORY / ROOT / bin');
+            })
+            .click(`a[href="/files/${COMMIT_HASH}/"]`)
+            .getText('.breadcrumbs')
+            .then((text) => {
+                expect(text).to.be.equal('HISTORY / ROOT');
+            })
+            .click(`a[href="/"]`)
+            .getText('.breadcrumbs')
+            .then((text) => {
+                expect(text).to.be.equal('HISTORY');
+            })
+    });
+
+});
+
+describe('start page content', () => {
+
+    const URL = `/`;
+
+    it('should have title history', function () {
+        return this.browser
+            .url(URL)
+            .getTitle().then((title) => {
+                expect(title).to.be.equal('history');
             });
     });
 
-    it('should have content with commits and commits should have 3 lines of info', function () {
+    it('should have content with array of commits, each commit should consist of 3 lines of info', function () {
         return this.browser
-            .url('/')//get content
-            .isExisting('.content .commit')
-            .then((exists) => {
-                expect(exists).to.be.true;
-            });
-            // .getText('.commit')
-            // .then((commits) => {
-            //     let result = commits.every(commit => commit.split('\n').length === 3);
-            //     console.log(commits,result);
-            //     expect(result).to.be.true;
-            // });
-    });
-
-    it('should have commits with 3 lines of info', function () {
-        return this.browser
-            .url('/')//get content
-            .getText('.commit')
+            .url(URL)//get content
+            .getText('.content .commit')
             .then((commits) => {
-                let result = commits.every(commit => commit.split('\n').length === 3);
+                expect(commits).to.be.a('array');
+                return commits.map(commit => commit.split('\n'));
+            })
+            .then((commits) => {
+                let result = commits.every(commit => commit.length === 3);
                 expect(result).to.be.true;
             });
     });
 
-    ///////////
-    it('should have link to commit', async function () {
-        let link;
-        await this.browser
-            .url('/')
-            .getText('.commit__link a').then((commits) => {
-                link = `/files/${commits[0]}/`;
-            });
-
-        return this.browser.url(link).getText('.container')
-            .then(text => {
-                expect(text.includes('404')).to.be.false;
-            });
-    });
-
 
 });
 
-describe('commit page', () => {
+describe('commit page content', () => {
 
-    const COMMIT_HASH = 'cc2284293758e32c50fa952da2f487c8c5e8d023',
-        URL = `/files/${COMMIT_HASH}/`;
+    const URL = `/files/${COMMIT_HASH}/`;
 
-    it('should have HISTORY/ROOT breadcrumb', function () {
+    it('should have title files', function () {
         return this.browser
             .url(URL)
-            .getText('.breadcrumbs')
-            .then((value) => {
-                expect(value.split(' ').join('')).to.be.equal('HISTORY/ROOT');
+            .getTitle().then((title) => {
+                expect(title).to.be.equal('files');
             });
     });
 
-///////////
-    it('should have list of files', function () {
+    it('should have list of files/folders with links to their content', function () {
         return this.browser
             .url(URL)
-            .getText('.content ul li')
+            .getHTML('.content ul li')
             .then((files) => {
                 expect(files).to.be.an('array');
-            });
-    });
-///////////
-    it('should have link to file', async function () {
-        let link;
-        await this.browser
-            .url(URL)
-            .getText('.content a').then((commits) => {
-                link = `/content/${COMMIT_HASH}/${commits[0]}`;
-            });
-        return this.browser.url(link).getText('.container')
-            .then(text => {
-                expect(text.includes('404')).to.be.false;
+                return files;
+            })
+            .then((files) => {
+                expect(files.every(file => file.search(/<a href="(\/content)|(\/files)\/\w*\/\w*/) !== -1)).to.be.true;
             });
     });
 
-    it('should return to history page via breadcrumb', function () {
-        return this.browser
-            .url(URL)
-            .getHTML('.breadcrumbs a')
-            .then((text) => {
-                expect(text.match(/href="\/"/)[0]).not.to.be.equal("");
-            });
-    });
 });
 
 describe('file description', () => {
 
-    const COMMIT_HASH = 'cc2284293758e32c50fa952da2f487c8c5e8d023',
-        FILE_NAME = 'README.md',
-        URL = `/content/${COMMIT_HASH}/${FILE_NAME}`;
+    const URL = `/content/${COMMIT_HASH}/${FILE_FOLDER}/${FILE_NAME}`;
 
-    it('should have HISTORY/ROOT/%filename breadcrumb', function () {
+    it('should have title content', function () {
         return this.browser
             .url(URL)
-            .getText('.breadcrumbs')
-            .then((value) => {
-
-                expect(value.split(' ').join('')).to.be.equal(`HISTORY/ROOT/${FILE_NAME}`);
+            .getTitle().then((title) => {
+                expect(title).to.be.equal('content');
             });
     });
-
 
     it('should have content of file', function () {
         return this.browser
             .url(URL)
-            .getText('.content')
+            .getHTML('.file-content')
             .then((text) => {
-                expect(text).to.include('автотесты');
+                expect(text).to.include('Module dependencies');
             });
     });
 
-    it('should return to history page via breadcrumb', function () {
-        return this.browser
-            .url(URL)
-            .getHTML('.breadcrumbs a')
-            .then((text) => {
-                expect(text[0].match(/href="\/"/)[0]).not.to.be.equal("");
-            });
-    });
 
-    it('should return to commit page via breadcrumb', async function () {
-        let parentUrl;
-        await this.browser
-            .url(URL)
-            .getHTML('.breadcrumbs a')
-            .then((text) => {
-                parentUrl = text[1].match(/\/*\w*\/\w*\/*/)[0];
-            });
-        return this.browser.url(parentUrl).getText('.container')
-            .then(text => {
-                expect(text.includes('404')).to.be.false;
-            });
-    });
 });
