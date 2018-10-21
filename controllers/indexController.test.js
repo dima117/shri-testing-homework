@@ -14,7 +14,7 @@ jest.mock('../utils/git')
 jest.mock('../utils/navigation')
 
 const res = {
-    render: jest.fn(() => console.log(';lsdkjf;lskdj'))
+    render: jest.fn()
 };
 
 const req = jest.fn()
