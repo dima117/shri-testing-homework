@@ -1,12 +1,10 @@
 const { resolve } = require('path');
-const REPO = resolve('.');
+const { path } = require('../config/default');
+const REPO = resolve(path);
 
 const { execFile } = require('child_process');
 
 class Git {
-  constructor() {
-    //
-  }
   executeGit(cmd, args) {
     return new Promise((resolve, reject) => {
       execFile(cmd, args, { cwd: REPO }, (err, stdout) => {

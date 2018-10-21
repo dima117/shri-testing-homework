@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "testsel": "selenium-standalone start",
+    "herbione": "./node_modules/.bin/hermione"
   },
   "keywords": [],
   "author": "",
