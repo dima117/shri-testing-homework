@@ -1,25 +1,22 @@
 const assert = require('assert');
 
-describe('История коммитов.', () => {
+describe('Список файлов.', () => {
     it('Проверка хлебных крошек и контента', function() {
         return this.browser
-            .url('/')
+            .url('/files/172001aeb63bdfc4e3f01f29e30876022cf6ad45/')
             .isExisting('.breadcrumbs')
             .then(exists => {
                 assert.ok(exists, 'Нет хлебных крошек');
             })
-            .getText('.breadcrumbs')
-            .then(text => {
-                assert.equal(text, 'HISTORY', 'Текст хлебных крошек не соответствует');
-            })
+            .assertView('breadcrumbs', '.breadcrumbs')
             .isExisting('.content')
             .then(exists => {
                 assert.ok(exists, 'Нет контента');
             })
-            .isExisting('.content .commit:last-child')
+            .isExisting('.content ul')
             .then(exists => {
-                assert.ok(exists, 'Нет начального коммита');
+                assert.ok(exists, 'Нет списка файлов');
             })
-            .assertView('initial-commit', '.content .commit:last-child');
+            .assertView('file-list', '.content ul');
     });
 });
