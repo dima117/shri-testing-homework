@@ -21,6 +21,7 @@ npm run test
 # Как запустить
 
 - установить selenium-standalone
+
 В 3 разных выполнить по команде:
 ```
 selenium-standalone start
