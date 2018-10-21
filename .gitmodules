@@ -1,3 +1,0 @@
-[submodule "test-repo"]
-	path = test-repo
-	url = https://github.com/smakhl/test-repo.git
