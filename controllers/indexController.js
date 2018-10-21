@@ -1,17 +1,17 @@
-const { gitHistory } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const gitUtil = require('../utils/git');
+const navUtil = require('../utils/navigation');
 
 module.exports = function(req, res) {
-  gitHistory(1, 20).then(
+  gitUtil.gitHistory(1, 20).then(
     history => {
       const list = history.map(item => ({
         ...item,
-        href: buildFolderUrl(item.hash, '')
+        href: navUtil.buildFolderUrl(item.hash, '')
       }));
 
       res.render('index', {
         title: 'history',
-        breadcrumbs: buildBreadcrumbs(),
+        breadcrumbs: navUtil.buildBreadcrumbs(),
         list
       });
     },
