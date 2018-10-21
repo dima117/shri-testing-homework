@@ -7,7 +7,7 @@
 		"test": "nyc --reporter=html mocha ./**/__tests__/**/*.test.js",
 		"test-watch": "nyc --reporter=html mocha ./**/__tests__/**/*.test.js --watch",
 		"test-int": "hermione gui --reporter flat",
-		"selenium-start": "selenium-standalone start",
+		"selenium-start": "selenium-standalone start ",
 		"start": "node ./bin/www",
 		"devstart": "ndb ./bin/www"
 	},

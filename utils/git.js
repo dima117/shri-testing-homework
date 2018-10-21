@@ -5,7 +5,7 @@ const { getOffset, parseHistoryItem, parseFileTreeItem } = require("./helpers");
 
 class Git {
 	constructor() {
-		this.REPO = resolve(".");
+		this.REPO = resolve("./testrepo");
 	}
 
 	executeGit(args) {
@@ -31,7 +31,7 @@ class Git {
 			offset,
 			"-n",
 			size
-		]).then((data) => {
+		]).then(data => {
 			return data
 				.split("\n")
 				.filter(Boolean)
@@ -44,7 +44,7 @@ class Git {
 
 		path && params.push(path);
 
-		return this.executeGit(params).then((data) => {
+		return this.executeGit(params).then(data => {
 			return data
 				.split("\n")
 				.filter(Boolean)
