@@ -1,7 +1,7 @@
-const {
+let {
   gitFileTree
 } = require("../utils/git");
-const {
+let {
   buildFolderUrl,
   buildFileUrl,
   buildBreadcrumbs
@@ -23,9 +23,9 @@ function buildObjectUrl(parentHash, {
 
 function filesController(req, res, next, mocks) {
   if (mocks) {
-
+    gitFileTree = mocks.gitFileTree
+    buildBreadcrumbs = mocks.buildBreadcrumbs
   }
-  this.gitFileTree = req.testData ? mocks.gitFileTree : gitFileTree;
 
   const {
     hash
@@ -35,15 +35,13 @@ function filesController(req, res, next, mocks) {
 
   const path = pathParam.length ? pathParam.join("/") + "/" : "";
 
-  return this.gitFileTree(hash, path).then(
+  return gitFileTree(hash, path).then(
     list => {
       const files = list.map(item => ({
         ...item,
         href: buildObjectUrl(hash, item),
         name: item.path.split("/").pop()
       }));
-
-      console.log('Что то есть', files)
 
       res.render("files", {
         title: "files",
