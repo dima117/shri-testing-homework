@@ -1,6 +1,8 @@
 <div class="breadcrumbs">
     {{#each breadcrumbs}} {{#if href}}
-    <a href="{{href}}">{{text}}</a> / {{else}} {{text}} {{/if}} {{/each}}
+    <a href="{{href}}">{{text}}</a> / {{else}}
+    <span>{{text}}</span>
+    {{/if}} {{/each}}
 </div>
 
 <div class="content">
