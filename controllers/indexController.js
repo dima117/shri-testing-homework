@@ -1,7 +1,24 @@
-const { gitHistory } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+let { gitHistory } = require('../utils/git');
+let { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-module.exports = function (req, res, next) {
+module.exports = function indexController(req, res, next) {
+  // точки расширения
+  res.render = indexController._renderFake
+    ? indexController._renderFake(res)
+    : res.render;
+
+  buildFolderUrl = indexController._buildFolderUrlFake
+    ? indexController._buildFolderUrlFake
+    : buildFolderUrl;
+
+  buildBreadcrumbs = indexController._buildBreadcrumbsFake
+    ? indexController._buildBreadcrumbsFake
+    : buildBreadcrumbs;
+
+  gitHistory = indexController._gitHistoryFake
+    ? indexController._gitHistoryFake
+    : gitHistory;
+
   gitHistory(1, 20).then(
     (history) => {
       const list = history.map(item => ({
