@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha ./utils ./controllers",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "hermione": "hermione ./hermione"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
     "mocha": "^5.2.0",
     "ndb": "^1.0.26"
   }
