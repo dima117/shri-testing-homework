@@ -53,5 +53,6 @@ function generateList(history) {
 module.exports = { 
   generateContent,
   generateFiles,
-  generateList
+  generateList, 
+  buildObjectUrl
 };
