@@ -64,6 +64,7 @@ npm start
 	2) Аналогично с `gitFileTree`
 	3) Аналогично с `gitFileContent`
 
+---
 
 ## Инструкции
 
@@ -85,6 +86,7 @@ npm run test:unit
 ```
 git clone https://github.com/smakhl/test-repo.git
 ```
+- копируем его путь в переменную `REPO_PATH` в файле **shri-testing-homework/tests/integrationTestStart.js**
 
 ```sh
 npm i selenium-standalone --global
