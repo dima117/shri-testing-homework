@@ -7,12 +7,10 @@ function buildFileUrl(parentHash, path) {
 }
 
 function buildBreadcrumbs(hash, path) {
-  const bc = [
-    {
-      text: 'HISTORY',
-      href: hash ? '/' : undefined
-    }
-  ];
+  const bc = [{
+    text: 'HISTORY',
+    href: hash ? '/' : undefined
+  }];
 
   if (hash) {
     const normalizedPath = (path || '').split('/').filter(Boolean);
@@ -36,12 +34,11 @@ function buildBreadcrumbs(hash, path) {
     }
 
     // last part
-    currentName &&
-      bc.push({
-        text: currentName
-      });
+    currentName && bc.push({
+      text: currentName
+    });
   }
-
+  
   return bc;
 }
 
