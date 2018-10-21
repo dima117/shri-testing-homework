@@ -94,27 +94,14 @@ describe('Работа git-функционала', () => {
     })
 })
 
-// заготовка на тест на execute git)
+describe('Внутренняя работа Execute Git', () => {
+    it('Execute Git вызывает действие с переданной командой(command) и аргументами(args)', async () => {
+        const expectedResult = 'On branch'
+        const command = 'git'
+        const args = 'status'
 
-// describe('Execute Git performance', () => {
-//     it('Execute Git возвращает ??', async () => {
-//         const gitCommandInputStub =
-//             '1e0156cb72fd07a3b7da80a14680b1e5b31bdd02\tHope R\t2018-10-18 16:36:56 +0300\tSet up test file with a test function\ndf248263322a497915566dab32fad0729f7d76db\tHope R\t2018-10-18 16:36:36 +0300\tMove functions to a class\n3e0cf248bd6cb28bcd0a91777c0d4c1560380715\tHope R\t2018-10-18 16:36:09 +0300\tSet up Jest'
-//         const actualResult = ''
-//         const command = 'git'
-//         const argument = [ 'ls-tree', '559f5451edf2ed5afa1f46021d24dabb6b4ebf9a' ]
+        const actualResult = await executeGit(command, [args])
 
-//         // const checkExecuteGit = await executeGit(command, argument)
-//         // {
-//         //     // console.log('i am promise', Promise.resolve(gitCommandInputStub))
-//         //     return Promise.resolve(stout.toString())
-//         // }
-
-//         const checkExecuteGit = await function executeGit(command, argument) {
-//             return Promise.resolve(gitCommandInputStub)
-//         }
-
-//         console.log('i am executegit', executeGit)
-//         expect(checkExecuteGit.toString()).toEqual(actualResult)
-//     })
-// })
+        expect(actualResult).toEqual(expect.stringContaining(expectedResult))
+    })
+})
