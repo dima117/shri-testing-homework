@@ -35,10 +35,17 @@ describe('переходы по страницам', () => {
 });
 
 describe('проверка верстки', function() {
-    it('история коммитов',function() {
-        const page = this.browser.url('/');
+    describe('история коммитов', function() {
+        it('сравнение хлебных крошек', function() {
+            const page = this.browser.url('/');
 
-        return page.assertView('last commit', '.commit:last-child') && page.assertView('breadcrumbs', '.breadcrumbs')
+            return page.assertView('breadcrumbs', '.breadcrumbs');
+        })
+        it('сравнение последнего коммита',function() {
+            const page = this.browser.url('/');
+    
+            return page.assertView('last commit', '.commit:last-child')
+        })
     })
     it('просмотр файловой системы',function() {
         const page = this.browser.url('http://localhost:3000/files/8c51372377fd121fa36a90793494ca32e4ed9d61/');
