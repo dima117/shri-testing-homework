@@ -29,7 +29,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__info .commit__author')
             .then(function(title) {
-                assert.equal(title, 'Dmitry Andriyanov')
+                assert.equal(title, 'Hope R')
             })
     })
 
@@ -38,7 +38,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__info .commit__date')
             .then(function(title) {
-                assert.equal(title, '2018-10-16 12:49:56 +0300')
+                assert.equal(title, '2018-10-18 19:42:08 +0300')
             })
     })
 
@@ -47,7 +47,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__msg')
             .then(function(title) {
-                assert.equal(title, 'исправлена опечатка в readme')
+                assert.equal(title, 'Add first unit test for Git History')
             })
     })
 
@@ -56,7 +56,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__link a')
             .then(function(title) {
-                assert.equal(title, '90180910fc27a11272a3e5caeeb119a51e5c0545')
+                assert.equal(title, '559f5451edf2ed5afa1f46021d24dabb6b4ebf9a')
             })
     })
 })

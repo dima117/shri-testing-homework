@@ -22,34 +22,35 @@ describe('Работа "хлебных крошек"', () => {
         expect(actualResult).toEqual(expectedResult)
     })
 
-    it('При вызове без параметров, возвращается массив из одного объекта history, у которого свойство href: undefined', async function () {
+    it('При вызове без параметров, возвращается массив из одного объекта history, у которого свойство href: undefined', async function() {
         const expectedResult = [{ text: 'HISTORY', href: undefined }]
 
-        const actualResult = buildBreadcrumbs();
-    
-        expect(actualResult).toEqual(expectedResult);
-      });
+        const actualResult = buildBreadcrumbs()
+
+        expect(actualResult).toEqual(expectedResult)
+    })
 })
 
 describe('Построение пути к файлам и файловым системам', () => {
     it('При заданном хэше возвращается путь к системе файлов коммита', () => {
         const hash = '1f5487e5c51504cf2f2db00227dd815664b6d8d7'
         const path = ''
-        const expectedResult = '/files/1f5487e5c51504cf2f2db00227dd815664b6d8d7/'
+        const expectedResult =
+            '/files/1f5487e5c51504cf2f2db00227dd815664b6d8d7/'
 
         const actualResult = buildFolderUrl(hash, path)
 
         expect(actualResult).toEqual(expectedResult)
     })
 
-    
-      it('При заданном хэше и пути возвращается путь к содежимому отдельного файла', function () {
+    it('При заданном хэше и пути возвращается путь к содежимому отдельного файла', function() {
         const hash = '1f5487e5c51504cf2f2db00227dd815664b6d8d7'
         const path = '.hermione.conf.js'
-        const expectedResult = '/content/1f5487e5c51504cf2f2db00227dd815664b6d8d7/.hermione.conf.js'
+        const expectedResult =
+            '/content/1f5487e5c51504cf2f2db00227dd815664b6d8d7/.hermione.conf.js'
 
         const actualResult = buildFileUrl(hash, path)
 
         expect(actualResult).toEqual(expectedResult)
-      });
+    })
 })

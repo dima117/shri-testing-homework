@@ -79,9 +79,9 @@ describe('Работа git-функционала', () => {
         const size = 5
         const expectedCommit = {
             author: 'Hope R',
-            hash: '68d14a5c95d67e815d5aa9e2560b16b902b402d9',
-            msg: 'Update README',
-            timestamp: '2018-10-20 14:21:04 +0300'
+            hash: '12a117de2070886d3f50d2f8cd6ae42afbfa9d08',
+            msg: 'Add description of logic blocks to README',
+            timestamp: '2018-10-21 17:21:30 +0300'
         }
 
         const actualResult = await mygit.gitHistory(page, size)
