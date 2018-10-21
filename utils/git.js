@@ -12,8 +12,11 @@ function executeGit(cmd, args) {
     return executeGit._executeFileFake(cmd, args);
   }
 
+  const currentREPO = executeGit._fakeREPO
+    ? executeGit._fakeREPO
+    : REPO;
   return new Promise((resolve, reject) => {
-    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
+    execFile(cmd, args, { cwd: currentREPO }, (err, stdout) => {
       if (err) {
         reject(err);
       }
@@ -92,4 +95,5 @@ module.exports = {
   gitHistory,
   gitFileTree,
   gitFileContent,
+  executeGit,
 };
