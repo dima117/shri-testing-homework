@@ -1,6 +1,5 @@
 const {
-  buildFolderUrl,
-  buildFileUrl,
+  buildObjectUrl,
   buildBreadcrumbs
 } = require('./navigation');
 
@@ -37,11 +36,18 @@ test('buildBreadcrumbs вызов с path глубиной в 15 уровней'
   expect(bc[15]).toEqual({ text: '13', href: '/files/hahash/0/1/2/3/4/5/6/7/8/9/10/11/12/13/' });
 });
 
-test('buildFolderUrl возвращает правильную ссылку', () => {
-  expect(buildFolderUrl('hash', 'path')).toBe('/files/hash/path');
-  expect(buildFolderUrl('hash')).toBe('/files/hash/');
+test('buildObjectUrl возвращает правильную ссылку папки', () => {
+  expect(buildObjectUrl('parentHash', {path: 'path', type:'tree'})).toBe('/files/parentHash/path');
 });
 
-test('buildFileUrl возвращает правильную ссылку', () => {
-  expect(buildFileUrl('parentHash', 'path')).toBe('/content/parentHash/path');
+test('buildObjectUrl возвращает правильную ссылку папки', () => {
+  expect(buildObjectUrl('parentHash', { type:'tree'})).toBe('/files/parentHash/');
+});
+
+test('buildObjectUrl возвращает правильную ссылку файла', () => {
+  expect(buildObjectUrl('parentHash', {path: 'path', type:'blob'})).toBe('/content/parentHash/path');
+});
+
+test('buildObjectUrl возвращает заглушку без указания типа', () => {
+  expect(buildObjectUrl('parentHash')).toBe('#');
 });
