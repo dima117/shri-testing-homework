@@ -1,5 +1,5 @@
-const assert = require('assert');
 const request = require('supertest');
+const { expect } = require('chai');
 const app = require('../app');
 
 const testRoute = route => {
@@ -7,10 +7,9 @@ const testRoute = route => {
     return request(app)
       .get(route.path)
       .then(response => {
-        assert.equal(response.status, route.status);
+        expect(response.status).to.eq(route.status);
         if (response.error) {
-          assert.equal(
-            response.error,
+          expect(response.error.toString()).to.eq(
             `Error: cannot GET ${route.path} (${route.status})`
           );
         }
