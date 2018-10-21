@@ -3,9 +3,9 @@ const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
-function executeGit(cmd, args) {
+function executeGit(cmd, args, stub) {
   return new Promise((resolve, reject) => {
-    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
+    (stub || execFile)(cmd, args, { cwd: REPO }, (err, stdout) => {
       if (err) {
         reject(err);
       }
@@ -26,10 +26,10 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
+function gitHistory(page = 1, size = 10, stub) {
   const offset = (page - 1) * size;
 
-  return executeGit('git', [
+  return (stub || executeGit)('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
@@ -52,11 +52,11 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
+function gitFileTree(hash, path, stub) {
   const params = ['ls-tree', hash];
   path && params.push(path);
 
-  return executeGit('git', params).then(data => {
+  return (stub || executeGit)('git', params).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
@@ -64,12 +64,13 @@ function gitFileTree(hash, path) {
   });
 }
 
-function gitFileContent(hash) {
-  return executeGit('git', ['show', hash]);
+function gitFileContent(hash, stub) {
+  return (stub || executeGit)('git', ['show', hash]);
 }
 
 module.exports = {
+  executeGit,
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
 };

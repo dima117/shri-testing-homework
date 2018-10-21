@@ -10,7 +10,7 @@ describe('utils/navigation.js', () => {
 
   describe('buildFileUrl', () => {
 
-    it('Урл файла должен начинаться с /content/', () => {
+    it('Возвращаемая строка должна начинаться с /content/', () => {
       const url = buildFileUrl();
       expect(url).to.match(/^\/content\//);
     });
@@ -19,7 +19,7 @@ describe('utils/navigation.js', () => {
 
   describe('buildFolderUrl', () => {
 
-    it('Урл папки должен начинаться с /files/', () => {
+    it('Возвращаемая строка должна начинаться с /files/', () => {
       const url = buildFolderUrl();
       expect(url).to.match(/^\/files\//);
     });
@@ -33,7 +33,7 @@ describe('utils/navigation.js', () => {
       expect(breadcrumbs).to.have.lengthOf(1);
     });
 
-    it('Объект массива должен содержать ключи text и href', () => {
+    it('Объект массива должен содержать правильные ключи', () => {
       const breadcrumbs = buildBreadcrumbs();
       expect(breadcrumbs[0]).to.have.all.keys('text', 'href');
     });
