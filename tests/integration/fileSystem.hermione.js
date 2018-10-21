@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-describe('Страница с файловой системой', () => {
+describe('Страница с файловой системой:', () => {
   it('корректно отображается', function () {
     return this.browser
       .url('/')

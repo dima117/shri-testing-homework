@@ -1,11 +1,12 @@
 const { expect } = require('chai');
 
-describe('Страница с историей коммитов', () => {
+describe('Страница с историей коммитов:', () => {
   it('корректно отображается', function () {
     return this.browser
       .url('/')
       .assertView('plain', 'html');
   });
+
 
   it('по ссылкам в коммитах можно перейти к файловой системе', function () {
     let link;
