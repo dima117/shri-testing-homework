@@ -1,5 +1,4 @@
-const { resolve } = require('path');
-const REPO = resolve('.');
+const { REPO } = require('../config/consts');
 
 let { execFile } = require('child_process');
 

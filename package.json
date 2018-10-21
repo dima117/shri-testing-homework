@@ -8,6 +8,7 @@
     "test-cover": "nyc --reporter=html --reporter=text mocha tests",
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
+    "stage": "NODE_ENV=staging node ./bin/www",
     "debug": "ndb",
     "lint": "eslint --fix tests",
     "hermione": "hermione hermione"
