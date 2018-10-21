@@ -1,75 +1,80 @@
 const { resolve } = require('path');
 const REPO = resolve('.');
-
 const { execFile } = require('child_process');
 
-function executeGit(cmd, args) {
-  return new Promise((resolve, reject) => {
-    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
-      if (err) {
-        reject(err);
-      }
+class gitModule {
 
-      resolve(stdout.toString());
-    });
-  });
-}
+    constructor(exec = this.executeGit){
+        this.exec = exec;
+    }
 
-function parseHistoryItem(line) {
-  const [hash, author, timestamp, msg] = line.split('\t');
+    executeGit(cmd, args) {
+        return new Promise((resolve, reject) => {
+            execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
+                if (err) {
+                    reject(err);
+                }
 
-  return {
-    hash,
-    author,
-    timestamp,
-    msg
-  };
-}
+                resolve(stdout.toString());
+            });
+        });
+    }
 
-function gitHistory(page = 1, size = 10) {
-  const offset = (page - 1) * size;
+    parseHistoryItem(line) {
+        const [hash, author, timestamp, msg] = line.split('\t');
 
-  return executeGit('git', [
-    'log',
-    '--pretty=format:%H%x09%an%x09%ad%x09%s',
-    '--date=iso',
-    '--skip',
-    offset,
-    '-n',
-    size
-  ]).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseHistoryItem);
-  });
-}
+        return {
+            hash,
+            author,
+            timestamp,
+            msg
+        };
+    }
 
-function parseFileTreeItem(line) {
-  const [info, path] = line.split('\t');
-  const [, type, hash] = info.split(' ');
+    gitHistory(offset = 0, size = 10){
+        return this.exec('git', [
+            'log',
+            '--pretty=format:%H%x09%an%x09%ad%x09%s',
+            '--date=iso',
+            '--skip',
+            offset,
+            '-n',
+            size
+        ]).then(data => {
+            return data
+                .split('\n')
+                .filter(Boolean)
+                .map(this.parseHistoryItem);
+        });
+    }
 
-  return { type, hash, path };
-}
+    parseFileTreeItem(line) {
+        const [info, path] = line.split('\t');
+        const [, type, hash] = info.split(' ');
 
-function gitFileTree(hash, path) {
-  const params = ['ls-tree', hash];
-  path && params.push(path);
+        return { type, hash, path };
+    }
 
-  return executeGit('git', params).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseFileTreeItem);
-  });
-}
+    gitFileTree(hash, path) {
+        const params = ['ls-tree', hash];
+        path && params.push(path);
 
-function gitFileContent(hash) {
-  return executeGit('git', ['show', hash]);
+        return this.exec('git', params).then(data => {
+            return data
+                .split('\n')
+                .filter(Boolean)
+                .map(this.parseFileTreeItem);
+        });
+    }
+
+    gitFileContent([file]) {
+        if (file && file.type === 'blob') {
+            return this.exec('git', ['show', file.hash]);
+        }
+    }
+
 }
 
 module.exports = {
-  gitHistory,
-  gitFileTree,
-  gitFileContent
+    gitModule
 };

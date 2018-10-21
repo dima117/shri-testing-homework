@@ -1,41 +1,35 @@
-const { gitFileTree } = require('../utils/git');
+const { controller } = require('./controller');
 const {
-  buildFolderUrl,
-  buildFileUrl,
-  buildBreadcrumbs
+    buildObjectUrl,
+    buildBreadcrumbs
 } = require('../utils/navigation');
 
-function buildObjectUrl(parentHash, { path, type }) {
-  switch (type) {
-    case 'tree':
-      return buildFolderUrl(parentHash, path);
-    case 'blob':
-      return buildFileUrl(parentHash, path);
-    default:
-      return '#';
-  }
+class filesController extends controller{
+
+    constructor(req, res, next){
+        super(req, res, next);
+        this.pathTree = !this.path ? this.path : this.path + '/';
+    }
+
+    async render(){
+        return this.git.gitFileTree(this.hash, this.pathTree).then(
+            list => {
+                const files = list.map(item => ({
+                    ...item,
+                    href: buildObjectUrl(this.hash, item),
+                    name: item.path.split('/').pop()
+                }));
+                return this.res.render('files', {
+                    title: 'files',
+                    breadcrumbs: buildBreadcrumbs(this.hash, this.path),
+                    files
+                });
+            },
+            err => this.next(err)
+        );
+    }
 }
 
-module.exports = function(req, res, next) {
-  const { hash } = req.params;
-  const pathParam = (req.params[0] || '').split('/').filter(Boolean);
-
-  const path = pathParam.length ? pathParam.join('/') + '/' : '';
-
-  return gitFileTree(hash, path).then(
-    list => {
-      const files = list.map(item => ({
-        ...item,
-        href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
-      }));
-
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
-    },
-    err => next(err)
-  );
+module.exports = {
+    filesController
 };
