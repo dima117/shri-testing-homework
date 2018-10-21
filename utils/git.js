@@ -5,9 +5,9 @@ const REPO = resolve('.');
 const { execFile } = require('child_process');
 
 class GitClass {
-  executeGit(cmd, args) {
+  getExecFile(args) {
     return new Promise((resolve, reject) => {
-      execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
+      execFile('git', args, { cwd: REPO }, (err, stdout) => {
         if (err) {
           reject(err);
         }
@@ -17,10 +17,14 @@ class GitClass {
     });
   }
 
+  executeGit(args) {
+    return this.getExecFile(args);
+  }
+
   gitHistory(page = 1, size = 10) {
     const offset = getOffset(page, size);
 
-    return this.executeGit('git', [
+    return this.executeGit([
       'log',
       '--pretty=format:%H%x09%an%x09%ad%x09%s',
       '--date=iso',
@@ -40,7 +44,7 @@ class GitClass {
     const params = ['ls-tree', hash];
     path && params.push(path);
 
-    return this.executeGit('git', params).then(data => {
+    return this.executeGit(params).then(data => {
       return data
         .split('\n')
         .filter(Boolean)
@@ -49,7 +53,7 @@ class GitClass {
   }
 
   gitFileContent(hash) {
-    return this.executeGit('git', ['show', hash]);
+    return this.executeGit(['show', hash]);
   }
 }
 

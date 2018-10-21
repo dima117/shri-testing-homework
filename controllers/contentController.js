@@ -5,7 +5,7 @@ module.exports = function(req, res, next) {
   const { hash } = req.params;
   const path = req.params[0].split('/').filter(Boolean);
 
-  Git.gitFileTree(hash, path.join('/'))
+  return Git.gitFileTree(hash, path.join('/'))
     .then(function([file]) {
       if (file && file.type === 'blob') {
         return Git.gitFileContent(file.hash);
