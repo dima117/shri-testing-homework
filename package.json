@@ -4,18 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha **/*.test.js",
+    "hermione": "hermione **/*.hermione.js",
+    "cover": "istanbul cover **/*.js",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "selenium": "selenium-standalone start",
+    "testEnv": "mkdir fakeRep && cd fakeRep && git init && echo 'file1' > file1.txt && git add -A && git commit -m 'first' && mkdir app && cd app && echo 'file2' > file2.txt && git add -A && git commit -m 'second'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "express": "^4.16.4",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "hermione": "^0.90.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "mock": "^0.1.1",
+    "selenium-standalone": "^6.15.3"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "html-reporter": "^2.22.0",
+    "ndb": "^1.0.26",
+    "sinon": "^7.0.0",
+    "sinon-express-mock": "^2.0.5"
   }
 }
