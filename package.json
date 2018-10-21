@@ -21,7 +21,6 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "chai-spies": "^1.0.0",
     "hermione": "^0.90.1",
     "html-reporter": "^2.22.0",
     "mocha": "^5.2.0",

@@ -20,17 +20,4 @@ describe('Содержимое страниц', () => {
         expect(exists).to.be.true;
       })
   });
-
-  it('При переходе с главной страницы на коммит отображается содержимое коммита', function() {
-    return this.browser
-      .url('/')
-      .click('[data-smid=commit-link]')
-      .pause(100)
-      .click('[data-smid=file-link]')
-      .pause(100)
-      .isExisting('[data-smid=commit-content]')
-      .then((exists) => {
-        expect(exists).to.be.true;
-      })
-  });
 });
