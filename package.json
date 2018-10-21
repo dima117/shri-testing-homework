@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha ./tests/*.test.js",
+    "test-hermione": "./node_modules/.bin/hermione ./hermione/*.hermione.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
