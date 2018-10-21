@@ -1,7 +1,11 @@
 const { resolve } = require('path');
 const REPO = resolve('.');
 
-const { execFile } = require('child_process');
+let { execFile } = require('child_process');
+
+function changeExecFile(mock) {
+  execFile = mock;
+}
 
 function executeGit(cmd, args) {
   return new Promise((resolve, reject) => {
@@ -69,6 +73,7 @@ function gitFileContent(hash) {
 }
 
 module.exports = {
+  changeExecFile,
   gitHistory,
   gitFileTree,
   gitFileContent
