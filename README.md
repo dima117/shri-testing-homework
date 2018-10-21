@@ -73,7 +73,7 @@
 
 ```sh
  npm i
- npm run start
+ npm start
   # В отдельной вкладке
  npm run selenium
  # В отдельной вкладке
