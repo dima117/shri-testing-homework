@@ -1,6 +1,9 @@
 const { getOffset, parseFileTreeItem, parseHistoryItem } = require('./helpers');
 const { resolve } = require('path');
-const REPO = resolve('.');
+const REPO =
+  process.env.NODE_ENV === 'test_hermione'
+    ? resolve('../teleginzhenya.github.io')
+    : resolve('.');
 
 const { execFile } = require('child_process');
 
