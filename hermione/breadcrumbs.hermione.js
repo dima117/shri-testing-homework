@@ -10,7 +10,6 @@ describe('Переходы по хлебным крошкам', () => {
       .url(testUtlContent)
       .click('.breadcrumbs a:first-child')
       .assertExists('.commit:first-child', 'Нет истории коммитов')
-      .assertView('plain', '.commit:first-child')
       .assertUrl(testUtl, 'Ссылка не совпадает');
   });
   it('Переход по хлебным крошкам -> root', function () {
@@ -18,7 +17,6 @@ describe('Переходы по хлебным крошкам', () => {
       .url(testUtlContent)
       .click('.breadcrumbs a:nth-child(2)')
       .assertExists('.content ul', 'Нет списка файлов')
-      .assertView('plain', '.content ul')
       .assertUrl(testUtlFile, 'Ссылка не совпадает');
   });
 });

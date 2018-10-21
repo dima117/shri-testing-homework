@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "unit-test": "nyc mocha tests/**/*.test.js",
-    "integration-test": "./node_modules/.bin/hermione",
+    "unit-tests": "nyc mocha tests/**/*.test.js",
+    "integration-tests": "./node_modules/.bin/hermione",
     "start-selenium": "selenium-standalone start",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"

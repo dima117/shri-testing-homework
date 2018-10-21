@@ -17,11 +17,6 @@ describe('Скриншот тесты', () => {
         .url(testUtl)
         .assertView('plain', '.commit:last-child');
     });
-    it('Контент', function () {
-      return this.browser
-        .url(testUtl)
-        .assertView('plain', '.content');
-    });
   });
   describe('Список файлов', () => {
     it('Хлебные крошки', function () {
