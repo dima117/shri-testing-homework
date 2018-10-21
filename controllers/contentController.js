@@ -3,7 +3,7 @@ const { buildBreadcrumbs } = require('../utils/navigation');
 
 module.exports = async function(req, res, next) {
   const { hash } = req.params;
-  const path = req.params[0].split('/').filter(Boolean);
+  const path = (req.params[0] || '').split('/').filter(Boolean);
 
   await gitFileTree(hash, path.join('/'))
     .then(function([file]) {

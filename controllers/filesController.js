@@ -30,11 +30,15 @@ module.exports = async function(req, res, next) {
         name: item.path.split('/').pop()
       }));
 
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
+      if (files.length) {
+          res.render('files', {
+              title: 'files',
+              breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+              files
+          });
+      } else {
+          next()
+      }
     },
     err => next(err)
   );
