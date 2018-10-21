@@ -22,7 +22,7 @@ describe('controllers/filesController.js', () => {
     it('добавление href и name в объекты файлов', async () => {
       await controller(req, spy, null, stubGetTree, stubBuildObj)
 
-      const mappedArr = spy.render.args[0][1].files
+      const mappedArr = spy.render.firstCall.args[1].files
       const result = mappedArr.every(obj => 'href' in obj && 'name' in obj)
 
       expect(result).to.be.true
@@ -32,7 +32,7 @@ describe('controllers/filesController.js', () => {
   describe('построение пути из url', () => {
     it('путь для корневой директории должен быть пустой строкой', async () => {
       await controller(req, spy, null, stubGetTree, stubBuildObj)
-      const path = stubGetTree.args[1][1]
+      const path = stubGetTree.secondCall.args[1]
       expect(path).to.be.a('string').that.equal('')
     })
 
@@ -42,8 +42,9 @@ describe('controllers/filesController.js', () => {
       }
 
       await controller(req, spy, null, stubGetTree, stubBuildObj)
-      const path = stubGetTree.args[2][1]
-      expect(path.slice(-1)).to.equal('/')
+      const path = stubGetTree.thirdCall.args[1]
+
+      expect(path.endsWith('/')).to.be.true
     })
   })
 })

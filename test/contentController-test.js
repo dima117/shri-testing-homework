@@ -25,7 +25,7 @@ describe('controllers/contentController.js', () => {
 
   it('если тип файла не blob - gitFileContent не будет вызван', async () => {
     const stubFileTree = sinon.stub()
-    const spyFileContent = sinon.spy()
+    const spyFileContent = sinon.stub()
     stubFileTree.returns(Promise.resolve([{ type: 'tree' }]))
 
     await controller(req, resSpy, nextSpy, stubFileTree, spyFileContent)
