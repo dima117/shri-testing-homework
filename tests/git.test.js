@@ -2,8 +2,9 @@ const { GitClass } = require('../utils/git');
 const { expect } = require('chai');
 
 describe('Блок Гит', () => {
+    const git = new GitClass();
+
     it('возвращает историю коммитов', async () => {
-        let git = new GitClass();
 
         git.executeGit = () => {
             return new Promise((resolve) => {
@@ -23,7 +24,6 @@ describe('Блок Гит', () => {
     });
 
     it('возвращает дерево файлов', async () => {
-        let git = new GitClass();
 
         git.executeGit = () => {
             // ./utils для коммита 7e013ae0440ad6e91082599376a6aaebe20d2112
@@ -43,8 +43,7 @@ describe('Блок Гит', () => {
     });
 
     it('возвращает содержимое файла', async () => {
-        let git = new GitClass();
-
+        
         git.executeGit = () => {
             // содержимое файла
             return new Promise((resolve) => {
