@@ -1,6 +1,5 @@
 const { resolve } = require('path');
-const REPO = resolve('.');
-
+const REPO = process.env.NODE_ENV == 'test' ? './test-rep' : resolve('.');
 const { execFile } = require('child_process');
 
 module.exports = function (rep) {

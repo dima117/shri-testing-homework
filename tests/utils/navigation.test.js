@@ -48,7 +48,7 @@ describe('Навигация', function () {
        ]);
    });
 
-   it('Возвращаются корректные хлебные крошки при просмотре содержимого файла коммита.', function () {
+   it('Возвращаются корректные хлебные крошки при просмотре файлов 1 уровня вложенности.', function () {
        const hash = 'testhash';
        const path = 'testpath';
 
@@ -69,4 +69,29 @@ describe('Навигация', function () {
 
        ]);
    });
+
+    it('Возвращаются хлебные крошки при просмотре файлов больше 1 уровня вложенности', () => {
+        const hash = 'somehash';
+        const path = 'somepath1/somepath2';
+
+        const result = buildBreadcrumbs(hash, path);
+
+        expect(result).to.eql([
+            {
+                text: 'HISTORY',
+                href: '/'
+            },
+            {
+                text: 'ROOT',
+                href: '/files/somehash/'
+            },
+            {
+                text: 'somepath1',
+                href: '/files/somehash/somepath1/'
+            },
+            {
+                text: 'somepath2'
+            }
+        ]);
+    });
 });

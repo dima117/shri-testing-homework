@@ -3,7 +3,7 @@ const PATH = './test-rep';
 const git = new GitUtil(PATH);
 const expect = require('chai').expect;
 
-describe('Выполнение git команд и обработка входных/выходных данных для нее', function () {
+describe('Выполнение git команд и обработка входных/выходных данных для них', function () {
 
     it('Парсинг коммита в истории коммитов', function () {
         const line = 'somehash\tsomeauthor\tsometimestamp\tsomemsg';
