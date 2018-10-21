@@ -1,5 +1,6 @@
 const assert = require("chai").assert;
-const expect = require("chai").expect;
+const sinon = require("sinon");
+
 const { FilesController } = require("../controllers/FilesController");
 const { buildBreadcrumbs } = require("../utils/navigation");
 
@@ -24,14 +25,35 @@ describe("Обработка страницы с содержимым объек
     ]);
   });
   it("Получить список содержимого объекта-дерева", async function() {
-    const hash = "90180910fc27a11272a3e5caeeb119a51e5c0545";
-    const path = "controllers/";
     const filesController = new FilesController();
+    const stubGetHistory = sinon
+      .stub()
+      .resolves([
+        { type: "mockType_1", hash: "mockHash_1", path: "mockPath_1" },
+        { type: "mockType_2", hash: "mockHash_2", path: "mockPath_2" }
+      ]);
+    const stubBuildUrl = () => `/content/parentHash/path`;
 
-    const commit = await filesController.getFileTree(hash, path);
+    filesController.fetchFileTree = stubGetHistory;
+    filesController.getObjectUrl = stubBuildUrl;
 
-    commit.every(i =>
-      expect(i).to.have.all.keys("type", "hash", "path", "href", "name")
-    );
+    const tree = await filesController.getFileTree("hash", "path");
+
+    assert.deepEqual(tree, [
+      {
+        type: "mockType_1",
+        hash: "mockHash_1",
+        path: "mockPath_1",
+        href: "/content/parentHash/path",
+        name: "mockPath_1"
+      },
+      {
+        type: "mockType_2",
+        hash: "mockHash_2",
+        path: "mockPath_2",
+        href: "/content/parentHash/path",
+        name: "mockPath_2"
+      }
+    ]);
   });
 });

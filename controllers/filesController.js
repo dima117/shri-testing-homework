@@ -11,6 +11,7 @@ class FilesController {
     this.getFolderUrl = buildFolderUrl;
     this.getFileUrl = buildFileUrl;
     this.getBreadcrumbs = buildBreadcrumbs;
+    this.getObjectUrl = this.buildObjectUrl;
   }
 
   buildObjectUrl(parentHash, { path, type }) {
@@ -28,7 +29,7 @@ class FilesController {
     const list = await this.fetchFileTree(hash, path);
     const files = list.map(item => ({
       ...item,
-      href: this.buildObjectUrl(hash, item),
+      href: this.getObjectUrl(hash, item),
       name: item.path.split("/").pop()
     }));
     return files;

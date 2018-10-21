@@ -15,14 +15,15 @@ describe("Переходы по страницам", () => {
   });
 
   it("Из списка файлов во вложенную папку", async function() {
-    //  сразу заходим в один из коммитов
-    const path = "/files/cc2284293758e32c50fa952da2f487c8c5e8d023/";
+    // ссылка на первый коммит в списке коммитов
+    const linkCommit = ".content .commit:nth-child(1) .commit__link a";
     // первая ссылка на папку
-    const link = "a[href^='/files/']";
+    const linkFolder = "a[href^='/files/']";
 
     const browser = this.browser;
-    await browser.url(path);
-    await browser.click(link);
+    await browser.url("/");
+    await browser.click(linkCommit);
+    await browser.click(linkFolder);
     const text = await browser.getText(".breadcrumbs");
 
     expect(text.split("/")).to.have.lengthOf(

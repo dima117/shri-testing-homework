@@ -1,4 +1,6 @@
 const assert = require("chai").assert;
+const sinon = require("sinon");
+
 const { ContentController } = require("../controllers/contentController");
 const { buildBreadcrumbs } = require("../utils/navigation");
 

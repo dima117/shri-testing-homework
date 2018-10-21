@@ -30,10 +30,10 @@ describe("Обработка страницы со списком из N объ�
         msg: "ссылки на корневую папку 2"
       }
     ]);
+    const stubBuildFolderUrl = () => `/files/test_hash/`;
+
     indexController.fetchHistory = stubGetHistory;
-    indexController.getFolderUrl = () => {
-      return `/files/test_hash/`;
-    };
+    indexController.getFolderUrl = stubBuildFolderUrl;
 
     const list = await indexController.getIndexList(1, 2);
 
