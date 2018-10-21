@@ -1,5 +1,6 @@
 const { Git } = require('../utils/git');
 const git = new Git();
+const { expect } = require('chai');
 
 const testGitHistoryExecFile = `
 90180910fc27a11272a3e5caeeb119a51e5c0545\tDmitry Andriyanov\t2018-10-16 12:49:56 +0300\tисправлена опечатка в readme
@@ -26,8 +27,6 @@ const testGitHistotyExecObj = [
         msg: 'codestyle'
     }
 ];
-
-const { expect } = require('chai');
 
 describe("utils/git.js", () => {
 

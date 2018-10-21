@@ -17,8 +17,11 @@ npm start
 
 ## Интеграционные тесты
 
- - npm run integration-test
+``selenium-standalone start``
+
+in new tab:
+``npm run integration-test``
 
 ## Модульные тесты
 
- - npm test для запуска
+``npm test для запуска``
