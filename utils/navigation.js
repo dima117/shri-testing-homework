@@ -7,6 +7,7 @@ function buildFileUrl(parentHash, path) {
 }
 
 function buildBreadcrumbs(hash, path) {
+
   const bc = [
     {
       text: 'HISTORY',
