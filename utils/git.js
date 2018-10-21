@@ -1,11 +1,17 @@
-const { resolve } = require('path');
+const {
+  resolve
+} = require('path');
 const REPO = resolve('.');
 
-const { execFile } = require('child_process');
+const {
+  execFile
+} = require('child_process');
 
 function executeGit(cmd, args) {
   return new Promise((resolve, reject) => {
-    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
+    execFile(cmd, args, {
+      cwd: REPO
+    }, (err, stdout) => {
       if (err) {
         reject(err);
       }
@@ -49,7 +55,11 @@ function parseFileTreeItem(line) {
   const [info, path] = line.split('\t');
   const [, type, hash] = info.split(' ');
 
-  return { type, hash, path };
+  return {
+    type,
+    hash,
+    path
+  };
 }
 
 function gitFileTree(hash, path) {
@@ -71,5 +81,8 @@ function gitFileContent(hash) {
 module.exports = {
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
+  executeGit,
+  parseFileTreeItem,
+  parseHistoryItem
 };

@@ -1,7 +1,12 @@
-const { gitHistory } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const {
+  gitHistory
+} = require('../utils/git');
+const {
+  buildFolderUrl,
+  buildBreadcrumbs
+} = require('../utils/navigation');
 
-module.exports = function(req, res) {
+module.exports = function (req, res) {
   gitHistory(1, 20).then(
     history => {
       const list = history.map(item => ({
