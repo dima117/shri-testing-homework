@@ -14,7 +14,7 @@ describe('Блок Гит', () => {
 
         let hist = await git.gitHistory(1, 1);
 
-        expect(hist).to.deep.eql([{
+        expect(hist).to.eql([{
             author: 'Dmitry Andriyanov',
             hash: '30fc48ec578e6b0052f6ab9ea7a118fb31574cdc',
             msg: 'ссылки на корневую папку',
@@ -35,7 +35,7 @@ describe('Блок Гит', () => {
 
         let tree = await git.gitFileTree();
 
-        expect(tree).to.deep.eql([{
+        expect(tree).to.eql([{
             type: 'tree', 
             hash: '0c174efd10167e419bca53f98fde0611072258ba', 
             path: 'utils'
