@@ -40,8 +40,10 @@ app.use(function(err, req, res, next) {
   res.render('error', { title: 'error', status, message });
 });
 
-app.listen(PORT, HOST, () => {
-  console.log(`App listening at http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, HOST, () => {
+    console.log(`App listening at http://localhost:${PORT}`);
+  });
+}
 
 module.exports = app;
