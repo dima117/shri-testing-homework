@@ -7,7 +7,7 @@ describe('Routes transitions', function() {
     const hash = '4104d1e02d19759f456c831fc16c5617a5b2584a';
     return this.browser
       .url('/')
-      .click(`#hash-${hash}`)
+      .click(`.hash-${hash}`)
       .getUrl()
       .then(url => {
         expect(url).to.eq(`${homeUrl}files/${hash}/`);
@@ -19,7 +19,7 @@ describe('Routes transitions', function() {
     const name = 'components';
     return this.browser
       .url(`/files/${hash}/`)
-      .click(`#file-${name}`)
+      .click(`.file-${name}`)
       .getUrl()
       .then(url => {
         expect(url).to.eq(`${homeUrl}files/${hash}/${name}`);
@@ -32,7 +32,7 @@ describe('Routes transitions', function() {
     const escapedName = name.replace(/\./g, '\\.');
     return this.browser
       .url(`/files/${hash}/`)
-      .click(`#file-${escapedName}`)
+      .click(`.file-${escapedName}`)
       .getUrl()
       .then(url => {
         expect(url).to.eq(`${homeUrl}content/${hash}/${name}`);
