@@ -1,7 +1,7 @@
 const chai = require('chai'),
     expect = chai.expect;
 
-const {buildFolderUrl, buildFileUrl, buildObjectUrl} = require('../../utils/navigation');
+const {buildFolderUrl, buildFileUrl, buildObjectUrl} = require('../../app/utils/navigation');
 
 
 describe('buildFolderUrl', () => {

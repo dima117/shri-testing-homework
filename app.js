@@ -1,13 +1,14 @@
 const path = require('path');
 const express = require('express');
 
-const PORT = 3000;
+const PORT = 9000;
 const HOST = '::';
 
 // controller
-const {indexController, filesController, contentController} = require('./app/controller/controller');
+const {Controller} = require('./app/controller/controller');
 
 const app = express();
+const controller = new Controller();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'templates'));
@@ -17,10 +18,11 @@ app.set('view options', {layout: 'layout', extname: '.hbs'});
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // pages
-app.get('/',indexController);
-app.get('/files/:hash/*?', filesController);
-app.get('/content/:hash/*?', contentController);
+app.get('/', (req, res) => controller.indexController(req, res));
+app.get('/files/:hash/*?', (req, res, next) => controller.filesController(req, res, next));
+app.get('/content/:hash/*?', (req, res, next) => controller.contentController(req, res, next));
 
 // error handlers
 app.use(function (req, res, next) {

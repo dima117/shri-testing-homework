@@ -1,6 +1,6 @@
 const chai = require('chai'),
     expect = chai.expect;
-const { buildBreadcrumbs} = require('../../view/buildBreadcrumbs');
+const { buildBreadcrumbs} = require('../../app/view/buildBreadcrumbs');
 
 describe('buildBreadcrumbs', () => {
 

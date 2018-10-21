@@ -1,12 +1,14 @@
 const chai = require('chai'),
     expect = chai.expect;
-const {indexController, contentController, filesController} = require('../../controller/controller');
+let {Controller} = require('../../app/controller/controller');
+
 
 const stubResponse = {
     render: function (view, options, callback) {
         return true;
     }
 };
+
 const stubRequest = {
     params: {
         '0': 'README.md',
@@ -17,6 +19,7 @@ const stubRequest = {
 const stubNext = function () {
     return false;
 };
+
 
 describe('indexController', () => {
     const testHistory = [{
@@ -37,25 +40,34 @@ describe('indexController', () => {
             timestamp: '2018-10-16 12:02:11 +0300',
             msg: 'стили'
         }];
+    let controller = new Controller();
 
-    indexController.prototype.gitHistory = function (type, params) {
+    controller.gitApi.gitHistory = function (type, params) {
         return new Promise((resolve, reject) => {
             resolve(testHistory);
         });
     };
+
+
     it('should return an object with title, breadcrumbs and list properties', async () => {
-        let result = await indexController('', stubResponse);
+        let result = await controller.indexController('', stubResponse);
         expect(result).to.have.all.keys('title', 'breadcrumbs', 'list');
     });
 
     it('should have array in list property', async () => {
-        let result = await indexController('', stubResponse);
+        let result = await controller.indexController('', stubResponse);
         expect(result.list).to.be.an('array');
     });
 
     it('should have href property in list', async () => {
-        let result = await indexController('', stubResponse);
+        let result = await controller.indexController('', stubResponse);
         expect(result.list.every(el => el.href)).to.be.true;
+    });
+
+    it('should have first testObject', async () => {
+        let result = await controller.indexController('', stubResponse);
+        expect(result.list.some(el => el.hash === 'hash4' && el.author ===  'Dmitry Andriyanov' && el.msg === 'readme'))
+            .to.be.true;
     });
 
 });
@@ -67,38 +79,39 @@ describe('contentController', () => {
         path: 'README.md'
     }];
 
-    contentController.prototype.gitFileTree = function (type, params) {
+    let controller = new Controller();
+    controller.gitApi.getFileTree = function (type, params) {
         return new Promise((resolve, reject) => {
             resolve(testFileTree);
         });
     };
-    beforeEach(function () {
 
-        contentController.prototype.gitFileContent = function (type, params) {
-            return new Promise((resolve, reject) => {
-                resolve('file content');
-            });
-        };
-    });
+    controller.gitApi.gitFileContent = function (type, params) {
+        return new Promise((resolve, reject) => {
+            resolve('file content');
+        });
+    };
+
 
     it('should return an object with title, breadcrumbs and content properties', async () => {
-        let result = await contentController(stubRequest, stubResponse);
+        let result = await controller.contentController(stubRequest, stubResponse);
         expect(result).to.have.all.keys('title', 'breadcrumbs', 'content');
     });
 
     it('should return content as an string if file has content', async () => {
-        let result = await contentController(stubRequest, stubResponse, stubNext);
+        let result = await controller.contentController(stubRequest, stubResponse, stubNext);
         expect(result.content).to.be.an('string');
     });
 
 
     it('should return false if file has no content', async () => {
-        contentController.prototype.gitFileContent = function (type, params) {
+        controller.gitApi.gitFileContent = function (type, params) {
             return new Promise((resolve, reject) => {
                 resolve('');
             });
         };
-        let result = await contentController(stubRequest, stubResponse, stubNext);
+
+        let result = await controller.contentController(stubRequest, stubResponse, stubNext);
         expect(result).to.be.false;
     });
 
@@ -112,22 +125,24 @@ describe('filesController', () => {
         path: 'README.md'
     }];
 
-    filesController.prototype.gitFileTree = function (type, params) {
+    let controller = new Controller();
+    controller.gitApi.getFileTree = function (type, params) {
         return new Promise((resolve, reject) => {
             resolve(testFileTree);
         });
     };
+
     it('should an object with title, files and content properties', async () => {
-        let result = await filesController(stubRequest, stubResponse);
+        let result = await controller.filesController(stubRequest, stubResponse);
         expect(result).to.have.all.keys('title', 'breadcrumbs', 'files');
     });
 
     it('should a files property that is an array', async () => {
-        let result = await filesController(stubRequest, stubResponse);
+        let result = await controller.filesController(stubRequest, stubResponse);
         expect(result.files).to.be.an('array');
     });
     it('should a files property that elements have href and name properties', async () => {
-        let result = await filesController(stubRequest, stubResponse);
-        expect(result.files.every(res => res.href&&res.name)).to.be.true;
+        let result = await controller.filesController(stubRequest, stubResponse);
+        expect(result.files.every(res => res.href && res.name)).to.be.true;
     });
 });

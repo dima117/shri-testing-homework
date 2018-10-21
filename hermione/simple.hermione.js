@@ -12,13 +12,19 @@ describe('start page', () => {
             });
     });
 
-    it('should have content with commits', function () {
+    it('should have content with commits and commits should have 3 lines of info', function () {
         return this.browser
             .url('/')//get content
             .isExisting('.content .commit')
             .then((exists) => {
                 expect(exists).to.be.true;
             });
+            // .getText('.commit')
+            // .then((commits) => {
+            //     let result = commits.every(commit => commit.split('\n').length === 3);
+            //     console.log(commits,result);
+            //     expect(result).to.be.true;
+            // });
     });
 
     it('should have commits with 3 lines of info', function () {
@@ -31,6 +37,7 @@ describe('start page', () => {
             });
     });
 
+    ///////////
     it('should have link to commit', async function () {
         let link;
         await this.browser
@@ -62,7 +69,7 @@ describe('commit page', () => {
             });
     });
 
-
+///////////
     it('should have list of files', function () {
         return this.browser
             .url(URL)
@@ -71,7 +78,7 @@ describe('commit page', () => {
                 expect(files).to.be.an('array');
             });
     });
-
+///////////
     it('should have link to file', async function () {
         let link;
         await this.browser

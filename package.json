@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./app/tests/utils ./app/tests/api ./app/tests/view ./app/tests/controllers",
+    "test": "mocha ./tests/utils ./tests/api ./tests/view  ./tests/controller ./tests/model",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
     "lint": "eslint ./ --fix",

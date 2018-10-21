@@ -1,7 +1,7 @@
 const chai = require('chai'),
     expect = chai.expect;
 
-const {parseFileTreeItem, parseHistoryItem} = require('../../utils/gitParser');
+const {parseFileTreeItem, parseHistoryItem} = require('../../app/utils/gitParser');
 
 
 describe('parseFileTreeItem', () => {
