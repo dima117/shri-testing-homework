@@ -1,9 +1,11 @@
-const { gitFileTree } = require('../utils/git');
+// const { gitFileTree } = require('../utils/git');
+const { GitClass } = require('../utils/git');
 const {
   buildFolderUrl,
   buildFileUrl,
   buildBreadcrumbs
 } = require('../utils/navigation');
+const git = new GitClass();
 
 function buildObjectUrl(parentHash, { path, type }) {
   switch (type) {
@@ -22,7 +24,7 @@ module.exports = function(req, res, next) {
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-  return gitFileTree(hash, path).then(
+  return git.gitFileTree(hash, path).then(
     list => {
       const files = list.map(item => ({
         ...item,
