@@ -5,8 +5,8 @@ const PORT = 3000;
 const HOST = '::';
 
 // controllers
-const indexController = require('./controllers/indexController');
-const filesController = require('./controllers/filesController');
+const {indexController} = require('./controllers/indexController');
+const {filesController} = require('./controllers/filesController');
 const contentController = require('./controllers/contentController');
 
 const app = express();

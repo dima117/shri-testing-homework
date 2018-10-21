@@ -23,7 +23,7 @@ describe('GitUtils', () => {
       hash: 'ead09676a',
       path: 'README.md'
     })
-  })
+  });
 
   describe('gitHistory', () => {
     it('executeGit вызывается с нужными аргументами, offset посчитан правильно', async () => {
@@ -169,6 +169,6 @@ describe('GitUtils', () => {
 
       await gitUtils.gitFileContent('0f04363de');
       expect(arguments).to.deep.equal(['git', ['show', '0f04363de']]);
-    })
+    });
   });
 });

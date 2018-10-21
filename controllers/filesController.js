@@ -16,7 +16,13 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
-module.exports = function(req, res, next) {
+const addParamsToFile = (file, hash) => ({
+  ...file,
+  href: buildObjectUrl(hash, file),
+  name: file.path.split('/').pop()
+});
+
+function filesController(req, res, next) {
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
@@ -25,11 +31,7 @@ module.exports = function(req, res, next) {
 
   return gitUtils.gitFileTree(hash, path).then(
     list => {
-      const files = list.map(item => ({
-        ...item,
-        href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
-      }));
+      const files = list.map(item => addParamsToFile(item, hash));
 
       res.render('files', {
         title: 'files',
@@ -40,3 +42,8 @@ module.exports = function(req, res, next) {
     err => next(err)
   );
 };
+
+module.exports = {
+  filesController,
+  addParamsToFile,
+}

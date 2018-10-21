@@ -19,7 +19,7 @@ describe('buildBreadcrumbs', () => {
 })
 
 it('buildFileUrl', () => {
-  const result =  buildFileUrl('9018091', 'README.md');
+  const result = buildFileUrl('9018091', 'README.md');
   expect(result).to.equal('/content/9018091/README.md');
 });
 

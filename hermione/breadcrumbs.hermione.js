@@ -15,7 +15,6 @@ describe('Хлебные крошки', () => {
       .pause(100)
       .getText('[data-smid=breadcrumbs-title]')
       .then((text) => {
-        console.log('breadcrumbsTexts', breadcrumbsTexts)
         expect(text).to.equal(`HISTORY / ROOT / ${breadcrumbsTexts[0]}`);
       })
   });
@@ -35,7 +34,7 @@ describe('Хлебные крошки', () => {
       })
   });
 
-  it('Скриншот хлебных крошек', function() {
+  it('Скриншот хлебных крошек HISTORY / ROOT', function() {
     return this.browser
       .url('/')
       .click('[data-smid=commit-link]')
