@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./utils ./controllers",
+    "test:modular": "mocha ./utils ./controllers",
+    "test:integration": "hermione hermione",
+    "test": "npm run test:modular && npm run test:integration",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
-    "hermione": "hermione ./hermione"
+    "hermione-gui":"hermione gui hermione"
   },
   "keywords": [],
   "author": "",

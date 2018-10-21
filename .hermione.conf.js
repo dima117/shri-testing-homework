@@ -9,7 +9,7 @@ module.exports = {
     },
     firefox :{
       desiredCapabilities:{
-        browserName:'firefox'
+        browserName:'firefox',
       },
     }
     },
@@ -17,5 +17,6 @@ module.exports = {
       'html-reporter/hermione':{
         path:'hermione-html-report'
       }
-    }
+    },
+    compositeImage:true
 }
