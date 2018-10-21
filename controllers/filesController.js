@@ -8,10 +8,11 @@ class filesController extends controller{
 
     constructor(req, res, next){
         super(req, res, next);
+        this.pathTree = !this.path ? this.path : this.path + '/';
     }
 
     async render(){
-        return this.git.gitFileTree(this.hash, this.path).then(
+        return this.git.gitFileTree(this.hash, this.pathTree).then(
             list => {
                 const files = list.map(item => ({
                     ...item,

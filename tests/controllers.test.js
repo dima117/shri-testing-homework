@@ -29,4 +29,41 @@ describe('indexController', () => {
             expect(res.render.firstCall.args[0]).to.equal('index');
         })
     });
+
+    it('проверка построения path, когда params нет. getPath, controller', () => {
+        const req = {};
+        const test = new indexController(req);
+
+        const result = test.getPath(req);
+
+        expect(result).to.equal('');
+    });
+
+    it('проверка построения path. getPath, controller', () => {
+        const req = {
+            params: [
+                'item1//item2'
+            ]
+        };
+        const test = new indexController(req);
+
+        const eqlResult = 'item1/item2';
+
+        const result = test.getPath(req);
+
+        expect(result).to.equal(eqlResult);
+    });
+
+    it('проверка построения path, когда params пустой. getPath, controller', () => {
+        const req = {
+            params: ''
+        };
+        const test = new indexController(req);
+
+        const eqlResult = '';
+
+        const result = test.getPath(req);
+
+        expect(result).to.equal(eqlResult);
+    });
 });
