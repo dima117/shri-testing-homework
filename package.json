@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "start-hermione": "NODE_ENV=test_hermione npm start",
+    "devstart": "ndb ./bin/www",
+    "selenium-start": "selenium-standalone start",
+    "test": "NODE_ENV=test npx mocha test --watch",
+    "test-watch": "NODE_ENV=test npx mocha test --watch --recursive",
+    "test-hermione": "NODE_ENV=test_hermione ./node_modules/.bin/hermione hermione/test/",
+    "test-hermione-concurrently": "concurrently \"npm run selenium-start\" \"npm run start-hermione\" \"npm run test-hermione\""
   },
   "keywords": [],
   "author": "",
@@ -16,6 +21,18 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "chai": "^4.2.0",
+    "concurrently": "^4.0.1",
+    "eslint": "^5.7.0",
+    "eslint-config-google": "^0.11.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
+    "ndb": "^1.0.26",
+    "prettier": "^1.14.3",
+    "sinon": "^7.0.0",
+    "supertest": "^3.3.0"
   }
 }

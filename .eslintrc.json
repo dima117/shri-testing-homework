@@ -1,0 +1,12 @@
+{
+  "extends": ["google", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "require-jsdoc": "off"
+  }
+}
