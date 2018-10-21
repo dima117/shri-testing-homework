@@ -1,4 +1,4 @@
-const { gitFileTree } = require('../utils/git');
+const Git = require('../utils/git');
 const {
   buildFolderUrl,
   buildFileUrl,
@@ -17,12 +17,13 @@ function buildObjectUrl(parentHash, { path, type }) {
 }
 
 module.exports = function(req, res, next) {
+  const git = new Git(req);
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-  return gitFileTree(hash, path).then(
+  return git.fileTree(hash, path).then(
     list => {
       const files = list.map(item => ({
         ...item,

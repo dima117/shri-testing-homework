@@ -1,15 +1,22 @@
 const { resolve } = require('path');
 const REPO = resolve('.');
 const { execFile } = require('child_process');
+const fakeExecFile = require('../stubData/fakeExecFile');
 
 class Git {
-  constructor() {
-    this.exec = execFile;
+  constructor(req) {
+    const query = req.query;
+
+    if (query.testing) {
+      this._exec = fakeExecFile;
+    } else {
+      this._exec = execFile;
+    }
   }
 
   execute(cmd, args) {
     return new Promise((resolve, reject) => {
-      this.exec(cmd, args, { cwd: REPO }, (err, stdout) => {
+      this._exec(cmd, args, { cwd: REPO }, (err, stdout) => {
         if (err) {
           reject(err);
         }
