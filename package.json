@@ -20,6 +20,8 @@
   "devDependencies": {
     "hermione": "^0.90.1",
     "html-reporter": "^2.22.0",
-    "ndb": "^1.0.26"
+    "ndb": "^1.0.26",
+    "sinon": "^7.0.0",
+    "sinon-express-mock": "^2.0.5"
   }
 }
