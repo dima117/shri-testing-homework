@@ -1,4 +1,6 @@
-let contentController = require("./contentController").contentController;
+let {
+  contentController
+} = require("./contentController");
 
 describe("Проверка вывода контента", () => {
   const req = {
