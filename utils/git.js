@@ -3,7 +3,7 @@ const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
-const TEST = process.env.NODE_ENV === 'test';
+const DEV = process.env.NODE_ENV !== 'production';
 
 function executeGit(cmd, args, stub) {
   return new Promise((resolve, reject) => {
@@ -32,7 +32,8 @@ function gitHistory(page = 1, size = 10, stub) {
   const offset = (page - 1) * size;
 
   return (stub || executeGit)('git', [
-    'log' + (TEST ? ' test' : ''),
+    'log',
+    (DEV ? 'test' : 'master'),
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
     '--skip',
