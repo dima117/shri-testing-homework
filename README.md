@@ -35,7 +35,9 @@ npm run test-hermione
 # or npm run test-hermione-concurrently
 ```
 
-Отчеты лежат в `hermione-reports/index.html`
+Отчеты лежат в `hermione-reports/index.html`.
+
+Для интеграциионных тестов темплейты hbs добавил `class`, чтобы выбирать через селектор в тесте. Эти темплейты подставляются только при `env=test_hermione`.
 
 ## Интеграционные тесты
 
