@@ -1,28 +1,21 @@
 const { resolve } = require('path');
-const REPO = resolve('.');
+const REPO = process.env.REPO_PATH || resolve('.');
+let { execFile } = require('child_process');
 
-const { execFile } = require('child_process');
+function injectGitExec(mock) {
+  execFile = mock;
+}
 
-function executeGit(args, postprocess) {
+function executeGit(cmd, args) {
   return new Promise((resolve, reject) => {
-    execFile('git', args, { cwd: REPO }, (err, stdout) => {
+    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
       if (err) {
         reject(err);
       }
 
-      if (postprocess)
-        resolve(postprocess(stdout.toString()));
-      else
-        resolve(stdout.toString());
+      resolve(stdout.toString());
     });
   });
-}
-
-function parseMultiline(lineParser) {
-  return (rawInput) => rawInput
-    .split('\n')
-    .filter(Boolean)
-    .map(lineParser);
 }
 
 function parseHistoryItem(line) {
@@ -36,9 +29,10 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory({ page = 1, size = 10, gitRunner = executeGit }) {
+function gitHistory(page = 1, size = 10) {
   const offset = (page - 1) * size;
-  const params = [
+
+  return executeGit('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
@@ -46,9 +40,12 @@ function gitHistory({ page = 1, size = 10, gitRunner = executeGit }) {
     offset,
     '-n',
     size
-  ];
-
-  return gitRunner(params, parseMultiline(parseHistoryItem));
+  ]).then(data => {
+    return data
+      .split('\n')
+      .filter(Boolean)
+      .map(parseHistoryItem);
+  });
 }
 
 function parseFileTreeItem(line) {
@@ -58,19 +55,25 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree({ hash, path, gitRunner = executeGit }) {
+function gitFileTree(hash, path) {
   const params = ['ls-tree', hash];
   path && params.push(path);
 
-  return gitRunner(params, parseMultiline(parseFileTreeItem));
+  return executeGit('git', params).then(data => {
+    return data
+      .split('\n')
+      .filter(Boolean)
+      .map(parseFileTreeItem);
+  });
 }
 
-function gitFileContent({ hash, gitRunner = executeGit }) {
-  return gitRunner(['show', hash]);
+function gitFileContent(hash) {
+  return executeGit('git', ['show', hash]);
 }
 
 module.exports = {
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
+  injectGitExec
 };
