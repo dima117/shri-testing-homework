@@ -36,7 +36,7 @@ npm start
 
 - Используем хелпер navigation
     - вызываем функцию buildFolderUrl
-        - получаем url по hash, без path
+        - получаем url по hash, без передачи path
     - вызываем функцию buildBreadcrumbs
         - получаем крошки без параметров
         - получаем крошки по hash
