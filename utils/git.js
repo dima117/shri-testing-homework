@@ -42,6 +42,7 @@ class gitHelper {
         .split('\n')
         .filter(Boolean)
         .map(this.parseHistoryItem);
+    }).catch((err) => {
     });
   }
 
@@ -54,7 +55,8 @@ class gitHelper {
         .split('\n')
         .filter(Boolean)
         .map(this.parseFileTreeItem);
-    });
+    }).catch((err) => {
+    });      
   }
   
   static gitFileContent(hash) {
