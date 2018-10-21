@@ -1,0 +1,124 @@
+{
+  "log": [
+    {
+      "hash": "a650ac6d04e840290cf02bc4e8fcf917d2f1c4d0",
+      "author": "Ivan Kolobaev",
+      "timestamp": "2018-10-21 03:12:43 +0300",
+      "msg": "Хелпер git переписан на класс"
+    },
+    {
+      "hash": "bf6f83f2779b4829ee5301211352f3a3814feedb",
+      "author": "Ivan Kolobaev",
+      "timestamp": "2018-10-21 01:00:50 +0300",
+      "msg": "Сценарии тестирования и тесты для хелпера navigation"
+    },
+    {
+      "hash": "17605188faec24540ae3f413bb6d113821f76ea6",
+      "author": "Ivan Kolobaev",
+      "timestamp": "2018-10-21 00:21:31 +0300",
+      "msg": "Линтер"
+    },
+    {
+      "hash": "ac8b1946ecbcdec188a0c67c5187cd9884c0e56c",
+      "author": "Ivan Kolobaev",
+      "timestamp": "2018-10-21 00:03:04 +0300",
+      "msg": "Добавлены nodemon, mocha и chai, nyc"
+    },
+    {
+      "hash": "79eec830de6fa907a6f6a1e176f0e4d9dea3c600",
+      "author": "Ivan Kolobaev",
+      "timestamp": "2018-10-20 23:42:10 +0300",
+      "msg": "Исправлена опечатка в readme"
+    },
+    {
+      "hash": "c81643d8fa442b8bd2ed46569f158cd27977b916",
+      "author": "Ivan Kolobaev",
+      "timestamp": "2018-10-20 23:41:24 +0300",
+      "msg": "Игнор настроек IDE"
+    },
+    {
+      "hash": "90180910fc27a11272a3e5caeeb119a51e5c0545",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 12:49:56 +0300",
+      "msg": "исправлена опечатка в readme"
+    },
+    {
+      "hash": "cc2284293758e32c50fa952da2f487c8c5e8d023",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 12:36:32 +0300",
+      "msg": "readme"
+    },
+    {
+      "hash": "7e013ae0440ad6e91082599376a6aaebe20d2112",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 12:10:05 +0300",
+      "msg": "codestyle"
+    },
+    {
+      "hash": "f2df8ac23e817f6da01624a77ec050a0147f642a",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 12:02:11 +0300",
+      "msg": "стили"
+    },
+    {
+      "hash": "0f7b962409d6980236944164c5b0c9f43f9348e9",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 11:54:32 +0300",
+      "msg": "хлебные крошки"
+    },
+    {
+      "hash": "82810cf7d56476059477aaa5ff55c99ff191be29",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 11:25:59 +0300",
+      "msg": "исправлена ошибка"
+    },
+    {
+      "hash": "30fc48ec578e6b0052f6ab9ea7a118fb31574cdc",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 11:23:01 +0300",
+      "msg": "ссылки на корневую папку"
+    },
+    {
+      "hash": "f69c43393449afe9284f3fa20010695a5faa3849",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 11:20:57 +0300",
+      "msg": "ссылки на корневую папку"
+    },
+    {
+      "hash": "5dec08da64c3b090708aa8412924b26744d60597",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 11:19:59 +0300",
+      "msg": "отображение списка коммитов"
+    },
+    {
+      "hash": "144944153a24f28bd13bcd60aa7f588523649a53",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 11:17:57 +0300",
+      "msg": "экранирование контента"
+    },
+    {
+      "hash": "e91effac1a382d9569198e0625d5c979956e9870",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 11:16:20 +0300",
+      "msg": "стили для списка коммитов"
+    },
+    {
+      "hash": "1bd9b4848866f8d83cbb45b45193c695ffebb282",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 10:15:28 +0300",
+      "msg": "навигация для страницы с контентом файла"
+    },
+    {
+      "hash": "cdd4eb0149493540c34103e7ac2a49a5f67a917b",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 09:53:14 +0300",
+      "msg": "просмотр содержимого файла"
+    },
+    {
+      "hash": "172001aeb63bdfc4e3f01f29e30876022cf6ad45",
+      "author": "Dmitry Andriyanov",
+      "timestamp": "2018-10-16 09:02:52 +0300",
+      "msg": "список файлов"
+    }
+  ]
+}
