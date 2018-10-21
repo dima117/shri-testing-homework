@@ -8,9 +8,11 @@
 
 ## Как запустить
 
+Перед запуском, не забудьте заклонить [тестовый репозиторий](https://github.com/teleginzhenya/teleginzhenya.github.io) для интеграционных тестов.
+
 ```sh
-git clone https://github.com/teleginzhenya/shri-testing-homework.git
-git clone https://github.com/teleginzhenya/teleginzhenya.github.io
+git clone git@github.com:teleginzhenya/shri-testing-homework.git
+git clone git@github.com:teleginzhenya/teleginzhenya.github.io.git
 cd shri-testing-homework
 npm i
 npm start
