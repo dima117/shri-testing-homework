@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha ./**/__test__/*.test.js",
+    "unit-test": "nyc mocha ./**/__test__/*.test.js",
+    "integration-test": "./node_modules/.bin/hermione gui ./hermione/*.hermione.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -17,6 +18,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
     "mocha": "^5.2.0",
     "ndb": "^1.0.26",
     "nyc": "^13.1.0",
