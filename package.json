@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -15,9 +15,15 @@
     "chai": "^4.2.0",
     "express": "^4.16.4",
     "hbs": "^4.0.1",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "proxyquire": "^2.1.0",
+    "proxyrequire": "^1.0.21",
+    "sinon": "^7.0.0"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "ndb": "^1.0.26",
+    "nyc": "^13.1.0"
   }
 }
