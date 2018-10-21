@@ -1,0 +1,122 @@
+[
+  {
+    "hash": "cc783fde86abe11450cb2917a62970229930ea8c",
+    "author": "smakhl",
+    "timestamp": "2018-10-20 16:26:14 +0300",
+    "msg": "add unit tests for utils"
+  },
+  {
+    "hash": "e26ed53b505e7834f18376bb75867d6a1a270250",
+    "author": "smakhl",
+    "timestamp": "2018-10-20 16:25:57 +0300",
+    "msg": "refactor for testing"
+  },
+  {
+    "hash": "93f9067e24092580b3ded3888b5cb7022e36abac",
+    "author": "smakhl",
+    "timestamp": "2018-10-20 16:25:32 +0300",
+    "msg": "add jest"
+  },
+  {
+    "hash": "c8f996152b53231c2abbd399d587017f0ec73e93",
+    "author": "smakhl",
+    "timestamp": "2018-10-20 16:25:11 +0300",
+    "msg": "exclude ide configs"
+  },
+  {
+    "hash": "f0943a415569ea5364d6d535327a97d249deeb5d",
+    "author": "smakhl",
+    "timestamp": "2018-10-20 16:24:54 +0300",
+    "msg": "add eslint"
+  },
+  {
+    "hash": "55e7275d72a1d85eac23d5c74d9d8b9881e431bc",
+    "author": "smakhl",
+    "timestamp": "2018-10-19 22:44:22 +0300",
+    "msg": "update readme"
+  },
+  {
+    "hash": "90180910fc27a11272a3e5caeeb119a51e5c0545",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 12:49:56 +0300",
+    "msg": "исправлена опечатка в readme"
+  },
+  {
+    "hash": "cc2284293758e32c50fa952da2f487c8c5e8d023",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 12:36:32 +0300",
+    "msg": "readme"
+  },
+  {
+    "hash": "7e013ae0440ad6e91082599376a6aaebe20d2112",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 12:10:05 +0300",
+    "msg": "codestyle"
+  },
+  {
+    "hash": "f2df8ac23e817f6da01624a77ec050a0147f642a",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 12:02:11 +0300",
+    "msg": "стили"
+  },
+  {
+    "hash": "0f7b962409d6980236944164c5b0c9f43f9348e9",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 11:54:32 +0300",
+    "msg": "хлебные крошки"
+  },
+  {
+    "hash": "82810cf7d56476059477aaa5ff55c99ff191be29",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 11:25:59 +0300",
+    "msg": "исправлена ошибка"
+  },
+  {
+    "hash": "30fc48ec578e6b0052f6ab9ea7a118fb31574cdc",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 11:23:01 +0300",
+    "msg": "ссылки на корневую папку"
+  },
+  {
+    "hash": "f69c43393449afe9284f3fa20010695a5faa3849",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 11:20:57 +0300",
+    "msg": "ссылки на корневую папку"
+  },
+  {
+    "hash": "5dec08da64c3b090708aa8412924b26744d60597",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 11:19:59 +0300",
+    "msg": "отображение списка коммитов"
+  },
+  {
+    "hash": "144944153a24f28bd13bcd60aa7f588523649a53",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 11:17:57 +0300",
+    "msg": "экранирование контента"
+  },
+  {
+    "hash": "e91effac1a382d9569198e0625d5c979956e9870",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 11:16:20 +0300",
+    "msg": "стили для списка коммитов"
+  },
+  {
+    "hash": "1bd9b4848866f8d83cbb45b45193c695ffebb282",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 10:15:28 +0300",
+    "msg": "навигация для страницы с контентом файла"
+  },
+  {
+    "hash": "cdd4eb0149493540c34103e7ac2a49a5f67a917b",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 09:53:14 +0300",
+    "msg": "просмотр содержимого файла"
+  },
+  {
+    "hash": "172001aeb63bdfc4e3f01f29e30876022cf6ad45",
+    "author": "Dmitry Andriyanov",
+    "timestamp": "2018-10-16 09:02:52 +0300",
+    "msg": "список файлов"
+  }
+]
