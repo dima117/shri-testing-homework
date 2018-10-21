@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test:unit": "jest",
+    "test:integration": "hermione",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -17,7 +18,10 @@
   },
   "devDependencies": {
     "eslint": "^5.7.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
     "jest": "^23.6.0",
-    "ndb": "^1.0.26"
+    "ndb": "^1.0.26",
+    "nodemon": "^1.18.4"
   }
 }
