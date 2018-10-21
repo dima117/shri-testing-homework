@@ -1,5 +1,3 @@
-const { expect } = require('chai');
-
 describe('Страница с контентом файла:', () => {
   it('корректно отображается', function () {
     return this.browser
@@ -11,45 +9,31 @@ describe('Страница с контентом файла:', () => {
 
 
   it('можно вернуться в корневой каталог по "хлебным крошкам"', function () {
-    let linkRoot;
+    const storage = {};
+    const storageOptions = [storage, 'rootLink'];
+
     return this.browser
       .url('/')
       .click('.commit:first-child .commit__link > a')
-      .getUrl()
-      .then((url) => {
-        linkRoot = url;
-      })
+      .saveCurrentUrl(...storageOptions)
       .click('.content > ul > li:nth-child(1) > a')
-      .getAttribute('.breadcrumbs a:nth-child(2)', 'href')
-      .then((href) => {
-        expect(href).to.be.equal(linkRoot);
-      })
+      .checkElementHref('.breadcrumbs a:nth-child(2)', ...storageOptions)
       .click('.breadcrumbs a:nth-child(2)')
-      .getUrl()
-      .then((url) => {
-        expect(url).to.be.equal(linkRoot);
-      });
+      .checkCurrentUrl(...storageOptions);
   });
 
 
   it('можно вернуться на главную по "хлебным крошкам"', function () {
-    let linkMainPage;
+    const storage = {};
+    const storageOptions = [storage, 'mainPageLink'];
+
     return this.browser
       .url('/')
-      .getUrl()
-      .then((url) => {
-        linkMainPage = url;
-      })
+      .saveCurrentUrl(...storageOptions)
       .click('.commit:first-child .commit__link > a')
       .click('.content > ul > li:nth-child(1) > a')
-      .getAttribute('.breadcrumbs a:nth-child(1)', 'href')
-      .then((href) => {
-        expect(href).to.be.equal(linkMainPage);
-      })
+      .checkElementHref('.breadcrumbs a:nth-child(1)', ...storageOptions)
       .click('.breadcrumbs a:nth-child(1)')
-      .getUrl()
-      .then((url) => {
-        expect(url).to.be.equal(linkMainPage);
-      });
+      .checkCurrentUrl(...storageOptions);
   });
 });

@@ -1,5 +1,3 @@
-const { expect } = require('chai');
-
 describe('Страница с файловой системой:', () => {
   it('корректно отображается', function () {
     return this.browser
@@ -10,105 +8,72 @@ describe('Страница с файловой системой:', () => {
 
 
   it('из блока с "хлебными крошками" можно перейти на главную страницу', function () {
-    let mainPageLink;
+    const storage = {};
+    const storageOptions = [storage, 'mainPageLink'];
+
     return this.browser
       .url('/')
-      .getUrl()
-      .then((href) => {
-        mainPageLink = href;
-      })
+      .saveCurrentUrl(...storageOptions)
       .click('.commit:first-child .commit__link > a')
-      .getAttribute('.breadcrumbs > a', 'href')
-      .then((href) => {
-        // проверяем что в ссылка содержит путь до главной страницы
-        expect(href).to.be.equal(mainPageLink);
-      })
+      .checkElementHref('.breadcrumbs > a', ...storageOptions)
       .click('.breadcrumbs > a')
-      .getUrl()
-      .then((href) => {
-        // проверяем что успешно перешли на главную страницу
-        expect(href).to.be.equal(mainPageLink);
-      });
+      .checkCurrentUrl(...storageOptions);
   });
 
 
   it('по ссылкам в списке файловой системы можно перейти к контенту коммита', function () {
-    let linkOnContent;
+    const storage = {};
+    const storageOptions = [storage, 'linkOnContent'];
+
     return this.browser
       .url('/')
       .click('.commit:first-child .commit__link > a')
-      .getAttribute('.content > ul > li:first-child > a', 'href')
-      .then((href) => {
-        expect(href).not.empty;
-        linkOnContent = href;
-      })
+      .saveElementHref('.content > ul > li:first-child > a', ...storageOptions)
       .click('.content > ul > li:first-child > a')
-      .getUrl()
-      .then((url) => {
-        expect(url).to.be.equal(linkOnContent);
-      });
+      .checkCurrentUrl(...storageOptions);
   });
 
 
   it('по ссылкам в списке файловой системы можно перейти в папку', function () {
-    let linkOnContent;
+    const storage = {};
+    const storageOptions = [storage, 'linkOnFolder'];
+
     return this.browser
       .url('/')
       .click('.commit:first-child .commit__link > a')
-      .getAttribute('.content > ul > li:nth-child(3) > a', 'href')
-      .then((href) => {
-        expect(href).not.empty;
-        linkOnContent = href;
-      })
+      .saveElementHref('.content > ul > li:nth-child(3) > a', ...storageOptions)
       .click('.content > ul > li:nth-child(3) > a')
-      .getUrl()
-      .then((url) => {
-        expect(url).to.be.equal(linkOnContent);
-      })
+      .checkCurrentUrl(...storageOptions)
       .assertView('plain', 'html');
   });
 
 
   it('из папки можно вернуться в корневой каталог по "хлебным крошкам"', function () {
-    let linkRoot;
+    const storage = {};
+    const storageOptions = [storage, 'rootLink'];
+
     return this.browser
       .url('/')
       .click('.commit:first-child .commit__link > a')
-      .getUrl()
-      .then((url) => {
-        linkRoot = url;
-      })
+      .saveCurrentUrl(...storageOptions)
       .click('.content > ul > li:nth-child(3) > a')
-      .getAttribute('.breadcrumbs a:nth-child(2)', 'href')
-      .then((href) => {
-        expect(href).to.be.equal(linkRoot);
-      })
+      .checkElementHref('.breadcrumbs a:nth-child(2)', ...storageOptions)
       .click('.breadcrumbs a:nth-child(2)')
-      .getUrl()
-      .then((url) => {
-        expect(url).to.be.equal(linkRoot);
-      });
+      .checkCurrentUrl(...storageOptions);
   });
 
 
   it('из папки можно вернуться на главную по "хлебным крошкам"', function () {
-    let linkMainPage;
+    const storage = {};
+    const storageOptions = [storage, 'mainPageLink'];
+
     return this.browser
       .url('/')
-      .getUrl()
-      .then((url) => {
-        linkMainPage = url;
-      })
+      .saveCurrentUrl(...storageOptions)
       .click('.commit:first-child .commit__link > a')
       .click('.content > ul > li:nth-child(3) > a')
-      .getAttribute('.breadcrumbs a:nth-child(1)', 'href')
-      .then((href) => {
-        expect(href).to.be.equal(linkMainPage);
-      })
+      .checkElementHref('.breadcrumbs a:nth-child(1)', ...storageOptions)
       .click('.breadcrumbs a:nth-child(1)')
-      .getUrl()
-      .then((url) => {
-        expect(url).to.be.equal(linkMainPage);
-      });
+      .checkCurrentUrl(...storageOptions);
   });
 });

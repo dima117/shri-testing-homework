@@ -1,5 +1,3 @@
-const { expect } = require('chai');
-
 describe('Страница с историей коммитов:', () => {
   it('корректно отображается', function () {
     return this.browser
@@ -9,15 +7,13 @@ describe('Страница с историей коммитов:', () => {
 
 
   it('по ссылкам в коммитах можно перейти к файловой системе', function () {
-    let link;
+    const storage = {};
+    const storageOptions = [storage, 'commitLink'];
+
     return this.browser
       .url('/')
-      .getAttribute('.commit:first-child .commit__link > a', 'href')
-      .then((href) => { link = href; })
+      .saveElementHref('.commit:first-child .commit__link > a', ...storageOptions)
       .click('.commit:first-child .commit__link > a')
-      .getUrl()
-      .then((url) => {
-        expect(url).to.be.equal(link);
-      });
+      .checkCurrentUrl(...storageOptions);
   });
 });
