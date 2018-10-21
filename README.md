@@ -107,6 +107,14 @@ npm run-script hermione
 
 ### Модульные тесты
 
+#### Запуск интеграционных тестов
+  Запускаем модульные тесты
+
+  ```
+  npm run-script unit
+  ```
+  > для  одновременного запуска интеграционных тестов и модульных нужно выполнить команду `npm test`
+
   Логические блоки:
     - получение контента коммита
     - получение файлового дерева
@@ -127,5 +135,5 @@ npm run-script hermione
 
 - [mocha](https://www.npmjs.com/package/mocha) - тестовый фреймворк
 - [chai](https://www.npmjs.com/package/chai) - assertion библиотека
-- [supertest](https://www.npmjs.com/package/supertest) - тестирование HTTP
+- [supertest](https://www.npmjs.com/package/supertest) - тестирование express запросов
 - [sinon](https://www.npmjs.com/package/sinon) - создание mock

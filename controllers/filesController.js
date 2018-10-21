@@ -32,7 +32,7 @@ module.exports = function filesController(req, res, next) {
 
   buildFileUrl = filesController._buildFileUrlFake
     ? filesController._buildFileUrlFake
-    : buildFolderUrl;
+    : buildFileUrl;
 
   buildBreadcrumbs = filesController._buildBreadcrumbsFake
     ? filesController._buildBreadcrumbsFake

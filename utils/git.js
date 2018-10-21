@@ -15,6 +15,7 @@ function executeGit(cmd, args) {
   const currentREPO = executeGit._fakeREPO
     ? executeGit._fakeREPO
     : REPO;
+
   return new Promise((resolve, reject) => {
     execFile(cmd, args, { cwd: currentREPO }, (err, stdout) => {
       if (err) {
