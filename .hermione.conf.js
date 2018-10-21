@@ -1,6 +1,6 @@
 module.exports = {
   baseUrl: "http://localhost:3000/",
-  //screenshotsDir: "images",
+  screenshotsDir: "hermione-html-report/images",
 
   sets: {
     desktop: {

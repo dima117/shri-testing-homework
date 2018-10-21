@@ -1,3 +1,4 @@
+/* Check Commit Elemets: Aurhor, Timestamp, Message, Hash */
 const { expect } = require("chai");
 
 describe("Check Commit Aurhor", function() {
