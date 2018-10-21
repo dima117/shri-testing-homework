@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:integration": "run-p hermione-gui start",
+    "test:integration": "run-p hermione-gui start:mock",
     "hermione": "./node_modules/.bin/hermione hermione/*.js",
     "hermione-gui": "./node_modules/.bin/hermione gui hermione/*.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "start:mock": "node ./bin/www ./test/mock/gitRepo"
   },
   "keywords": [],
   "author": "",

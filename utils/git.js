@@ -4,8 +4,10 @@ const REPO = resolve('.');
 const { execFile } = require('child_process');
 
 function executeGit(cmd, args) {
+  const repo = process.argv[2];
+
   return new Promise((resolve, reject) => {
-    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
+    execFile(cmd, args, { cwd: repo || REPO }, (err, stdout) => {
       if (err) {
         reject(err);
       }

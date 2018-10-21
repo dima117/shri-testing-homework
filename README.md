@@ -41,3 +41,5 @@ npm start
 Во второй `npm run test:integration`
 
 P.S. На машине должна стоять [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
+## Выделенные блоки и сценарии
