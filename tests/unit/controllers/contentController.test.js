@@ -1,25 +1,49 @@
 const express = require('express');
 const request = require('supertest');
 const path = require('path');
-const { expect } = require('chai');
+
+const fakeREPO = path.resolve('./tests/hermioneStub/');
+const sinon = require('sinon');
+const { expect, assert } = require('chai');
+const { executeGit } = require('./../../../utils/git');
 const contentController = require('./../../../controllers/contentController');
 
 describe('controllers/contentController', () => {
-  it('возвращает корректные данные в шаблоне', (done) => {
+  it('передает корректные параметры для шаблонизатора', (done) => {
     const app = express();
+    const breadcrumbsMock = sinon.fake();
 
-    app.set('views', path.join(__dirname, '../../../views'));
-    app.set('view engine', 'hbs');
-    app.set('view options', { layout: 'layout', extname: '.hbs' });
+    // полменяем данные стабами и моками
+    executeGit._fakeREPO = fakeREPO;
+    contentController._buildBreadcrumbsFake = (...args) => {
+      breadcrumbsMock(...args);
+      return 'BreadCrumbs';
+    };
+    contentController._gitFileContentFake = () => 'FileContent';
+    contentController._gitFileTreeFake = sinon.fake.resolves([
+      {
+        type: 'blob',
+        hash: '84fffd893f6edf655d2537c4d1b24b268e61e270',
+        path: '.editorconfig',
+      }]);
+    contentController._renderFake = res => (...args) => { res.send({ data: args }); };
     app.get('/content/:hash/*?', contentController);
 
+    // делаем фэйковый запрос
     request(app)
-      .get('/content/0a88cdf2265c0b19663ddbe2733a27e9599724e1/.gitignore')
+      .get('/content/84fffd893f6edf655d2537c4d1b24b268e61e270/.editorconfig')
       .expect(200)
-      .expect((res) => {
-        expect(res.text).to.include('<div class="file-content">node_modules</div>');
+      .end((err, res) => {
+        //  блок проверки
+        expect(res.body.data).to.have.deep.members(['content',
+          {
+            title: 'content',
+            breadcrumbs: 'BreadCrumbs',
+            content: 'FileContent',
+          }]);
+        assert(breadcrumbsMock.calledWith('84fffd893f6edf655d2537c4d1b24b268e61e270', '.editorconfig'));
+
         done();
-      })
-      .catch(done);
+      });
   });
 });
