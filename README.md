@@ -65,4 +65,32 @@ npm start
 	3) Аналогично с `gitFileContent`
 
 
+## Инструкции
 
+```
+git clone https://github.com/smakhl/shri-testing-homework.git
+cd shri-testing-homework
+npm i
+```
+
+### Запуск модульных тестов
+```
+npm run test:unit
+```
+
+### Запуск интеграционных тестов
+
+Подготовка
+- Клонируем тестовый репозиторий
+```
+git clone https://github.com/smakhl/test-repo.git
+```
+
+```sh
+npm i selenium-standalone --global
+selenium-standalone start
+
+# в отдельном терминале
+
+npm run test:integration
+```
