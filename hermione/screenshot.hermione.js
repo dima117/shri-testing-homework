@@ -12,10 +12,10 @@ describe('Скриншот тесты', () => {
         .url(testUtl)
         .assertView('plain', '.breadcrumbs');
     });
-    it('Первый коммит', function () {
+    it('Последний коммит', function () {
       return this.browser
         .url(testUtl)
-        .assertView('plain', '.commit:first-child');
+        .assertView('plain', '.commit:last-child');
     });
     it('Контент', function () {
       return this.browser

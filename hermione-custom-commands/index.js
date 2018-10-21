@@ -6,5 +6,9 @@ module.exports = (hermione, opts) => {
       .then((exists) => {
         assert.ok(exists, msg);
       }));
+    browser.addCommand('assertUrl', (actual, message) => browser.getUrl()
+      .then((url) => {
+        if (url !== actual) assert.fail(actual, message);
+      }));
   });
 };

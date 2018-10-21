@@ -5,11 +5,20 @@ const testUtlFile = 'http://localhost:3000/files/90180910fc27a11272a3e5caeeb119a
 const testUtlContent = 'http://localhost:3000/content/90180910fc27a11272a3e5caeeb119a51e5c0545/package.json/';
 
 describe('Переходы по хлебным крошкам', () => {
-  it('History', function () {
-    // const firstCommit = document.querySelector('.commit:first-child a').text;
-    // console.log(`tezt: $/{firstCommit}`);
+  it('Переход по хлебным крошкам -> history', function () {
     return this.browser
-      .url('http://localhost:3000/')
-      .assertView('plain', '.content');
+      .url(testUtlContent)
+      .click('.breadcrumbs a:first-child')
+      .assertExists('.commit:first-child', 'Нет истории коммитов')
+      .assertView('plain', '.commit:first-child')
+      .assertUrl(testUtl, 'Ссылка не совпадает');
+  });
+  it('Переход по хлебным крошкам -> root', function () {
+    return this.browser
+      .url(testUtlContent)
+      .click('.breadcrumbs a:nth-child(2)')
+      .assertExists('.content ul', 'Нет списка файлов')
+      .assertView('plain', '.content ul')
+      .assertUrl(testUtlFile, 'Ссылка не совпадает');
   });
 });
