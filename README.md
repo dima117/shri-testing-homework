@@ -11,26 +11,26 @@
 1. buildFolderUrl 
 - Генерация url к папке cо всеми входными данными
 - Генерация url к папке без переменной path
-1. buildFileUrl  
+2. buildFileUrl  
 - Генерация url к файлу
-1. buildBreadcrumbs
+3. buildBreadcrumbs
  - Создание объекта breadcrumbs для главной стр
  - Создание объкета breadcrumbs для всех стр кроме главное
 
  ## Работа с коммитами (git.js)
  1. executeGit 
  - Инициализация 
- 1. parseHistoryItem
+ 2. parseHistoryItem
  - Преобразование строки с данными о коммите в объект
- 1. gitHistory
+ 3. gitHistory
  - Получение истории коммитов
- 1. parseFileTreeItem 
+ 4. parseFileTreeItem 
  - преобразование в объект информации о файле
- 1. gitFileTree
+ 5. gitFileTree
  - Получение списка файлов
- 1. gitFileContent
+ 6. gitFileContent
  - Получение содержимого файла
- 1. Вывод списка коммитов (indexContorller.js)
+ 7. Вывод списка коммитов (indexContorller.js)
  - Вывод списка коммитов
  - Ошибка вывода
  
@@ -43,7 +43,7 @@
  - Генерация ссылки для папки
  - Генерация ссылки для файла
  - При отсутствии типа вернуть #
- 1. filesController
+ 2. filesController
  - Вывод содержимого страницы для списка файлов
  - Ошибка вывода
 
