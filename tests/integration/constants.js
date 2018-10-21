@@ -1,0 +1,18 @@
+const TEST_COMMIT_HASH = '90180910fc27a11272a3e5caeeb119a51e5c0545';
+const TEST_FOLDER_NAME = 'controllers';
+const TEST_FILE_NAME = 'app.js';
+
+const BASE_URL = 'http://localhost:3000/';
+const TEST_COMMIT_URL = `${BASE_URL}files/${TEST_COMMIT_HASH}/`;
+const TEST_FOLDER_URL = `${BASE_URL}files/${TEST_COMMIT_HASH}/${TEST_FOLDER_NAME}`;
+const TEST_FILE_URL = `${BASE_URL}content/${TEST_COMMIT_HASH}/${TEST_FILE_NAME}`;
+
+module.exports = {
+  TEST_COMMIT_HASH,
+  TEST_FOLDER_NAME,
+  TEST_FILE_NAME,
+  BASE_URL,
+  TEST_COMMIT_URL,
+  TEST_FOLDER_URL,
+  TEST_FILE_URL
+};

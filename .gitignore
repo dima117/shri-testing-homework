@@ -1,4 +1,5 @@
 node_modules
 coverage
+hermione-http-report
 .nyc_output
 .idea

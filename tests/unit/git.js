@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const gitUtils = require('../utils/git');
+const gitUtils = require('../../utils/git');
 
 const CMD_ARGS = {
   'git ls-tree hash': '1 blob hash1\tfile.js\n2 tree hash2\tfolder',

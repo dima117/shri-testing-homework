@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../../utils/navigation');
 
 describe('проверка navigation', function() {
   it('можно получить url папки', function() {
