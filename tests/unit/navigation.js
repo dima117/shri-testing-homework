@@ -10,10 +10,10 @@ describe('проверка navigation', function() {
     const expectedResult = `/files/${hash}/${path}`;
 
     // действие
-    const url = buildFolderUrl(hash, path);
+    const actualResult = buildFolderUrl(hash, path);
 
     // проверка
-    expect(url).to.equal(expectedResult);
+    expect(actualResult).to.equal(expectedResult);
   });
 
   it('можно получить url папки без передачи path', function() {
@@ -22,10 +22,10 @@ describe('проверка navigation', function() {
     const expectedResult = `/files/${hash}/`;
 
     // действие
-    const url = buildFolderUrl(hash);
+    const actualResult = buildFolderUrl(hash);
 
     // проверка
-    expect(url).to.equal(expectedResult);
+    expect(actualResult).to.equal(expectedResult);
   });
 
   it('можно получить url файла', function() {
@@ -35,10 +35,10 @@ describe('проверка navigation', function() {
     const expectedResult = `/content/${hash}/${path}`;
 
     // действие
-    const url = buildFileUrl(hash, path);
+    const actualResult = buildFileUrl(hash, path);
 
     // проверка
-    expect(url).to.equal(expectedResult);
+    expect(actualResult).to.equal(expectedResult);
   });
 
   it('можно получить хлебные крошки находясь в папке с историей', function() {
@@ -52,10 +52,10 @@ describe('проверка navigation', function() {
     ];
 
     // действие
-    const breadcrumbs = buildBreadcrumbs(hash);
+    const actualResult = buildBreadcrumbs(hash);
 
     // проверка
-    expect(breadcrumbs).to.deep.equal(expectedResult);
+    expect(actualResult).to.deep.equal(expectedResult);
   });
 
   it('можно получить хлебные крошки находясь в корневой папке', function() {
@@ -73,10 +73,10 @@ describe('проверка navigation', function() {
     ];
 
     // действие
-    const breadcrumbs = buildBreadcrumbs(hash);
+    const actualResult = buildBreadcrumbs(hash);
 
     // проверка
-    expect(breadcrumbs).to.deep.equal(expectedResult);
+    expect(actualResult).to.deep.equal(expectedResult);
   });
 
   it('можно получить хлебные крошки находясь в файле', function() {
@@ -106,9 +106,9 @@ describe('проверка navigation', function() {
     ];
 
     // действие
-    const breadcrumbs = buildBreadcrumbs(hash, path);
+    const actualResult = buildBreadcrumbs(hash, path);
 
     // проверка
-    expect(breadcrumbs).to.deep.equal(expectedResult);
+    expect(actualResult).to.deep.equal(expectedResult);
   });
 });

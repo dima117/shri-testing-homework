@@ -29,10 +29,10 @@ describe('проверка git', function() {
     ];
 
     // действие
-    const content = await gitUtils.gitFileTree(hash, path);
+    const actualResult = await gitUtils.gitFileTree(hash, path);
 
     // проверка
-    expect(content).to.deep.equal(expectedResult);
+    expect(actualResult).to.deep.equal(expectedResult);
   });
 
   it('можно получить file-tree без передачи path', async function() {
@@ -44,10 +44,10 @@ describe('проверка git', function() {
     ];
 
     // действие
-    const content = await gitUtils.gitFileTree(hash);
+    const actualResult = await gitUtils.gitFileTree(hash);
 
     // проверка
-    expect(content).to.deep.equal(expectedResult);
+    expect(actualResult).to.deep.equal(expectedResult);
   });
 
   it('можно получить file-content', async function() {
@@ -56,10 +56,10 @@ describe('проверка git', function() {
     const expectedResult = 'file content';
 
     // действие
-    const content = await gitUtils.gitFileContent(hash);
+    const actualResult = await gitUtils.gitFileContent(hash);
 
     // проверка
-    expect(content).to.equal(expectedResult);
+    expect(actualResult).to.equal(expectedResult);
   });
 
   it('можно получить git-history', async function() {
@@ -70,10 +70,10 @@ describe('проверка git', function() {
     ];
 
     // действие
-    const content = await gitUtils.gitHistory(1, 1);
+    const actualResult = await gitUtils.gitHistory(1, 1);
 
     // проверка
-    expect(content).to.deep.equal(expectedResult);
+    expect(actualResult).to.deep.equal(expectedResult);
   });
 
   it('можно получить git-history без передачи page, size', async function() {
@@ -84,9 +84,9 @@ describe('проверка git', function() {
     ];
 
     // действие
-    const content = await gitUtils.gitHistory();
+    const actualResult = await gitUtils.gitHistory();
 
     // проверка
-    expect(content).to.deep.equal(expectedResult);
+    expect(actualResult).to.deep.equal(expectedResult);
   });
 });
