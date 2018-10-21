@@ -1,17 +1,17 @@
-function buildFolderUrl(parentHash, path = '') {
-  return `/files/${parentHash}/${path}`;
+function buildFolderUrl(hash, path = '') {
+  return `/files/${hash}/${path}`;
 }
 
-function buildFileUrl(parentHash, path) {
-  return `/content/${parentHash}/${path}`;
+function buildFileUrl(hash, path) {
+  return `/content/${hash}/${path}`;
 }
 
-function buildObjectUrl(parentHash, { path, type }) {
+function buildObjectUrl(hash, { path, type }) {
   switch (type) {
     case 'tree':
-      return buildFolderUrl(parentHash, path);
+      return buildFolderUrl(hash, path);
     case 'blob':
-      return buildFileUrl(parentHash, path);
+      return buildFileUrl(hash, path);
     default:
       return '#';
   }
