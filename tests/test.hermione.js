@@ -1,11 +1,11 @@
 const assert = require('chai').assert;
 
 describe('Проверка страниц', () => {
-   it('Шапка должна появиться на главной странице', function() {
-      return this.browser
-          .url('/')
-          .assertView('plain_breadcrumbs_home', '.breadcrumbs');
-   });
+    it('Шапка должна появиться на главной странице', function() {
+        return this.browser
+            .url('/')
+            .assertView('plain_breadcrumbs_home', '.breadcrumbs');
+    });
 
     it('Блок commit должен появиться на главной странице', function() {
         return this.browser

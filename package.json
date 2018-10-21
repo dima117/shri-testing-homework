@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "herm": "hermione test.hermione.js",
-    "hermgui": "hermione gui test.hermione.js",
+    "herm": "hermione tests/test.hermione.js",
+    "hermgui": "hermione gui tests/test.hermione.js",
     "test": "mocha \"tests/*.test.js\"",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"

@@ -10,7 +10,7 @@ module.exports = {
     },
     sets: {
         desktop: {
-            files: 'test.hermione.js'
+            files: 'tests/test.hermione.js'
         }
     },
     plugins: {
