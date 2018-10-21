@@ -12,12 +12,20 @@ module.exports = {
       chrome: {
           desiredCapabilities: {
               browserName: 'chrome'
+          },
+          windowSize: {
+            width: 1200,
+            height: 700
           }
       },
 
       firefox: {
           desiredCapabilities: {
               browserName: 'firefox'
+          },
+          windowSize: {
+            width: 1200,
+            height: 700
           }
       }
   },
@@ -28,8 +36,4 @@ module.exports = {
     },
     'custom-commands': true,
   },
-  windowSize: {
-    width: 800,
-    height: 1000
-  }
 };

@@ -9,6 +9,7 @@
     "hermione": "hermione",
     "hermione-gui": "hermione gui",
     "start": "node ./bin/www",
+    "start-testing": "NODE_ENV=testing node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
   "husky": {
