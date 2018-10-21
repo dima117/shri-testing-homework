@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/*.test.js",
+		"test-gui": "./node_modules/.bin/hermione gui hermione/**/*.hermione.js",
+		"test-console": "./node_modules/.bin/hermione hermione/console/*.hermione.js",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+		"devstart": "ndb ./bin/www"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,12 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "chai": "^4.2.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
+    "ndb": "^1.0.26",
+    "selenium-standalone": "^6.15.3",
+    "sinon": "^7.0.0"
   }
 }

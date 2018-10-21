@@ -1,20 +1,36 @@
-const { gitHistory } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { Git } = require("../utils/Git");
+const { buildFolderUrl, buildBreadcrumbs } = require("../utils/navigation");
+class IndexController {
+  constructor() {
+    this.git = new Git();
+    this.fetchHistory = (...args) => this.git.gitHistory(...args);
+    this.getFolderUrl = buildFolderUrl;
+    this.getBreadcrumbs = buildBreadcrumbs;
+  }
 
-module.exports = function(req, res) {
-  gitHistory(1, 20).then(
-    history => {
-      const list = history.map(item => ({
-        ...item,
-        href: buildFolderUrl(item.hash, '')
-      }));
+  async getIndexList(page, size) {
+    const history = await this.fetchHistory(page, size);
+    const list = history.map(item => ({
+      ...item,
+      href: this.getFolderUrl(item.hash, "")
+    }));
+    return list;
+  }
 
-      res.render('index', {
-        title: 'history',
-        breadcrumbs: buildBreadcrumbs(),
-        list
-      });
-    },
-    err => next(err)
-  );
+  render(req, res, next) {
+    this.getIndexList(1, 20).then(
+      list => {
+        res.render("index", {
+          title: "history",
+          breadcrumbs: this.getBreadcrumbs(),
+          list
+        });
+      },
+      err => next(err)
+    );
+  }
+}
+
+module.exports = {
+  IndexController
 };
