@@ -1,4 +1,4 @@
-const { gitFileTree } = require('../utils/git');
+const { gitHelper } = require('../utils/git');
 const { generateFiles } = require('../utils/generateData');
 
 module.exports = function(req, res, next) {
@@ -7,7 +7,7 @@ module.exports = function(req, res, next) {
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-  return gitFileTree(hash, path).then(
+  return gitHelper.gitFileTree(hash, path).then(
     list => {
       res.render('files', generateFiles(hash, pathParam, list));
     },
