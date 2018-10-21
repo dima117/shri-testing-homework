@@ -1,3 +1,7 @@
+function getOffset(page, size) {
+  return (page - 1) * size;
+}
+
 function parseFileTreeItem(line) {
   const [info, path] = line.split('\t');
   const [, type, hash] = info.split(' ');
@@ -16,4 +20,4 @@ function parseHistoryItem(line) {
   };
 }
 
-module.exports = { parseFileTreeItem, parseHistoryItem };
+module.exports = { getOffset, parseFileTreeItem, parseHistoryItem };

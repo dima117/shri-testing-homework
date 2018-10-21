@@ -1,4 +1,4 @@
-const { parseFileTreeItem, parseHistoryItem } = require('./helpers');
+const { getOffset, parseFileTreeItem, parseHistoryItem } = require('./helpers');
 const { resolve } = require('path');
 const REPO = resolve('.');
 
@@ -18,7 +18,7 @@ class GitClass {
   }
 
   gitHistory(page = 1, size = 10) {
-    const offset = (page - 1) * size;
+    const offset = getOffset(page, size);
 
     return this.executeGit('git', [
       'log',
