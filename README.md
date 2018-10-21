@@ -34,7 +34,62 @@ npm start
 
 ## Выполнение домашнего задания
 
+### Запуск
+1. Клонируем репозиторий
+
+```
+git clone https://github.com/MoonW1nd/shri-testing-homework.git
+```
+
+2. Переключаемся на ветку с домашней работой
+```
+git checkout testing-homework-ivankov
+```
+
+3. Установка подмодулей
+```
+git submodule init
+git submodule update
+```
+
+4. Установка зависимостей
+
+Устанавливаем selenium(если нужно):
+```
+npm install selenium-standalone@latest -g
+selenium-standalone install
+```
+
+Устанавливаем зависимости:
+```
+npm install
+```
+
+> в процессе установки зависимостей могут возникнуть пробелмы с Xcode, решение можно найти [тут](https://github.com/nodejs/node-gyp#on-windows) или [тут](https://github.com/nodejs/node-gyp/issues/569)
+
 ### Интеграционные тесты
+
+#### Запуск интеграционных тестов
+
+Запускаем selenium
+
+```
+selenium-standalone start
+```
+
+Запускаем тестовый сервер
+
+```
+npm run-script start-testing
+```
+
+Запускаем hermione тесты
+
+```
+npm run-script hermione
+```
+> запуск gui `npm run-script hermione-gui`
+
 
 Для удобной реализации тестов написал собственный плагин `hermione-custom-commands`;
 

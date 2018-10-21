@@ -1,0 +1,3 @@
+[submodule "tests/hermioneStub"]
+	path = tests/hermioneStub
+	url = https://github.com/MoonW1nd/testing-homework-git-stub.git

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests/**/*.test.js",
+    "test": "mocha ./tests/**/*.test.js && hermione",
     "test-watch": "mocha ./tests/**/*.test.js --watch",
     "hermione": "hermione",
     "hermione-gui": "hermione gui",
