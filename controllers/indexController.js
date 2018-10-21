@@ -1,11 +1,11 @@
 const { GitClass } = require('../utils/git');
 const { NavigationClass } = require('../utils/navigation');
 
-module.exports = function(req, res) {
+indexControllerFunction =  function(req, res) {
   let git = new GitClass();
   let navigation = new NavigationClass();
 
-  git.gitHistory(1, 20).then(
+  git.gitHistory(1, 30).then( // changed 20 -> 30 to make integration screenshot tests easier
     history => {
       const list = history.map(item => ({
         ...item,
@@ -21,3 +21,5 @@ module.exports = function(req, res) {
     err => next(err)
   );
 };
+
+module.exports = indexControllerFunction;

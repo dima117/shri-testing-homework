@@ -2,113 +2,117 @@ const { expect } = require('chai');  // Using Expect style
 const { GitClass } = require('../utils/git');
 const { NavigationClass } = require('../utils/navigation')
 
-describe('git.js', function(){
-    describe('Получение истории из гита (gitHistory)', function(){
-        it('Должен быть массив', async function() {
-            let git = new GitClass();
+describe('Получение истории из гита', function(){
+    it('Должен быть массив', async function() {
+        let git = new GitClass();
+
+        const result = await git.gitHistory();
+        expect(result).to.be.a('array');
+    });
     
-            const result = await git.gitHistory();
-            expect(result).to.be.a('array');
-        });
-        
-        it('Должны быть элементы в массиве', async function() {
-            let git = new GitClass();
-    
-            const result = await git.gitHistory(1,10);
-            expect(result).to.be.not.empty;
-        })
-        
-        it('Количество эллементов в массиве должно быть меньше 11', async function() {
-            let git = new GitClass();
-    
-            const size = 10;
-            const result = await git.gitHistory(1,size);
-            expect(result.length).to.be.below(size+1);
-        })
-    
-        it('проверка работы parseHistoryItem', async function() {
-            let git = new GitClass();
-    
-            git.executeGit = function() {
-                return new Promise((resolve) => {
-                    resolve("90180910fc27a11272a3e5caeeb119a51e5c0545	Dmitry Andriyanov	2018-10-16 12:49:56 +0300	исправлена опечатка в readme\ncc2284293758e32c50fa952da2f487c8c5e8d023	Dmitry Andriyanov	2018-10-16 12:36:32 +0300	readme")
-                })
-            }
-    
-            const result = await git.gitHistory(page=1, size=2)
-    
-            expect(result).to.deep.equal([
-                {
-                    author: "Dmitry Andriyanov",
-                    hash: "90180910fc27a11272a3e5caeeb119a51e5c0545",
-                    msg: "исправлена опечатка в readme",
-                    timestamp: "2018-10-16 12:49:56 +0300"
-                },
-                {
-                    author: "Dmitry Andriyanov",
-                    hash: "cc2284293758e32c50fa952da2f487c8c5e8d023",
-                    msg: "readme",
-                    timestamp: "2018-10-16 12:36:32 +0300"
-                }
-            ]);
-    
-    
-    
-        })
+    it('Должны быть элементы в массиве', async function() {
+        let git = new GitClass();
+
+        const result = await git.gitHistory(1,10);
+        expect(result).to.be.not.empty;
     })
     
-    describe('Получение дерева файла (gitFileTree)', function(){
-        it('проверка работы parseFileTreeItem', async function() {
-            let git = new GitClass();
-    
-            git.executeGit = function() {
-                return new Promise((resolve) => {
-                    resolve('100644 blob c9d18582f6c7fb78fb2c611bcd6c0d5f87304072	controllers/contentController.js\n' +
-                    '100644 blob 02fe732137bea2adfb6f650bce92aa0be2f5cd9d	controllers/filesController.js\n' +
-                    '100644 blob 0e3f100b8db850ebc6ca003312c328f73972cdec	controllers/indexController.js')
-                })
+    it('Количество эллементов в массиве должно быть меньше 11', async function() {
+        let git = new GitClass();
+
+        const size = 10;
+        const result = await git.gitHistory(1,size);
+        expect(result.length).to.be.below(size+1);
+    })
+
+    it('проверка работы parseHistoryItem', async function() {
+        let git = new GitClass();
+
+        git.executeGit = function() {
+            return new Promise((resolve) => {
+                resolve("90180910fc27a11272a3e5caeeb119a51e5c0545	Dmitry Andriyanov	2018-10-16 12:49:56 +0300	исправлена опечатка в readme\ncc2284293758e32c50fa952da2f487c8c5e8d023	Dmitry Andriyanov	2018-10-16 12:36:32 +0300	readme")
+            })
+        }
+
+        const result = await git.gitHistory(page=1, size=2)
+
+        expect(result).to.deep.equal([
+            {
+                author: "Dmitry Andriyanov",
+                hash: "90180910fc27a11272a3e5caeeb119a51e5c0545",
+                msg: "исправлена опечатка в readme",
+                timestamp: "2018-10-16 12:49:56 +0300"
+            },
+            {
+                author: "Dmitry Andriyanov",
+                hash: "cc2284293758e32c50fa952da2f487c8c5e8d023",
+                msg: "readme",
+                timestamp: "2018-10-16 12:36:32 +0300"
             }
-    
-            const result = await git.gitFileTree();
-            
-            expect(result).to.deep.equal([ { type: 'blob',
-            hash: 'c9d18582f6c7fb78fb2c611bcd6c0d5f87304072',
-            path: 'controllers/contentController.js' },
-          { type: 'blob',
-            hash: '02fe732137bea2adfb6f650bce92aa0be2f5cd9d',
-            path: 'controllers/filesController.js' },
-          { type: 'blob',
-            hash: '0e3f100b8db850ebc6ca003312c328f73972cdec',
-            path: 'controllers/indexController.js' } ])
-        
-        })
+        ]);
+
+
+
     })
 })
 
-describe('navigation.js', function(){
-    describe('построение урла папки (buildFolderUrl)', function(){
-        it('проверка работы функции buildFolderUrl', function(){
-            const parentHash = 'parentHash';
-            const path = 'path';
+describe('Получение дерева файла ', function(){
+    it('проверка работы gitFileTree', async function() {
+        let git = new GitClass();
 
-            navigation = new NavigationClass();
+        git.executeGit = function() {
+            return new Promise((resolve) => {
+                resolve('100644 blob c9d18582f6c7fb78fb2c611bcd6c0d5f87304072	controllers/contentController.js\n' +
+                '100644 blob 02fe732137bea2adfb6f650bce92aa0be2f5cd9d	controllers/filesController.js\n' +
+                '100644 blob 0e3f100b8db850ebc6ca003312c328f73972cdec	controllers/indexController.js')
+            })
+        }
 
-            const result = navigation.buildFolderUrl(parentHash, path);
+        const result = await git.gitFileTree();
+        
+        expect(result).to.deep.equal([ { type: 'blob',
+        hash: 'c9d18582f6c7fb78fb2c611bcd6c0d5f87304072',
+        path: 'controllers/contentController.js' },
+        { type: 'blob',
+        hash: '02fe732137bea2adfb6f650bce92aa0be2f5cd9d',
+        path: 'controllers/filesController.js' },
+        { type: 'blob',
+        hash: '0e3f100b8db850ebc6ca003312c328f73972cdec',
+        path: 'controllers/indexController.js' } ])
+    
+    })
+})
 
-            expect(result).to.be.equal(`/files/${parentHash}/${path}`);
-        })
+describe('Получение содержимого файла', function() {
+    it('Проверка работы gitFileContent', async function() {
+        let git = new GitClass();
+
+        const result = await git.gitFileContent('b512c09d476623ff4bf8d0d63c29b784925dbdf8');
+
+        expect(result).to.be.equal('node_modules');
+    })
+})
+
+describe('Навигация (navigation.js)', function(){
+    it('построение урла папки (buildFolderUrl)', function(){
+        const parentHash = 'parentHash';
+        const path = 'path';
+
+        navigation = new NavigationClass();
+
+        const result = navigation.buildFolderUrl(parentHash, path);
+
+        expect(result).to.be.equal(`/files/${parentHash}/${path}`);
     });
-    describe('построение урла файла (buildFileUrl)', function(){
-        it('проверка работы функции buildFileUrl', function(){
-            const parentHash = 'parentHash';
-            const path = 'path';
+    it('построение урла файла (buildFileUrl)', function(){
+        const parentHash = 'parentHash';
+        const path = 'path';
 
-            navigation = new NavigationClass();
+        navigation = new NavigationClass();
 
-            const result = navigation.buildFileUrl(parentHash, path);
+        const result = navigation.buildFileUrl(parentHash, path);
 
-            expect(result).to.be.equal(`/content/${parentHash}/${path}`);
-        })
+        expect(result).to.be.equal(`/content/${parentHash}/${path}`);
     });
     describe('Построение хлебных крошек (buildBreadcrumbs)', function(){
         it('построения в корневой папке', function(){

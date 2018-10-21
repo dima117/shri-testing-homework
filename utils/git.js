@@ -1,12 +1,13 @@
-const { resolve } = require('path');
+const {resolve} = require('path');
+
 const REPO = resolve('.');
 
-const { execFile } = require('child_process');
+const {execFile} = require('child_process');
 
 class GitClass {
-  constructor(){  }
+  // constructor(){  }
 
-  //возвращает результат команды
+  // возвращает результат команды
   executeGit(cmd, args) {
     return new Promise((resolve, reject) => {
       execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
@@ -19,7 +20,7 @@ class GitClass {
     });
   }
 
-  //строка -> объект
+  // строка -> объект
   parseHistoryItem(line) {
     const [hash, author, timestamp, msg] = line.split('\t');
 
@@ -52,7 +53,7 @@ class GitClass {
     });
   }
 
-  //парсер строка -> {type: 'blob', hash: 'b12e...', path: 'package.json'}
+  // парсер строка -> {type: 'blob', hash: 'b12e...', path: 'package.json'}
   parseFileTreeItem(line) {
     const [info, path] = line.split('\t');
     const [, type, hash] = info.split(' ');
@@ -60,12 +61,13 @@ class GitClass {
     return { type, hash, path };
   }
 
-  //по хэшу и пути возвращает все файлы по этому пути если файл это папка то путь равен пустой строке
+  // по хэшу и пути возвращает все файлы по этому пути
+  // если файл это папка то путь равен пустой строке
   gitFileTree(hash, path) {
     const params = ['ls-tree', hash];
-    path && params.push(path);
+    if (path) params.push(path);
 
-    return this.executeGit('git', params).then(data => {
+    return this.executeGit('git', params).then((data) => {
       return data
         .split('\n')
         .filter(Boolean)
@@ -73,13 +75,10 @@ class GitClass {
     });
   }
 
-  //строка которую возвращает гит по команде git show hash, предполагается что это содержимое файла
+  // строка которую возвращает гит по команде git show hash, предполагается что это содержимое файла
   gitFileContent(hash) {
     return this.executeGit('git', ['show', hash]);
   }
-
 }
 
-module.exports = {
-  GitClass
-};
+module.exports = { GitClass };

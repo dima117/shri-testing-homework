@@ -14,7 +14,7 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
-module.exports = function(req, res, next) {
+filesControllerFunction = function(req, res, next) {
   let navigation = new NavigationClass();
 
   const { hash } = req.params;
@@ -40,3 +40,5 @@ module.exports = function(req, res, next) {
     err => next(err)
   );
 };
+
+module.exports = filesControllerFunction;

@@ -1,7 +1,7 @@
 const { GitClass } = require('../utils/git');
 const { NavigationClass } = require('../utils/navigation');
 
-module.exports = function(req, res, next) {
+contentControllerFunction = function(req, res, next) {
   const { hash } = req.params;
   const path = req.params[0].split('/').filter(Boolean);
   let git = new GitClass();
@@ -16,11 +16,12 @@ module.exports = function(req, res, next) {
     .then(
       content => {
         if (content) {
-          res.render('content', {
-            title: 'content',
+          const result = { title: 'content',
             breadcrumbs: navigation.buildBreadcrumbs(hash, path.join('/')),
             content
-          });
+          };
+          
+          res.render('content', result);
         } else {
           next();
         }
@@ -28,3 +29,5 @@ module.exports = function(req, res, next) {
       err => next(err)
     );
 };
+
+module.exports = contentControllerFunction;
