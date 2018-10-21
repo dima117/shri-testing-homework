@@ -1,5 +1,5 @@
 const { myGit } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { buildBreadcrumbs } = require('../utils/navigation');
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
