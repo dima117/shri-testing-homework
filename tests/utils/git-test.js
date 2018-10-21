@@ -24,3 +24,33 @@ it('история коммитов соответствует истории к
   );
 
 });
+
+it('в Git отправлены правильные параметры', async function () {
+  // подготовка
+    let params;
+
+    const gitFake = (...args) => {
+    params = args;
+    return Promise.resolve('');
+  };
+
+  //действие
+  const history = await gitHistory(1, 5, gitFake);
+  const [ cmd, flags ] = params;
+
+  //проверка
+  expect(cmd).to.equal('git');
+
+  expect(flags[0]).to.equal('log');
+  expect(flags).to.include('--pretty=format:%H%x09%an%x09%ad%x09%s');
+  expect(flags).to.include('--date=iso');
+
+  const countIndex = flags.indexOf('-n') + 1;
+  const skipIndex = flags.indexOf('--skip') + 1;
+
+  expect(flags[skipIndex]).to.equal(0);
+  expect(flags[countIndex]).to.equal(5);
+
+});
+
+

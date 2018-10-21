@@ -30,6 +30,7 @@ function gitHistory(page = 1, size = 10, gitFake) {
   const offset = (page - 1) * size;
   const gitFunction = gitFake || executeGit;
 
+
   return gitFunction('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
@@ -65,8 +66,9 @@ function gitFileTree(hash, path) {
   });
 }
 
-function gitFileContent(hash) {
-  return executeGit('git', ['show', hash]);
+function gitFileContent(hash, gitFake) {
+  const gitFunction = gitFake || executeGit;
+  return gitFunction('git', ['show', hash]);
 }
 
 module.exports = {
