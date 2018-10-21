@@ -1,6 +1,7 @@
 const assert = require("chai").assert;
-const expect = require("chai").expect;
-const { getIndexList } = require("../controllers/indexController");
+const sinon = require("sinon");
+
+const { IndexController } = require("../controllers/IndexController");
 const { buildBreadcrumbs } = require("../utils/navigation");
 
 describe("Обработка страницы со списком из N объектов-коммитов", function() {
@@ -14,10 +15,43 @@ describe("Обработка страницы со списком из N объ�
     ]);
   });
   it("Получить список коммитов", async function() {
-    const commit = await getIndexList(1, 2);
+    const indexController = new IndexController();
+    const stubGetHistory = sinon.stub().resolves([
+      {
+        hash: "hash_1",
+        author: "author_1",
+        timestamp: "timestamp_1",
+        msg: "ссылки на корневую папку 1"
+      },
+      {
+        hash: "hash_2",
+        author: "author_2",
+        timestamp: "timestamp_2",
+        msg: "ссылки на корневую папку 2"
+      }
+    ]);
+    indexController.fetchHistory = stubGetHistory;
+    indexController.getFolderUrl = () => {
+      return `/files/test_hash/`;
+    };
 
-    commit.every(i =>
-      expect(i).to.have.all.keys("hash", "author", "timestamp", "msg", "href")
-    );
+    const list = await indexController.getIndexList(1, 2);
+
+    assert.deepEqual(list, [
+      {
+        hash: "hash_1",
+        author: "author_1",
+        timestamp: "timestamp_1",
+        msg: "ссылки на корневую папку 1",
+        href: "/files/test_hash/"
+      },
+      {
+        hash: "hash_2",
+        author: "author_2",
+        timestamp: "timestamp_2",
+        msg: "ссылки на корневую папку 2",
+        href: "/files/test_hash/"
+      }
+    ]);
   });
 });
