@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha tests/**/*.js",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "init-test-rep": "cd test-rep && git init"
   },
   "keywords": [],
   "author": "",
