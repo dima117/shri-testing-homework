@@ -1,21 +1,44 @@
 {
-  "name": "git-viewer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.4",
-    "hbs": "^4.0.1"
-  },
-  "devDependencies": {
-    "ndb": "^1.0.26"
-  }
+	"name": "git-viewer",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "nyc --reporter=html mocha ./**/__tests__/**/*.test.js",
+		"test-watch": "nyc --reporter=html mocha ./**/__tests__/**/*.test.js --watch",
+		"test-int": "hermione  --reporter flat",
+		"selenium-start": "selenium-standalone start ",
+		"start": "node ./bin/www",
+		"devstart": "ndb ./bin/www"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"chai": "^4.2.0",
+		"eslint-config-google": "^0.11.0",
+		"express": "^4.16.4",
+		"hbs": "^4.0.1",
+		"mocha": "^5.2.0",
+		"sinon": "^7.0.0"
+	},
+	"devDependencies": {
+		"eslint": "^5.7.0",
+		"eslint-config-prettier": "^3.1.0",
+		"html-reporter": "^2.22.0",
+		"husky": "^1.1.2",
+		"ndb": "^1.0.26"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js}": [
+			"eslint ./",
+			"prettier --write",
+			"git add"
+		]
+	}
 }
