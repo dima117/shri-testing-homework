@@ -21,10 +21,13 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "hermione": "^0.90.1",
     "html-reporter": "^2.22.0",
-    "ndb": "^1.0.26",
     "mocha": "^5.2.0",
+    "ndb": "^1.0.26",
     "nyc": "^13.1.0"
   }
 }
