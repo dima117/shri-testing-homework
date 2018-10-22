@@ -51,7 +51,7 @@ describe('utils/git.js', () => {
 
       const history = gitHistory(2, 1, stub);
 
-      expect(stub.args[0][1][5]).to.be.equal(1);
+      expect(stub.args[0][1][4]).to.be.equal(1);
     });
 
     it('Вызов заглушки происходит с правильными аргументами', () => {
@@ -63,7 +63,6 @@ describe('utils/git.js', () => {
       expect(stub.args[0]).to.be.eql([
         'git', [
           'log',
-          'test',
           '--pretty=format:%H%x09%an%x09%ad%x09%s',
           '--date=iso',
           '--skip',

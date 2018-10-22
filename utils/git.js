@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+const gitHistoryStub = require('./__test__/gitHistoryStub.js');
 const REPO = resolve('.');
 
 const { execFile } = require('child_process');
@@ -33,7 +34,6 @@ function gitHistory(page = 1, size = 10, stub) {
 
   return (stub || executeGit)('git', [
     'log',
-    (DEV ? 'test' : 'master'),
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
     '--skip',
@@ -41,10 +41,16 @@ function gitHistory(page = 1, size = 10, stub) {
     '-n',
     size
   ]).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseHistoryItem);
+    return (
+      DEV ? (
+        gitHistoryStub
+      ) : (
+        data
+          .split('\n')
+          .filter(Boolean)
+          .map(parseHistoryItem)
+      )
+    )
   });
 }
 
