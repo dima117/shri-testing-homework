@@ -1,0 +1,20 @@
+cc783fde86abe11450cb2917a62970229930ea8c	smakhl	2018-10-20 16:26:14 +0300	add unit tests for utils
+e26ed53b505e7834f18376bb75867d6a1a270250	smakhl	2018-10-20 16:25:57 +0300	refactor for testing
+93f9067e24092580b3ded3888b5cb7022e36abac	smakhl	2018-10-20 16:25:32 +0300	add jest
+c8f996152b53231c2abbd399d587017f0ec73e93	smakhl	2018-10-20 16:25:11 +0300	exclude ide configs
+f0943a415569ea5364d6d535327a97d249deeb5d	smakhl	2018-10-20 16:24:54 +0300	add eslint
+55e7275d72a1d85eac23d5c74d9d8b9881e431bc	smakhl	2018-10-19 22:44:22 +0300	update readme
+90180910fc27a11272a3e5caeeb119a51e5c0545	Dmitry Andriyanov	2018-10-16 12:49:56 +0300	исправлена опечатка в readme
+cc2284293758e32c50fa952da2f487c8c5e8d023	Dmitry Andriyanov	2018-10-16 12:36:32 +0300	readme
+7e013ae0440ad6e91082599376a6aaebe20d2112	Dmitry Andriyanov	2018-10-16 12:10:05 +0300	codestyle
+f2df8ac23e817f6da01624a77ec050a0147f642a	Dmitry Andriyanov	2018-10-16 12:02:11 +0300	стили
+0f7b962409d6980236944164c5b0c9f43f9348e9	Dmitry Andriyanov	2018-10-16 11:54:32 +0300	хлебные крошки
+82810cf7d56476059477aaa5ff55c99ff191be29	Dmitry Andriyanov	2018-10-16 11:25:59 +0300	исправлена ошибка
+30fc48ec578e6b0052f6ab9ea7a118fb31574cdc	Dmitry Andriyanov	2018-10-16 11:23:01 +0300	ссылки на корневую папку
+f69c43393449afe9284f3fa20010695a5faa3849	Dmitry Andriyanov	2018-10-16 11:20:57 +0300	ссылки на корневую папку
+5dec08da64c3b090708aa8412924b26744d60597	Dmitry Andriyanov	2018-10-16 11:19:59 +0300	отображение списка коммитов
+144944153a24f28bd13bcd60aa7f588523649a53	Dmitry Andriyanov	2018-10-16 11:17:57 +0300	экранирование контента
+e91effac1a382d9569198e0625d5c979956e9870	Dmitry Andriyanov	2018-10-16 11:16:20 +0300	стили для списка коммитов
+1bd9b4848866f8d83cbb45b45193c695ffebb282	Dmitry Andriyanov	2018-10-16 10:15:28 +0300	навигация для страницы с контентом файла
+cdd4eb0149493540c34103e7ac2a49a5f67a917b	Dmitry Andriyanov	2018-10-16 09:53:14 +0300	просмотр содержимого файла
+172001aeb63bdfc4e3f01f29e30876022cf6ad45	Dmitry Andriyanov	2018-10-16 09:02:52 +0300	список файлов

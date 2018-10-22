@@ -1,7 +1,10 @@
 const { resolve } = require('path');
-const REPO = resolve('.');
+const REPO = process.env.REPO_PATH || resolve('.');
+let { execFile } = require('child_process');
 
-const { execFile } = require('child_process');
+function injectGitExec(mock) {
+  execFile = mock;
+}
 
 function executeGit(cmd, args) {
   return new Promise((resolve, reject) => {
@@ -71,5 +74,6 @@ function gitFileContent(hash) {
 module.exports = {
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
+  injectGitExec
 };
