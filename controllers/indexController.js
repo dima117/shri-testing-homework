@@ -1,21 +1,10 @@
 const { Git } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { buildIndexPage } = require('../utils/buildPage');
 
-module.exports = function(req, res) {
+module.exports = function (req, res) {
   const git = new Git();
   git.getHistory(1, 20).then(
-    history => {
-      const list = history.map(item => ({
-        ...item,
-        href: buildFolderUrl(item.hash, '')
-      }));
-
-      res.render('index', {
-        title: 'history',
-        breadcrumbs: buildBreadcrumbs(),
-        list
-      });
-    },
+    history => res.render('index', buildIndexPage(history)),
     err => next(err)
   );
 };

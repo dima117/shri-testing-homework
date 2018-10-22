@@ -1,20 +1,5 @@
 const { Git } = require('../utils/git');
-const {
-  buildFolderUrl,
-  buildFileUrl,
-  buildBreadcrumbs
-} = require('../utils/navigation');
-
-function buildObjectUrl(parentHash, { path, type }) {
-  switch (type) {
-    case 'tree':
-      return buildFolderUrl(parentHash, path);
-    case 'blob':
-      return buildFileUrl(parentHash, path);
-    default:
-      return '#';
-  }
-}
+const { buildFilesPage } = require('../utils/buildPage');
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
@@ -24,19 +9,7 @@ module.exports = function(req, res, next) {
 
   const git = new Git();
   return git.getFileTree(hash, path).then(
-    list => {
-      const files = list.map(item => ({
-        ...item,
-        href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
-      }));
-
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
-    },
+    list => res.render('files', buildFilesPage(list, hash, pathParam)),
     err => next(err)
   );
 };

@@ -1,5 +1,5 @@
 const { Git } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { buildContentPage } = require('../utils/buildPage');
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
@@ -15,11 +15,7 @@ module.exports = function(req, res, next) {
     .then(
       content => {
         if (content) {
-          res.render('content', {
-            title: 'content',
-            breadcrumbs: buildBreadcrumbs(hash, path.join('/')),
-            content
-          });
+          res.render('content', buildContentPage(content, hash, path));
         } else {
           next();
         }
