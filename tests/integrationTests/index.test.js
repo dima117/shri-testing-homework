@@ -3,7 +3,7 @@ let assert = require('chai').assert;
 describe('Index', () => {
 
     describe('Content', () => {
-        it('content', function () {
+        it('content exists', function () {
             return this.browser
                 .url('/')
                 .isExisting('.content')
@@ -11,6 +11,16 @@ describe('Index', () => {
                     assert.ok(exists, 'Content has not appeared');
                 });
         });
+
+        it('history of commits exists', function () {
+            return this.browser
+                .url('/')
+                .isExisting('.content .commit')
+                .then((exists) => {
+                    assert.ok(exists, 'Content has not appeared');
+                });
+        });
+
     });
 
     describe('Breadcrumbs', () => {

@@ -7,6 +7,8 @@ module.exports = {
 
     baseUrl: 'http://localhost:3000',
 
+    compositeImage: true,
+
     browsers: {
         chrome: {
             desiredCapabilities: {

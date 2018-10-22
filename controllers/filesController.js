@@ -39,8 +39,6 @@ module.exports.rout = function(req, res, next) {
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-  console.log(pathParam);
-
   return utilGit.gitFileTree(hash, path)
         .then(
           list => insideProc(list, hash, pathParam, res),
