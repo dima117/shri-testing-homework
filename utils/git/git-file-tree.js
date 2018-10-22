@@ -8,11 +8,11 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
+function gitFileTree(hash, path, gitExecuter = executeGit) {
   const params = ['ls-tree', hash];
   path && params.push(path);
 
-  return executeGit('git', params).then(data => {
+  return gitExecuter('git', params).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
