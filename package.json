@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha utils/*.test.js",
-    "integrational": "./node_modules/.bin/hermione gui hermione/*.js",
+    "integrational": "NODE_ENV=test ./node_modules/.bin/hermione gui hermione/*.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
