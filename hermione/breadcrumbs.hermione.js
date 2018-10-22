@@ -12,7 +12,6 @@ describe('Хлебные крошки', () => {
         breadcrumbsTexts = text;
       })
       .click('[data-smid=file-link]')
-      .pause(100)
       .getText('[data-smid=breadcrumbs-title]')
       .then((text) => {
         expect(text).to.equal(`HISTORY / ROOT / ${breadcrumbsTexts[0]}`);
@@ -23,11 +22,8 @@ describe('Хлебные крошки', () => {
     return this.browser
       .url('/')
       .click('[data-smid=commit-link]')
-      .pause(100)
       .click('[data-smid=file-link]')
-      .pause(100)
       .click('[data-smid=breadcrumbs-link]:last-of-type')
-      .pause(100)
       .getText('[data-smid=breadcrumbs-title]')
       .then((text) => {
         expect(text).to.equal('HISTORY / ROOT');
@@ -38,9 +34,7 @@ describe('Хлебные крошки', () => {
     return this.browser
       .url('/')
       .click('[data-smid=commit-link]')
-      .pause(100)
       .click('[data-smid=file-link]')
-      .pause(100)
       .assertView('breadcrumbs-history-root', '[data-smid=breadcrumbs-title]')
   });
 });

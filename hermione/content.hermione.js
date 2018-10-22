@@ -1,23 +1,38 @@
 const {expect} = require('chai');
 
-describe('Содержимое страниц', () => {
-  it('Открывается главная с коммитами', function() {
+describe('Правильно отображается файловая система коммита', () => {
+  it('Главная со списком коммитов', function() {
     return this.browser
       .url('/')
-      .pause(100)
-      .assertView('main-page', '[data-smid="commit-content"]')
+      .assertView('main-page', '[data-smid="index-content"]')
+  });
+  it('Корневая папка', function() {
+    return this.browser
+      .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
+      .isExisting('[data-smid=files-content]')
+      .then((exists) => {
+        expect(exists).to.be.true;
+      })
+      .assertView('files-content-root', '[data-smid="files-content"]')
   });
 
-  it('При переходе с главной страницы на коммит отображается содержимое коммита', function() {
+  it('Внутри папки', function() {
     return this.browser
-      .url('/')
-      .click('[data-smid=commit-link]')
-      .pause(100)
-      .click('[data-smid=file-link]')
-      .pause(100)
+      .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/public')
+      .isExisting('[data-smid=files-content]')
+      .then((exists) => {
+        expect(exists).to.be.true;
+      })
+      .assertView('files-content-dir', '[data-smid="files-content"]')
+  });
+
+  it('Содержиме файла', function() {
+    return this.browser
+      .url('/content/90180910fc27a11272a3e5caeeb119a51e5c0545/public/styles.css')
       .isExisting('[data-smid=commit-content]')
       .then((exists) => {
         expect(exists).to.be.true;
       })
+      .assertView('commit-content', '[data-smid="commit-content"]')
   });
 });
