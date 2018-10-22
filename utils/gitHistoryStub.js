@@ -1,0 +1,1 @@
+module.exports = '48069b358498830cd781b5c99bd6cab57332ffac\tMikhail Durmanov\t2018-10-21 21:35:57 +0300\tAdd pages view integration test\nf135c5ab9197d1d0e3f5d6eb5e3da2a3a2125f3a\tMikhail Durmanov\t2018-10-21 19:44:35 +0300\tPrepare hermione for integration testing';
