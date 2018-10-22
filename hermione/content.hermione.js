@@ -6,6 +6,7 @@ describe('Правильно отображается файловая сист�
       .url('/')
       .assertView('main-page', '[data-smid="index-content"]')
   });
+
   it('Корневая папка', function() {
     return this.browser
       .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
@@ -34,5 +35,11 @@ describe('Правильно отображается файловая сист�
         expect(exists).to.be.true;
       })
       .assertView('commit-content', '[data-smid="commit-content"]')
+  });
+
+  it('Скриншот хлебных крошек HISTORY / ROOT', function() {
+    return this.browser
+      .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
+      .assertView('breadcrumbs-history-root', '[data-smid=breadcrumbs-title]')
   });
 });
