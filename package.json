@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "test-pages-view": "./node_modules/.bin/hermione tests/testPagesView.js",
+    "test-moving-pages": "./node_modules/.bin/hermione tests/testMovingBehavior.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,9 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "ndb": "^1.0.26",
+    "selenium-standalone": "^6.15.3"
   }
 }
