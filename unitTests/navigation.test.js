@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 const { buildBreadcrumbs, buildFolderUrl, buildFileUrl } = require('../utils/navigation');
 
-describe('"хлебные крошки"', function () {
-  it('функция buildBreadcrumbs на вход принимает hash и path, возвращает массив "хлебных крошек"', function () {
+describe('"хлебные крошки"', () => {
+  it('функция buildBreadcrumbs на вход принимает hash и path, возвращает массив "хлебных крошек"', () => {
     // подготовка
     const hash = '90180910fc27a11272a3e5caeeb119a51e5c0545';
     const path = 'controllers/indexController.js';
@@ -14,18 +14,18 @@ describe('"хлебные крошки"', function () {
     expect(bc).to.include.deep.members([
       {
         text: 'ROOT',
-        href: '/files/90180910fc27a11272a3e5caeeb119a51e5c0545/'
+        href: '/files/90180910fc27a11272a3e5caeeb119a51e5c0545/',
       },
       {
         text: 'controllers',
         href:
-          '/files/90180910fc27a11272a3e5caeeb119a51e5c0545/controllers/'
+          '/files/90180910fc27a11272a3e5caeeb119a51e5c0545/controllers/',
       },
-      { text: 'indexController.js' }
+      { text: 'indexController.js' },
     ]);
   });
 
-  it('при отсутствии параметров hash и path функция buildBreadcrumbs возвращает один объект HISTORY', async function () {
+  it('при отсутствии параметров hash и path функция buildBreadcrumbs возвращает один объект HISTORY', async () => {
     // действие
     const bc = buildBreadcrumbs();
 
@@ -33,7 +33,7 @@ describe('"хлебные крошки"', function () {
     expect(bc).to.eql([{ text: 'HISTORY', href: undefined }]);
   });
 
-  it('при наличии hash и отсутствии path функция buildBreadcrumbs возвращает массив, в котором у первого объекта свойство href == undefined', async function () {
+  it('при наличии hash и отсутствии path функция buildBreadcrumbs возвращает массив, в котором у первого объекта свойство href == undefined', async () => {
     // подготовка
     const hash = '90180910fc27a11272a3e5caeeb119a51e5c0545';
 
@@ -42,14 +42,14 @@ describe('"хлебные крошки"', function () {
 
     // проверка
     expect(bc).to.eql([
-      { "href": "/", "text": "HISTORY" },
-      { "href": undefined, "text": "ROOT" }
+      { href: '/', text: 'HISTORY' },
+      { href: undefined, text: 'ROOT' },
     ]);
   });
 });
 
-describe('формирование пути к файлам и папкам', function () {
-  it('функция buildFolderUrl возвращает путь к файловой структуре коммита', function () {
+describe('формирование пути к файлам и папкам', () => {
+  it('функция buildFolderUrl возвращает путь к файловой структуре коммита', () => {
     // подготовка
     const parentHash = 'a5b8b36531c819d685b4d220edb9784edae8b0f2';
     const path = '';
@@ -62,7 +62,7 @@ describe('формирование пути к файлам и папкам', fu
     expect(bc).to.eql(url);
   });
 
-  it('функция buildFileUrl возвращает путь к содержимому выбранного файла', function () {
+  it('функция buildFileUrl возвращает путь к содержимому выбранного файла', () => {
     // подготовка
     const parentHash = 'a5b8b36531c819d685b4d220edb9784edae8b0f2';
     const path = 'README.md';
