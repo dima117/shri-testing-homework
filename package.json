@@ -11,7 +11,8 @@
     "stage": "NODE_ENV=staging node ./bin/www",
     "debug": "ndb",
     "lint": "eslint --fix tests",
-    "hermione": "hermione hermione"
+    "hermione": "hermione hermione",
+    "hermione-gui": "hermione gui"
   },
   "keywords": [],
   "author": "",
