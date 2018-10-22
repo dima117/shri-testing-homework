@@ -1,6 +1,6 @@
 const assert = require('chai').assert;
 
-describe('Открываю содержимое файла', function() {
+describe('Перехожу по хлебным крошкам со страницы с файлом до главной', function() {
   it('кликаю в ХК на ссылку с фаловой структурой папки коммита', function() {
     return this.browser
       .url('/content/a35931b770328564ddde0ca70ccdab832b22e97a/controllers/contentController.js')

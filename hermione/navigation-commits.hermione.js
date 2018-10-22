@@ -1,6 +1,6 @@
 const assert = require('chai').assert;
 
-describe('Открываю главную страницу', function() {
+describe('Перехожу перехожу от главной до страницы с содержимым файла', function() {
   it('кликаю в списке коммитов на ссылку с корневой структурой комита', function() {
     return this.browser
       .url('/')
