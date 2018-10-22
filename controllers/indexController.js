@@ -1,5 +1,4 @@
 const GitUtil = require('../utils/git');
-
 const git = new GitUtil();
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
