@@ -19,9 +19,7 @@ describe('Переходы по страницам', () => {
             .getUrl();
         const fileName = url.split('/');
         const result = await this.browser
-            .url('/')
-            .click('.commit:last-child a')
-            .click('.content li a:first-child')
+            .url(url)
             .getText('.breadcrumbs');
         
         expect(result).to.be.equal('HISTORY / ROOT / ' + fileName[fileName.length-1]);
@@ -35,9 +33,7 @@ describe('Переходы по страницам', () => {
             .getUrl();
         const fileName = url.split('/');
         const result = await this.browser
-            .url('/')
-            .click('.commit:last-child a')
-            .click('.content li a:last-child')
+             .url(url)
             .getText('.breadcrumbs');
         
         expect(result).to.be.equal('HISTORY / ROOT / ' + fileName[fileName.length-1]);
@@ -51,17 +47,12 @@ describe('Переходы по страницам', () => {
             .getUrl();
         const folderName = folderUrl.split('/');
         const fileUrl = await this.browser
-            .url('/')
-            .click('.commit:last-child a')
-            .click('.content li:last-child a')
+            .url(folderUrl)
             .click('.content li:last-child a')
             .getUrl();
         const fileName = fileUrl.split('/');
         const result = await this.browser
-            .url('/')
-            .click('.commit:last-child a')
-            .click('.content li:last-child a')
-            .click('.content li:last-child a')
+            .url(fileUrl)
             .getText('.breadcrumbs');
         
         expect(result).to.be.equal('HISTORY / ROOT / ' + folderName[folderName.length-1] + ' / ' + fileName[fileName.length-1]);
