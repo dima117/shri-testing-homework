@@ -26,7 +26,7 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
+function gitHistory(page = 1, size = 10) {   
   const offset = (page - 1) * size;
 
   return executeGit('git', [
@@ -52,7 +52,7 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
+function gitFileTree(hash, path) {   //
   const params = ['ls-tree', hash];
   path && params.push(path);
 
@@ -64,12 +64,15 @@ function gitFileTree(hash, path) {
   });
 }
 
-function gitFileContent(hash) {
+function gitFileContent(hash) {   //
   return executeGit('git', ['show', hash]);
 }
 
 module.exports = {
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
+  parseHistoryItem,
+  executeGit,
+  parseFileTreeItem
 };
