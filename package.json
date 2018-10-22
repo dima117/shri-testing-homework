@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -16,6 +16,7 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "eslint": "^5.7.0",
     "jest": "^23.6.0",
     "ndb": "^1.0.26"
   }
