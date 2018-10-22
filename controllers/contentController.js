@@ -26,7 +26,7 @@ module.exports.rout = function(req, res, next) {
     .then(
       content => {
         if (content) {
-          insideProc(content, res);
+          insideProc(content, hash, path, res);
         } else {
           next();
         }
