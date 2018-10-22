@@ -18,26 +18,28 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
-module.exports = function(req, res, next) {
-  const { hash } = req.params;
-  const pathParam = (req.params[0] || '').split('/').filter(Boolean);
+module.exports = function(getFileTree = gitFileTree) {
+  return function(req, res, next) {
+    const { hash } = req.params;
+    const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
-  const path = pathParam.length ? pathParam.join('/') + '/' : '';
+    const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-  return gitFileTree(hash, path).then(
-    list => {
-      const files = list.map(item => ({
-        ...item,
-        href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
-      }));
+    return getFileTree(hash, path).then(
+      list => {
+        const files = list.map(item => ({
+          ...item,
+          href: buildObjectUrl(hash, item),
+          name: item.path.split('/').pop()
+        }));
 
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
-    },
-    err => next(err)
-  );
+        res.render('files', {
+          title: 'files',
+          breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+          files
+        });
+      },
+      err => next(err)
+    );
+  };
 };
