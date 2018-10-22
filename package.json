@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "selenium": "selenium-standalone start",
-    "test:u": "nyc mocha unitTests/**/*.js",
+    "test:u": "mocha unitTests/**/*.js",
+    "coverage": "nyc report --reporter=html unitTests/**/*.js",
     "test:i": "hermione hermione/test.hermione.js --config ./hermione/.hermione.conf.js",
     "hermione:gui" : "hermione gui integrationTests/test.hermione.js --config integrationTests/.hermione.conf.js",
     "start": "node ./bin/www",
