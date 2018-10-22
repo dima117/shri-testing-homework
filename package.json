@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:int": "./node_modules/.bin/hermione avadakedavra.hermione.js",
-    "test:unit":"mocha tests/test_navi.js",
+    "test:unit": "mocha tests/test_navi.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
     "selenium": "selenium-standalone start",
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "concurrently": "^4.0.1",
     "eslint": "^5.7.0",
     "eslint-plugin-chai-expect": "^2.0.1",
     "graceful-fs": "^4.1.11",
