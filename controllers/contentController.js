@@ -1,5 +1,5 @@
 const { gitFileContent, gitFileTree } = require('../utils/git');
-const { buildBreadcrumbs } = require('../utils/navigation');
+const { getContent } = require('../utils/page-content');
 
 module.exports = function (req, res, next) {
   const { hash } = req.params;
@@ -14,16 +14,11 @@ module.exports = function (req, res, next) {
     .then(
       content => {
         if (content) {
-          res.render('content', {
-            title: 'content',
-            breadcrumbs: buildBreadcrumbs(hash, path.join('/')),
-            content
-          });
+          res.render('content', getContent(content, hash, path));
         } else {
           next();
         }
       },
       err => next(err)
-    //  miss next?
     );
 };
