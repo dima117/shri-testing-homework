@@ -28,15 +28,11 @@ function buildFilesPage(list, hash, pathParam) {
 };
 
 function buildContentPage(content, hash, path) {
-  if (content) {
-    return {
-      title: 'content',
-      breadcrumbs: buildBreadcrumbs(hash, path.join('/')),
-      content
-    };
-  } else {
-    next();
-  }
+  return {
+    title: 'content',
+    breadcrumbs: buildBreadcrumbs(hash, path.join('/')),
+    content
+  };
 };
 
 function buildObjectUrl(parentHash, { path, type }) {

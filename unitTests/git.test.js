@@ -62,6 +62,7 @@ describe('класс Git', () => {
       // подготовка
       const git = new Git();
       const hash = '90180910fc27a11272a3e5caeeb119a51e5c0545';
+      const path = 'controlers/'
       const fakeCMDOutput = '040000 tree 0c174efd10167e419bca53f98fde0611072258ba\tutils\n040000 tree 4c0e80c9ffcda3ef1a11b2d8ecd552418dad68b5\tviews\n';
       const fakeFileTree = [
         {
@@ -81,7 +82,7 @@ describe('класс Git', () => {
         return Promise.resolve(fakeCMDOutput);
       }
 
-      const fileTree = await git.getFileTree(hash);
+      const fileTree = await git.getFileTree(hash, path);
 
       // проверка
       expect(fileTree).to.eql(fakeFileTree);

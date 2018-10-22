@@ -52,10 +52,15 @@ describe('формирование страниц перед рендером', 
         "path": "controllers/contentController.js"
       },
       {
-        "type": "blob",
+        "type": "tree",
         "hash": "6a1c8de449609cf3a6dc4a0fc2c8ba1896f54abf",
-        "path": "controllers/filesController.js"
-      }
+        "path": "controllers/"
+      },
+      {
+        "type": "",
+        "hash": "some_hash",
+        "path": "some_path"
+      },
     ];
 
     const hash = '83736c5588bfc7ab6f25a2bf5b438ac789aa769a';
@@ -86,7 +91,7 @@ describe('формирование страниц перед рендером', 
 
     it('в возращаемом объекте есть список файлов', () => {
       // проверка
-      expect(filesPage.files).to.have.lengthOf(2);
+      expect(filesPage.files).to.have.lengthOf(3);
     });
   });
 

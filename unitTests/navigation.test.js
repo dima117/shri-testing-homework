@@ -32,6 +32,20 @@ describe('"хлебные крошки"', function () {
     // проверка
     expect(bc).to.eql([{ text: 'HISTORY', href: undefined }]);
   });
+
+  it('при наличии hash и отсутствии path функция buildBreadcrumbs возвращает массив, в котором у первого объекта свойство href == undefined', async function () {
+    // подготовка
+    const hash = '90180910fc27a11272a3e5caeeb119a51e5c0545';
+
+    // действие
+    const bc = buildBreadcrumbs(hash, '');
+
+    // проверка
+    expect(bc).to.eql([
+      { "href": "/", "text": "HISTORY" },
+      { "href": undefined, "text": "ROOT" }
+    ]);
+  });
 });
 
 describe('формирование пути к файлам и папкам', function () {
