@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "unit-tests": "nyc mocha tests/**/*.test.js",
+    "integration-tests": "./node_modules/.bin/hermione",
+    "start-selenium": "selenium-standalone start",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -12,10 +14,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "express": "^4.16.4",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "mocha": "^5.2.0",
+    "sinon": "^7.0.0"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "hermione": "^0.90.1",
+    "hermione-custom-commands": "file:hermione-custom-commands",
+    "html-reporter": "^2.22.0",
+    "istanbul": "^0.4.5",
+    "ndb": "^1.0.26",
+    "nyc": "^13.1.0"
   }
 }

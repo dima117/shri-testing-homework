@@ -1,0 +1,34 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "jquery": true
+    },
+    "rules": {
+        "no-unused-vars": [
+            0,
+            {
+                "vars": "all",
+                "args": "after-used"
+            }
+        ],
+        "func-names": [
+            "error",
+            "never"
+        ],
+        "no-console": "off",
+        "no-unused-expressions": [
+            2,
+            {
+                "allowShortCircuit": true,
+                "allowTernary": true
+            }
+        ],
+        "no-undef": "off",
+        "no-plusplus": "off",
+        "consistent-return": "off",
+        "no-underscore-dangle": "off"
+    },
+    "extends": "airbnb-base"
+}
