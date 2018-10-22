@@ -1,20 +1,22 @@
-const { gitHistory } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const Git = require('../utils/git');
+const Navigation = require('../utils/navigation');
 
-module.exports = function(req, res) {
-  gitHistory(1, 20).then(
-    history => {
-      const list = history.map(item => ({
-        ...item,
-        href: buildFolderUrl(item.hash, '')
-      }));
+module.exports = async (req, res, next) => {
+  let history;
+  try {
+    history = await Git.gitHistory(1, 20);
+  } catch (err) {
+    next(err);
+    return;
+  }
+  const list = history.map(item => ({
+    ...item,
+    href: Navigation.buildFolderUrl(item.hash, '')
+  }));
 
-      res.render('index', {
-        title: 'history',
-        breadcrumbs: buildBreadcrumbs(),
-        list
-      });
-    },
-    err => next(err)
-  );
+  res.render('index', {
+    title: 'history',
+    breadcrumbs: Navigation.buildBreadcrumbs(),
+    list
+  });
 };
