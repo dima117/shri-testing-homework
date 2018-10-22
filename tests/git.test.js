@@ -1,6 +1,11 @@
-describe('тестим хз че', () => {
+const {Git} = require('../utils/git');
+const assert = require('chai');
 
-    it('тестим внутри', function () {
+describe('Тест хелпера Git', () => {
 
-    });
+  it('Можно получить список коммитов', function () {
+    const git = new Git();
+
+
+  });
 });
