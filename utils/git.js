@@ -52,7 +52,7 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path, exec=executeGit) {
+function gitFileTree(hash, path, exec = executeGit) {
   const params = ['ls-tree', hash];
   path && params.push(path);
 
@@ -64,7 +64,7 @@ function gitFileTree(hash, path, exec=executeGit) {
   });
 }
 
-function gitFileContent(hash, exec=executeGit) {
+function gitFileContent(hash, exec = executeGit) {
   return exec('git', ['show', hash]);
 }
 
@@ -72,5 +72,7 @@ module.exports = {
   executeGit,
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
+  parseHistoryItem,
+  parseFileTreeItem
 };
