@@ -1,5 +1,8 @@
-const { gitFileContent, gitFileTree } = require('../utils/git');
+const { gitFileContentFactory, gitFileTreeFactory } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+
+const gitFileContent = gitFileContentFactory();
+const gitFileTree = gitFileTreeFactory();
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;

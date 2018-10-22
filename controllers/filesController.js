@@ -1,9 +1,11 @@
-const { gitFileTree } = require('../utils/git');
+const { gitFileTreeFactory } = require('../utils/git');
 const {
   buildFolderUrl,
   buildFileUrl,
   buildBreadcrumbs
 } = require('../utils/navigation');
+
+const gitFileTree = gitFileTreeFactory();
 
 function buildObjectUrl(parentHash, { path, type }) {
   switch (type) {

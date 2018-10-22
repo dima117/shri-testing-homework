@@ -1,5 +1,7 @@
-const { gitHistory } = require('../utils/git');
+const { gitHistoryFactory } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+
+const gitHistory = gitHistoryFactory();
 
 module.exports = function(getHistory = gitHistory) {
   return function(req, res) {

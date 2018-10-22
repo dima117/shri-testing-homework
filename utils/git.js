@@ -26,23 +26,25 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
-  const offset = (page - 1) * size;
+function gitHistoryFactory(executeCommand = executeGit) {
+  return function gitHistory(page = 1, size = 10) {
+    const offset = (page - 1) * size;
 
-  return executeGit('git', [
-    'log',
-    '--pretty=format:%H%x09%an%x09%ad%x09%s',
-    '--date=iso',
-    '--skip',
-    offset,
-    '-n',
-    size
-  ]).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseHistoryItem);
-  });
+    return executeCommand('git', [
+      'log',
+      '--pretty=format:%H%x09%an%x09%ad%x09%s',
+      '--date=iso',
+      '--skip',
+      offset,
+      '-n',
+      size
+    ]).then(data => {
+      return data
+        .split('\n')
+        .filter(Boolean)
+        .map(parseHistoryItem);
+    });
+  };
 }
 
 function parseFileTreeItem(line) {
@@ -52,24 +54,30 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
-  const params = ['ls-tree', hash];
-  path && params.push(path);
+function gitFileTreeFactory(executeCommand = executeGit) {
+  return function gitFileTree(hash, path) {
+    const params = ['ls-tree', hash];
+    path && params.push(path);
 
-  return executeGit('git', params).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseFileTreeItem);
-  });
+    return executeCommand('git', params).then(data => {
+      return data
+        .split('\n')
+        .filter(Boolean)
+        .map(parseFileTreeItem);
+    });
+  };
 }
 
-function gitFileContent(hash) {
-  return executeGit('git', ['show', hash]);
+function gitFileContentFactory(executeCommand = executeGit) {
+  return function gitFileContent(hash) {
+    return executeCommand('git', ['show', hash]);
+  };
 }
+
+
 
 module.exports = {
-  gitHistory,
-  gitFileTree,
-  gitFileContent
+  gitHistoryFactory,
+  gitFileTreeFactory,
+  gitFileContentFactory
 };
