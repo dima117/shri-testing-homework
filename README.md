@@ -1,10 +1,25 @@
 ## Как запустить
 
 ```sh
-git clone git@github.com:dima117/shri-testing-homework.git
-cd shri-testing-homework.git
 npm i
 npm start
+```
+## Запуск юнит тестов
+```sh
+npm test
+```
+-- для отчета
+```sh
+npm run coverage
+```
+
+## Запуск  интеграционные тестов
+```sh
+./node_modules/.bin/hermione
+```
+-- Запуск gui
+```sh
+./node_modules/.bin/hermione gui
 ```
 
 ## Модульные тесты
@@ -32,7 +47,6 @@ npm start
         - filesController: 
             модуль обрабатывает роут '/files/:hash/*?'
             формирует данные для отображнеия views/files.hbs
-
         - contentController: 
             модуль обрабатывает роут '/content/:hash/*?'
             формирует данные для отображнеия views/content.hbs
