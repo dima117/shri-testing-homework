@@ -22,6 +22,7 @@ npm start
 - Selenium build info: version: '3.12.0'
 - Google Chrome 70.0.3538.67
 - Mozilla Firefox 62.0.3
+- git version 2.7.4
 
 ## Интеграционные тесты
 
