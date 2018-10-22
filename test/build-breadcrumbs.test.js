@@ -8,9 +8,9 @@ suite(`buildBreadcrumbs`, () => {
     const actual = buildBreadcrumbs(hash);
     const expected = [
       {
-      text: 'HISTORY',
-      href: undefined
-    }
+        text: 'HISTORY',
+        href: undefined
+      }
     ];
 
     assert.deepEqual(actual, expected);
@@ -23,13 +23,13 @@ suite(`buildBreadcrumbs`, () => {
     const actual = buildBreadcrumbs(hash, path);
     const expected = [
       {
-      text: 'HISTORY',
-      href: '/'
+        text: 'HISTORY',
+        href: '/'
       },
       {
         text: 'ROOT',
         href: undefined
-      },
+      }
     ];
 
     assert.deepEqual(actual, expected);
@@ -58,11 +58,10 @@ suite(`buildBreadcrumbs`, () => {
         href: '/files/f14d98df73bb0e8dd276edf43019b7244557f8b0/project/folder/'
       },
       {
-        text: 'content.txt',
-      },
+        text: 'content.txt'
+      }
     ];
 
     assert.deepEqual(actual, expected);
   });
-
 });
