@@ -6,7 +6,7 @@
   "scripts": {
     "selenium": "selenium-standalone start",
     "test:u": "nyc mocha unitTests/**/*.js",
-    "test:i": "hermione integrationTests/test.hermione.js --config ./integrationTests/.hermione.conf.js",
+    "test:i": "hermione hermione/test.hermione.js --config ./hermione/.hermione.conf.js",
     "hermione:gui" : "hermione gui integrationTests/test.hermione.js --config integrationTests/.hermione.conf.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
