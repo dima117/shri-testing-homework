@@ -1,7 +1,7 @@
 let { expect } = require('chai');
-let { GitWorkflow, GitWorkflowDep } = require('../utils/git');
-let mocks = require('./mocks');
-const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require("../utils/navigation");
+let { GitWorkflow, GitWorkflowDep } = require('../../utils/git');
+let mocks = require('./mocks/index');
+const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require("../../utils/navigation");
 
 class TestGitWorkflow extends GitWorkflow {
     constructor() {

@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/*.test.js",
     "start": "node app.js",
     "devstart": "ndb ./bin/www",
+    "hermione": "hermione",
+    "hermioneGUI": "./node_modules/.bin/hermione gui tests/integration/index.hermione.js",
     "selenium": "selenium-standalone start",
-    "hermione": "hermione"
+    "unit": "mocha tests/unit/*.test.js",
+    "integration": "npm run selenium && npm run hermione",
+    "test": "npm run unit && npm run hermione"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +23,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
     "mocha": "^5.2.0",
     "ndb": "^1.0.26"
   }
