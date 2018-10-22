@@ -8,11 +8,11 @@
     {{/each}}
 </div>
 
-<div class="content">
-    <ul>
+<div class="content content--files">
+    <ul class="files">
         {{#each files}}
             <li>
-                <a href="{{href}}">{{name}}</a>
+                <a class="files__link files__link--{{type}}" href="{{href}}">{{name}}</a>
             </li>
         {{/each}}
     </ul>
