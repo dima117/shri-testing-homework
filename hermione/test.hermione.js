@@ -82,6 +82,7 @@ describe("route to next folder/file", () => {
     describe("check breadcrumbs link route", () => {
 
         describe("route to ROOT", () => {
+
             it("check breadcrumbs", async function () {
                 const result = await this.browser
                     .click(".breadcrumbs a:nth-child(2)")
@@ -110,6 +111,7 @@ describe("route to next folder/file", () => {
             });
     
             describe("commits on HistoryPage", () => {
+                
                 it("should contain .commit", function () {
                     return this.browser
                         .assertExists(".commit", "does not contain commits")

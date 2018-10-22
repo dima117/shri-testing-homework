@@ -1,12 +1,12 @@
 
-const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../utils/navigation');
-const { expect } = require('chai');
+const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require("../utils/navigation");
+const { expect } = require("chai");
 
 const testHash = "90180910fc27a11272a3e5caeeb119a51e5c0545";
 const testPath = "/utils/navigation.js";
 
 const normalizedPath = (path) => {
-    return (path || '').split('/').filter(Boolean);
+    return (path || "").split("/").filter(Boolean);
 };
 
 const getCurrentPath = (normalizedPath) => {
@@ -14,10 +14,12 @@ const getCurrentPath = (normalizedPath) => {
 };
 
 describe("utils/navigation.js", () => {
+
     describe("buildFolderUrl", () => {
-        it("test buildFolderUrl, return a !empty string", () => {
+
+        it("must return a !empty string", () => {
             const result = buildFolderUrl(testHash, testPath);
-            expect(result).to.be.a('string').with.to.not.equal("");
+            expect(result).to.be.a("string").with.to.not.equal("");
         });
 
         it("get folder URL with args: hash && path", () => {
@@ -26,15 +28,16 @@ describe("utils/navigation.js", () => {
         });
 
         it("get folder URL with args: hash", () => {
-            const result = buildFolderUrl(testHash, undefined);
+            const result = buildFolderUrl(testHash);
             expect(result).to.equal(`/files/${testHash}/`);
         });
     });
 
     describe("buildFileUrl", () => {
-        it("test buildFileUrl, return a !empty string", () => {
+
+        it("must return a !empty string", () => {
             const result = buildFileUrl(testHash, testPath);
-            expect(result).to.be.a('string').with.to.not.equal("");
+            expect(result).to.be.a("string").with.to.not.equal("");
         });
 
         it("get file URL with args: hash && path", () => {
@@ -46,24 +49,26 @@ describe("utils/navigation.js", () => {
     describe("buildBreadcrumbs", () => {
 
         describe("without args", () => {
+
             it("array length must be 1", () => {
                 const result = buildBreadcrumbs();
-                expect(result).to.be.a('array').with.to.have.lengthOf(1);
+                expect(result).to.be.a("array").with.to.have.lengthOf(1);
             });
 
             it("should return the first element of the array with the text key HISTORY", () => {
                 const result = buildBreadcrumbs();
                 expect(result[0]).to.deep.equal({
-                    text: 'HISTORY',
+                    text: "HISTORY",
                     href: undefined
                 });
             });
         });
 
         describe("only with args: hash", () => {
+
             it("array length must be 2", () => {
                 const result = buildBreadcrumbs(testHash);
-                expect(result).to.be.a('array').with.to.have.lengthOf(2);
+                expect(result).to.be.a("array").with.to.have.lengthOf(2);
             });
 
             it("result[0].href must be '/'", () => {
@@ -74,7 +79,7 @@ describe("utils/navigation.js", () => {
             it("should return the second element of the array with the key ROOT", () => {
                 const result = buildBreadcrumbs(testHash);
                 expect(result[1]).to.deep.equal({
-                    text: 'ROOT',
+                    text: "ROOT",
                     href: undefined
                 });
             });
@@ -82,10 +87,10 @@ describe("utils/navigation.js", () => {
 
         describe("with args: hash && path", () => {
 
-            it("must return result[1].href equal /files/${hash}/${fullPath}", () => {
+            it("must return result[1].href equal /files/args.hash/args.fullPath", () => {
                 const result = buildBreadcrumbs(testHash, testPath);
                 expect(result[1]).to.deep.equal({
-                    text: 'ROOT',
+                    text: "ROOT",
                     href: `/files/${testHash}/`
                 });
             });
@@ -95,7 +100,7 @@ describe("utils/navigation.js", () => {
                 expect(result).to.have.lengthOf(normalizedPath(testPath).length + 2);
             });
 
-            it("result[length-1].text must be a equal normalizedPath(testPath).slice(-1) ", () => {
+            it("result[length-1].text must be a equal .../lastResource)", () => {
                 const result = buildBreadcrumbs(testHash, testPath);
                 const resultLength = result.length;
                 const [currentName] = getCurrentPath(normalizedPath(testPath));
@@ -104,7 +109,6 @@ describe("utils/navigation.js", () => {
                 });
             });
         });
-
     });
 });
 

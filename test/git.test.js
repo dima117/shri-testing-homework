@@ -1,6 +1,6 @@
-const { Git } = require('../utils/git');
+const { Git } = require("../utils/git");
 const git = new Git();
-const { expect } = require('chai');
+const { expect } = require("chai");
 
 const testGitHistoryExecFile = `
 90180910fc27a11272a3e5caeeb119a51e5c0545\tDmitry Andriyanov\t2018-10-16 12:49:56 +0300\tисправлена опечатка в readme
@@ -9,22 +9,22 @@ cc2284293758e32c50fa952da2f487c8c5e8d023\tDmitry Andriyanov\t2018-10-16 12:36:32
 
 const testGitHistotyExecObj = [
     {
-        hash: '90180910fc27a11272a3e5caeeb119a51e5c0545',
-        author: 'Dmitry Andriyanov',
-        timestamp: '2018-10-16 12:49:56 +0300',
-        msg: 'исправлена опечатка в readme'
+        hash: "90180910fc27a11272a3e5caeeb119a51e5c0545",
+        author: "Dmitry Andriyanov",
+        timestamp: "2018-10-16 12:49:56 +0300",
+        msg: "исправлена опечатка в readme"
     },
     {
-        hash: 'cc2284293758e32c50fa952da2f487c8c5e8d023',
-        author: 'Dmitry Andriyanov',
-        timestamp: '2018-10-16 12:36:32 +0300',
-        msg: 'readme'
+        hash: "cc2284293758e32c50fa952da2f487c8c5e8d023",
+        author: "Dmitry Andriyanov",
+        timestamp: "2018-10-16 12:36:32 +0300",
+        msg: "readme"
     },
     {
-        hash: '7e013ae0440ad6e91082599376a6aaebe20d2112',
-        author: 'Dmitry Andriyanov',
-        timestamp: '2018-10-16 12:10:05 +0300',
-        msg: 'codestyle'
+        hash: "7e013ae0440ad6e91082599376a6aaebe20d2112",
+        author: "Dmitry Andriyanov",
+        timestamp: "2018-10-16 12:10:05 +0300",
+        msg: "codestyle"
     }
 ];
 
@@ -39,7 +39,7 @@ describe("utils/git.js", () => {
 
         it("return must be array with no params and params", async () => {
             const result = await git.gitHistory();
-            expect(result).to.be.an("array");
+            expect(result).to.be.a("array");
         });
 
         it("must return full array of commits", async () => {
@@ -86,5 +86,4 @@ describe("utils/git.js", () => {
             }]);
         });
     });
-
 });
