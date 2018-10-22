@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 
 describe('Выполнение git команд и обработка входных/выходных данных для них', function () {
 
-    it('Парсинг коммита в истории коммитов', function () {
+    it('Парсит значения коммита и возвращает объект с ними', function () {
         const line = 'somehash\tsomeauthor\tsometimestamp\tsomemsg';
         const hash = 'somehash';
         const author = 'someauthor';
@@ -20,17 +20,6 @@ describe('Выполнение git команд и обработка входн
             timestamp,
             msg
         });
-    });
-
-    it('Возвращает объект с валидными hash, author, timestamp, msg', function () {
-        const line = 'somehash\tsomeauthor\tsometimestamp\tsomemsg';
-
-        const parsedLine = git.parseHistoryItem(line);
-
-        expect(parsedLine).to.have.property('hash').with.equal('somehash');
-        expect(parsedLine).to.have.property('author').with.equal('someauthor');
-        expect(parsedLine).to.have.property('timestamp').with.equal('sometimestamp');
-        expect(parsedLine).to.have.property('msg').with.equal('somemsg');
     });
 
     it('Возвращает корректную историю коммитов тестового репозитория', async function () {

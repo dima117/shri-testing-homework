@@ -5,7 +5,7 @@ const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 module.exports = async function(req, res, next) {
   const { hash } = req.params;
   const path = req.params[0].split('/').filter(Boolean);
-  console.log(req.params);
+
   await git.gitFileTree(hash, path.join('/'))
     .then(function([file]) {
       if (file && file.type === 'blob') {
