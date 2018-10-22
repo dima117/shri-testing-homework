@@ -4,9 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha ./tests/**/*.test.js && hermione",
+    "unit": "mocha ./tests/**/*.test.js",
+    "unit-watch": "mocha ./tests/**/*.test.js --watch",
+    "hermione": "hermione",
+    "hermione-gui": "hermione gui",
     "start": "node ./bin/www",
+    "start-testing": "NODE_ENV=testing node ./bin/www",
     "devstart": "ndb ./bin/www"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "keywords": [],
   "author": "",
@@ -16,6 +26,24 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "chai": "^4.2.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
+    "ndb": "^1.0.26",
+    "sinon": "^7.0.0",
+    "supertest": "^3.3.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.1.0",
+    "lint-staged": "^7.3.0",
+    "hermione-custom-commands": "file:./hermione-custom-commands/"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

@@ -1,8 +1,8 @@
-const { gitFileTree } = require('../utils/git');
-const {
+let { gitFileTree } = require('../utils/git');
+let {
   buildFolderUrl,
   buildFileUrl,
-  buildBreadcrumbs
+  buildBreadcrumbs,
 } = require('../utils/navigation');
 
 function buildObjectUrl(parentHash, { path, type }) {
@@ -16,26 +16,47 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
-module.exports = function(req, res, next) {
+module.exports = function filesController(req, res, next) {
+  // точки расширения
+  res.render = filesController._renderFake
+    ? filesController._renderFake(res)
+    : res.render;
+
+  gitFileTree = filesController._gitFileTreeFake
+    ? filesController._gitFileTreeFake
+    : gitFileTree;
+
+  buildFolderUrl = filesController._buildFolderUrlFake
+    ? filesController._buildFolderUrlFake
+    : buildFolderUrl;
+
+  buildFileUrl = filesController._buildFileUrlFake
+    ? filesController._buildFileUrlFake
+    : buildFileUrl;
+
+  buildBreadcrumbs = filesController._buildBreadcrumbsFake
+    ? filesController._buildBreadcrumbsFake
+    : buildBreadcrumbs;
+
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
-  const path = pathParam.length ? pathParam.join('/') + '/' : '';
+  const path = pathParam.length ? `${pathParam.join('/')}/` : '';
 
   return gitFileTree(hash, path).then(
-    list => {
+    (list) => {
       const files = list.map(item => ({
         ...item,
         href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
+        name: item.path.split('/').pop(),
       }));
 
       res.render('files', {
         title: 'files',
         breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
+        files,
       });
     },
-    err => next(err)
+    err => next(err),
   );
 };

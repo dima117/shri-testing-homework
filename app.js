@@ -8,8 +8,14 @@ const HOST = '::';
 const indexController = require('./controllers/indexController');
 const filesController = require('./controllers/filesController');
 const contentController = require('./controllers/contentController');
+const { executeGit } = require('./utils/git');
 
+const fakeREPO = path.resolve('./tests/hermioneStub/');
 const app = express();
+
+if (process.env.NODE_ENV === 'testing') {
+  executeGit._fakeREPO = fakeREPO;
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,14 +31,14 @@ app.get('/files/:hash/*?', filesController);
 app.get('/content/:hash/*?', contentController);
 
 // error handlers
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   const { status = 500, message } = err;
 
   // render the error page

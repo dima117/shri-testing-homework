@@ -10,8 +10,8 @@ function buildBreadcrumbs(hash, path) {
   const bc = [
     {
       text: 'HISTORY',
-      href: hash ? '/' : undefined
-    }
+      href: hash ? '/' : undefined,
+    },
   ];
 
   if (hash) {
@@ -21,7 +21,7 @@ function buildBreadcrumbs(hash, path) {
     // root folder
     bc.push({
       text: 'ROOT',
-      href: normalizedPath.length ? `/files/${hash}/` : undefined
+      href: normalizedPath.length ? `/files/${hash}/` : undefined,
     });
 
     // path
@@ -31,14 +31,14 @@ function buildBreadcrumbs(hash, path) {
       fullPath += `${part}/`;
       bc.push({
         text: part,
-        href: `/files/${hash}/${fullPath}`
+        href: `/files/${hash}/${fullPath}`,
       });
     }
 
     // last part
-    currentName &&
-      bc.push({
-        text: currentName
+    currentName
+      && bc.push({
+        text: currentName,
       });
   }
 
@@ -48,5 +48,5 @@ function buildBreadcrumbs(hash, path) {
 module.exports = {
   buildFolderUrl,
   buildFileUrl,
-  buildBreadcrumbs
+  buildBreadcrumbs,
 };
