@@ -333,7 +333,7 @@ describe('Utils Git Tests', () => {
 
             // действиe
             const result = await utilGit.gitFileContent(hash);
-            console.log(result);
+
             // проверка
             expect(result).to.be.eql(data);
         });
