@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha tests/**/*.js",
-    "integration-test": "./node_modules/.bin/hermione hermione/**/*.hermione.js",
+    "integration-test": "NODE_ENV=test ./node_modules/.bin/hermione hermione/**/*.hermione.js",
+    "integration-gui": "NODE_ENV=test ./node_modules/.bin/hermione gui hermione/**/*.hermione.js",
     "start": "node ./bin/www",
+    "teststart": "NODE_ENV=test node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
   "keywords": [],

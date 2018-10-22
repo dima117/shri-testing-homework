@@ -16,6 +16,13 @@ describe('История коммитов',function () {
                 breadcrumbs: [ { text: 'HISTORY', href: undefined } ],
                 list: [
                     {
+                        hash: 'ae9dfcb7d7e823a9b3f2406678165ceea09dc0fe',
+                        author: 'Arsen',
+                        timestamp: '2018-10-22 16:27:03 +0300',
+                        msg: 'added nested folder',
+                        href: '/files/ae9dfcb7d7e823a9b3f2406678165ceea09dc0fe/'
+                    },
+                    {
                         hash: '1f78f3b14096667c70de44f7025d363614343f17',
                         author: 'Arsen',
                         timestamp: '2018-10-21 22:16:44 +0300',
