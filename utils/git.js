@@ -3,20 +3,6 @@ const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
-function executeGit(cmd, args) {
-  const repo = process.argv[2];
-
-  return new Promise((resolve, reject) => {
-    execFile(cmd, args, { cwd: repo || REPO }, (err, stdout) => {
-      if (err) {
-        reject(err);
-      }
-
-      resolve(stdout.toString());
-    });
-  });
-}
-
 function parseHistoryItem(line) {
   const [hash, author, timestamp, msg] = line.split('\t');
 
@@ -28,25 +14,6 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
-  const offset = (page - 1) * size;
-
-  return executeGit('git', [
-    'log',
-    '--pretty=format:%H%x09%an%x09%ad%x09%s',
-    '--date=iso',
-    '--skip',
-    offset,
-    '-n',
-    size
-  ]).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseHistoryItem);
-  });
-}
-
 function parseFileTreeItem(line) {
   const [info, path] = line.split('\t');
   const [, type, hash] = info.split(' ');
@@ -54,24 +21,79 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
-  const params = ['ls-tree', hash];
-  path && params.push(path);
+class Git {
+  constructor(repo, executeMethod) {
+    this.executeMethod = executeMethod || this.execute;
+    this.repo = repo || REPO;
+  }
 
-  return executeGit('git', params).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseFileTreeItem);
-  });
+  execute(args) {
+    return new Promise((resolve, reject) => {
+      execFile('git', args, { cwd: this.repo }, (err, stdout) => {
+        if (err) {
+          console.log('rejected')
+          reject(err);
+        }
+
+        resolve(stdout.toString());
+      });
+    });
+  }
+
+  getHistory(page = 1, size = 10) {
+    const offset = (page - 1) * size;
+
+    return this.executeMethod([
+      'log',
+      '--pretty=format:%H%x09%an%x09%ad%x09%s',
+      '--date=iso',
+      '--skip',
+      offset,
+      '-n',
+      size
+    ]).then(data => {
+      return data
+        .split('\n')
+        .filter(Boolean)
+        .map(parseHistoryItem);
+    });
+  }
+
+  getFileTree(hash, path) {
+    const params = ['ls-tree', hash];
+    path && params.push(path);
+
+    return this.executeMethod(params).then(data => {
+      return data
+        .split('\n')
+        .filter(Boolean)
+        .map(parseFileTreeItem);
+    });
+  }
+
+  getContent(hash) {
+    return this.executeMethod(['show', hash]);
+  }
+
 }
 
-function gitFileContent(hash) {
-  return executeGit('git', ['show', hash]);
+const git = new Git('./ddd/');
+
+function gitHistory(...args) {
+  return git.getHistory(...args);
+}
+
+function gitFileTree(...args) {
+  return git.getFileTree(...args);
+}
+
+function gitFileContent(...args) {
+  return git.getContent(...args);
 }
 
 module.exports = {
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
+  Git
 };
