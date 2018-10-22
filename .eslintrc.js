@@ -27,5 +27,7 @@ module.exports = {
   "globals": {
     "describe": true,
     "it": true,
+    "afterEach": true,
+    "beforeEach": true,
   }
 };

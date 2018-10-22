@@ -6,6 +6,21 @@ const { expect } = require('chai');
 const indexController = require('./../../../controllers/indexController');
 
 describe('передача данных в шаблонизатор: indexController', () => {
+  // сброс точек расширения
+  afterEach(() => {
+    indexController._buildBreadcrumbsFake = null;
+    indexController._gitHistoryFake = null;
+    indexController._renderFake = null;
+    indexController._buildFolderUrlFake = null;
+  });
+
+  beforeEach(() => {
+    indexController._buildBreadcrumbsFake = null;
+    indexController._gitHistoryFake = null;
+    indexController._renderFake = null;
+    indexController._buildFolderUrlFake = null;
+  });
+
   it('передает корректные параметры для шаблонизатора', (done) => {
     const expectedTemplateData = ['index',
       {

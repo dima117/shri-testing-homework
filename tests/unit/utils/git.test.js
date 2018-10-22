@@ -3,6 +3,20 @@ const sinon = require('sinon');
 const { gitFileContent, gitFileTree, gitHistory } = require('../../../utils/git');
 
 describe('работа с Git', () => {
+  // сброс состояния после
+  afterEach(() => {
+    gitHistory._executeFileFake = null;
+    gitFileTree._executeFileFake = null;
+    gitFileContent._executeFileFake = null;
+  });
+
+  // сброс состояния до тестов
+  beforeEach(() => {
+    gitHistory._executeFileFake = null;
+    gitFileTree._executeFileFake = null;
+    gitFileContent._executeFileFake = null;
+  });
+
   describe('gitFileContent: получение контента коммита', () => {
     it('вызывает корректную git команду для получения контента', async () => {
       const mock = sinon.fake();

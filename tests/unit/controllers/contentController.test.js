@@ -6,6 +6,21 @@ const { expect, assert } = require('chai');
 const contentController = require('./../../../controllers/contentController');
 
 describe('передача данных в шаблонизатор: contentController', () => {
+  // сброс точек расширения
+  afterEach(() => {
+    contentController._buildBreadcrumbsFake = null;
+    contentController._gitFileContentFake = null;
+    contentController._gitFileTreeFake = null;
+    contentController._renderFake = null;
+  });
+
+  beforeEach(() => {
+    contentController._buildBreadcrumbsFake = null;
+    contentController._gitFileContentFake = null;
+    contentController._gitFileTreeFake = null;
+    contentController._renderFake = null;
+  });
+
   it('передает корректные параметры для шаблонизатора', (done) => {
     const breadcrumbsMock = sinon.fake();
     const expectedTemplateData = ['content',
