@@ -4,7 +4,7 @@ module.exports = {
 
   sets: {
     common: {
-      files: 'test/test.hermione.js'
+      files: 'test/hermione.test.js'
     }
   },
 
