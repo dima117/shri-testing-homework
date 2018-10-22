@@ -57,8 +57,11 @@ describe('Тестирование утилит для GIT', () => {
 	});
 
 	it('#gitFileContent', async () => {
-		const result = await gitFileContent('d7b47df17ba8ea90f706bf9c92f9a7fc14579744');
-		const string = "#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar app = require('../app');\n";
+		const result = await gitFileContent(
+			'd7b47df17ba8ea90f706bf9c92f9a7fc14579744'
+		);
+		const string =
+			"#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar app = require('../app');\n";
 		assert.strictEqual(result, string);
-    });
+	});
 });
