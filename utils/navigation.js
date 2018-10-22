@@ -39,7 +39,6 @@ function buildBreadcrumbs(hash, path) {
           text: currentName
       });
     }
-
     return bc;
 }
 

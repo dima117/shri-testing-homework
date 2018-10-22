@@ -1,14 +1,17 @@
-const { gitFileContent, gitFileTree } = require('../utils/git');
+const { UtilGit } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+
+const utilGit = new UtilGit();
+
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
   const path = req.params[0].split('/').filter(Boolean);
 
-  gitFileTree(hash, path.join('/'))
+  utilGit.gitFileTree(hash, path.join('/'))
     .then(function([file]) {
       if (file && file.type === 'blob') {
-        return gitFileContent(file.hash);
+        return utilGit.gitFileContent(file.hash);
       }
     })
     .then(

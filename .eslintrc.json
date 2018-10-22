@@ -6,21 +6,17 @@
         "node": true,
         "browser": true,
         "commonjs": true,
+        "jquery": true,
         "mocha": true,
         "es6": true
     },
-    
-    "extends": [
-        "eslint:recommended"
-    ],
+
+    "extends": "eslint:recommended",
 
 
     "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
+        "ecmaVersion": 8,
+        "sourceType": "module"
     },
 
     "rules": {
@@ -74,6 +70,7 @@
         "no-shadow": 2,
         "no-shadow-restricted-names": 2,
         "no-spaced-func": 2,
+        "no-trailing-spaces": 2,
         "no-undef": 2,
         "no-undef-init": 2,
         "no-undefined": 2,
@@ -96,6 +93,7 @@
         "wrap-iife": [2, "inside"],
         "yoda": [2, "never"],
 
+        // Previously on by default in node environment
         "no-catch-shadow": 0,
         "no-console": 0,
         "no-mixed-requires": 2,
@@ -104,6 +102,7 @@
         "global-strict": [0, "always"],
         "handle-callback-err": [2, "err"],
 
+        // ES6
         "arrow-spacing": [2, {"before": true, "after": true}],
         "constructor-super": 2,
         "no-confusing-arrow": 2,
