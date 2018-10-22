@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   baseUrl: 'http://localhost:3000',
   gridUrl: 'http://0.0.0.0:4444/wd/hub',
@@ -18,6 +20,7 @@ module.exports = {
   plugins: {
     'html-reporter/hermione': {
       path: 'hermione/hermione-html-report'
-    }
+    },
+    [path.resolve(__dirname, './hermione/custom-commands/index.js')]: true
   }
 };
