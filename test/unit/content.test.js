@@ -5,7 +5,7 @@ const sinon = require('sinon');
 describe('File content', function () {
 
     it('Should be return file properties ', function (done) {
-        const execute = sinon.stub().resolves(`100644 blob b512c09d476623ff4bf8d0d63c29b784925dbdf8	.gitignore`);
+        const execute = sinon.stub().resolves('100644 blob b512c09d476623ff4bf8d0d63c29b784925dbdf8\t.gitignore');
         
         const hash = '90180910fc27a11272a3e5caeeb119a51e5c0545';
         const path = ['.gitignore'];
@@ -22,7 +22,7 @@ describe('File content', function () {
     });
 
     it('Should be return file content', function(done) {
-        const execute = sinon.stub().resolves(`node_modules`);
+        const execute = sinon.stub().resolves('node_modules');
 
         const fileProperties = {
             type: 'blob',

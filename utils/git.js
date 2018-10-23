@@ -54,5 +54,7 @@ function gitFileContent(systemConsole, hash) {
 module.exports = {
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
+  parseFileTreeItem,
+  parseHistoryItem
 };

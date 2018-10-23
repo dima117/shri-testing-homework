@@ -5,7 +5,7 @@ const sinon = require('sinon');
 describe('Files sturcture', function () {
 
     it('Should be displayed file list', function (done) {
-        const execute = sinon.stub().resolves(`100644 blob d7b47df17ba8ea90f706bf9c92f9a7fc14579744\tbin/www`);
+        const execute = sinon.stub().resolves('100644 blob d7b47df17ba8ea90f706bf9c92f9a7fc14579744\tbin/www');
         
         const hash = '90180910fc27a11272a3e5caeeb119a51e5c0545';
         const path = '/bin';
