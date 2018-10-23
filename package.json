@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha ./tests/unit/*",
     "start": "node ./bin/www",
+    "start-mock": "node ./bin/wwwMock",
     "devstart": "ndb ./bin/www"
   },
   "keywords": [],
