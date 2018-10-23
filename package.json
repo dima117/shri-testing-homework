@@ -1,21 +1,25 @@
 {
-  "name": "git-viewer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.4",
-    "hbs": "^4.0.1"
-  },
-  "devDependencies": {
-    "ndb": "^1.0.26"
-  }
+	"name": "git-viewer",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "mocha ./tests/tests-unit.js && ./node_modules/.bin/hermione ./tests/tests-integration.js",
+		"start": "node ./bin/www",
+		"devstart": "ndb ./bin/www"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.16.4",
+		"hbs": "^4.0.1"
+	},
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"hermione": "^0.90.1",
+		"html-reporter": "^2.22.0",
+		"mocha": "^5.2.0",
+		"ndb": "^1.0.26"
+	}
 }
