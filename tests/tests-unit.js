@@ -1,2 +1,2 @@
-require('./test-git');
-require('./test-indexController');
+require('./unit/git');
+require('./unit/indexController');

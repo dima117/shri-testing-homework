@@ -2,7 +2,7 @@ const assert = require('assert');
 const chai = require('chai');
 const expect = chai.expect;
 
-const { parseHistoryItem, gitHistory, parseFileTreeItem, gitFileTree, gitFileContent } = require('../utils/git');
+const { parseHistoryItem, gitHistory, parseFileTreeItem, gitFileTree, gitFileContent } = require('../../utils/git');
 
 describe('Запуск гита и получение рез-та', () => {
 	it('parseHistoryItem получает строку', function() {

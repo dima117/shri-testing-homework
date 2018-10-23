@@ -1,6 +1,6 @@
 <h2>Запуск</h2>
 
-```git checkout task5
+```
 npm i
 npm start
 selenium-standalone start
