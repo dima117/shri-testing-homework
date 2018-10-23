@@ -1,20 +1,24 @@
 const { gitHistory } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-module.exports = function(req, res) {
-  gitHistory(1, 20).then(
-    history => {
-      const list = history.map(item => ({
-        ...item,
-        href: buildFolderUrl(item.hash, '')
-      }));
+// Добавлен async / await + добавлены стабы
+module.exports = async function(req, res, next, ...stubs) {
+	const getHistory = stubs[0] ? stubs[0] : gitHistory;
 
-      res.render('index', {
-        title: 'history',
-        breadcrumbs: buildBreadcrumbs(),
-        list
-      });
-    },
-    err => next(err)
-  );
+	// Добавление к объекту ключа href с ссылкой
+	const list = await getHistory(1, 20).then(
+		history => {
+			return history.map(item => ({
+				...item,
+				href: buildFolderUrl(item.hash, '')
+			}));
+		},
+		err => next(err)
+	);
+
+	res.render('index', {
+		title: 'history',
+		breadcrumbs: buildBreadcrumbs(),
+		list
+	});
 };
