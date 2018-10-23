@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:int": "./node_modules/.bin/hermione tests/avadakedavra.hermione.js",
-    "test:unit": "mocha tests/test_navi.js",
+    "test:unit": "mocha tests/test_navi.js && mocha tests/test_git.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
     "selenium": "selenium-standalone start",
