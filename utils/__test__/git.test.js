@@ -9,20 +9,17 @@ const {
 
 describe('История коммитов', () => {
 
+  const executeGit = sinon.stub();
+  executeGit.returns(Promise.resolve('1\t2\t3\t4'));
+
   it('Количество возвращаемых элементов соответствует переданным параметрам', () => {
-    const stub = sinon.stub();
-    stub.returns(Promise.resolve('1\t2\t3\t4'));
+    gitHistory(2, 1, executeGit);
 
-    gitHistory(2, 1, stub);
-
-    expect(stub.args[0][1][4]).to.be.equal(1);
+    expect(executeGit.getCall(0).args[1][4]).to.be.equal(1);
   });
 
   it('Правильно разбирается история коммитов', async () => {
-    const stub = sinon.stub();
-    stub.returns(Promise.resolve('1\t2\t3\t4'));
-
-    const history = await gitHistory(1, 1, stub);
+    const history = await gitHistory(1, 1, executeGit);
 
     expect(history[0]).to.have.all.keys(
       'hash',
@@ -36,29 +33,23 @@ describe('История коммитов', () => {
 
 describe('Файловая система коммита', () => {
 
+  const executeGit = sinon.stub();
+  executeGit.returns(Promise.resolve('1 2 3\t4'));
+
   it('Возвращается список файлов для определенного коммита', () => {
-    const stub = sinon.stub();
-    stub.returns(Promise.resolve('1 2 3\t4'));
+    gitFileTree('hash', '', executeGit);
 
-    gitFileTree('hash', '', stub);
-
-    expect(stub.args[0][1][1]).to.be.equal('hash');
+    expect(executeGit.getCall(0).args[1][1]).to.be.equal('hash');
   });
 
   it('При выборе папки из коммита, возвращается список файлов этой папки', () => {
-    const stub = sinon.stub();
-    stub.returns(Promise.resolve('1 2 3\t4'));
+    const fileTree = gitFileTree('hash', 'path', executeGit);
 
-    const fileTree = gitFileTree('hash', 'path', stub);
-
-    expect(stub.args[0][1][2]).to.be.equal('path');
+    expect(executeGit.getCall(1).args[1][2]).to.be.equal('path');
   });
 
   it('Правильно разбирается файловая система коммита', async () => {
-    const stub = sinon.stub();
-    stub.returns(Promise.resolve('1 2 3\t4'));
-
-    const fileTree = await gitFileTree('', '', stub);
+    const fileTree = await gitFileTree('', '', executeGit);
 
     expect(fileTree[0]).to.have.all.keys(
       'type',

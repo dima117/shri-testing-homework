@@ -29,10 +29,12 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10, stub) {
+function gitHistory(page = 1, size = 10, executeGitStub) {
+  const _executeGit = executeGitStub || executeGit;
+
   const offset = (page - 1) * size;
 
-  return (stub || executeGit)('git', [
+  return _executeGit('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
@@ -55,11 +57,13 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path, stub) {
+function gitFileTree(hash, path, executeGitStub) {
+  const _executeGit = executeGitStub || executeGit;
+
   const params = ['ls-tree', hash];
   path && params.push(path);
 
-  return (stub || executeGit)('git', params).then(data => {
+  return _executeGit('git', params).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
