@@ -10,9 +10,11 @@ class ContentController {
     const file = (await this.git.gitFileTree(hash, path.join('/')))[0];
     let content;
 
+    console.log(path);
     if (file && file.type === 'blob') {
       content = await this.git.gitFileContent(file.hash);
     }
+    console.log(content)
 
     return content;
   }
