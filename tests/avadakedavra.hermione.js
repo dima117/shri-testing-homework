@@ -1,8 +1,8 @@
 const assert = require('assert');
 
-describe('Наличие и расположение страниц приложения', () => {
+describe('Правильно отображается содержимое', () => {
 
-    it('История коммитов - заголовок верный', function () {
+    it('заголовок на странице - история комммитов', function () {
         return this.browser
             .url('/')
             .getText('.breadcrumbs')
@@ -11,7 +11,7 @@ describe('Наличие и расположение страниц прилож
             });
     });
 
-    it('История коммитов - содержимое верное', function () {
+    it('список коммитов на странице - история комммитов', function () {
         return this.browser
             .url('/')
             .isExisting('.commit')
@@ -20,50 +20,58 @@ describe('Наличие и расположение страниц прилож
             });
     });
 
-    it('Файловая система - заголовок верный', function () {
+    it('заголовок на странице - файловая система', function () {
         return this.browser
-            .url('/files/7e013ae0440ad6e91082599376a6aaebe20d2112/')
+            .url('/')
+            .click('.commit__link a')
             .getText('.breadcrumbs')
             .then((text) => {
                 assert.equal(text, 'HISTORY / ROOT', 'Заголовок не совпадает или страница отсутствует');
             });
     });
 
-    it('Файловая система - содержимое верное', function () {
+    it('файлы на странице - файловая система', function () {
         return this.browser
-            .url('/files/7e013ae0440ad6e91082599376a6aaebe20d2112/')
-            .getText('.content ul li:first-child a')
+            .url('/')
+            .click('.commit__link a')
+            .getText('a[href$=".gitignore"]')
             .then((text) => {
                 assert.equal(text, '.gitignore', 'содержимое не совпадает или страница отсутствует');
             });
     });
 
-    it('Содержимое файла - заголовок верный', function () {
+    it('заголовок на странице - файл', function () {
         return this.browser
-            .url('/content/7e013ae0440ad6e91082599376a6aaebe20d2112/.gitignore')
+            .url('/')
+            .click('.commit__link a')
+            .click('a[href$=".gitignore"]')
             .getText('.breadcrumbs')
             .then((text) => {
                 assert.equal(text, 'HISTORY / ROOT / .gitignore', 'Заголовок не совпадает или страница отсутствует');
             });
+
     });
 
-    it('Содержимое файла - содержимое верное', function () {
+    it('данные файла на странице - файл', function () {
         return this.browser
-            .url('/content/7e013ae0440ad6e91082599376a6aaebe20d2112/.gitignore')
-            .getText('.file-content')
-            .then((text) => {
-                assert.equal(text, 'node_modules', 'содержимое не совпадает или страница отсутствует');
+            .url('/')
+            .click('.commit__link a')
+            .click('a[href*="content"]')
+            .getText('.breadcrumbs')
+            .isExisting('.file-content')
+            .then((exist) => {
+                assert.ok(exist, 'содержимое не совпадает или страница отсутствует');
             });
     });
 
 });
 
-describe('Правильно работают переходы по страницам', () => {
+describe('Правильно работает переход', () => {
 
     it('из списка коммитов на список файлов', function () {
         return this.browser
             .url('/')
-            .click('a[href$="/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/"]')
+            .click('.commit__link a')
             .getText('.breadcrumbs')
             .then((text) => {
                 assert.equal(text, 'HISTORY / ROOT', 'Переход неверный');
@@ -71,27 +79,31 @@ describe('Правильно работают переходы по страни
     });
     it('из списка файлов во вложенную папку', function () {
         return this.browser
-            .url('/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/')
-            .click('a[href$="/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/bin"]')
-            .getText('.breadcrumbs')
-            .then((text) => {
-                assert.equal(text, 'HISTORY / ROOT / bin', 'Переход неверный');
+            .url('/')
+            .click('.commit__link a')
+            .click('a[href*="files"]')
+            .isExisting('.content a')
+            .then((exist) => {
+                assert.ok(exist, 'Переход неверный');
             });
     });
 
     it('Из списка файлов на страницу отдельного файла', function () {
         return this.browser
-            .url('/files/cc2284293758e32c50fa952da2f487c8c5e8d023/')
-            .click('.content ul li:first-child a')
-            .getText('.breadcrumbs')
-            .then((text) => {
-                assert.equal(text, 'HISTORY / ROOT / .gitignore', 'Заголовок не совпадает или страница отсутствует');
+            .url('/')
+            .click('.commit__link a')
+            .click('a[href*="content"]')
+            .isExisting('.file-content')
+            .then((exist) => {
+                assert.ok(exist, 'переход неверный');
             });
     });
 
     it('Переход по хлебным крошкам', function () {
         return this.browser
-            .url('/content/cc2284293758e32c50fa952da2f487c8c5e8d023/controllers/contentController.js')
+            .url('/')
+            .click('.commit__link a')
+            .click('a[href*="content"]')
             .click('.breadcrumbs a:first-child')
             .getText('.breadcrumbs')
             .then((text) => {
