@@ -1,6 +1,9 @@
 const { resolve } = require('path');
 const REPO = resolve('.');
 
+/**
+ * Дочерний процесс
+ */
 const { execFile } = require('child_process');
 
 
@@ -32,7 +35,7 @@ class Git {
   gitHistory(page = 1, size = 10) {
     const offset = (page - 1) * size;
 
-    return this.executeGit('git', [
+    return this.executing('git', [
       'log',
       '--pretty=format:%H%x09%an%x09%ad%x09%s',
       '--date=iso',
@@ -70,16 +73,17 @@ class Git {
     const params = ['ls-tree', hash];
     path && params.push(path);
 
-    return this.executeGit('git', params).then(data => {
-      return data
-          .split('\n')
-          .filter(Boolean)
-          .map(this.parseFileTreeItem);
-    });
+    return this.executing('git', params)
+      .then(data => {
+        return data
+            .split('\n')
+            .filter(Boolean)
+            .map(this.parseFileTreeItem);
+      });
   }
 
   gitFileContent(hash) {
-    return this.executeGit('git', ['show', hash]);
+    return this.executing('git', ['show', hash]);
   }
 }
 
