@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/unit-tests/**/*.spec.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
     "eslint": "eslint controllers/*.js utils/*.js *.js"
@@ -17,8 +17,11 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.7.0",
     "eslint-config-google": "^0.11.0",
+    "mocha": "^5.2.0",
+    "moment": "^2.22.2",
     "ndb": "^1.0.26"
   }
 }

@@ -1,7 +1,12 @@
 const { gitHistory } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-module.exports = function(req, res) {
+/**
+ * Renders index page.
+ * @param {Object} req
+ * @param {Object} res
+ */
+function indexController(req, res) {
   gitHistory(1, 20).then(history => {
     const list = history.map(item => ({
       ...item,
@@ -15,4 +20,6 @@ module.exports = function(req, res) {
     });
   },
   err => next(err));
-};
+}
+
+module.exports = indexController;
