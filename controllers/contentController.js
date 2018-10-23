@@ -4,17 +4,18 @@ const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 class ContentController {
   constructor() {
     this.git = new Git();
+    this.fileTree = (...args) => this.git.fileTree(...args);
+    this.fileContent = (...args) => this.git.fileContent(...args);
   }
 
   async getContent(hash, path) {
-    const file = (await this.git.gitFileTree(hash, path.join('/')))[0];
+    const file = (await this.fileTree(hash, path.join('/')))[0];
+
     let content;
 
-    console.log(path);
     if (file && file.type === 'blob') {
-      content = await this.git.gitFileContent(file.hash);
+      content = await this.fileContent(file.hash);
     }
-    console.log(content)
 
     return content;
   }
