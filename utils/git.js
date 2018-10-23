@@ -51,6 +51,7 @@ class Git {
     });
   }
 
+  /* + */
   parseHistoryItem(line) {
     const [hash, author, timestamp, msg] = line.split('\t');
 

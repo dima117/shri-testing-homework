@@ -5,9 +5,9 @@ const PORT = 3000;
 const HOST = '::';
 
 // controllers
-const {IndexController} = require('./controllers/indexController');
+const IndexController = require('./controllers/indexController');
 
-const indexController = new IndexController();
+// const indexController = new IndexController();
 const filesController = require('./controllers/filesController');
 const contentController = require('./controllers/contentController');
 
@@ -22,7 +22,7 @@ app.set('view options', { layout: 'layout', extname: '.hbs' });
 app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
-app.get('/', indexController);
+app.get('/', IndexController);
 app.get('/files/:hash/*?', filesController);
 app.get('/content/:hash/*?', contentController);
 
