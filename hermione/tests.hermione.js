@@ -172,5 +172,36 @@ describe('Правильно работают переходы по страни
                     )
                 })
         })
+
+        describe('Возвращает ошибки при переходе на несуществующие страницы', function() {
+            it('Переход на неверный URL - ошибка 500', function() {
+                return this.browser
+                    .url('content/somehash/somepath')
+                    .getText('.container')
+                    .then((text) => {
+                        assert.include(text, '500')
+                    })
+            });
+
+            it('Переход на неверный URL - ошибка 404', function() {
+                return this.browser
+                    .url('content/somehash')
+                    .getText('.container')
+                    .then((text) => {
+                        assert.ok(text, '404 - Not Found')
+                    })
+            });
+
+            it('Переход на неверный URL со `/` в конце - ошибка 500', function() {
+                return this.browser
+                    .url('content/somehash/')
+                    .getText('.container')
+                    .then((text) => {
+                        assert.ok(text, '500')
+                    })
+            });
+        });
     });
+
+
 });
