@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run test:unit",
+    "test:unit": "mocha tests/unit",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -16,6 +17,8 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "chai": "4.2.0",
+    "mocha": "5.2.0",
     "ndb": "^1.0.26"
   }
 }
