@@ -10,7 +10,7 @@ describe('Отображение главных элементов', () => {
 
 	it('На стр коммита должен отображаться список файлов', function() {
 		return this.browser
-			.url('/files/77ff20b22039b73fc655bee0185f02ff2e33b4cf/')
+			.url('/files/c91138ad7ecdd2de853eb50ef2842b5bff8d74d2/')
 			.isExisting('.content--files')
 			.then((exists) => {
 				assert.ok(exists, 'Список файлов не появился');
@@ -19,7 +19,7 @@ describe('Отображение главных элементов', () => {
 
 	it('На стр файла должно отображаться содержимое файла', function() {
 		return this.browser
-			.url('/content/77ff20b22039b73fc655bee0185f02ff2e33b4cf/app.js')
+			.url('/content/c91138ad7ecdd2de853eb50ef2842b5bff8d74d2/app.js')
 			.isExisting('.content--file')
 			.then((exists) => {
 				assert.ok(exists, 'Содержимое файла не появилась');
@@ -34,7 +34,7 @@ describe('Отображение главных элементов', () => {
 
 	it('Хлебные крошки отображаются на стр коммита', function() {
 		return this.browser
-			.url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
+			.url('/files/c91138ad7ecdd2de853eb50ef2842b5bff8d74d2/')
 			.isExisting('.breadcrumbs')
 			.then((exists) => {
 				assert.ok(exists, 'Хлебные крошки не отображаются на стр коммита');
@@ -43,7 +43,7 @@ describe('Отображение главных элементов', () => {
 
 	it('Хлебные крошки отображаются на стр файла', function() {
 		return this.browser
-			.url('/content/90180910fc27a11272a3e5caeeb119a51e5c0545/app.js')
+			.url('/content/c91138ad7ecdd2de853eb50ef2842b5bff8d74d2/app.js')
 			.isExisting('.breadcrumbs')
 			.then((exists) => {
 				assert.ok(exists, 'Хлебные крошки не отображаются на стр файла');
