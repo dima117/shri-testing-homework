@@ -13,5 +13,11 @@ module.exports = (hermione, opts) => {
         .getText(selector)
         .then((text) => {assert.equal(text, msg)});
     });
+
+    browser.addCommand('assertLink', (link) => {
+      return browser
+        .getUrl()
+        .then((url) => {assert.equal(url, link)});
+    });
   });   
 }
