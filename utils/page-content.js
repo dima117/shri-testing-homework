@@ -1,8 +1,6 @@
 const { buildObjectUrl, buildBreadcrumbs } = require('../utils/navigation');
 
 const getIndex = (history) => {
-  console.log(!Array.isArray(history));
-
   if (!Array.isArray(history)) {
     history = [];
   }
@@ -41,11 +39,6 @@ const getFiles = (list, hash, pathParam) => {
 };
 
 const getContent = (content, hash, path) => {
-  console.log('content::', content);
-  console.log('hash::', hash);
-  console.log('path::', path);
-
-  console.log('type of', typeof content);
   return {
     title: 'content',
     breadcrumbs: buildBreadcrumbs(hash, path.join('/')),

@@ -1,4 +1,4 @@
-const { buildBreadcrumbs } = require('../utils/navigation');
+const { buildBreadcrumbs } = require('../../../utils/navigation');
 const { assert } = require('chai');
 
 suite(`buildBreadcrumbs`, () => {

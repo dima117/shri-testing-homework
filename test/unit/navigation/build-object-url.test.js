@@ -1,4 +1,4 @@
-const { buildObjectUrl } = require('../utils/navigation');
+const { buildObjectUrl } = require('../../../utils/navigation');
 const { assert } = require('chai');
 
 const hash = 'f14d98df73bb0e8dd276edf43019b7244557f8b0';

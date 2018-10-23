@@ -1,4 +1,4 @@
-const { getFiles } = require('../utils/page-content');
+const { getFiles } = require('../../../utils/page-content');
 const { assert, expect } = require('chai');
 
 suite(`getFiles`, () => {

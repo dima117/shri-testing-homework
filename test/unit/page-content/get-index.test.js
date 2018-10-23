@@ -1,4 +1,4 @@
-const { getIndex } = require('../utils/page-content');
+const { getIndex } = require('../../../utils/page-content');
 const { assert, expect } = require('chai');
 
 suite(`getIndex`, () => {
