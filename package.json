@@ -28,6 +28,6 @@
     "sinon": "^7.0.0"
   },
   "nyc": {
-    "temp-dir": "./node_modules/coverage/.nyc_output"
+    "temp-dir": "./coverage/.nyc_output"
   }
 }
