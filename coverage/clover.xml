@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1540221616342" clover="3.2.0">
+  <project timestamp="1540221616343" name="All files">
+    <metrics statements="48" coveredstatements="28" conditionals="17" coveredconditionals="4" methods="18" coveredmethods="11" elements="83" coveredelements="43" complexity="0" loc="48" ncloc="48" packages="3" files="4" classes="4">
+      <package name="controllers">
+        <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+        <file name="indexController.js" path="C:\Peter\workspace\Yandex\homeworks\testing\controllers\indexController.js">
+          <metrics statements="7" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="12" count="1" type="stmt"/>
+          <line num="18" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="te">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <file name="obertka.js" path="C:\Peter\workspace\Yandex\homeworks\testing\te\obertka.js">
+          <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="utils">
+        <metrics statements="38" coveredstatements="19" conditionals="17" coveredconditionals="4" methods="13" coveredmethods="7"/>
+        <file name="git.js" path="C:\Peter\workspace\Yandex\homeworks\testing\utils\git.js">
+          <metrics statements="23" coveredstatements="17" conditionals="6" coveredconditionals="4" methods="10" coveredmethods="6"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="8" count="5" type="stmt"/>
+          <line num="9" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="13" count="2" type="stmt"/>
+          <line num="19" count="1" type="stmt"/>
+          <line num="21" count="1" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="41" count="0" type="stmt"/>
+          <line num="49" count="1" type="stmt"/>
+          <line num="50" count="1" type="stmt"/>
+          <line num="52" count="1" type="stmt"/>
+          <line num="56" count="3" type="stmt"/>
+          <line num="57" count="3" type="cond" truecount="2" falsecount="0"/>
+          <line num="59" count="3" type="stmt"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="61" count="0" type="stmt"/>
+          <line num="69" count="0" type="stmt"/>
+          <line num="72" count="1" type="stmt"/>
+        </file>
+        <file name="navigation.js" path="C:\Peter\workspace\Yandex\homeworks\testing\utils\navigation.js">
+          <metrics statements="15" coveredstatements="2" conditionals="11" coveredconditionals="0" methods="3" coveredmethods="1"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="6" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="19" count="0" type="stmt"/>
+          <line num="22" count="0" type="stmt"/>
+          <line num="28" count="0" type="stmt"/>
+          <line num="29" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="45" count="0" type="stmt"/>
+          <line num="48" count="1" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>
