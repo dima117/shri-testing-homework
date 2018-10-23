@@ -1,14 +1,14 @@
 <div class="breadcrumbs">
     {{#each breadcrumbs}}
         {{#if href}}
-            <a href="{{href}}">{{text}}</a> /
+            <a class="breadcrumbs__link" href="{{href}}">{{text}}</a> /
         {{else}}
             {{text}}
         {{/if}}
     {{/each}}
 </div>
 
-<div class="content">
+<div class="content content--inner-file">
     <a href="{{parentHref}}">{{parentPath}}</a>
 
     <div class="file-content">{{content}}</div>

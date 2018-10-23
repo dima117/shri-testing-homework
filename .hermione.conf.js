@@ -2,18 +2,18 @@ module.exports = {
   baseUrl: 'http://localhost:3000',
   gridUrl: 'http://0.0.0.0:4444/wd/hub',
 
-  browsers: {
-    chrome: {
-      desiredCapabilities: {
-        browserName: 'chrome',
-      },
-    },
+  sets: {
+		desktop: {
+			files: 'hermione'
+		}
+	},
 
-    firefox: {
-      desiredCapabilities: {
-        browserName: 'firefox',
-      },
-    },
+	browsers: {
+    chrome: {
+     desiredCapabilities: {
+       browserName: 'chrome'
+     }
+   },
   },
 
   compositeImage: true,
