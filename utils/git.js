@@ -1,14 +1,14 @@
 const { resolve } = require('path');
-const gitHistoryStub = require('./gitHistoryStub.js');
 const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
-const DEV = process.env.NODE_ENV !== 'production';
+const DEV = process.env.NODE_ENV === 'development';
 
-function executeGit(cmd, args, stub) {
+/* istanbul ignore next */
+function executeGit(cmd, args) {
   return new Promise((resolve, reject) => {
-    (stub || execFile)(cmd, args, { cwd: REPO }, (err, stdout) => {
+    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
       if (err) {
         reject(err);
       }
@@ -41,7 +41,7 @@ function gitHistory(page = 1, size = 10, stub) {
     '-n',
     size
   ]).then(data => {
-    return (DEV ? gitHistoryStub : data)
+    return (DEV ? require('./gitHistoryStub') : data)
       .split('\n')
       .filter(Boolean)
       .map(parseHistoryItem)
@@ -67,12 +67,12 @@ function gitFileTree(hash, path, stub) {
   });
 }
 
-function gitFileContent(hash, stub) {
-  return (stub || executeGit)('git', ['show', hash]);
+/* istanbul ignore next */
+function gitFileContent(hash) {
+  return executeGit('git', ['show', hash]);
 }
 
 module.exports = {
-  executeGit,
   gitHistory,
   gitFileTree,
   gitFileContent,
