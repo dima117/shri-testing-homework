@@ -4,10 +4,23 @@ const express = require('express');
 const PORT = 3000;
 const HOST = '::';
 
+const {   
+  gitHistoryFactory,
+  gitFileTreeFactory,
+  gitFileContentFactory 
+} = require('./utils/git');
+
+const gitHistory = gitHistoryFactory();
+const gitFileTree = gitFileTreeFactory();
+const gitFileContent = gitFileContentFactory();
+
 // controllers
-const indexController = require('./controllers/indexController');
-const filesController = require('./controllers/filesController');
-const contentController = require('./controllers/contentController');
+const indexController = require('./controllers/indexController')();
+const filesController = require('./controllers/filesController')();
+const contentController = require('./controllers/contentController')({
+  gitFileTree,
+  gitFileContent
+});
 
 const app = express();
 
