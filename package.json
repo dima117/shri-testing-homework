@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "test:unit": "mocha ./test/**/*.test.js",
+    "test:integration": "./node_modules/.bin/hermione test/integration/**/*.hermione.js",
+    "test:integration-gui": "./node_modules/.bin/hermione gui test/integration/**/*.hermione.js",
+    "test:coverage": "nyc mocha ./test/unit/**"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,12 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "chai": "^4.2.0",
+    "hermione": "^0.90.1",
+    "hermione-custom-plugin": "file:./hermione-custom-plugin",
+    "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
+    "ndb": "^1.0.26",
+    "nyc": "^13.1.0"
   }
 }
