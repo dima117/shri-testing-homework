@@ -1,27 +1,29 @@
-const {gitFileContent, gitFileTree} = require('../utils/git');
-const {renderData} = require('../utils/prepareData');
+const { gitFileContent, gitFileTree } = require('../utils/git');
+const { renderData } = require('../utils/prepareData');
 
-module.exports = function (getFileTree = gitFileTree) {
+module.exports = function (getFileTree = gitFileTree, getFileContent = gitFileContent) {
   return function (req, res, next) {
     const {hash} = req.params;
     const path = req.params[0].split('/').filter(Boolean);
     const pathFull = path.join('/');
 
-    getFileTree(hash, path.join('/'))
+    getFileTree(hash, pathFull)
       .then(function ([file]) {
         if (file && file.type === 'blob') {
-          return gitFileContent(file.hash);
+          return getFileContent(file.hash);
         }
       })
       .then(
         content => {
           if (content) {
-            res.render('content', renderData('content', content, hash, pathFull));
+            console.log('content true')
+            const data = renderData('content', content, hash, pathFull);
+            res.render('content', data);
           } else {
+            console.log('content false')
             next();
           }
         }
       ).catch(err => next(err));
   };
-}();
-
+};
