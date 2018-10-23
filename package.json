@@ -4,18 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:int": "./node_modules/.bin/hermione tests/avadakedavra.hermione.js",
+    "test:unit": "mocha tests/test_navi.js && mocha tests/test_git.js",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "selenium": "selenium-standalone start",
+    "testrun": "concurrently --kill-others \"npm:start\" \"npm:selenium\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "debug": "^4.1.0",
     "express": "^4.16.4",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "webdriverio": "^4.13.2"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "chai": "^4.2.0",
+    "concurrently": "^4.0.1",
+    "eslint": "^5.7.0",
+    "eslint-plugin-chai-expect": "^2.0.1",
+    "graceful-fs": "^4.1.11",
+    "growl": "^1.10.5",
+    "hermione": "^0.90.1",
+    "minimatch": "^3.0.4",
+    "ndb": "^1.0.26",
+    "pug": "^2.0.3",
+    "wdio-mocha-framework": "^0.6.3"
   }
 }

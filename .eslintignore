@@ -1,0 +1,9 @@
+!.eslintrc.js
+/bin/**
+/controllers/
+/node_modules/
+/public/
+/utils/
+/views/
+app.js
+index.js
