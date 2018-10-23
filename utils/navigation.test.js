@@ -36,7 +36,7 @@ describe('Breadcrumbs with not empty hash', function() {
       path: undefined,
       expected: [
         { text: 'HISTORY', href: '/' },
-        { text: 'ROOT', href: undefined }
+        { text: 'ROOT', href: undefined } // undefined это не норм, но такое поведение у функции. Я просто тестирую
       ]
     },
   ];
