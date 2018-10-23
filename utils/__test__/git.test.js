@@ -7,68 +7,64 @@ const {
   gitFileContent,
 } = require('../git');
 
-describe('utils/git.js', () => {
+describe('История коммитов', () => {
 
-  describe('История коммитов', () => {
+  it('Количество возвращаемых элементов соответствует переданным параметрам', () => {
+    const stub = sinon.stub();
+    stub.returns(Promise.resolve('1\t2\t3\t4'));
 
-    it('Количество возвращаемых элементов соответствует переданным параметрам', () => {
-      const stub = sinon.stub();
-      stub.returns(Promise.resolve('1\t2\t3\t4'));
+    gitHistory(2, 1, stub);
 
-      gitHistory(2, 1, stub);
-
-      expect(stub.args[0][1][4]).to.be.equal(1);
-    });
-
-    it('Правильно разбирается история коммитов', async () => {
-      const stub = sinon.stub();
-      stub.returns(Promise.resolve('1\t2\t3\t4'));
-
-      const history = await gitHistory(1, 1, stub);
-
-      expect(history[0]).to.have.all.keys(
-        'hash',
-        'author',
-        'timestamp',
-        'msg',
-      );
-    });
-
+    expect(stub.args[0][1][4]).to.be.equal(1);
   });
 
-  describe('Файловая система коммита', () => {
+  it('Правильно разбирается история коммитов', async () => {
+    const stub = sinon.stub();
+    stub.returns(Promise.resolve('1\t2\t3\t4'));
 
-    it('Возвращается список файлов для определенного коммита', () => {
-      const stub = sinon.stub();
-      stub.returns(Promise.resolve('1 2 3\t4'));
+    const history = await gitHistory(1, 1, stub);
 
-      gitFileTree('hash', '', stub);
+    expect(history[0]).to.have.all.keys(
+      'hash',
+      'author',
+      'timestamp',
+      'msg',
+    );
+  });
 
-      expect(stub.args[0][1][1]).to.be.equal('hash');
-    });
+});
 
-    it('При выборе папки из коммита, возвращается список файлов этой папки', () => {
-      const stub = sinon.stub();
-      stub.returns(Promise.resolve('1 2 3\t4'));
+describe('Файловая система коммита', () => {
 
-      const fileTree = gitFileTree('hash', 'path', stub);
+  it('Возвращается список файлов для определенного коммита', () => {
+    const stub = sinon.stub();
+    stub.returns(Promise.resolve('1 2 3\t4'));
 
-      expect(stub.args[0][1][2]).to.be.equal('path');
-    });
+    gitFileTree('hash', '', stub);
 
-    it('Правильно разбирается файловая система коммита', async () => {
-      const stub = sinon.stub();
-      stub.returns(Promise.resolve('1 2 3\t4'));
+    expect(stub.args[0][1][1]).to.be.equal('hash');
+  });
 
-      const fileTree = await gitFileTree('', '', stub);
+  it('При выборе папки из коммита, возвращается список файлов этой папки', () => {
+    const stub = sinon.stub();
+    stub.returns(Promise.resolve('1 2 3\t4'));
 
-      expect(fileTree[0]).to.have.all.keys(
-        'type',
-        'hash',
-        'path',
-      );
-    });
+    const fileTree = gitFileTree('hash', 'path', stub);
 
+    expect(stub.args[0][1][2]).to.be.equal('path');
+  });
+
+  it('Правильно разбирается файловая система коммита', async () => {
+    const stub = sinon.stub();
+    stub.returns(Promise.resolve('1 2 3\t4'));
+
+    const fileTree = await gitFileTree('', '', stub);
+
+    expect(fileTree[0]).to.have.all.keys(
+      'type',
+      'hash',
+      'path',
+    );
   });
 
 });
