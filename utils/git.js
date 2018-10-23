@@ -51,7 +51,6 @@ class Git {
     });
   }
 
-  /* + */
   parseHistoryItem(line) {
     const [hash, author, timestamp, msg] = line.split('\t');
 
@@ -74,16 +73,17 @@ class Git {
     const params = ['ls-tree', hash];
     path && params.push(path);
 
-    return this.executing('git', params).then(data => {
-      return data
-          .split('\n')
-          .filter(Boolean)
-          .map(this.parseFileTreeItem);
-    });
+    return this.executing('git', params)
+      .then(data => {
+        return data
+            .split('\n')
+            .filter(Boolean)
+            .map(this.parseFileTreeItem);
+      });
   }
 
   gitFileContent(hash) {
-    return this.executeGit('git', ['show', hash]);
+    return this.executing('git', ['show', hash]);
   }
 }
 

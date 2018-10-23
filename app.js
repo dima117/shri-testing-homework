@@ -6,10 +6,9 @@ const HOST = '::';
 
 // controllers
 const IndexController = require('./controllers/indexController');
-
-// const indexController = new IndexController();
 const filesController = require('./controllers/filesController');
-const contentController = require('./controllers/contentController');
+const {ContentController} = require('./controllers/contentController');
+const contentController = new ContentController();
 
 const app = express();
 
@@ -24,7 +23,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // pages
 app.get('/', IndexController);
 app.get('/files/:hash/*?', filesController);
-app.get('/content/:hash/*?', contentController);
+app.get('/content/:hash/*?', (...args) => {
+  contentController.render(...args);
+});
 
 // error handlers
 app.use(function(req, res, next) {

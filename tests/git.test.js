@@ -3,14 +3,14 @@ const assert = require('chai').assert;
 
 describe('Тест хелпера Git', () => {
 
-  it('Получаем историю коммитов', function () {
+  it('Получаем историю коммитов в виде объектов', async function () {
     const git = new Git();
 
-    this.executing = () => {
+    git.executing = () => {
       return Promise.resolve('hash1\tauthor1\tdate1\ttext1\n' + 'hash2\tauthor2\tdate2\ttext2')
     };
 
-    const historyList = git.gitHistory(1,2);
+    const historyList = await git.gitHistory(1,2);
 
     assert.deepEqual(historyList, [
       {
@@ -29,7 +29,7 @@ describe('Тест хелпера Git', () => {
 
   });
 
-  it('Разбивает строку коммита на объект', function () {
+  it('Разбивает в истории коммитов строку коммита на объект', function () {
     const git = new Git();
     const line = 'hashTemp\tauthorMain\t01012018\tdescribe';
     const result = git.parseHistoryItem(line);
@@ -42,7 +42,7 @@ describe('Тест хелпера Git', () => {
     );
   });
 
-  it('Получаем из строки объект', function () {
+  it('Получаем из строки объект в tree object', function () {
     const git = new Git();
     const line = '1111 blob c1c1\tfile';
     const result = git.parseFileTreeItem(line);
