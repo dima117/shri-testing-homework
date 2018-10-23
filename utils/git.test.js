@@ -1,4 +1,4 @@
-const {Git} = require('../utils/git');
+const {Git} = require('./git');
 const {expect} = require('chai');
 
 const repoContentByCmd = {

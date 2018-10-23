@@ -77,7 +77,7 @@ class Git {
 
 }
 
-const git = new Git();
+const git = new Git(process.argv[2]);
 
 function gitHistory(...args) {
   return git.getHistory(...args);

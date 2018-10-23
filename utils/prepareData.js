@@ -12,14 +12,12 @@ function renderData(title, data, hash, path) {
   }
 }
 
-function buildListData(start, end, getHistory) {
+function buildListData(start = 1, end = 20, getHistory) {
   return getHistory(start, end).then((history) => {
-    const list = history.map(item => ({
+    return history.map(item => ({
       ...item,
       href: buildFolderUrl(item.hash, '')
     }));
-
-    return list
   })
 }
 
@@ -37,16 +35,13 @@ function buildObjectUrl(parentHash, { path, type }) {
 function buildFilesData(hash, path, getFileTree) {
   return getFileTree(hash, path).then(
     list => {
-      const files = list.map(item => ({
+      return list.map(item => ({
         ...item,
         href: buildObjectUrl(hash, item),
         name: item.path.split('/').pop()
       }));
-
-      return files
     })
 }
-
 
 module.exports = {
   renderData,

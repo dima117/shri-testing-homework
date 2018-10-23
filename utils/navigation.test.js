@@ -1,4 +1,4 @@
-const { buildBreadcrumbs, buildFolderUrl, buildFileUrl } = require('../utils/navigation');
+const { buildBreadcrumbs, buildFolderUrl, buildFileUrl } = require('./navigation');
 const {expect} = require('chai');
 
 const getNumberOfPathPoints = (path) => {
