@@ -13,6 +13,11 @@ module.exports = {
         browserName: 'chrome',
       },
     },
+    firefoxWeb: {
+      desiredCapabilities: {
+        browserName: 'firefox',
+      },
+    },
   },
 
   compositeImage: true,
