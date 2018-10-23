@@ -7,7 +7,7 @@ module.exports = function (getFileTree = gitFileTree, getFileContent = gitFileCo
     const path = req.params[0].split('/').filter(Boolean);
     const pathFull = path.join('/');
 
-    getFileTree(hash, pathFull)
+    return getFileTree(hash, pathFull)
       .then(function ([file]) {
         if (file && file.type === 'blob') {
           return getFileContent(file.hash);
@@ -16,11 +16,9 @@ module.exports = function (getFileTree = gitFileTree, getFileContent = gitFileCo
       .then(
         content => {
           if (content) {
-            console.log('content true')
             const data = renderData('content', content, hash, pathFull);
             res.render('content', data);
           } else {
-            console.log('content false')
             next();
           }
         }

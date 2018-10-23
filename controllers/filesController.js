@@ -9,10 +9,10 @@ module.exports = function(getFileTree = gitFileTree) {
     const path = pathParam.length ? pathParam.join('/') + '/' : '';
     const pathFull = pathParam.join('/');
 
-    buildFilesData(hash, path, getFileTree).then(
+    return buildFilesData(hash, path, getFileTree).then(
       files => {
         res.render('files', renderData('files', files, hash, pathFull));
       }
     ).catch(err => next(err));
   }
-}();
+};

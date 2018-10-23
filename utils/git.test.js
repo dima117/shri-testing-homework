@@ -1,5 +1,6 @@
 const {Git} = require('./git');
 const {expect} = require('chai');
+const sinon = require('sinon');
 
 const repoContentByCmd = {
   'log':
@@ -25,22 +26,22 @@ describe('Git history', function () {
   it('parse right full repo', async function () {
     const resultExpected = [
       {
-        "author": "Dmitry Andriyanov",
-        "hash": "cc228",
-        "msg": "readme",
-        "timestamp": "2018-10-16 12:36:32 +0300"
+        author: "Dmitry Andriyanov",
+        hash: "cc228",
+        msg: "readme",
+        timestamp: "2018-10-16 12:36:32 +0300"
       },
       {
-        "author": "Dmitry Andriyanov",
-        "hash": "7e013",
-        "msg": "codestyle",
-        "timestamp": "2018-10-16 12:10:05 +0300"
+        author: "Dmitry Andriyanov",
+        hash: "7e013",
+        msg: "codestyle",
+        timestamp: "2018-10-16 12:10:05 +0300"
       },
       {
-        "author": "Dmitry Andriyanov",
-        "hash": "f2df8",
-        "msg": "стили",
-        "timestamp": "2018-10-16 12:02:11 +0300"
+        author: "Dmitry Andriyanov",
+        hash: "f2df8",
+        msg: "стили",
+        timestamp: "2018-10-16 12:02:11 +0300"
       }
     ];
 
@@ -50,9 +51,8 @@ describe('Git history', function () {
   });
 
   it('parse right empty repo', async function () {
-    const stubExecuteMethod = (...args) => {
-      return Promise.resolve('');
-    };
+    const stubExecuteMethod = sinon.fake.resolves('');
+
     const gitWithFakeExecutor = new Git('', stubExecuteMethod);
 
     const resultExpected = [];
@@ -89,7 +89,7 @@ describe('Git file tree', function () {
       },
     ];
 
-    const result = await gitWithFakeExecutor.getFileTree();
+    const result = await gitWithFakeExecutor.getFileTree('123', '/dist');
 
     expect(result).to.deep.equal(resultExpected);
   });

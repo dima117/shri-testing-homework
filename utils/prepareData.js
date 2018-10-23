@@ -12,7 +12,7 @@ function renderData(title, data, hash, path) {
   }
 }
 
-function buildListData(start = 1, end = 20, getHistory) {
+function buildListData(start, end, getHistory) {
   return getHistory(start, end).then((history) => {
     return history.map(item => ({
       ...item,

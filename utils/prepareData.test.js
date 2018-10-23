@@ -4,6 +4,7 @@ const {
   buildFilesData
 } = require('./prepareData');
 const {expect} = require('chai');
+const sinon = require('sinon');
 
 describe('Data for render', function () {
   it('has right format', function () {
@@ -62,9 +63,8 @@ describe('Commits list', function () {
         msg: 'readme'
       }
     ];
-    const stubGitHistory = () => {
-      return Promise.resolve(history)
-    };
+    const stubGitHistory = sinon.fake.resolves(history);
+
     const expected = [
       {
         hash: '90180910fc27a11272a3e5caeeb119a51e5c0545',
@@ -103,11 +103,13 @@ describe('Files list', function () {
         hash: '8b4a09f575b860abf8076352354858d8e9f3a617',
         path: 'views/bin'
       },
-
+      {
+        type: 'some',
+        hash: '8b4a',
+        path: 'views/file'
+      },
     ];
-    const stubGitFileTree = () => {
-      return Promise.resolve(files)
-    };
+    const stubGitFileTree = sinon.fake.resolves(files);
     const expected = [
       {
         type: 'blob',
@@ -122,6 +124,13 @@ describe('Files list', function () {
         path: 'views/bin',
         href: '/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/views/bin',
         name: 'bin'
+      },
+      {
+        hash: "8b4a",
+        href: "#",
+        name: "file",
+        path: "views/file",
+        type: "some"
       }
     ];
 
