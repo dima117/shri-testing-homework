@@ -77,7 +77,7 @@ class Git {
 
 }
 
-const git = new Git('./ddd/');
+const git = new Git();
 
 function gitHistory(...args) {
   return git.getHistory(...args);
