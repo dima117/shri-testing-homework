@@ -1,4 +1,4 @@
-const { buildObjectUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { buildObjectUrl, buildBreadcrumbs } = require('./navigation');
 
 const getIndex = (history) => {
   if (!Array.isArray(history)) {
