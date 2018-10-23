@@ -17,8 +17,6 @@ const executeGit = jest.fn(() =>
 
 const parseFileTreeItem = jest.fn();
 
-const gitFileTree = jest.fn(() => Promise.resolve());
-
 module.exports = {
   gitHistory,
   executeGit,

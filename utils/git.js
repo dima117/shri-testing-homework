@@ -52,16 +52,15 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
+function gitFileTree(hash, path, exexGitStub, prsFlTrStub) {
   const params = ["ls-tree", hash];
   path && params.push(path);
 
-  return executeGit("git", params).then(data => {
-    console.log(data);
+  return (exexGitStub || executeGit)("git", params).then(data => {
     return data
       .split("\n")
       .filter(Boolean)
-      .map(parseFileTreeItem);
+      .map(prsFlTrStub || parseFileTreeItem);
   });
 }
 

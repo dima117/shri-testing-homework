@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon node ./bin/www",
-    "test": "jest --coverage",
+    "unit-test": "jest --coverage",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
-    "integration-test": "./node_modules/.bin/hermione ./hermione/*.hermione.js"
+    "integration-test": "./node_modules/.bin/hermione gui ./hermione/*.hermione.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
     "jest": "^23.6.0",
     "ndb": "^1.0.26",
     "nodemon": "^1.18.4"

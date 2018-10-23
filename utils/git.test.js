@@ -67,27 +67,28 @@ describe("executeGit", () => {
 
 describe("gitFileTree", () => {
   const hash = "38429bed94bd7c107c65fed6bffbf443ff0f4183";
-  jest.mock("./git");
+  let gitStub = jest.fn(() => Promise.resolve(""));
+  let parseFileTreeStub = jest.fn();
 
   describe("правильно составляет массив с параметрами", () => {
     test("при path = ''", () => {
       const path = "";
-      gitFileTree(hash, path).then(() => {
-        expect(executeGit).toHaveBeenCalledWith("git", ["ls-tree", hash]);
+      gitFileTree(hash, path, gitStub).then(() => {
+        expect(gitStub).toHaveBeenCalledWith("git", ["ls-tree", hash]);
       });
     });
 
     test("при path = 'controllers'", () => {
       const path = "controllers";
-      gitFileTree(hash, path).then(() => {
-        expect(executeGit).toHaveBeenCalledWith("git", ["ls-tree", hash, path]);
+      gitFileTree(hash, path, gitStub).then(() => {
+        expect(gitStub).toHaveBeenCalledWith("git", ["ls-tree", hash, path]);
       });
     });
   });
 
   test("правильно разбивает строку в массив", () => {
-    gitFileTree(hash).then(() => {
-      expect(parseFileTreeItem).toHaveBeenCalledWith(
+    gitFileTree(hash, null, null, parseFileTreeStub).then(() => {
+      expect(parseFileTreeStub).toHaveBeenCalledWith(
         "100644 blob b512c09d476623ff4bf8d0d63c29b784925dbdf8\t.gitignore"
       );
     });
