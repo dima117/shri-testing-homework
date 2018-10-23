@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 
 describe('Выполнение git команд и обработка входных/выходных данных для них', function () {
 
-    it('Парсит значения коммита и возвращает объект с ними', function () {
+    it('parseHistoryItem() - Парсит значения коммита и возвращает объект с ними', function () {
         const line = 'somehash\tsomeauthor\tsometimestamp\tsomemsg';
         const hash = 'somehash';
         const author = 'someauthor';
@@ -22,7 +22,7 @@ describe('Выполнение git команд и обработка входн
         });
     });
 
-    it('Возвращает корректную историю коммитов тестового репозитория', async function () {
+    it('gitHistory() - Возвращает корректную историю коммитов тестового репозитория', async function () {
         const commitsHistory = await git.gitHistory();
 
         expect(commitsHistory).to.eql([
@@ -47,7 +47,7 @@ describe('Выполнение git команд и обработка входн
         ]);
     });
 
-    it('Возвращает корректную структуру файлов тестового репозитория', async function () {
+    it('gitFileTree() - Возвращает корректную структуру файлов тестового репозитория', async function () {
         const hash = '1f78f3b14096667c70de44f7025d363614343f17';
         const path = '';
 
@@ -62,7 +62,7 @@ describe('Выполнение git команд и обработка входн
         ]);
     });
 
-    it('Возвращает содержимое файла тестового репозитория', async function () {
+    it('gitFileContent() - Возвращает содержимое файла тестового репозитория', async function () {
          const fileHash = '818b46f5a3570484c229ae09f2cd76ac8c0e1d36';
 
          const fileContent = await git.gitFileContent(fileHash);

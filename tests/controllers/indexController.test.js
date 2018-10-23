@@ -9,6 +9,7 @@ describe('История коммитов',function () {
         const req = mockReq();
         const res = mockRes()
         res.render = sinon.spy()
+
         await indexController(req, res);
 
         expect(res.render.getCall(0).args[1]).to.deep.eq({

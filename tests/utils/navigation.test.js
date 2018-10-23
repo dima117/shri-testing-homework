@@ -2,7 +2,7 @@ const { buildFolderUrl, buildFileUrl, buildBreadcrumbs } = require('../../utils/
 const expect = require('chai').expect;
 
 describe('Навигация', function () {
-   it('Возвращается корректный url для файла.', function () {
+   it('buildFileUrl() - Возвращается корректный url для файла.', function () {
        const hash = 'testhash';
        const path = 'testpath';
 
@@ -11,7 +11,7 @@ describe('Навигация', function () {
        expect(result).to.equal(`/content/${hash}/${path}`);
    });
 
-   it('Возвращается корректный url для директории.', function () {
+   it('buildFolderUrl() - Возвращается корректный url для директории.', function () {
        const hash = 'testhash';
        const path = 'testpath';
 
@@ -20,7 +20,7 @@ describe('Навигация', function () {
        expect(result).to.equal(`/files/${hash}/${path}`);
    });
 
-   it('Возвращаются корректные хлебные крошки при просмотре главной страницы', function () {
+   it('buildBreadcrumbs() - Возвращаются корректные хлебные крошки при просмотре главной страницы', function () {
 
        const result = buildBreadcrumbs();
 
@@ -30,7 +30,7 @@ describe('Навигация', function () {
        }]);
    });
 
-   it('Возвращаются корректные хлебные крошки при просмотре корневой директории файлов коммита.', function () {
+   it('buildBreadcrumbs() - Возвращаются корректные хлебные крошки при просмотре корневой директории файлов коммита.', function () {
        const hash = 'testhash';
        const path = '';
 
@@ -48,7 +48,7 @@ describe('Навигация', function () {
        ]);
    });
 
-   it('Возвращаются корректные хлебные крошки при просмотре файлов 1 уровня вложенности.', function () {
+   it('buildBreadcrumbs() - Возвращаются корректные хлебные крошки при просмотре файлов 1 уровня вложенности.', function () {
        const hash = 'testhash';
        const path = 'testpath';
 
@@ -70,7 +70,7 @@ describe('Навигация', function () {
        ]);
    });
 
-    it('Возвращаются хлебные крошки при просмотре файлов больше 1 уровня вложенности', () => {
+    it('buildBreadcrumbs() - Возвращаются хлебные крошки при просмотре файлов больше 1 уровня вложенности', () => {
         const hash = 'somehash';
         const path = 'somepath1/somepath2';
 
