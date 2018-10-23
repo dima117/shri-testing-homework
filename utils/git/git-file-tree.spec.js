@@ -17,12 +17,14 @@ const FILE_TREE = {
   ]
 }
 
-const mockExecuteGit = jest.fn()
-  .mockName('executeGit')
-  .mockResolvedValue(FILE_TREE.original)
+// Fake execute-git.js
+const executeGit = require('../../libs/execute-git')
+jest.genMockFromModule('../../libs/execute-git')
+jest.mock('../../libs/execute-git')
+executeGit.mockResolvedValue(FILE_TREE.original)
 
 
-it('calls gitExecuter with right args', () => {
+it('calls executeGit with right args', () => {
   expect.assertions(1)
 
   const params = [
@@ -31,13 +33,13 @@ it('calls gitExecuter with right args', () => {
     'PATH'
   ]
 
-  return gitFileTree('30fc48ec578e6b0052f6ab9ea7a118fb31574cdc', 'PATH', mockExecuteGit)
-    .then(() => expect(mockExecuteGit).toBeCalledWith('git', [...params]))
-    .catch(e => console.error(e))
+  return Promise.resolve()
+    .then(() => gitFileTree('30fc48ec578e6b0052f6ab9ea7a118fb31574cdc', 'PATH')) 
+    .then(() => expect(executeGit).toBeCalledWith('git', [...params]))
 })
 
 it('parses tree correctly', () => {
   expect.assertions(1)
 
-  expect(gitFileTree('h', 'p', mockExecuteGit)).resolves.toEqual(FILE_TREE.parsed)
+  expect(gitFileTree('h', 'p')).resolves.toEqual(FILE_TREE.parsed)
 })

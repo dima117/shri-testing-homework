@@ -1,11 +1,11 @@
 const { resolve } = require('path');
 const REPO = resolve('.');
 
-const { execFile } = require('child_process');
+const child_process = require('child_process');
 
-function executeGit(cmd, args, cwd = REPO, APIFunc = execFile) {
+function executeGit(cmd, args, cwd = REPO) {
   return new Promise((resolve, reject) => {
-    APIFunc(cmd, args, { cwd }, (err, stdout) => {
+    child_process.execFile(cmd, args, { cwd }, (err, stdout) => {
       if (err) {
         reject(err);
       }

@@ -48,36 +48,39 @@ const PAGES = [
   }
 ]
 
-const mockExecuteGit = jest.fn()
-  .mockName('executeGit')
-  .mockResolvedValue(PAGES[0].original);
-const ARGS = [ 1, 10, mockExecuteGit ];
+// Fake execute-git.js
+const executeGit = require('../../libs/execute-git')
+jest.genMockFromModule('../../libs/execute-git')
+jest.mock('../../libs/execute-git')
+executeGit.mockResolvedValue(PAGES[0].original)
 
-describe('call git executer', () => {
+const ARGS = [ 1, 10 ];
+
+describe('call executeGit', () => {
   it('calls gitExecuter', () => {
     expect.assertions(1)
 
     return gitHistory(...ARGS)
-      .then(() => expect(mockExecuteGit).toBeCalledTimes(1))
+      .then(() => expect(executeGit).toBeCalledTimes(1))
       .catch(e => console.error(e))
   })
 
-  it('calls git executer with correct arguments', () => {
+  it('calls executeGit with correct arguments', () => {
     expect.assertions(4)
 
-    mockExecuteGit.mockClear()
-    return gitHistory(3, 10, mockExecuteGit)
+    executeGit.mockClear()
+    return gitHistory(3, 10)
       .then(() => {
-        const call = mockExecuteGit.mock.calls[0]
+        const call = executeGit.mock.calls[0]
         const offset = call[1][4]
         const size = call[1][6]
 
         expect(offset).toBe(20)
         expect(size).toBe(10)
       })
-      .then(() => gitHistory(4, 9, mockExecuteGit))
+      .then(() => gitHistory(4, 9, executeGit))
       .then(() => {
-        const call = mockExecuteGit.mock.calls[1]
+        const call = executeGit.mock.calls[1]
         const offset = call[1][4]
         const size = call[1][6]
 
@@ -92,14 +95,16 @@ describe('parse and return git history', () => {
   it('returns array', () => {
     expect.assertions(1)
 
-    expect(gitHistory(...ARGS).then(res => Array.isArray(res))).resolves.toBe(true)
+    const gitHistoryPromise = gitHistory(...ARGS)
+
+    expect(gitHistoryPromise && gitHistoryPromise.then && gitHistoryPromise.then(res => Array.isArray(res))).resolves.toBe(true)
   })
 
   it('returns array of correct length', () => {
     expect.assertions(2)
 
     PAGES.map(PAGE => {
-      mockExecuteGit.mockResolvedValueOnce(PAGE.original)
+      executeGit.mockResolvedValueOnce(PAGE.original)
       expect(gitHistory(...ARGS)).resolves.toHaveLength(PAGE.parsed.length)
     })
   })
@@ -108,7 +113,7 @@ describe('parse and return git history', () => {
     expect.assertions(2)
     
     PAGES.map(PAGE => {
-      mockExecuteGit.mockResolvedValueOnce(PAGE.original)
+      executeGit.mockResolvedValueOnce(PAGE.original)
       expect(gitHistory(...ARGS)).resolves.toEqual(PAGE.parsed)
     })
   })
