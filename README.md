@@ -47,9 +47,9 @@ npm start
     - по хешу
 
 - navigation module
-  - `buildBreadcrumbs`
+  - `getBreadcrumbs`
     - возращает список ссылок для _index page_
     - возращает список ссылок для _root folder_
-    - возращает список ссылок для _nested folder_
     - возращает список ссылок для _some file_ in _root folder_
-    - возращает список ссылок для _some file_ in _some folder_
+    - возращает список ссылок для _nested folder_
+    - возращает список ссылок для _some file_ of the _nested folder_

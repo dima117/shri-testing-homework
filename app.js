@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
 app.get('/', indexController);
-app.get('/files/:hash/*?', filesController);
+app.get('/files/:hash(\\w+)/?*?', filesController);
 app.get('/content/:hash/*?', contentController);
 
 // error handlers

@@ -1,5 +1,5 @@
 const { gitHistory } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { buildFolderUrl, getBreadcrumbs } = require('../utils/navigation');
 
 /**
  * Renders index page.
@@ -15,7 +15,7 @@ function indexController(req, res) {
 
     res.render('index', {
       title: 'history',
-      breadcrumbs: buildBreadcrumbs(),
+      breadcrumbs: getBreadcrumbs(),
       list
     });
   },

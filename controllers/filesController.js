@@ -2,7 +2,7 @@ const { gitFileTree } = require('../utils/git');
 const {
   buildFolderUrl,
   buildFileUrl,
-  buildBreadcrumbs
+  getBreadcrumbs
 } = require('../utils/navigation');
 
 function buildObjectUrl(parentHash, { path, type }) {
@@ -34,7 +34,7 @@ module.exports = function(req, res, next) {
 
         res.render('files', {
           title: 'files',
-          breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+          breadcrumbs: getBreadcrumbs(hash, pathParam),
           files
         });
       },
