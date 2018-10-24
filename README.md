@@ -17,7 +17,7 @@
 `selenium-standalone install`   
 2. Запустить приложение (запускается файл *./hermione/startAppForTests.js*, устанавливающий путь к mock-репозиторию в переменную окружения и стартующий приложение на localhost:3000)  
 `npm run start:t`
-3. Запустить selenium в отдельном терминале
+3. Запустить selenium в отдельном терминале  
 `npm run selenium`  
 4. Запустить интеграционные тесты в отдельном терминале  
 `npm run test:i`  
