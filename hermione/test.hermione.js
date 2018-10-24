@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe('содержимое отображается правильно на странице', () => {
   describe('"история коммитов"', () => {
-    it('на странице присутствуют коммиты', function () {
+    it('на странице должны присутствуют коммиты', function () {
       return this.browser
         .url('/')
         .isExisting('.content')
@@ -13,7 +13,7 @@ describe('содержимое отображается правильно на 
   });
 
   describe('"просмотр файловой системы"', () => {
-    it('на странице должен присутствовать блок files-tree', function () {
+    it('на странице должен присутствовать список файлов', function () {
       return this.browser
         .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
         .isExisting('.content ul')
@@ -24,7 +24,7 @@ describe('содержимое отображается правильно на 
   });
 
   describe('"просмотр содержимого файла"', () => {
-    it('на странице должен присутствовать блок file-content', function () {
+    it('на странице должен присутствовать блок с контентом', function () {
       return this.browser
         .url('/content/90180910fc27a11272a3e5caeeb119a51e5c0545/README.md')
         .isExisting('.content .file-content')
