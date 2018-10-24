@@ -186,8 +186,71 @@ describe('controllers block', function() {
     });
 
     describe('files', function() {
-        it('test name', function () {
-            assert.equal(1,1);
+        const files = require('../controllers/filesController');
+        this.files = new files();
+
+        this.files.gitFileTree = () => {
+            return Promise.resolve(
+                [{
+                    type: 'blob',
+                    hash: 'test_hash1',
+                    path: 'test_file.test'
+                },
+                {
+                    type: 'blob',
+                    hash: 'test_hash2',
+                    path: 'test_folder'
+                }]
+            );
+        }
+
+        this.files.buildObjectUrl = () => {
+            return '/files/test_hash_href/';
+        }
+
+        this.files.buildBreadcrumb = () => {
+            return [{ text: 'test text', href: '/' },
+            {
+                text: 'ROOT',
+                href: '/files/test_hash_href/'
+            },
+            { text: 'test_folder' }];
+        }
+
+        it('build filestree data for render', async () => {
+            const buildRenderData = this.files.buildRenderData;
+
+            let render;
+            await buildRenderData().then(res => render = res);
+
+            const result = {
+                title: 'files',
+                breadcrumbs:
+                    [{ text: 'test text', href: '/' },
+                    {
+                        text: 'ROOT',
+                        href: '/files/test_hash_href/'
+                    },
+                    { text: 'test_folder' }],
+                files:
+                    [{
+                        type: 'blob',
+                        hash: 'test_hash1',
+                        path: 'test_file.test',
+                        href: '/files/test_hash_href/',
+                        name: "test_file.test"
+                    },
+                    {
+                        type: 'blob',
+                        hash: 'test_hash2',
+                        path: 'test_folder',
+                        href: '/files/test_hash_href/',
+                        name: "test_folder"
+                    }]
+            }
+
+            expect(render).to.eql(result);
         });
+
     });
 });
