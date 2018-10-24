@@ -5,6 +5,8 @@ module.exports = {
     "alert": false,
     'test': false,
     'suite': false,
+    'describe': false,
+    'it': false,
   },
   "rules": {
     "semi": 0,
