@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/**/*.js",
+    "test-int": "hermione app-test.js",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
