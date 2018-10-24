@@ -7,7 +7,8 @@
     "test": "jest",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
-    "hermione": "./node_modules/.bin/hermione ./hermione --config ./.hermione.conf.js --browser chrome",
+    "hermione": "./node_modules/.bin/hermione gui ./hermione --config ./.hermione.conf.js --browser chrome",
+    "hermione-no-gui": "./node_modules/.bin/hermione ./hermione --config ./.hermione.conf.js --browser chrome",
     "selenium": "selenium-standalone start"
   },
   "keywords": [],

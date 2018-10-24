@@ -9,6 +9,7 @@ describe('core', () => {
       .then(bc => 
         assert(bc, 'HISTORY', 'no breadcrumbs on core page')
       )
+      .assertView('plain', '.breadcrumbs')
   })
 
   it('has commits', function () {
