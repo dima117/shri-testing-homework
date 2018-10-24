@@ -52,15 +52,19 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path, exexGitStub, prsFlTrStub) {
+function gitFileTree(hash, path, ...rest) {
+  const stub = (rest && rest[0]) || {};
+  const _executeGit = stub.executeGit || executeGit;
+  const _parseFileTreeItem = stub.parseFileTreeItem || parseFileTreeItem;
+
   const params = ["ls-tree", hash];
   path && params.push(path);
 
-  return (exexGitStub || executeGit)("git", params).then(data => {
+  return _executeGit("git", params).then(data => {
     return data
       .split("\n")
       .filter(Boolean)
-      .map(prsFlTrStub || parseFileTreeItem);
+      .map(_parseFileTreeItem);
   });
 }
 

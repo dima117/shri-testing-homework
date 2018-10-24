@@ -5,7 +5,7 @@ const {
   gitFileTree
 } = require("./git");
 
-describe("parseFileTreeItem", () => {
+describe("Файловая система коммите", () => {
   test("разбивает строку в объект с тремя свойствами", () => {
     const line =
       "100644 blob b512c09d476623ff4bf8d0d63c29b784925dbdf8\t.gitignore";
@@ -19,7 +19,7 @@ describe("parseFileTreeItem", () => {
   });
 });
 
-describe("parseHistoryItem", () => {
+describe("История коммитов", () => {
   test("преобразует строку в объект", () => {
     const line =
       "38429bed94bd7c107c65fed6bffbf443ff0f4183\tDmitry Andriyanov\t2018-10-15 13:22:09 +0300\tзаготовка приложения";
@@ -65,30 +65,35 @@ describe("executeGit", () => {
   });
 });
 
-describe("gitFileTree", () => {
+describe("дерево файлов", () => {
   const hash = "38429bed94bd7c107c65fed6bffbf443ff0f4183";
-  let gitStub = jest.fn(() => Promise.resolve(""));
-  let parseFileTreeStub = jest.fn();
+  const stubs = {};
+  stubs.executeGit = jest.fn(() => Promise.resolve(""));
+  stubs.parseFileTreeStub = jest.fn();
 
   describe("правильно составляет массив с параметрами", () => {
     test("при path = ''", () => {
       const path = "";
-      gitFileTree(hash, path, gitStub).then(() => {
-        expect(gitStub).toHaveBeenCalledWith("git", ["ls-tree", hash]);
+      gitFileTree(hash, path, stubs).then(() => {
+        expect(stubs.executeGit).toHaveBeenCalledWith("git", ["ls-tree", hash]);
       });
     });
 
     test("при path = 'controllers'", () => {
       const path = "controllers";
-      gitFileTree(hash, path, gitStub).then(() => {
-        expect(gitStub).toHaveBeenCalledWith("git", ["ls-tree", hash, path]);
+      gitFileTree(hash, path, stubs).then(() => {
+        expect(stubs.executeGit).toHaveBeenCalledWith("git", [
+          "ls-tree",
+          hash,
+          path
+        ]);
       });
     });
   });
 
   test("правильно разбивает строку в массив", () => {
-    gitFileTree(hash, null, null, parseFileTreeStub).then(() => {
-      expect(parseFileTreeStub).toHaveBeenCalledWith(
+    gitFileTree(hash, null, stubs).then(() => {
+      expect(stubs.parseFileTreeStub).toHaveBeenCalledWith(
         "100644 blob b512c09d476623ff4bf8d0d63c29b784925dbdf8\t.gitignore"
       );
     });
