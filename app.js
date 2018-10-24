@@ -8,7 +8,7 @@ const HOST = '::';
 const IndexController = require('./controllers/indexController');
 const filesController = require('./controllers/filesController');
 const contentController = require('./controllers/contentController');
-const indexControllerEx = new IndexController();
+const IndexControllerEx = new IndexController();
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.set('view options', { layout: 'layout', extname: '.hbs' });
 app.use(express.static(path.join(__dirname, 'public')));
 
 // pages
-app.get('/', indexControllerEx.run.bind(indexControllerEx));
+app.get('/', IndexControllerEx.run.bind(IndexControllerEx));
 app.get('/files/:hash/*?', filesController);
 app.get('/content/:hash/*?', contentController);
 

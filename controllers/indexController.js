@@ -1,7 +1,7 @@
 const { gitHistory } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-module.exports = class IndexConroller {
+module.exports = class IndexController {
   constructor(stubs = {}){
     this.stubs = stubs;
   }
