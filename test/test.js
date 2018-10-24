@@ -140,31 +140,39 @@ describe('controllers block', function() {
 
     describe('content', function() {
         const content = require('../controllers/contentController');
+        this.content = new content();
 
-        const thisGitFileContent = () => {
+        this.content.gitFileTree = (hash, path) => {
+            return Promise.resolve(
+                [{
+                    type: 'blob',
+                    hash: hash,
+                    path: path
+                }]
+            );
+        }
+
+        this.content.gitFileContent = () => {
             return Promise.resolve('test content');
         };
 
-        const thisBuildBreadcrumbs = (hash, path) => {
-            return Promie.resolve(
-                [
-                    { text: 'HISTORY', href: '/' },
-                    { text: 'ROOT', href: '/files/' + hash + '/' },
-                    { text: path }
-                ]
-            )
+        this.content.buildBreadcrumbs = (hash, path) => {
+            return [
+                { text: 'HISTORY', href: '/' },
+                { text: 'ROOT', href: '/files/' + hash + '/' },
+                { text: path }
+            ]
         }
-
-        this.content = new content(0,0,0,thisGitFileContent,thisBuildBreadcrumbs);
 
         it('build file data for render', async () => {
             const buildRenderData = this.content.buildRenderData;
+
 
             let render;
             await buildRenderData('test_hash', [ '.gitignore' ]).then(res => render = res);
 
             const result = {
-                title: 'test title',
+                title: 'content',
                 breadcrumbs: [
                         { text: 'HISTORY', href: '/' },
                         { text: 'ROOT', href: '/files/test_hash/' },

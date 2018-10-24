@@ -27,11 +27,13 @@ module.exports = function (req, res) {
   }
 
   this.render = list => {
-    res.render('index', {
-      title: 'history',
-      breadcrumbs: buildBreadcrumbs(),
-      list
-    });
+    if (res) {
+      res.render('index', {
+        title: 'history',
+        breadcrumbs: buildBreadcrumbs(),
+        list
+      });
+    }
   }
 
   this.buildList().then(list => this.render(list));
