@@ -13,6 +13,12 @@ describe('методы класса Git', () => {
     });
   });
 
+  test('Git реализует паттерн singletone', () => {
+    const firstGitObj = new Git();
+    const secondGitObj = new Git();
+    expect(firstGitObj).toBe(secondGitObj);
+  });
+
   test('Git.history вызывает внешнюю зависимость с нужным набором параметров', () => {
     const gitTestObject = new Git();
     gitTestObject.execute = execGitMock;
