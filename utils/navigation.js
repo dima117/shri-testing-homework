@@ -6,6 +6,25 @@ function buildFileUrl(parentHash, path) {
   return `/content/${parentHash}/${path}`;
 }
 
+function buildRootUrl(length, hash, bc) {
+  bc.push({
+    text: 'ROOT',
+    href: length ? `/files/${hash}/` : undefined
+  });
+}
+
+function buildFullPath(normalizedPath, hash, bc) {
+  let fullPath = '';
+  for (let i = 0; i < normalizedPath.length - 1; i++) {
+    const part = normalizedPath[i];
+    fullPath += `${part}/`;
+    bc.push({
+      text: part,
+      href: `/files/${hash}/${fullPath}`
+    });
+  }
+}
+
 function buildBreadcrumbs(hash, path) {
   const bc = [
     {
@@ -19,21 +38,10 @@ function buildBreadcrumbs(hash, path) {
     const [currentName] = normalizedPath.slice(-1);
 
     // root folder
-    bc.push({
-      text: 'ROOT',
-      href: normalizedPath.length ? `/files/${hash}/` : undefined
-    });
+    buildRootUrl( normalizedPath.length, hash, bc );
 
     // path
-    let fullPath = '';
-    for (let i = 0; i < normalizedPath.length - 1; i++) {
-      const part = normalizedPath[i];
-      fullPath += `${part}/`;
-      bc.push({
-        text: part,
-        href: `/files/${hash}/${fullPath}`
-      });
-    }
+    buildFullPath( normalizedPath, hash, bc );
 
     // last part
     currentName &&
