@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "ndb ./bin/www",
+    "start:t": "node ./hermione/startAppForTests.js",
     "selenium": "selenium-standalone start",
     "test:u": "mocha unitTests/**/*.js",
     "coverage": "nyc --reporter=html mocha unitTests/**/*.js",
     "test:i": "hermione hermione/test.hermione.js --config ./hermione/.hermione.conf.js",
-    "hermione:gui": "hermione gui hermione/test.hermione.js --config hermione/.hermione.conf.js",
-    "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "hermione:gui": "hermione gui hermione/test.hermione.js --config hermione/.hermione.conf.js"
   },
   "keywords": [],
   "author": "",

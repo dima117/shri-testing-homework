@@ -1,5 +1,5 @@
 const { resolve } = require('path');
-const REPO = resolve('.');
+const REPO = process.env.REPO_PATH || resolve('.');
 
 const { execFile } = require('child_process');
 
