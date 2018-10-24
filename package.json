@@ -4,18 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon node ./bin/www",
+    "unit-test": "jest --coverage",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "integration-test": "./node_modules/.bin/hermione gui ./hermione/*.hermione.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "istanbul": "^0.4.5"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "jest": "^23.6.0",
+    "ndb": "^1.0.26",
+    "nodemon": "^1.18.4"
   }
 }
