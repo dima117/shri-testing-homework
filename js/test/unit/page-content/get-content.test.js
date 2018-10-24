@@ -1,4 +1,4 @@
-const { getContent: getContentTest } = require('../../../utils/page-content');
+const { getContent } = require('../../../utils/page-content');
 const { assert, expect } = require('chai');
 
 suite(`getContent`, () => {
@@ -7,7 +7,7 @@ suite(`getContent`, () => {
     const hash = 'b4427cfc3e128ae2aaf48aefee04dd6324960e9a';
     const path = ['text.js'];
 
-    const actual = getContentTest(content, hash, path).content;
+    const actual = getContent(content, hash, path).content;
     const expected = content;
 
     assert.strictEqual(actual, expected);
@@ -18,7 +18,7 @@ suite(`getContent`, () => {
     const hash = 'b4427cfc3e128ae2aaf48aefee04dd6324960e9a';
     const path = ['text.js'];
 
-    const result = getContentTest(content, hash, path);
+    const result = getContent(content, hash, path);
 
     expect(result).to.have.property('title', 'content');
     expect(result).to.have.property('breadcrumbs');
