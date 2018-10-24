@@ -1,22 +1,20 @@
 const { gitFileContent, gitFileTree } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const { getBreadcrumbs } = require('../utils/navigation');
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
   const path = req.params[0].split('/').filter(Boolean);
 
-  gitFileTree(hash, path.join('/'))
-    .then(function([file]) {
-      if (file && file.type === 'blob') {
-        return gitFileContent(file.hash);
-      }
-    })
-    .then(
+  gitFileTree(hash, path.join('/')).then(function([file]) {
+    if (file && file.type === 'blob') {
+      return gitFileContent(file.hash);
+    }
+  }).then(
       content => {
         if (content) {
           res.render('content', {
             title: 'content',
-            breadcrumbs: buildBreadcrumbs(hash, path.join('/')),
+            breadcrumbs: getBreadcrumbs(hash, path),
             content
           });
         } else {
@@ -24,5 +22,5 @@ module.exports = function(req, res, next) {
         }
       },
       err => next(err)
-    );
+  );
 };
