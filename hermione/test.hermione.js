@@ -40,7 +40,7 @@ describe('правильно работают переходы по страни
     it('Заголовок страницы должен быть "files"', function () {
       return this.browser
         .url('/')
-        .click('.content .commit:nth-of-type(1) .commit__link a')
+        .click('.content .commit .commit__link a[href="/files/90180910fc27a11272a3e5caeeb119a51e5c0545/"]')
         .getTitle()
         .then(title => assert.equal(title, 'files', 'переход на страницу просмотра файловой системы не состоялся'));
     });
