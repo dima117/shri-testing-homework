@@ -1,18 +1,11 @@
-const { resolve } = require('path');
-const REPO = resolve('.');
+const cliInterface = require('./cli-interface');
 
-const { execFile } = require('child_process');
+const gitTools = {
+  cliInterface
+};
 
-function executeGit(cmd, args) {
-  return new Promise((resolve, reject) => {
-    execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
-      if (err) {
-        reject(err);
-      }
-
-      resolve(stdout.toString());
-    });
-  });
+function executeGit(args) {
+  return gitTools.cliInterface('git', args);
 }
 
 function parseHistoryItem(line) {
@@ -26,50 +19,60 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
-  const offset = (page - 1) * size;
+function parseGitHistoryList(text) {
+  return text
+      .split('\n')
+      .filter(Boolean)
+      .map(parseHistoryItem);
+}
 
-  return executeGit('git', [
+function gitHistory(page = 1, pageSize = 10) {
+  const offset = (page - 1) * pageSize;
+
+  return executeGit([
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
     '--skip',
     offset,
     '-n',
-    size
-  ]).then(data => {
-    return data
-      .split('\n')
-      .filter(Boolean)
-      .map(parseHistoryItem);
-  });
+    pageSize
+  ]).then(parseGitHistoryList);
 }
 
 function parseFileTreeItem(line) {
   const [info, path] = line.split('\t');
   const [, type, hash] = info.split(' ');
-
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
-  const params = ['ls-tree', hash];
-  path && params.push(path);
-
-  return executeGit('git', params).then(data => {
-    return data
+function parseGitFileTree(text) {
+  return text
       .split('\n')
       .filter(Boolean)
       .map(parseFileTreeItem);
-  });
 }
 
-function gitFileContent(hash) {
-  return executeGit('git', ['show', hash]);
+function gitFileTree(commitHash, path) {
+  const params = [
+    'ls-tree',
+    commitHash
+  ];
+
+  if (path) {
+    params.push(path);
+  }
+
+  return executeGit(params)
+      .then(parseGitFileTree);
 }
 
-module.exports = {
-  gitHistory,
+function gitFileContent(fileOrFolderHash) {
+  return executeGit(['show', fileOrFolderHash]);
+}
+
+module.exports = Object.assign(gitTools, {
+  gitFileContent,
   gitFileTree,
-  gitFileContent
-};
+  gitHistory
+});
