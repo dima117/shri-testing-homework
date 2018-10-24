@@ -1,29 +1,34 @@
 const { gitHistory } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
+module.exports = class IndexConroller {
+  constructor(stubs = {}){
+    this.stubs = stubs;
+  }
 
-module.exports = function(req, res, next, stubs) {
+  run(req, res, next) {
 
-  const getHistory = stubs.getFakeHistory || gitHistory;
-  const getFolderUrl = stubs.getFakeFolderUrl || buildFolderUrl;
-  const getBreadcrumbs = stubs.getFakeBreadcrumbs || buildBreadcrumbs;
-
-
-  return getHistory(1, 20)
-    .then(
-    history => {
-      const list = history.map(item => ({
-        ...item,
-        href: getFolderUrl(item.hash, '')
-      }));
+    const getHistory = this.stubs.getFakeHistory || gitHistory;
+    const getFolderUrl = this.stubs.getFakeFolderUrl || buildFolderUrl;
+    const getBreadcrumbs = this.stubs.getFakeBreadcrumbs || buildBreadcrumbs;
 
 
-      res.render('index', {
-        title: 'history',
-        breadcrumbs: getBreadcrumbs(),
-        list
-      });
-    },
-    err => next(err)
-  );
-};
+    return getHistory(1, 20)
+      .then(
+        history => {
+          const list = history.map(item => ({
+            ...item,
+            href: getFolderUrl(item.hash, '')
+          }));
+
+
+          res.render('index', {
+            title: 'history',
+            breadcrumbs: getBreadcrumbs(),
+            list
+          });
+        },
+        err => next(err)
+      );
+  }
+}

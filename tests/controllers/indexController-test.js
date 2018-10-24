@@ -1,13 +1,15 @@
 const chai = require('chai');
 const { expect } = chai;
-const indexController = require('../../controllers/indexController');
+const IndexController = require('../../controllers/indexController');
 const sinonChai = require('sinon-chai');
 const { mockReq, mockRes } = require('sinon-express-mock');
 
 chai.use(sinonChai);
 
 it('контроллер рендерит список коммитов из Git', async function () {
+
   // подготовка
+
   const fakeHistory = [{
     hash: '90180910fc27a11272a3e5caeeb119a51e5c0545',
     author: 'Dmitry Andriyanov',
@@ -34,11 +36,13 @@ it('контроллер рендерит список коммитов из Git
     'getFakeBreadcrumbs': getFakeBreadcrumbs
   };
 
+  const indexControllerEx = new IndexController(stubs);
+
   const req = mockReq({});
   const res = mockRes();
 
   //действие
-  await indexController(req, res, function() {}, stubs);
+  await indexControllerEx.run(req, res);
 
   //проверка
   console.log(res.render.getCall(0).args);
