@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
+    "unit-test": "nyc mocha ./**/__test__/*.test.js",
+    "integration-test": "./node_modules/.bin/hermione gui ./hermione/*.hermione.js",
+    "start": "cross-env NODE_ENV=production node ./bin/www",
+    "dev": "cross-env NODE_ENV=development node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
   "keywords": [],
@@ -16,6 +18,16 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "chai": "^4.2.0",
+    "cross-env": "^5.2.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
+    "ndb": "^1.0.26",
+    "nyc": "^13.1.0",
+    "sinon": "^7.0.0"
+  },
+  "nyc": {
+    "temp-dir": "./coverage/.nyc_output"
   }
 }

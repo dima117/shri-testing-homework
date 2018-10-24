@@ -3,6 +3,9 @@ const REPO = resolve('.');
 
 const { execFile } = require('child_process');
 
+const DEV = process.env.NODE_ENV === 'development';
+
+/* istanbul ignore next */
 function executeGit(cmd, args) {
   return new Promise((resolve, reject) => {
     execFile(cmd, args, { cwd: REPO }, (err, stdout) => {
@@ -26,10 +29,12 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
+function gitHistory(page = 1, size = 10, executeGitStub) {
+  const _executeGit = executeGitStub || executeGit;
+
   const offset = (page - 1) * size;
 
-  return executeGit('git', [
+  return _executeGit('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
@@ -38,10 +43,10 @@ function gitHistory(page = 1, size = 10) {
     '-n',
     size
   ]).then(data => {
-    return data
+    return (DEV ? require('./gitHistoryStub') : data)
       .split('\n')
       .filter(Boolean)
-      .map(parseHistoryItem);
+      .map(parseHistoryItem)
   });
 }
 
@@ -52,11 +57,13 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
+function gitFileTree(hash, path, executeGitStub) {
+  const _executeGit = executeGitStub || executeGit;
+
   const params = ['ls-tree', hash];
   path && params.push(path);
 
-  return executeGit('git', params).then(data => {
+  return _executeGit('git', params).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
@@ -64,6 +71,7 @@ function gitFileTree(hash, path) {
   });
 }
 
+/* istanbul ignore next */
 function gitFileContent(hash) {
   return executeGit('git', ['show', hash]);
 }
@@ -71,5 +79,5 @@ function gitFileContent(hash) {
 module.exports = {
   gitHistory,
   gitFileTree,
-  gitFileContent
+  gitFileContent,
 };

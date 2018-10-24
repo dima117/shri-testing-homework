@@ -1,7 +1,9 @@
-function buildFolderUrl(parentHash, path = '') {
+/* istanbul ignore next */
+function buildFolderUrl(parentHash, path) {
   return `/files/${parentHash}/${path}`;
 }
 
+/* istanbul ignore next */
 function buildFileUrl(parentHash, path) {
   return `/content/${parentHash}/${path}`;
 }
