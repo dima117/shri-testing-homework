@@ -5,6 +5,13 @@ const {
   getBreadcrumbs
 } = require('../utils/navigation');
 
+/**
+ * Returns object URL based on it's type.
+ * @param {string } parentHash
+ * @param {string} path
+ * @param {string} type
+ * @return {string}
+ */
 function buildObjectUrl(parentHash, { path, type }) {
   switch (type) {
     case 'tree':
