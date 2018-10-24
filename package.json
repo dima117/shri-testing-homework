@@ -6,6 +6,8 @@
   "scripts": {
     "eslint": "eslint js/",
     "test": "npm run eslint && gulp test",
+    "test:unit": "gulp test",
+    "test:coverage": "nyc --reporter=html --report-dir ./js/test/coverage npm test",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
     "selenium": "selenium-standalone start",
