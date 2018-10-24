@@ -2,41 +2,41 @@
 const {buildObjectUrl} = require('../../utils/navigation');
 const {buildBreadcrumbs} = require('../../utils/navigation');
 
-describe('Формирование URL', function () {
-  test('Маршрутизирует на content при типе blob', function () {
-    const [hash, path, type] = ['565ca95a044cfa1c6e061a80374e9a9a77f5771e', 'somePath', 'blob'];
+describe('Формирование URL', () => {
+  test('Маршрутизирует на content при типе blob', () => {
+    const [hash, path, type] = ['hash12345', 'somePath', 'blob'];
     const result = buildObjectUrl(hash, {path, type});
     expect(result).toEqual('/content/' + hash + '/' + path);
   });
 
-  test('Маршрутизирует на files при типе tree', function () {
-    const [hash, path, type] = ['565ca95a044cfa1c6e061a80374e9a9a77f5771e', 'somePath', 'tree'];
+  test('Маршрутизирует на files при типе tree', () => {
+    const [hash, path, type] = ['hash12345', 'somePath', 'tree'];
     const result = buildObjectUrl(hash, {path, type});
     expect(result).toEqual('/files/' + hash + '/' + path);
   });
 
-  test('Маршрутизирует на # если тип не входит в список известных', function () {
-    const [hash, path, wrongType] = ['565ca95a044cfa1c6e061a80374e9a9a77f5771e', 'somePath', 'wrongType'];
+  test('Маршрутизирует на # если тип не входит в список известных', () => {
+    const [hash, path, wrongType] = ['hash12345', 'somePath', 'wrongType'];
     const wrongTypeResult = buildObjectUrl(hash, {path, type: wrongType});
     expect(wrongTypeResult).toEqual('#');
 
   });
 
-  test('Маршрутизирует на # если тип неопределен', function () {
-    const [hash, path, undefinedType] = ['565ca95a044cfa1c6e061a80374e9a9a77f5771e', 'somePath', undefined];
+  test('Маршрутизирует на # если тип неопределен', () => {
+    const [hash, path, undefinedType] = ['hash12345', 'somePath', undefined];
     const undefinedTypeResult = buildObjectUrl(hash, {path, type: undefinedType});
     expect(undefinedTypeResult).toEqual('#');
   });
 
-  test('Маршрутизирует на # если тип равен null', function () {
+  test('Маршрутизирует на # если тип равен null', () => {
     const [hash, path, nullType] = ['someHash', 'somePath', null];
     const nullTypeResult = buildObjectUrl(hash, {path, type: nullType});
     expect(nullTypeResult).toEqual('#');
   });
 });
 
-describe('"Хлебные крошки"', function () {
-  test('Возвращает "крошку" HISTORY со ссылкой на undefined при вызове без параметров', function () {
+describe('"Хлебные крошки"', () => {
+  test('Возвращает "крошку" HISTORY со ссылкой на undefined при вызове без параметров', () => {
     // const [hash, path] = ['someHash', 'oneLevelPath'];
     const result = buildBreadcrumbs(hash = undefined, path = undefined);
     expect(result).toEqual([{
@@ -45,7 +45,7 @@ describe('"Хлебные крошки"', function () {
     }]);
   });
 
-  test('Возвращает "крошки" со ссылкой на HISTORY и ROOT коммита, если путь не задан', function () {
+  test('Возвращает "крошки" со ссылкой на HISTORY и ROOT коммита, если путь не задан', () => {
     // const [hash, path] = ['someHash', 'oneLevelPath'];
     const result = buildBreadcrumbs(hash = 'myPath', path = undefined);
     expect(result).toEqual([
@@ -54,8 +54,8 @@ describe('"Хлебные крошки"', function () {
     ]);
   });
 
-  test('Возвращает "крошки" HISTORY, ROOT коммита и первый уровень пути внутри коммита', function () {
-    const [hash, path] = ['565ca95a044cfa1c6e061a80374e9a9a77f5771e', 'oneLevelPath'];
+  test('Возвращает "крошки" HISTORY, ROOT коммита и первый уровень пути внутри коммита', () => {
+    const [hash, path] = ['hash12345', 'oneLevelPath'];
     const result = buildBreadcrumbs(hash, path);
     expect(result).toEqual([
       {'href': '/', 'text': 'HISTORY'},
@@ -64,8 +64,8 @@ describe('"Хлебные крошки"', function () {
     ]);
   });
 
-  test('Корректно работает на пути больше одного уровня внутри коммита', function () {
-    const [hash, path] = ['565ca95a044cfa1c6e061a80374e9a9a77f5771e', 'one/two'];
+  test('Корректно работает на пути больше одного уровня внутри коммита', () => {
+    const [hash, path] = ['hash12345', 'one/two'];
     const result = buildBreadcrumbs(hash, path);
     expect(result).toEqual([
       {text: 'HISTORY', href: '/'},
@@ -75,8 +75,8 @@ describe('"Хлебные крошки"', function () {
     );
   });
 
-  test('Обрезает "/", если он указан в конце пути', function () {
-    const [hash, path] = ['565ca95a044cfa1c6e061a80374e9a9a77f5771e', '/one/two/'];
+  test('Обрезает "/", если он указан в конце пути', () => {
+    const [hash, path] = ['hash12345', '/one/two/'];
     const result = buildBreadcrumbs(hash, path);
     expect(result).toEqual([
       {text: 'HISTORY', href: '/'},
