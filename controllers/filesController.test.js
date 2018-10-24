@@ -1,21 +1,28 @@
 const filesController = require("./filesController");
-const { gitFileTree } = require("../utils/git");
-const {
-  buildFolderUrl,
-  buildFileUrl,
-  buildBreadcrumbs
-} = require("../utils/navigation");
 
-jest.mock("../utils/navigation");
-jest.mock("../utils/git");
+describe("Файловая система", () => {
+  const stubs = {};
+  stubs.gitFileTree = jest.fn(() =>
+    Promise.resolve([{ type: "", hash: "", path: "" }])
+  );
+  stubs.buildObjectUrl = jest.fn();
+  stubs.buildBreadcrumbs = jest.fn();
 
-describe("filesController", () => {
-  test("правильно создает path", () => {
-    const hash = "b512c09d476623ff4bf8d0d63c29b784925dbdf8";
-    const path = "controllers";
+  const req = { params: { hash: "" } };
+  const res = { render: jest.fn() };
 
-    filesController(hash, path);
+  test("добавляются ключи href и path к объектам файлов", () => {
+    filesController(req, res, () => {}, stubs).then(() => {
+      expect(res.render.mock.calls[0][1].files.toHaveProperty("href"));
+      expect(res.render.mock.calls[0][1].files.toHaveProperty("name"));
+    });
+  });
 
-    expect(gitFileTree);
+  test("в функцию render в качестве аргументов попадают заголовок, хлебные крошки и объекты файлов", () => {
+    filesController(req, res, () => {}, stubs).then(() => {
+      const keys = Object.keys(res.render.mock.calls[0][1]);
+
+      expect(keys.toEqual(["title", "breadcrumbs", "files"]));
+    });
   });
 });

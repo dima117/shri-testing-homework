@@ -1,42 +1,25 @@
 const indexController = require("./indexController");
-const { gitHistory } = require("../utils/git");
-const { buildFolderUrl, buildBreadcrumbs } = require("../utils/navigation");
 
-describe("indexController", () => {
-  test("добавляет ключ href к объекту коммита", () => {
-    const mock = jest.fn();
-    const gitHstrStub = jest.fn(() =>
-      Promise.resolve([
-        {
-          hash: "38429bed94bd7c107c65fed6bffbf443ff0f4183",
-          author: "Dmitry Andriyanov",
-          timestamp: "2018-10-15 13:22:09 +0300",
-          msg: "заготовка приложения"
-        }
-      ])
-    );
-    const bfuStub = jest.fn(
-      () => "/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/"
-    );
+describe("История коммитов", () => {
+  const stubs = {};
+  stubs.gitHistory = jest.fn(() =>
+    Promise.resolve([{ hash: "", author: "", timestamp: "", msg: "" }])
+  );
+  stubs.buildFolderUrl = jest.fn();
+  stubs.buildBreadcrumbs = jest.fn();
+  const res = { render: jest.fn() };
 
-    const bbcStub = jest.fn();
+  test("добавляется ключ href к объекту коммита", () => {
+    indexController(null, res, () => {}, stubs).then(() => {
+      expect(res.render.mock.calls[0][1].list.toHaveProperty("href"));
+    });
+  });
 
-    const res = { render: mock };
+  test("в функцию render в качестве аргументов попадают заголовок, хлебные крошки и объекты коммитов", () => {
+    indexController(null, res, () => {}, stubs).then(() => {
+      const keys = Object.keys(res.render.mock.calls[0][1]);
 
-    indexController(null, res, null, gitHstrStub, bfuStub).then(() => {
-      expect(mock).toHaveBeenCalledWith("index", {
-        title: "history",
-        breadcrumbs: buildBreadcrumbs(),
-        list: [
-          {
-            hash: "38429bed94bd7c107c65fed6bffbf443ff0f4183",
-            author: "Dmitry Andriyanov",
-            timestamp: "2018-10-15 13:22:09 +0300",
-            msg: "заготовка приложения",
-            href: "/files/38429bed94bd7c107c65fed6bffbf443ff0f4183/"
-          }
-        ]
-      });
+      expect(keys.toEqual(["title", "breadcrumbs", "list"]));
     });
   });
 });
