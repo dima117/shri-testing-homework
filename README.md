@@ -30,7 +30,7 @@
 - Модульные тесты писал в стиле TDD `suite` -> `test`
 
 ## Интеграционные `js/test/integrational`
-Тесты запускаются в `Chrome` и `Firefox`.
+Тесты запускаются в `Chrome` и `Firefox`. Скриншоты хранятся в папке `screenshots`.
 
 ## Запуск тестов
 ### Unit тесты

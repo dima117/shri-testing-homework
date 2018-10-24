@@ -11,4 +11,13 @@ describe('Content on files page"', () => {
 
     assert.isTrue(files);
   });
+
+  it('should contain files on screenshot', async function () {
+    const commitLink = '//div[@class="commit"]/div[@class="commit__link"]/a';
+
+    return this.browser
+      .url('/')
+      .click(commitLink)
+      .assertView('files', 'html');
+  });
 });

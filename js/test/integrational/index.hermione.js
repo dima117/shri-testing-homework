@@ -9,6 +9,12 @@ describe('Content on index page"', () => {
     assert.isTrue(index);
   });
 
+  it('should contain commits on screenshot', async function () {
+    return this.browser
+      .url('/')
+      .assertView('index', 'html');
+  });
+
   it('should contain commit information', async function () {
     const indexPage = this.browser.url('/').element('.commit');
 

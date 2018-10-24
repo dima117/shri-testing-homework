@@ -21,6 +21,10 @@ module.exports = {
       ]
     }
   },
+
+  compositeImage: true,
+  screenshotsDir: 'screenshots',
+
   plugins: {
     'html-reporter/hermione': {
       path: 'hermione-html-report'

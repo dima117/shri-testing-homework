@@ -15,4 +15,18 @@ describe('Content on file page"', () => {
 
     assert.isTrue(content);
   });
+
+  it('should contain file content on screenshot', async function () {
+    const commitLink = '//div[@class="commit"]/div[@class="commit__link"]/a';
+    const filesLink = '//div[@class="content"]/ul/li[last()]/a';
+    const contentLink = '//div[@class="content"]/ul/li[last()]/a[1]';
+
+    return this.browser
+      .url('/')
+      .url('/')
+      .click(commitLink)
+      .click(filesLink)
+      .click(contentLink)
+      .assertView('content', 'html');
+  });
 });
