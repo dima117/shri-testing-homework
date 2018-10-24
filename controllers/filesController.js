@@ -1,4 +1,4 @@
-const { gitFileTree } = require('../utils/git');
+const GitWorker = require('../utils/git');
 const {
   buildFolderUrl,
   buildFileUrl,
@@ -16,19 +16,22 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
-module.exports = function(req, res, next) {
+const attachParams = (item, hash) => ({
+  ...item,
+  href: buildObjectUrl(hash, item),
+  name: item.path.split('/').pop()
+});
+
+function filesController(req, res, next) {
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
+  const gitWorker = new GitWorker();
 
-  return gitFileTree(hash, path).then(
+  return gitWorker.gitFileTree(hash, path).then(
     list => {
-      const files = list.map(item => ({
-        ...item,
-        href: buildObjectUrl(hash, item),
-        name: item.path.split('/').pop()
-      }));
+      const files = list.map(item => attachParams(item, hash));
 
       res.render('files', {
         title: 'files',
@@ -39,3 +42,8 @@ module.exports = function(req, res, next) {
     err => next(err)
   );
 };
+
+module.exports = {
+  filesController,
+  attachParams,
+}

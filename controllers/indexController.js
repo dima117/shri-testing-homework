@@ -1,13 +1,17 @@
-const { gitHistory } = require('../utils/git');
+const GitWorker = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-module.exports = function(req, res) {
-  gitHistory(1, 20).then(
-    history => {
-      const list = history.map(item => ({
-        ...item,
-        href: buildFolderUrl(item.hash, '')
-      }));
+const attachHref = gitInfo => ({
+  ...gitInfo,
+  href: buildFolderUrl(gitInfo.hash, '')
+});
+
+function indexController(req, res) {
+  const gitWorker = new GitWorker();
+
+  gitWorker.gitHistory(1, 20)
+    .then((history) => {
+      const list = history.map(attachHref);
 
       res.render('index', {
         title: 'history',
@@ -15,6 +19,10 @@ module.exports = function(req, res) {
         list
       });
     },
-    err => next(err)
-  );
+    err => next(err));
+}
+
+module.exports = {
+  indexController,
+  attachHref,
 };
