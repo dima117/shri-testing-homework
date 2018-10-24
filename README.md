@@ -4,7 +4,7 @@
 `git clone git@github.com:EVStarostin/shri-testing-homework.git`  
 2. Склонировать mock-репозиторий для интеграционных тестов (оба репозитория должны располагаться на одном уровне)  
 `git clone git@github.com:EVStarostin/shri-stub-repo.git`  
-3. Перейти в основной репозиторий
+3. Перейти в основной репозиторий  
 `cd shri-testing-homework`  
 4. Установить зависимости  
 `npm install`
@@ -12,7 +12,7 @@
 Запустить юнит-тесты
 `npm run test:u`  
 ### Интеграционные тесты  
-1. Установить selenium глобально
+1. Установить selenium глобально  
 `npm install selenium-standalone --global`  
 `selenium-standalone install`   
 2. Запустить приложение (запускается файл *./hermione/startAppForTests.js*, устанавливающий путь к mock-репозиторию в переменную окружения и стартующий приложение на localhost:3000)  
