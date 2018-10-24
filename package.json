@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/**/*.js",
+    "test": "mocha ./tests/**/*.js",
     "hermi": "./node_modules/.bin/hermione",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www",
     "devserver": "./node_modules/nodemon/bin/nodemon.js app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "kasmur",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
@@ -24,6 +24,7 @@
     "mocha": "^5.2.0",
     "ndb": "^1.0.26",
     "nodemon": "^1.18.4",
-    "nyc": "^13.1.0"
+    "nyc": "^13.1.0",
+    "sinon": "^7.0.0"
   }
 }
