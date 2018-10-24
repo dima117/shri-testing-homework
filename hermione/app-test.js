@@ -1,7 +1,7 @@
 const assert = require('assert');
 const expect = require('chai').expect;
 
-describe('Запуск приложения', () => {
+describe('Запуск приложения - корневой роут', () => {
   it('должна отобразиться история коммитов', function () {
     return this.browser
       .url('/')
@@ -25,10 +25,7 @@ describe('Запуск приложения', () => {
       });
   });
 
-//todo 20 коммитов
-
-  it(' в истории коммитов по умолчанию выводится не более 20 коммитов на страницу', async function () {
-
+  it('в истории коммитов по умолчанию выводится не более 20 коммитов на страницу', async function () {
     await this.browser.url('/');
     await this.browser.waitForExist('.test-history-content', 5000);
 
@@ -36,7 +33,8 @@ describe('Запуск приложения', () => {
     assert.equal(commits.value.length, 20);
   });
 
-
+  // it('в истории коммитов выводится корректное информация о коммите', function () {});
+  // не знаю как протестировать текст, т.к. докоммичиваются изменения.
 });
 
 describe('Просмотр коммита', () => {
@@ -74,6 +72,30 @@ describe('Просмотр коммита', () => {
       .title()
       .then((title) => {
         assert.equal(title.value, 'files');
+      });
+  });
+
+  it('корректное отображение файловой структуры при переходе в коммит', function () {
+    return this.browser
+      .url('/')
+      .waitForExist('.test-history-content', 5000)
+      .click('.commit__link a')
+      .waitForExist('.test-filetree-content', 5000)
+      .elements('.test-filetree-content ul li')
+      .then((elements) => {
+        assert.equal(elements.value.length, 13);;
+      });
+  });
+
+  it('корректное содержимое файловой структуры при переходе в коммит', function () {
+    return this.browser
+      .url('/')
+      .waitForExist('.test-history-content', 5000)
+      .click('.commit__link a')
+      .waitForExist('.test-filetree-content', 5000)
+      .getText('.test-filetree-content ul li:first-of-type')
+      .then((text) => {
+        assert.equal(text, '.gitignore');
       });
   });
 });
