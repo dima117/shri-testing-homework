@@ -7,7 +7,9 @@
     "eslint": "eslint js/",
     "test": "npm run eslint && gulp test",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "selenium": "selenium-standalone start",
+    "hermione": "./node_modules/.bin/hermione"
   },
   "keywords": [],
   "author": "",
