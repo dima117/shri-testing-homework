@@ -27,12 +27,14 @@ describe('Запуск приложения', () => {
 
 //todo 20 коммитов
 
-  // it(' в истории коммитов по умолчанию выводится не более 20 коммитов на страницу', function () {
-  //    this.browser.url('/')
-  //     .waitForExist('.test-history-content .commit', 5000);
-  //    const commits = elements('.commits');
-  //     expect(commits.length).to.be.below(5);
-  // });
+  it(' в истории коммитов по умолчанию выводится не более 20 коммитов на страницу', async function () {
+
+    await this.browser.url('/');
+    await this.browser.waitForExist('.test-history-content', 5000);
+
+    const commits = await this.browser.elements('.commit');
+    assert.equal(commits.value.length, 20);
+  });
 
 
 });
