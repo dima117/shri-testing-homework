@@ -1,20 +1,34 @@
 const { gitHistory } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-module.exports = function(req, res) {
-  gitHistory(1, 20).then(
-    history => {
-      const list = history.map(item => ({
-        ...item,
-        href: buildFolderUrl(item.hash, '')
-      }));
+module.exports = class IndexController {
+  constructor(stubs = {}){
+    this.stubs = stubs;
+  }
 
-      res.render('index', {
-        title: 'history',
-        breadcrumbs: buildBreadcrumbs(),
-        list
-      });
-    },
-    err => next(err)
-  );
-};
+  run(req, res, next) {
+
+    const getHistory = this.stubs.getFakeHistory || gitHistory;
+    const getFolderUrl = this.stubs.getFakeFolderUrl || buildFolderUrl;
+    const getBreadcrumbs = this.stubs.getFakeBreadcrumbs || buildBreadcrumbs;
+
+
+    return getHistory(1, 20)
+      .then(
+        history => {
+          const list = history.map(item => ({
+            ...item,
+            href: getFolderUrl(item.hash, '')
+          }));
+
+
+          res.render('index', {
+            title: 'history',
+            breadcrumbs: getBreadcrumbs(),
+            list
+          });
+        },
+        err => next(err)
+      );
+  }
+}

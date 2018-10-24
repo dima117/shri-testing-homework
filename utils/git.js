@@ -26,10 +26,12 @@ function parseHistoryItem(line) {
   };
 }
 
-function gitHistory(page = 1, size = 10) {
+function gitHistory(page = 1, size = 10, gitFake) {
   const offset = (page - 1) * size;
+  const gitFunction = gitFake || executeGit;
 
-  return executeGit('git', [
+
+  return gitFunction('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
@@ -52,11 +54,13 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
-function gitFileTree(hash, path) {
+function gitFileTree(hash, path, gitFake) {
   const params = ['ls-tree', hash];
   path && params.push(path);
 
-  return executeGit('git', params).then(data => {
+  const gitFunction = gitFake || executeGit;
+
+  return gitFunction('git', params).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
@@ -64,8 +68,9 @@ function gitFileTree(hash, path) {
   });
 }
 
-function gitFileContent(hash) {
-  return executeGit('git', ['show', hash]);
+function gitFileContent(hash, gitFake) {
+  const gitFunction = gitFake || executeGit;
+  return gitFunction('git', ['show', hash]);
 }
 
 module.exports = {
