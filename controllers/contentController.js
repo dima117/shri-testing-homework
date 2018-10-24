@@ -1,28 +1,40 @@
 const { gitFileContent, gitFileTree } = require('../utils/git');
 const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
 
-module.exports = function(req, res, next) {
-  const { hash } = req.params;
-  const path = req.params[0].split('/').filter(Boolean);
+module.exports = function(req, res, next, thisGitFileContent, thisBuildBreadcrumbs) {
+  const { hash } = req ? req.params : '';
+  const path = req ? req.params[0].split('/').filter(Boolean) : '';
 
-  gitFileTree(hash, path.join('/'))
-    .then(function([file]) {
-      if (file && file.type === 'blob') {
-        return gitFileContent(file.hash);
-      }
-    })
-    .then(
-      content => {
-        if (content) {
-          res.render('content', {
+  thisGitFileContent = thisGitFileContent || gitFileContent;
+  thisBuildBreadcrumbs = thisBuildBreadcrumbs || buildBreadcrumbs;
+
+  this.buildRenderData = (hash, path) => {
+    path = path ? path.join('/') : '';
+    return new Promise ((res, rej) => {
+      gitFileTree(hash, path)
+      .then(function([file]) {
+        if (file && file.type === 'blob') {
+          return thisGitFileContent(file.hash);
+        }
+      })
+      .then(content => {
+          res({
             title: 'content',
-            breadcrumbs: buildBreadcrumbs(hash, path.join('/')),
+            breadcrumbs: thisBuildBreadcrumbs(hash, path),
             content
           });
-        } else {
-          next();
         }
-      },
-      err => next(err)
-    );
+      );
+    });
+  }
+
+  this.buildRenderData(hash, path).then(data => {
+    if (data) {
+      res.render('content', data);
+    } else {
+      next();
+    }
+  },
+  err => next(err))
+
 };
