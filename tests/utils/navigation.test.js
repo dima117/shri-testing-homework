@@ -32,13 +32,13 @@ describe('Breadcrumbs builder (buildBreadcrumbs)', () => {
     expect(pathArr[0]).to.be.an('object').that.deep.includes({ text: 'HISTORY' });
   });
 
-  it('should return a first crumb that takes you back to index page when given a single argument', () => {
+  it('should return first crumb that takes you back to the index page when given a single argument', () => {
     const pathArr = buildBreadcrumbs('hash123abc');
 
     expect(pathArr[0]).to.include({ href: '/', text: 'HISTORY' });
   });
 
-  it('should return a second crumb that shows you that you are at root filder. It should not have a href', () => {
+  it('should return second crumb that shows you that you are at root folder. It should not have href', () => {
     const pathArr = buildBreadcrumbs('hash123abc');
 
     expect(pathArr[1]).to.include({ href: undefined, text: 'ROOT' });
