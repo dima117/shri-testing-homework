@@ -1,12 +1,4 @@
-function buildFolderUrl(parentHash, path = '') {
-  return `/files/${parentHash}/${path}`;
-}
-
-function buildFileUrl(parentHash, path) {
-  return `/content/${parentHash}/${path}`;
-}
-
-function buildBreadcrumbs(hash, path) {
+module.exports = function buildBreadcrumbs(hash, path) {
   const bc = [
     {
       text: 'HISTORY',
@@ -44,9 +36,3 @@ function buildBreadcrumbs(hash, path) {
 
   return bc;
 }
-
-module.exports = {
-  buildFolderUrl,
-  buildFileUrl,
-  buildBreadcrumbs
-};

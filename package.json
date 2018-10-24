@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "devstart": "ndb ./bin/www",
+    "hermione": "./node_modules/.bin/hermione gui ./hermione --config ./.hermione.conf.js --browser chrome",
+    "hermione-no-gui": "./node_modules/.bin/hermione ./hermione --config ./.hermione.conf.js --browser chrome",
+    "selenium": "selenium-standalone start"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,9 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "jest": "^23.6.0",
     "ndb": "^1.0.26"
   }
 }
