@@ -71,9 +71,11 @@
 ## Интеграционные тесты
 Интеграционные тесты находятся в **hermione/test.hermione.js**.  
 
-Для того, чтобы тестовые данные, получаемые из git были консистентными, создал отдельный репозиторий (git@github.com:EVStarostin/shri-testing-homework.git). Скрипт `npm run start:t` запускает приложение и записывает в переменную окружения путь к mock-репозиторию с консистентной историй коммитов.  
+Для того, чтобы тестовые данные, получаемые из git были консистентными, создал отдельный репозиторий (https://github.com/EVStarostin/shri-testing-homework.git). Скрипт `npm run start:t` запускает приложение и записывает в переменную окружения путь к mock-репозиторию с консистентной историй коммитов.  
 
-Selenium и hermione разворачивал на windows 10. Версия Google Chrome — 70, FireFox — 62, Java 8, Python 2.7.  
+Интеграционные тесты находятся в **hermione/test.hermione.js**  
+
+Selenium и hermione разворачивал на windows 10. Версия Google Chrome — 70, FireFox — 62, Java — 8, Python — 2.7.  
 **hermione-html-report на windows** открывается нормально только в **Firefox**, в google chrome неправильный путь к картинкам.  
 
 Используется линтер с конфигом airbnb.  
