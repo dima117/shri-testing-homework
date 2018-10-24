@@ -7,7 +7,12 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'firefox'
       }
-    }
+    },
+    chrome: {
+      desiredCapabilities: {
+        browserName: 'chrome'
+      }
+    },
   },
   sets: {
     common: {
