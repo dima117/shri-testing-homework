@@ -1,25 +1,14 @@
 const GitWorker = require('../utils/git');
-const {
-  buildFolderUrl,
-  buildFileUrl,
-  buildBreadcrumbs
-} = require('../utils/navigation');
+const UrlBuilder = require('../utils/navigation');
 
-function buildObjectUrl(parentHash, { path, type }) {
-  switch (type) {
-    case 'tree':
-      return buildFolderUrl(parentHash, path);
-    case 'blob':
-      return buildFileUrl(parentHash, path);
-    default:
-      return '#';
-  }
-}
+const urls = new UrlBuilder();
 
-const attachParams = (item, hash) => ({
-  ...item,
-  href: buildObjectUrl(hash, item),
-  name: item.path.split('/').pop()
+const attachParams = ((item, hash) => {
+  return {
+    ...item,
+    href: urls.buildObjectUrl(hash, item),
+    name: item.path.split('/').pop()
+  };
 });
 
 function filesController(req, res, next) {
@@ -27,15 +16,15 @@ function filesController(req, res, next) {
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
-  const gitWorker = new GitWorker();
+  const gw = new GitWorker();
 
-  return gitWorker.gitFileTree(hash, path).then(
+  return gw.gitFileTree(hash, path).then(
     list => {
       const files = list.map(item => attachParams(item, hash));
 
       res.render('files', {
         title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+        breadcrumbs: urls.buildBreadcrumbs(hash, pathParam.join('/')),
         files
       });
     },

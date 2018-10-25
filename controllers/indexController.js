@@ -1,5 +1,7 @@
 const GitWorker = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const UrlBuilder = require('../utils/navigation');
+
+const urls = new UrlBuilder();
 
 // Подхачиваю отображение инфы в гите чтобы Гермиона нормально
 // отвалидировала страницу
@@ -10,9 +12,11 @@ const offsetHacked = true;
   page = offsetHacked ? 1.05 : page;
 }());
 
-const attachHref = gitInfo => ({
-  ...gitInfo,
-  href: buildFolderUrl(gitInfo.hash, '')
+const attachHref = ((gitInfo) => {
+  return {
+    ...gitInfo,
+    href: urls.buildFolderUrl(gitInfo.hash, '')
+  };
 });
 
 function indexController(req, res) {
@@ -24,7 +28,7 @@ function indexController(req, res) {
 
       res.render('index', {
         title: 'history',
-        breadcrumbs: buildBreadcrumbs(),
+        breadcrumbs: urls.buildBreadcrumbs(),
         list
       });
     },

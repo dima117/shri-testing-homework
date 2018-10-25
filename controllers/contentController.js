@@ -1,5 +1,7 @@
 const GitWorker = require('../utils/git');
-const { buildBreadcrumbs } = require('../utils/navigation');
+const UrlBuilder = require('../utils/navigation');
+
+const buildBreadcrumbs = new UrlBuilder().buildBreadcrumbs;
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;

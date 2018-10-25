@@ -1,6 +1,4 @@
 const { expect } = require('chai');
-const sinon = require('sinon').createSandbox();
-
 const GitWorker = require('../../utils/git');
 
 const git = new GitWorker();
@@ -11,22 +9,22 @@ describe('class GitWorker, responsible for the getting and parsing stdout from c
   describe('gitHistory, that returns a list of commits of customizable length and offset', () => {
     it('should use the default offset and size of the list when the agruments are not passed', async () => {
       git.executeGit = (...args) => {
-        this.stdoutArr = args;
+        this.stdinArr = args;
         return Promise.resolve('ok');
       };
 
       await git.gitHistory();
-      expect(this.stdoutArr[0]).to.include(0, 10);
+      expect(this.stdinArr[0]).to.include(0, 10);
     });
 
     it('should accept offset and size of the list of commits and correctly calculate them', async () => {
       git.executeGit = (...args) => {
-        this.stdoutArr = args;
+        this.stdinArr = args;
         return Promise.resolve('ok');
       };
 
       await git.gitHistory(5, 15);
-      expect(this.stdoutArr[0]).to.include(60, 15);
+      expect(this.stdinArr[0]).to.include(60, 15);
     });
 
     it('should properly cut a git string on the commits object', async () => {
