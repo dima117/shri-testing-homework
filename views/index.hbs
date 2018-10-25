@@ -1,25 +1,25 @@
-<div class="breadcrumbs">
+<div class="breadcrumbs" data-smid="breadcrumbs-title">
     {{#each breadcrumbs}}
         {{#if href}}
-            <a href="{{href}}">{{text}}</a> /
+            <a href="{{href}}" data-smid="breadcrumbs-link">{{text}}</a> /
         {{else}}
             {{text}}
         {{/if}}
     {{/each}}
 </div>
 
-<div class="content">
+<div class="content" data-smid="index-content">
     {{#each list}}
         <div class="commit">
             <div class="commit__info">
-                <span class="commit__author">{{author}}</span>
-                <span class="commit__date">{{timestamp}}</span>
+                <span class="commit__author" data-smid="commit-author">{{author}}</span>
+                <span class="commit__date" data-smid="commit-date">{{timestamp}}</span>
             </div>
-            <div class="commit__msg">
+            <div class="commit__msg" data-smid="commit-message">
                 {{msg}}
             </div>
             <div class="commit__link">
-                <a href="{{href}}">{{hash}}</a>
+                <a href="{{href}}" data-smid="commit-link">{{hash}}</a>
             </div>
         </div>
     {{/each}}
