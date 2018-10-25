@@ -9,7 +9,7 @@ const git = new GitWorker();
 describe('class GitWorker, responsible for the getting and parsing stdout from console, has methods:', () => {
 
   describe('gitHistory, that returns a list of commits of customizable length and offset', () => {
-    it('should use the default numbers in the arguments when they are not passed', async () => {
+    it('should use the default offset and size of the list when the agruments are not passed', async () => {
       git.executeGit = (...args) => {
         this.stdoutArr = args;
         return Promise.resolve('ok');
