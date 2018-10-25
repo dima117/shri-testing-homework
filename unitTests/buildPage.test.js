@@ -3,7 +3,6 @@ const { buildIndexPage, buildFilesPage, buildContentPage } = require('../utils/b
 
 describe('формирование страниц перед рендером', () => {
   describe('indexPage', () => {
-    // подготовка
     const history = [
       {
         hash: '83736c5588bfc7ab6f25a2bf5b438ac789aa769a',
@@ -19,32 +18,26 @@ describe('формирование страниц перед рендером', 
       },
     ];
 
-    // действие
     const indexPage = buildIndexPage(history);
 
     it('в объектах массива list есть свойство href', () => {
-      // проверка
       expect(indexPage.list[0]).to.have.property('href');
     });
 
     it('в возращаемом объекте есть корректный заголовок', () => {
-      // проверка
       expect(indexPage).to.have.property('title', 'history');
     });
 
     it('в возращаемом объекте есть "хлебные крошки"', () => {
-      // проверка
       expect(indexPage).to.have.property('breadcrumbs');
     });
 
     it('в возращаемом объекте есть список коммитов', () => {
-      // проверка
       expect(indexPage.list).to.have.lengthOf(2);
     });
   });
 
   describe('filesPage', () => {
-    // подготовка
     const list = [
       {
         type: 'blob',
@@ -66,57 +59,46 @@ describe('формирование страниц перед рендером', 
     const hash = '83736c5588bfc7ab6f25a2bf5b438ac789aa769a';
     const pathParam = ['controllers'];
 
-    // действие
     const filesPage = buildFilesPage(list, hash, pathParam);
 
     it('в объектах массива files есть свойство href', () => {
-      // проверка
       expect(filesPage.files[0]).to.have.property('href');
     });
 
     it('в объектах массива files есть свойство name', () => {
-      // проверка
       expect(filesPage.files[0]).to.have.property('name', 'contentController.js');
     });
 
     it('в возращаемом объекте есть корректный заголовок', () => {
-      // проверка
       expect(filesPage).to.have.property('title', 'files');
     });
 
     it('в возращаемом объекте есть "хлебные крошки"', () => {
-      // проверка
       expect(filesPage).to.have.property('breadcrumbs');
     });
 
     it('в возращаемом объекте есть список файлов', () => {
-      // проверка
       expect(filesPage.files).to.have.lengthOf(3);
     });
   });
 
   describe('contentPage', () => {
-    // подготовка
     const content = 'content';
 
     const hash = '83736c5588bfc7ab6f25a2bf5b438ac789aa769a';
     const path = ['controllers', 'indexController.js'];
 
-    // действие
     const contentPage = buildContentPage(content, hash, path);
 
     it('в возращаемом объекте есть корректное свойство контент', () => {
-      // проверка
       expect(contentPage).to.have.property('content', content);
     });
 
     it('в возращаемом объекте есть корректный заголовок', () => {
-      // проверка
       expect(contentPage).to.have.property('title', 'content');
     });
 
     it('в возращаемом объекте есть "хлебные крошки"', () => {
-      // проверка
       expect(contentPage).to.have.property('breadcrumbs');
     });
   });

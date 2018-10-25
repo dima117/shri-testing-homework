@@ -4,7 +4,6 @@ const { Git } = require('../utils/git');
 describe('класс Git', () => {
   describe('метод getHistory', () => {
     it('можно получить историю коммитов', async () => {
-      // подготовка
       const git = new Git();
       const page = 1;
       const size = 20;
@@ -24,21 +23,17 @@ describe('класс Git', () => {
         },
       ];
 
-      // действие
       git.executeGit = () => Promise.resolve(fakeCMDOutput);
 
       const history = await git.getHistory(page, size);
 
-      // проверка
       expect(history).to.eql(fakeHistory);
     });
 
     it('в случае ошибки должно выбрасываться исключение', async () => {
-      // подготовка
       const git = new Git();
       const someError = new Error('some error');
 
-      // действие
       git.executeGit = () => Promise.reject(someError);
 
       let thrownError;
@@ -48,14 +43,12 @@ describe('класс Git', () => {
         thrownError = error;
       }
 
-      // проверка
       expect(thrownError).to.eql(someError);
     });
   });
 
   describe('метод getFileTree', () => {
     it('можно получить список файлов для выбранного коммита', async () => {
-      // подготовка
       const git = new Git();
       const hash = '90180910fc27a11272a3e5caeeb119a51e5c0545';
       const path = 'controlers/';
@@ -73,21 +66,17 @@ describe('класс Git', () => {
         },
       ];
 
-      // действие
       git.executeGit = () => Promise.resolve(fakeCMDOutput);
 
       const fileTree = await git.getFileTree(hash, path);
 
-      // проверка
       expect(fileTree).to.eql(fakeFileTree);
     });
 
     it('в случае ошибки должно выбрасываться исключение', async () => {
-      // подготовка
       const git = new Git();
       const someError = new Error('some error');
 
-      // действие
       git.executeGit = () => Promise.reject(someError);
 
       let thrownError;
@@ -97,33 +86,27 @@ describe('класс Git', () => {
         thrownError = error;
       }
 
-      // проверка
       expect(thrownError).to.eql(someError);
     });
   });
 
   describe('метод getFileContent', () => {
     it('можно получить содержимое выбранного файла', async () => {
-      // подготовка
       const git = new Git();
       const hash = 'ead09676a936eb50ed700dad0d280d65c3df21d8';
       const fakeCMDOutput = '# Домашнее задание: автотесты\n\nВам дано приложение на JavaScript и нужно написать для него автотесты: интеграционные тесты на интерфейс и модульные тесты на серверную часть.\n\n';
 
-      // действие
       git.executeGit = () => Promise.resolve(fakeCMDOutput);
 
       const fileContent = await git.getFileContent(hash);
 
-      // проверка
       expect(fileContent).to.eql(fakeCMDOutput);
     });
 
     it('в случае ошибки должно выбрасываться исключение', async () => {
-      // подготовка
       const git = new Git();
       const someError = new ReferenceError('some error');
 
-      // действие
       git.executeGit = () => Promise.reject(someError);
 
       let thrownError;
@@ -133,7 +116,6 @@ describe('класс Git', () => {
         thrownError = error;
       }
 
-      // проверка
       expect(thrownError).to.eql(someError);
     });
   });
