@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:integration": "./node_modules/.bin/hermione test/integrations/",
+    "test:unit": "mocha test/units/**/*.js",
+    "test:gui": "./node_modules/.bin/hermione gui test/integrations/",
+    "selenium": "selenium-standalone start",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -13,9 +16,15 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "moment": "^2.22.2"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.7.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
     "ndb": "^1.0.26"
   }
 }
