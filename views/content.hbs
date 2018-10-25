@@ -1,7 +1,7 @@
 <div class="breadcrumbs">
     {{#each breadcrumbs}}
         {{#if href}}
-            <a href="{{href}}">{{text}}</a> /
+            <a class="breadcrumbs__item" href="{{href}}">{{text}}</a> /
         {{else}}
             {{text}}
         {{/if}}
