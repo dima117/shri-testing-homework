@@ -1,20 +1,22 @@
 const { gitFileTree } = require('../utils/git');
 const {
+  buildObjectUrl,
   buildFolderUrl,
   buildFileUrl,
   buildBreadcrumbs
 } = require('../utils/navigation');
 
-function buildObjectUrl(parentHash, { path, type }) {
-  switch (type) {
-    case 'tree':
-      return buildFolderUrl(parentHash, path);
-    case 'blob':
-      return buildFileUrl(parentHash, path);
-    default:
-      return '#';
-  }
-}
+// перенесла в navigation.js для тестов
+// function buildObjectUrl(parentHash, { path, type }) {
+//   switch (type) {
+//     case 'tree':
+//       return buildFolderUrl(parentHash, path);
+//     case 'blob':
+//       return buildFileUrl(parentHash, path);
+//     default:
+//       return '#';
+//   }
+// }
 
 module.exports = function(req, res, next) {
   const { hash } = req.params;
