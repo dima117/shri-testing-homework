@@ -26,12 +26,13 @@ app.get('/content/:hash/*?', contentController);
 
 // error handlers
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
+// eslint-disable-next-line no-unused-vars
 app.use(function(err, req, res, next) {
   const { status = 500, message } = err;
 
@@ -41,6 +42,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(PORT, HOST, () => {
+  // eslint-disable-next-line no-console
   console.log(`App listening at http://localhost:${PORT}`);
 });
 
