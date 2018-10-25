@@ -6,6 +6,6 @@ gulp.task('test', function () {
     .src(['js/test/**/*.test.js'], { read: false })
     .pipe(mocha({
       ui: 'tdd',
-      reporter: 'dot'
+      reporter: 'spec'
     }));
 });
