@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests",
+    "test-cover": "nyc --reporter=html --reporter=text mocha tests",
     "start": "node ./bin/www",
-    "devstart": "ndb ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "stage": "NODE_ENV=staging node ./bin/www",
+    "debug": "ndb",
+    "lint": "eslint --fix tests",
+    "hermione": "hermione hermione",
+    "hermione-gui": "hermione gui"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +22,16 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "chai": "^4.2.0",
+    "chai-shallow-deep-equal": "^1.4.6",
+    "eslint": "^5.7.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
+    "ndb": "^1.0.26",
+    "nodemon": "^1.18.4",
+    "nyc": "^13.1.0",
+    "prettier": "^1.14.3"
   }
 }

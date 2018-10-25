@@ -45,8 +45,20 @@ function buildBreadcrumbs(hash, path) {
   return bc;
 }
 
+function buildObjectUrl(parentHash, { path, type }) {
+  switch (type) {
+    case 'tree':
+      return buildFolderUrl(parentHash, path);
+    case 'blob':
+      return buildFileUrl(parentHash, path);
+    default:
+      return '#';
+  }
+}
+
 module.exports = {
   buildFolderUrl,
   buildFileUrl,
-  buildBreadcrumbs
+  buildBreadcrumbs,
+  buildObjectUrl
 };

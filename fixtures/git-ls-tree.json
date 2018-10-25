@@ -1,0 +1,85 @@
+{
+  "ls": {
+    "f955adfc43b8dc46359b0cc1f1265506d80f0644": [
+      {
+        "type": "blob",
+        "hash": "e102d52abefd86fb2e30bbb3751e0f0432834fd2",
+        "path": ".eslintrc.json"
+      },
+      {
+        "type": "blob",
+        "hash": "b5809f6d2d86cbe8d75b343d8460f46b6e16a0e5",
+        "path": ".gitignore"
+      },
+      {
+        "type": "blob",
+        "hash": "220ae8ef248e310e5ad4d8f8a79cb00485c3dc81",
+        "path": ".prettierrc"
+      },
+      {
+        "type": "blob",
+        "hash": "339a0cebf88c1eac07052a66d8ef94b5cf29c624",
+        "path": "README.md"
+      },
+      {
+        "type": "blob",
+        "hash": "70461d5f9009344d9933e889b0448aa3f18d83d9",
+        "path": "app.js"
+      },
+      {
+        "type": "tree",
+        "hash": "152db3caa8a0d01acc76abc9df36e6b432ad1e55",
+        "path": "bin"
+      },
+      {
+        "type": "tree",
+        "hash": "9b406f59179a5ebf9ee120ca7c4a7ceced0e6192",
+        "path": "controllers"
+      },
+      {
+        "type": "blob",
+        "hash": "104cc38bbc5416252cdeac15238b3aaceccbaa8d",
+        "path": "package-lock.json"
+      },
+      {
+        "type": "blob",
+        "hash": "118c19c06afcfe6b709d4739443e859f5cf50454",
+        "path": "package.json"
+      },
+      {
+        "type": "tree",
+        "hash": "6a033b657f10911ad9b65c27c3f9b6fb6130b058",
+        "path": "public"
+      },
+      {
+        "type": "tree",
+        "hash": "1a3c12b118bf123395852a688e46bab374c4c261",
+        "path": "tests"
+      },
+      {
+        "type": "tree",
+        "hash": "7b0aafd9e1a67392c6492e340ce52ab8624360c4",
+        "path": "utils"
+      },
+      {
+        "type": "tree",
+        "hash": "4c0e80c9ffcda3ef1a11b2d8ecd552418dad68b5",
+        "path": "views"
+      }
+    ],
+    "7ca983dadaf374d2bbd001447d49c9bf34cc54fc": {
+      "utils/": [
+        {
+          "type": "blob",
+          "hash": "34c8f2ef3a70fb1c8cd197ae20c5b366ca630bca",
+          "path": "utils/git.js"
+        },
+        {
+          "type": "blob",
+          "hash": "89f5eca8135b6f4f64a19a3813ea3a30eed2e8d3",
+          "path": "utils/navigation.js"
+        }
+      ]
+    }
+  }
+}
