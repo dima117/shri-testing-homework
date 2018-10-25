@@ -13,5 +13,6 @@ module.exports = {
       path: 'hermione-html-reporter'
     },
     'hermione-custom-commands': true
-  }
+  },
+  compositeImage: true
 };
