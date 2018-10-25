@@ -8,29 +8,33 @@ describe('содержимое отображается правильно на 
         .isExisting('.content')
         .isExisting('.breadcrumbs')
         .then(exists => assert.ok(exists, 'История коммитов не отображается'))
-        .assertView('plain', 'body');
+        .assertView('plain', '.content');
     });
   });
 
   describe('"просмотр файловой системы"', () => {
     it('на странице должен присутствовать список файлов', function () {
+      const filesPageUrl = '/files/90180910fc27a11272a3e5caeeb119a51e5c0545/';
+
       return this.browser
-        .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
+        .url(filesPageUrl)
         .isExisting('.content ul')
         .isExisting('.breadcrumbs')
         .then(exists => assert.ok(exists, 'Файловая система не отображается'))
-        .assertView('plain', 'body');
+        .assertView('plain', '.content');
     });
   });
 
   describe('"просмотр содержимого файла"', () => {
     it('на странице должен присутствовать блок с контентом', function () {
+      const contentPageUrl = '/content/90180910fc27a11272a3e5caeeb119a51e5c0545/README.md';
+
       return this.browser
-        .url('/content/90180910fc27a11272a3e5caeeb119a51e5c0545/README.md')
+        .url(contentPageUrl)
         .isExisting('.content .file-content')
         .isExisting('.breadcrumbs')
         .then(exists => assert.ok(exists, 'Содержимое файла не отображается'))
-        .assertView('plain', 'body');
+        .assertView('plain', '.content');
     });
   });
 });
@@ -38,9 +42,11 @@ describe('содержимое отображается правильно на 
 describe('правильно работают переходы по страницам: ', () => {
   describe('из списка коммитов на список файлов', () => {
     it('Заголовок страницы должен быть "files"', function () {
+      const commitLink = '.content .commit .commit__link a[href="/files/90180910fc27a11272a3e5caeeb119a51e5c0545/"]';
+
       return this.browser
         .url('/')
-        .click('.content .commit .commit__link a[href="/files/90180910fc27a11272a3e5caeeb119a51e5c0545/"]')
+        .click(commitLink)
         .getTitle()
         .then(title => assert.equal(title, 'files', 'переход на страницу просмотра файловой системы не состоялся'));
     });
@@ -48,19 +54,25 @@ describe('правильно работают переходы по страни
 
   describe('из списка файлов во вложенную папку', () => {
     it('Заголовок страницы должен не изменится и остаться "files"', function () {
+      const filesPageUrl = '/files/90180910fc27a11272a3e5caeeb119a51e5c0545/';
+      const folderLink = '.content ul li a[href="/files/90180910fc27a11272a3e5caeeb119a51e5c0545/bin"]';
+
       return this.browser
-        .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
-        .click('.content ul li a[href="/files/90180910fc27a11272a3e5caeeb119a51e5c0545/bin"]')
+        .url(filesPageUrl)
+        .click(folderLink)
         .getTitle()
         .then(title => assert.equal(title, 'files', 'переход из списка файлов во вложенную папку не состоялся'));
     });
   });
 
   describe('из списка файлов на страницу отдельного файла', () => {
+    const filesPageUrl = '/files/90180910fc27a11272a3e5caeeb119a51e5c0545/';
+    const fileLink = '.content ul li a[href="/content/90180910fc27a11272a3e5caeeb119a51e5c0545/app.js"]';
+
     it('Заголовок страницы должен быть "content"', function () {
       return this.browser
-        .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
-        .click('.content ul li a[href="/content/90180910fc27a11272a3e5caeeb119a51e5c0545/app.js"]')
+        .url(filesPageUrl)
+        .click(fileLink)
         .getTitle()
         .then(title => assert.equal(title, 'content', 'переход на страницу содержимого файла не состоялся'));
     });
@@ -68,20 +80,26 @@ describe('правильно работают переходы по страни
 
   describe('переходы по хлебным крошкам', () => {
     it('при клике на HISTORY осуществляется переход к истории коммитов', function () {
+      const filesPageUrl = '/files/90180910fc27a11272a3e5caeeb119a51e5c0545/';
+      const rootLink = '.breadcrumbs a[href="/"]';
+
       return this.browser
-        .url('/files/90180910fc27a11272a3e5caeeb119a51e5c0545/')
+        .url(filesPageUrl)
         .assertView('plain', '.breadcrumbs')
-        .click('.breadcrumbs a[href="/"]')
+        .click(rootLink)
         .getTitle()
         .then(title => assert.equal(title, 'history', 'переход на страницу истории коммитов не состоялся'))
         .assertView('clicked', '.breadcrumbs');
     });
 
     it('при клике на название папки осуществляется переход к списку файлов', function () {
+      const contentPageUrl = '/content/90180910fc27a11272a3e5caeeb119a51e5c0545/app.js';
+      const folderLink = '.breadcrumbs a[href="/files/90180910fc27a11272a3e5caeeb119a51e5c0545/"]';
+
       return this.browser
-        .url('/content/90180910fc27a11272a3e5caeeb119a51e5c0545/app.js')
+        .url(contentPageUrl)
         .assertView('plain', '.breadcrumbs')
-        .click('.breadcrumbs a[href="/files/90180910fc27a11272a3e5caeeb119a51e5c0545/"]')
+        .click(folderLink)
         .getTitle()
         .then(title => assert.equal(title, 'files', 'переход на страницу просмотра файловой системы не состоялся'))
         .assertView('clicked', '.breadcrumbs');
