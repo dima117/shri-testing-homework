@@ -6,7 +6,6 @@ describe('содержимое отображается правильно на 
       return this.browser
         .url('/')
         .isExisting('.content')
-        .isExisting('.breadcrumbs')
         .then(exists => assert.ok(exists, 'История коммитов не отображается'))
         .assertView('plain', '.content');
     });
@@ -19,7 +18,6 @@ describe('содержимое отображается правильно на 
       return this.browser
         .url(filesPageUrl)
         .isExisting('.content ul')
-        .isExisting('.breadcrumbs')
         .then(exists => assert.ok(exists, 'Файловая система не отображается'))
         .assertView('plain', '.content');
     });
@@ -32,7 +30,6 @@ describe('содержимое отображается правильно на 
       return this.browser
         .url(contentPageUrl)
         .isExisting('.content .file-content')
-        .isExisting('.breadcrumbs')
         .then(exists => assert.ok(exists, 'Содержимое файла не отображается'))
         .assertView('plain', '.content');
     });
