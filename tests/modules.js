@@ -25,7 +25,16 @@ describe('Navigation', function() {
         // проверка: хотелось бы, чтобы вернулась строка, которая сплитится по слэшу
         expect( folderUrl.split('/').length > 1 ).to.equal( true );
     });
+   it('создается корректный путь до файла с указанием пути', function() {
+        let hash = '90180910fc27a11272a3e5caeeb119a51e5c0545',
+            path = 'file.ext';
+
+        let folderUrl = buildFileUrl(hash, path);
+
+        expect( folderUrl.split('/') ).to.include( path );
+    });
 });
+
 
 // тестируем хлебные крошки
 
