@@ -5,7 +5,7 @@ describe('содержимое отображается правильно на 
     it('на странице должны присутствуют коммиты', function () {
       return this.browser
         .url('/')
-        .isExisting('.content')
+        .isExisting('.content .commit')
         .then(exists => assert.ok(exists, 'История коммитов не отображается'))
         .assertView('plain', '.content');
     });
