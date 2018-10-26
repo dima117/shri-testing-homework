@@ -1,5 +1,5 @@
 const GitUtil = require('../../utils/git');
-const PATH = './test-rep';
+const PATH = './test-repository';
 const git = new GitUtil(PATH);
 const expect = require('chai').expect;
 
