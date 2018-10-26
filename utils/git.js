@@ -53,6 +53,8 @@ function parseFileTreeItem(line) {
 }
 
 function gitFileTree(hash, path) {
+  console.log('!!!!!!!');
+  console.log(hash + '_____' + path);
   const params = ['ls-tree', hash];
   path && params.push(path);
 
