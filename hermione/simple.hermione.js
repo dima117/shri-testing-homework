@@ -11,7 +11,7 @@ describe ( 'Page content is load', () => {
     return this.browser
       .url('/')
       .click('a[href*=files]')
-      .assertView('plain', 'body', {ignoreElements: ['li a']});
+      .assertView('plain', 'body', {ignoreElements: ['.content']});
   });
 
   it ('should show inner folder', function() {
@@ -19,7 +19,7 @@ describe ( 'Page content is load', () => {
       .url('/')
       .click('a[href*=files]')
       .click('a[href*=files]')
-      .assertView('plain', 'body', {ignoreElements: ['li a', '.breadcrumbs a:nth-child(n+3)',  '.breadcrumbs span']});
+      .assertView('plain', 'body', {ignoreElements: ['.content', '.breadcrumbs a:nth-child(n+3)',  '.breadcrumbs span']});
   });
 
   it ('should show file', function() {
