@@ -6,6 +6,8 @@
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "mocha tests/unit",
+    "test:hermione": "hermione tests/hermione",
+    "test:hermione:gui": "hermione gui tests/hermione",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -18,6 +20,8 @@
   },
   "devDependencies": {
     "chai": "4.2.0",
+    "hermione": "0.90.1",
+    "html-reporter": "2.22.0",
     "mocha": "5.2.0",
     "ndb": "^1.0.26"
   }
