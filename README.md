@@ -2,6 +2,7 @@
 >Запуск
 ```
 npm i
+npm run ifk
 npm start
 npm run selenium
 npm test (module test)

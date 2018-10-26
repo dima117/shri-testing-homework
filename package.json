@@ -8,6 +8,7 @@
     "hermione": "hermione **/*.hermione.js",
     "cover": "istanbul cover **/*.js",
     "start": "node ./bin/www",
+    "ifk": "git submodule update --init --recursive",
     "devstart": "ndb ./bin/www",
     "selenium": "selenium-standalone start",
     "testEnv": "mkdir fakeRep && cd fakeRep && git init && echo 'file1' > file1.txt && git add -A && git commit -m 'first' && mkdir app && cd app && echo 'file2' > file2.txt && git add -A && git commit -m 'second'"
