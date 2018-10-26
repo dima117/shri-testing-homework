@@ -45,6 +45,3 @@ describe('buildBreadcrumbs', () => {
     expect(result[0]).to.deep.equal([ { text: 'HISTORY', href: '/' }, { text: 'ROOT', href: '/files/' + hash + '/' }, { text: file } ][0]);
   });
 });
-
-
-// AssertionError: expected { text: 'HISTORY', href: undefined } to equal { text: 'HISTORY', href: undefined }
