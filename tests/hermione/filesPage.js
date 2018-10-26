@@ -13,6 +13,21 @@ describe('Правильно работает страница файловой 
             .assertView('indexBreadcrumbs', '.breadcrumbs')
     });
 
+    it('Пользователь должен иметь возможность вернуться на страницу комитов', function () {
+        return this.browser
+            .url(url)
+            .isExisting('.breadcrumbs')
+            .then(exists => assert.ok(exists))
+            .$$('.breadcrumbs a')
+            .then(links => {
+                expect(links).to.not.be.empty;
+
+                return this.browser.elementIdClick(links[0].ELEMENT)
+            })
+            .getUrl()
+            .then(url => expect(url).to.be.eql('http://127.0.0.1:3000/'));
+    });
+
     it('Правильно отображается блок информации о файлах и папках', function () {
         return this.browser
             .url(url)
