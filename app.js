@@ -5,9 +5,9 @@ const PORT = 3000;
 const HOST = '::';
 
 // controllers
-const indexController = require('./controllers/indexController');
-const filesController = require('./controllers/filesController');
-const contentController = require('./controllers/contentController');
+const indexController = require('./js/controllers/indexController');
+const filesController = require('./js/controllers/filesController');
+const contentController = require('./js/controllers/contentController');
 
 const app = express();
 
@@ -25,14 +25,14 @@ app.get('/files/:hash/*?', filesController);
 app.get('/content/:hash/*?', contentController);
 
 // error handlers
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use(function (req, res, next) {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   const { status = 500, message } = err;
 
   // render the error page

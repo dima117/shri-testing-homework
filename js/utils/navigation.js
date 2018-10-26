@@ -1,12 +1,21 @@
-function buildFolderUrl(parentHash, path = '') {
-  return `/files/${parentHash}/${path}`;
+function buildObjectUrl (parentHash, objectPath) {
+  if (!parentHash || !objectPath) {
+    return '#';
+  }
+  const TYPE_ACCORD = {
+    tree: 'files',
+    blob: 'content'
+  };
+  const { path = '', type } = objectPath;
+
+  if (!type || !TYPE_ACCORD[type]) {
+    return '#';
+  }
+
+  return `/${TYPE_ACCORD[type]}/${parentHash}/${path}`
 }
 
-function buildFileUrl(parentHash, path) {
-  return `/content/${parentHash}/${path}`;
-}
-
-function buildBreadcrumbs(hash, path) {
+function buildBreadcrumbs (hash, path) {
   const bc = [
     {
       text: 'HISTORY',
@@ -46,7 +55,6 @@ function buildBreadcrumbs(hash, path) {
 }
 
 module.exports = {
-  buildFolderUrl,
-  buildFileUrl,
+  buildObjectUrl,
   buildBreadcrumbs
 };
