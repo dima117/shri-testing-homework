@@ -1,7 +1,9 @@
 const { resolve } = require('path');
-const REPO = resolve('.');
-
 const { execFile } = require('child_process');
+
+const REPO = process.env.NODE_ENV === 'test' ?
+  resolve('../test_rep') :
+  resolve('.');
 
 class Git {
   constructor() {
@@ -23,7 +25,6 @@ class Git {
     });
   }
 
-  // разбирает один элемент истории, которую строчка за строчкой возвращает гит
   static parseHistoryItem(line) {
     const [hash, author, timestamp, msg] = line.split('\t');
 
@@ -35,7 +36,6 @@ class Git {
     };
   }
 
-  // Выводит историю коммитов в формате
   history(page = 1, size = 10) {
     const offset = (page - 1) * size;
 
@@ -79,8 +79,8 @@ class Git {
     return this.execute('git', ['show', hash]);
   }
 }
-// static
+// static field of the class
 Git._instance = null;
 
-// Запускает на выполнение git с аргументами
+
 module.exports = Git;
