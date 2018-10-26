@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-const {buildObjectUrl} = require('../../utils/navigation');
-const {buildBreadcrumbs} = require('../../utils/navigation');
+const {resolve} = require('path');
+const {buildObjectUrl, buildBreadcrumbs} = require(resolve('utils/navigation'));
 
 describe('Формирование URL', () => {
   test('Маршрутизирует на content при типе blob', () => {
@@ -19,7 +19,6 @@ describe('Формирование URL', () => {
     const [hash, path, wrongType] = ['hash12345', 'somePath', 'wrongType'];
     const wrongTypeResult = buildObjectUrl(hash, {path, type: wrongType});
     expect(wrongTypeResult).toEqual('#');
-
   });
 
   test('Маршрутизирует на # если тип неопределен', () => {

@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-const Git = require('../../utils/git');
+const {resolve} = require('path');
+const Git = require(resolve('utils/git'));
 
 describe('методы класса Git', () => {
   const gitHistoryRow = 'hash12345\t' +
