@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
-    "start": "node ./bin/www",
+    "test:unit": "NODE_ENV=test jest --coverage",
+    "test:e2e": "NODE_ENV=test hermione",
+    "start": "NODE_ENV=test node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
   "keywords": [],
@@ -16,8 +17,13 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "acorn": "^6.0.2",
+    "chai": "^4.2.0",
     "eslint": "^5.7.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.23.0",
     "jest": "^23.6.0",
-    "ndb": "^1.0.26"
+    "ndb": "^1.0.26",
+    "node-mocks-http": "^1.7.3"
   }
 }
