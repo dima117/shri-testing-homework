@@ -2,7 +2,7 @@ const { resolve } = require('path');
 const { execFile } = require('child_process');
 
 const REPO = process.env.NODE_ENV === 'test' ?
-  resolve('../test_rep') :
+  resolve('../shri_test_repo') :
   resolve('.');
 
 class Git {
