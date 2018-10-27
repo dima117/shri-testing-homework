@@ -38,7 +38,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__info .commit__date')
             .then(function(title) {
-                assert.equal(title, '2018-10-18 19:42:08 +0300')
+                assert.equal(title, '2018-10-19 17:10:18 +0300')
             })
     })
 
@@ -47,7 +47,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__msg')
             .then(function(title) {
-                assert.equal(title, 'Add first unit test for Git History')
+                assert.equal(title, 'AInstall Selenium, Hermione')
             })
     })
 
@@ -56,7 +56,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__link a')
             .then(function(title) {
-                assert.equal(title, '559f5451edf2ed5afa1f46021d24dabb6b4ebf9a')
+                assert.equal(title, 'fc42a7bbe3fee0805d8a9258eff5c1f7d9a03545')
             })
     })
 })
