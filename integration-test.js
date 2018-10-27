@@ -38,7 +38,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__info .commit__date')
             .then(function(title) {
-                assert.equal(title, '2018-10-19 17:10:34 +0300')
+                assert.equal(title, '2018-10-19 17:32:10 +0300')
             })
     })
 
@@ -47,7 +47,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__msg')
             .then(function(title) {
-                assert.equal(title, 'Add integration tests')
+                assert.equal(title, 'Update layout')
             })
     })
 
@@ -56,7 +56,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__link a')
             .then(function(title) {
-                assert.equal(title, 'e0f4b6c186aa35958dfe3d111a6e3d201cc44e34')
+                assert.equal(title, '84f41c02fe446a3ec635f8708d15cca60ff54f20')
             })
     })
 })
