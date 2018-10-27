@@ -38,7 +38,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__info .commit__date')
             .then(function(title) {
-                assert.equal(title, '2018-10-19 17:10:18 +0300')
+                assert.equal(title, '2018-10-19 17:10:34 +0300')
             })
     })
 
@@ -47,7 +47,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__msg')
             .then(function(title) {
-                assert.equal(title, 'AInstall Selenium, Hermione')
+                assert.equal(title, 'Add integration tests')
             })
     })
 
@@ -56,7 +56,7 @@ describe('Содержимое страницы отображается кор�
             .url('/')
             .getText('.commit:last-of-type .commit__link a')
             .then(function(title) {
-                assert.equal(title, 'fc42a7bbe3fee0805d8a9258eff5c1f7d9a03545')
+                assert.equal(title, 'e0f4b6c186aa35958dfe3d111a6e3d201cc44e34')
             })
     })
 })
