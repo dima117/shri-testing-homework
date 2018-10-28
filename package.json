@@ -11,13 +11,15 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "dependencies": {
-        "chai": "^4.2.0",
+    "devDependencies": {
         "express": "^4.16.4",
         "hbs": "^4.0.1",
-        "mocha": "^5.2.0"
-    },
-    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^5.2.0",
+        "moment": "^2.22.2",
         "ndb": "^1.0.26"
+    },
+    "dependencies": {
+        "hermione": "^0.90.2"
     }
 }
