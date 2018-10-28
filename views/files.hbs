@@ -1,18 +1,18 @@
 <div class="breadcrumbs">
     {{#each breadcrumbs}}
         {{#if href}}
-            <a href="{{href}}">{{text}}</a> /
+            <a class="breadcrumbs__link" href="{{href}}">{{text}}</a> /
         {{else}}
             {{text}}
         {{/if}}
     {{/each}}
 </div>
 
-<div class="content">
+<div class="content content--files">
     <ul>
         {{#each files}}
             <li>
-                <a href="{{href}}">{{name}}</a>
+                <a class="files__link" href="{{href}}">{{name}}</a>
             </li>
         {{/each}}
     </ul>

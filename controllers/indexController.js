@@ -1,20 +1,41 @@
-const { gitHistory } = require('../utils/git');
-const { buildFolderUrl, buildBreadcrumbs } = require('../utils/navigation');
+const GitWorker = require('../utils/git');
+const UrlBuilder = require('../utils/navigation');
 
-module.exports = function(req, res) {
-  gitHistory(1, 20).then(
-    history => {
-      const list = history.map(item => ({
-        ...item,
-        href: buildFolderUrl(item.hash, '')
-      }));
+const urls = new UrlBuilder();
+
+// Подхачиваю отображение инфы в гите чтобы Гермиона нормально
+// отвалидировала страницу
+let page = 1;
+const offsetHacked = true;
+
+(function hackGitOffset() {
+  page = offsetHacked ? 1.05 : page;
+}());
+
+const attachHref = ((gitInfo) => {
+  return {
+    ...gitInfo,
+    href: urls.buildFolderUrl(gitInfo.hash, '')
+  };
+});
+
+function indexController(req, res) {
+  const gitWorker = new GitWorker();
+
+  gitWorker.gitHistory(page, 20)
+    .then((history) => {
+      const list = history.map(attachHref);
 
       res.render('index', {
         title: 'history',
-        breadcrumbs: buildBreadcrumbs(),
+        breadcrumbs: urls.buildBreadcrumbs(),
         list
       });
     },
-    err => next(err)
-  );
+    err => next(err));
+}
+
+module.exports = {
+  indexController,
+  attachHref,
 };

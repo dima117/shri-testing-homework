@@ -1,14 +1,14 @@
 <div class="breadcrumbs">
     {{#each breadcrumbs}}
         {{#if href}}
-            <a href="{{href}}">{{text}}</a> /
+            <a class="breadcrumbs__link" href="{{href}}">{{text}}</a> /
         {{else}}
             {{text}}
         {{/if}}
     {{/each}}
 </div>
 
-<div class="content">
+<div class="content content--index">
     {{#each list}}
         <div class="commit">
             <div class="commit__info">
@@ -19,7 +19,7 @@
                 {{msg}}
             </div>
             <div class="commit__link">
-                <a href="{{href}}">{{hash}}</a>
+                <a class="commit__href" href="{{href}}">{{hash}}</a>
             </div>
         </div>
     {{/each}}
