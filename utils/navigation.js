@@ -6,6 +6,17 @@ function buildFileUrl(parentHash, path) {
   return `/content/${parentHash}/${path}`;
 }
 
+function buildObjectUrl(parentHash, { path, type }) {
+  switch (type) {
+    case 'tree':
+      return buildFolderUrl(parentHash, path);
+    case 'blob':
+      return buildFileUrl(parentHash, path);
+    default:
+      return '#';
+  }
+}
+
 function buildBreadcrumbs(hash, path) {
   const bc = [
     {
@@ -46,6 +57,7 @@ function buildBreadcrumbs(hash, path) {
 }
 
 module.exports = {
+  buildObjectUrl,
   buildFolderUrl,
   buildFileUrl,
   buildBreadcrumbs
