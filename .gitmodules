@@ -1,0 +1,3 @@
+[submodule "fakeRep"]
+	path = fakeRep
+	url = https://github.com/DarkedLosted/shri-testing-homework.git

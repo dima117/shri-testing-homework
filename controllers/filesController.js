@@ -1,8 +1,8 @@
 const { gitFileTree } = require('../utils/git');
 const {
-  buildFolderUrl,
-  buildFileUrl,
-  buildBreadcrumbs
+    buildFolderUrl,
+    buildFileUrl,
+    buildBreadcrumbs
 } = require('../utils/navigation');
 
 function buildObjectUrl(parentHash, { path, type }) {
@@ -16,13 +16,13 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
-module.exports = function(req, res, next) {
+module.exports = async function(req, res, next) {
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
   const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-  return gitFileTree(hash, path).then(
+  return await gitFileTree(hash, path).then(
     list => {
       const files = list.map(item => ({
         ...item,
@@ -30,11 +30,15 @@ module.exports = function(req, res, next) {
         name: item.path.split('/').pop()
       }));
 
-      res.render('files', {
-        title: 'files',
-        breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
-        files
-      });
+      if (files.length) {
+          res.render('files', {
+              title: 'files',
+              breadcrumbs: buildBreadcrumbs(hash, pathParam.join('/')),
+              files
+          });
+      } else {
+          next()
+      }
     },
     err => next(err)
   );
