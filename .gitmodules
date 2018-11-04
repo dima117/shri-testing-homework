@@ -1,0 +1,3 @@
+[submodule "test-repository"]
+	path = test-repository
+	url = https://github.com/DontGiveAFck/test-rep.git

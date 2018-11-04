@@ -4,18 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha tests/**/*.js",
+    "integration-test": "NODE_ENV=test ./node_modules/.bin/hermione hermione/**/*.hermione.js",
+    "integration-gui": "NODE_ENV=test ./node_modules/.bin/hermione gui hermione/**/*.hermione.js",
     "start": "node ./bin/www",
+    "teststart": "NODE_ENV=test node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "express": "^4.16.4",
-    "hbs": "^4.0.1"
+    "hbs": "^4.0.1",
+    "mocha": "^5.2.0"
   },
   "devDependencies": {
-    "ndb": "^1.0.26"
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "ndb": "^1.0.26",
+    "sinon": "^7.0.0",
+    "sinon-express-mock": "^2.0.5"
   }
 }
