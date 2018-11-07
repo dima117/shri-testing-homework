@@ -37,14 +37,16 @@ function interProcessor(list, res, hash, pathParam) {
     });
 }
 
-module.exports.interProcessor = interProcessor;
-module.exports.router = function(req, res, next) {
-    const { hash } = req.params;
-    const pathParam = (req.params[0] || '').split('/').filter(Boolean);
+module.exports = {
+    router: function(req, res, next) {
+        const { hash } = req.params;
+        const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 
-    const path = pathParam.length ? pathParam.join('/') + '/' : '';
+        const path = pathParam.length ? pathParam.join('/') + '/' : '';
 
-    return Utils.gitFileTree(hash, path)
-        .then(list => { interProcessor(list, res, hash, pathParam); })
-        .catch(next);
-};
+        return Utils.gitFileTree(hash, path)
+            .then(list => { interProcessor(list, res, hash, pathParam); })
+            .catch(next);
+    },
+    interProcessor
+}

@@ -14,9 +14,11 @@ function interProcessor(history, res) {
     });
 }
 
-module.exports.interProcessor = interProcessor;
-module.exports.router = function(req, res, next) {
-    Utils.gitHistory(1, 20)
-        .then(history => interProcessor(history, res))
-        .catch(next);
-};
+module.exports = {
+    router: function(req, res, next) {
+        Utils.gitHistory(1, 20)
+            .then(history => interProcessor(history, res))
+            .catch(next);
+    },
+    interProcessor
+}

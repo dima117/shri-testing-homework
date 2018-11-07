@@ -14,9 +14,10 @@ describe('contentController.js', () => {
         };
 
         let mock = {};
+        // Copy result of interProcessor (whose will be object) to mock.
         Object.assign(mock, interProcessor(
-            'content', 
-            { render(path, options) { Object.assign(mock, { ...options }); } },
+            'content',
+            { render(path, options) { mock = {...mock, ...options }; } },
             'hash', ['path']
         ));
 
