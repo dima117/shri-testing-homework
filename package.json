@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:unit": "mocha test/unit.test.js",
+    "test:hermione": "hermione",
+    "test:gui": "hermione gui",
     "start": "node ./bin/www",
     "devstart": "ndb ./bin/www"
   },
@@ -16,6 +18,10 @@
     "hbs": "^4.0.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "hermione": "^0.90.1",
+    "html-reporter": "^2.22.0",
+    "mocha": "^5.2.0",
     "ndb": "^1.0.26"
   }
 }

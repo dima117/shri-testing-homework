@@ -1,1 +1,4 @@
 node_modules
+html-report
+.idea
+.DS_Store
