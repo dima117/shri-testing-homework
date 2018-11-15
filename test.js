@@ -54,9 +54,16 @@ describe('git.js', () => {
 
   it('Вернулись верные данные из коммита', async () => {
     // подготовка
-    const executeGitResult = '100644\tblob\tb512c09d476623ff4bf8d0d63c29b784925dbdf8\t.gitignore\n100644\tblob\tead09676a936eb50ed700dad0d280d65c3df21d8\tREADME.md\n100644\tblob\t70461d5f9009344d9933e889b0448aa3f18d83d9\tapp.js\n040000\ttree\t152db3caa8a0d01acc76abc9df36e6b432ad1e55\tbin\n040000\ttree\tc52fa4f12adafae357de1d8748f89787ae30431e\tcontrollers\n100644\tblob\tbbf3076fce71449c5da4419200d0c9506ae204f3\tpackage-lock.json\n100644\tblob\tf735db02056e29dde140bbe28a6ff46fa9bc010e\tpackage.json\n040000\ttree\t6a033b657f10911ad9b65c27c3f9b6fb6130b058\tpublic\n040000\ttree\t0c1d853fcb534b3d50a423871629e4a9993c58c8\tutils\n040000\ttree\t4c0e80c9ffcda3ef1a11b2d8ecd552418dad68b5\tviews\n';
-    Git.executeGit = async () => {
-      return await executeGitResult;
+const executeGitResult = `100644 blob b512c09d476623ff4bf8d0d63c29b784925dbdf8\t.gitignore
+100644 blob ead09676a936eb50ed700dad0d280d65c3df21d8\tREADME.md
+100644 blob 70461d5f9009344d9933e889b0448aa3f18d83d9\tapp.js
+040000 tree 152db3caa8a0d01acc76abc9df36e6b432ad1e55\tbin
+040000 tree c52fa4f12adafae357de1d8748f89787ae30431e\tcontrollers
+040000 tree 6a033b657f10911ad9b65c27c3f9b6fb6130b058\tpublic
+040000 tree 0c1d853fcb534b3d50a423871629e4a9993c58c8\tutils
+040000 tree 4c0e80c9ffcda3ef1a11b2d8ecd552418dad68b5\tviews`;
+    Git.executeGit = () => {
+      return Promise.resolve(executeGitResult);
     };
 
     // действие
@@ -88,16 +95,6 @@ describe('git.js', () => {
         path: 'controllers'
       },
       {
-        type: 'blob',
-        hash: 'bbf3076fce71449c5da4419200d0c9506ae204f3',
-        path: 'package-lock.json'
-      },
-      {
-        type: 'blob',
-        hash: 'f735db02056e29dde140bbe28a6ff46fa9bc010e',
-        path: 'package.json'
-      },
-      {
         type: 'tree',
         hash: '6a033b657f10911ad9b65c27c3f9b6fb6130b058',
         path: 'public'
@@ -116,6 +113,6 @@ describe('git.js', () => {
 
     // проверка
     expect(mock).to.deep.eq(res);
-  });
+});
 
 });
