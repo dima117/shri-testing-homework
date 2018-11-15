@@ -1,8 +1,9 @@
 const Git = require('./utils/git');
+const Navigation = require('./utils/navigation');
 
 const { expect } = require('chai');
 
-describe('git.js', () => {
+describe('utils/git.js', () => {
   it('Возвращаемые гитом строки правильно разбиваются на массив', () => {
     // подготовка
     const executeGitResult = 
@@ -24,7 +25,6 @@ describe('git.js', () => {
       '7e013ae0440ad6e91082599376a6aaebe20d2112\tDmitry Andriyanov\t2018-10-16 12:10:05 +0300\tcodestyle',
       'f2df8ac23e817f6da01624a77ec050a0147f642a\tDmitry Andriyanov\t2018-10-16 12:02:11 +0300\tстили'
     ];
-
     expect(mock).to.deep.eq(res);
   });
 
@@ -78,7 +78,6 @@ describe('git.js', () => {
         msg: 'стили'
       }
     ];
-
     expect(mock).to.deep.eq(res);
   });
 
@@ -99,6 +98,8 @@ describe('git.js', () => {
 
     // действие
     const mock = await Git.gitFileTree('any hash', 'path/to/folder');
+
+    // проверка
     const res = [
       {
         type: 'blob',
@@ -141,9 +142,81 @@ describe('git.js', () => {
         path: 'views'
       }
     ];
+    expect(mock).to.deep.eq(res);
+  });
+});
 
-    // проверка
+describe('utils/navigation.js', () => {
+  it('Получен правильный путь к папке по хешу', () => {
+    // подготовка
+    const hash = 'c1697931c52f3f4eb3d86a10c08c4e43e2dcb793';
+    const path = 'controllers';
+
+    // Действие
+    const mock = Navigation.buildFolderUrl(hash, path);
+
+    // Проверка
+    const res = '/files/c1697931c52f3f4eb3d86a10c08c4e43e2dcb793/controllers';
+    expect(mock).to.eq(res);
+  });
+
+  it('Получен правильный путь к файлу по хешу', () => {
+    // подготовка
+    const hash = 'c1697931c52f3f4eb3d86a10c08c4e43e2dcb793';
+    const path = 'app.js';
+
+    // Действие
+    const mock = Navigation.buildFileUrl(hash, path);
+
+    // Проверка
+    const res = '/content/c1697931c52f3f4eb3d86a10c08c4e43e2dcb793/app.js';
+    expect(mock).to.eq(res);
+  });
+
+  it('Получен правильный массив для хлебных крошек главной страницы', () => {
+    // Подготовки нет ...
+    // Действие
+    const mock = Navigation.buildBreadcrumbs();
+
+    // Проверка
+    const res = [
+      { text: 'HISTORY', href: undefined }
+    ];
     expect(mock).to.deep.eq(res);
   });
 
+  it('Получен правильный массив для хлебных крошек первого уровня', () => {
+    // подготовка
+    const hash = 'c1697931c52f3f4eb3d86a10c08c4e43e2dcb793';
+    const path = 'app.js';
+
+    // Действие
+    const mock = Navigation.buildBreadcrumbs(hash, path);
+
+    // Проверка
+    const res = [
+      { text: 'HISTORY', href: '/' },
+      { text: 'ROOT', href: '/files/c1697931c52f3f4eb3d86a10c08c4e43e2dcb793/' },
+      { text: 'app.js' }
+    ];
+    expect(mock).to.deep.eq(res);
+  });
+
+  it('Получен правильный массив для хлебных крошек глубокой вложенности', () => {
+    // подготовка
+    const hash = 'c1697931c52f3f4eb3d86a10c08c4e43e2dcb793';
+    const path = 'controllers/indexController.js';
+
+    // Действие
+    const mock = Navigation.buildBreadcrumbs(hash, path);
+
+    // Проверка
+    const res = [
+      { text: 'HISTORY', href: '/' },
+      { text: 'ROOT', href: '/files/c1697931c52f3f4eb3d86a10c08c4e43e2dcb793/' },
+      { text: 'controllers', href: '/files/c1697931c52f3f4eb3d86a10c08c4e43e2dcb793/controllers/' },
+      { text: 'indexController.js' }
+    ];
+    expect(mock).to.deep.eq(res);
+  });
 });
