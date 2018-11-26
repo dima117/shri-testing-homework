@@ -1,3 +1,7 @@
 [submodule "env-for-test"]
     path = env-for-test
     url = git://github.com/ilya777grin23/env-for-test.git
+
+[submodule "html-reporter"]
+    path = "html-reporter"
+    url = git://github.com/SukachevAlex/html-reporter.git

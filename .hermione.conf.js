@@ -7,16 +7,11 @@ module.exports = {
             desiredCapabilities: {
                 browserName: 'chrome'
             }
-        },
-        firefox: {
-            desiredCapabilities: {
-                browserName: 'firefox'
-            }
         }
     },
     plugins: {
-        'html-reporter/hermione': { 
-            path: 'html-reporter'
+        'html-reporter/hermione': {
+            path: 'harry-report'
         }
     },
     compositeImage: true
