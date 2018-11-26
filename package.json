@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "init-project": "git submodule update --init --recursive && npm i && npm run selenium-install",
+    "init-package": "cd html-reporter && npm i && NODE_ENV=production webpack --config=webpack.prod.js",
     "start": "node ./bin/www",
     "test": "run-s unit-test intergraion-test",
     "selenium-install": "selenium-standalone install",

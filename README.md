@@ -1,18 +1,21 @@
 # Интеграционные тесты
 ## Для подгрузги репозитория
 ```sh
-# Install html-reporter and environment for test
-git submodule update --init --recursive
-# Install dependencies
-npm i
-# Install and run selenium-standalone
-npm run selenium-install
+# install project dependencies
+npm run init-project
+# install html-reporter dependencies
+npm run init-package
+```
+## Скрипты
+Для начала подгрузить в отдельной вкладке терминала selenium-standalone
+```sh
 npm run selenium
 ```
-И в новой вкладке:
+### Для запуска gui
 ```sh
-# For static version
-npm run hermione-static
-# For gui (interactive) version
 npm run hermione-gui
+```
+### Для запуска статики
+```sh
+npm run hermione-static
 ```
